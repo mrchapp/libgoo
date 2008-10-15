@@ -1,0 +1,48 @@
+<!-- ##### SECTION Title ##### -->
+GooPortIterator
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooPortIterator ##### -->
+<para>
+
+</para>
+
+@parent: 
+@list: 
+@current: 
+
+<!-- ##### FUNCTION goo_port_iterator_new ##### -->
+<para>
+
+</para>
+
+@list: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_port_iterator_set_list ##### -->
+<para>
+
+</para>
+
+@self: 
+@list: 
+
+

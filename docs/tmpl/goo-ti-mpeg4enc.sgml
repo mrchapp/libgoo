@@ -1,0 +1,37 @@
+<!-- ##### SECTION Title ##### -->
+GooTiMpeg4Enc
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooTiMpeg4Enc ##### -->
+<para>
+
+</para>
+
+@parent: 
+@level_param: 
+
+<!-- ##### FUNCTION goo_ti_mpeg4enc_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

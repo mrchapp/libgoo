@@ -1,0 +1,64 @@
+<!-- ##### SECTION Title ##### -->
+goo-semaphore
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooSemaphore ##### -->
+<para>
+
+</para>
+
+@condition: 
+@mutex: 
+@counter: 
+
+<!-- ##### FUNCTION goo_semaphore_new ##### -->
+<para>
+
+</para>
+
+@counter: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_semaphore_free ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_semaphore_down ##### -->
+<para>
+
+</para>
+
+@self: 
+@timeout: 
+
+
+<!-- ##### FUNCTION goo_semaphore_up ##### -->
+<para>
+
+</para>
+
+@self: 
+
+

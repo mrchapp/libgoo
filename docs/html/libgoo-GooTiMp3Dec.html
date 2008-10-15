@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooTiMp3Dec</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooTiCamera.html" title="GooTiCamera">
+<link rel="next" href="libgoo-GooTiAudioComponent.html" title="GooTiAudioComponent">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooTiCamera.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooTiAudioComponent.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2581253" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2557156" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooTiMp3Dec"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2581253"></a><span class="refentrytitle">GooTiMp3Dec</span>
+</h2>
+<p>GooTiMp3Dec &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-GooTiMp3Dec.html#GooTiMp3Dec">GooTiMp3Dec</a>;
+#define             <a href="libgoo-GooTiMp3Dec.html#GOO-TI-MP3DEC-GET-PARAM:CAPS">GOO_TI_MP3DEC_GET_PARAM</a>             (dec)
+<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a>*       <a href="libgoo-GooTiMp3Dec.html#goo-ti-mp3dec-new">goo_ti_mp3dec_new</a>                   ();
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2557156"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2607868"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2607879"></a><h3>
+<a name="GooTiMp3Dec"></a>GooTiMp3Dec</h3>
+<a class="indexterm" name="id2607891"></a><pre class="programlisting">typedef struct {
+        GooTiAudioComponent parent;
+
+        /* OMX_AUDIO_PARAM_MP3TYPE* param; */
+	OMX_AUDIO_PARAM_PCMMODETYPE* param;
+} GooTiMp3Dec;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2604057"></a><h3>
+<a name="GOO-TI-MP3DEC-GET-PARAM:CAPS"></a>GOO_TI_MP3DEC_GET_PARAM()</h3>
+<a class="indexterm" name="id2604068"></a><pre class="programlisting">#define GOO_TI_MP3DEC_GET_PARAM(dec) (GOO_TI_MP3DEC (dec)-&gt;param)
+</pre>
+<p>
+Gets the OMX_AUDIO_PARAM_ structure of the MP3 component.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>dec</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooTiMp3Dec.html#GooTiMp3Dec"><span class="type">GooTiMp3Dec</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2604115"></a><h3>
+<a name="goo-ti-mp3dec-new"></a>goo_ti_mp3dec_new ()</h3>
+<a class="indexterm" name="id2604127"></a><pre class="programlisting"><a href="libgoo-GooComponent.html#GooComponent">GooComponent</a>*       goo_ti_mp3dec_new                   ();</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

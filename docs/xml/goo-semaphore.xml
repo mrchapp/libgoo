@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-goo-semaphore">
+<refmeta>
+<refentrytitle role="top_of_page">goo-semaphore</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>goo-semaphore</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+                    <link linkend="GooSemaphore">GooSemaphore</link>;
+<link linkend="GooSemaphore">GooSemaphore</link>*       <link linkend="goo-semaphore-new">goo_semaphore_new</link>                   (<link linkend="gint">gint</link> counter);
+<link linkend="void">void</link>                <link linkend="goo-semaphore-free">goo_semaphore_free</link>                  (<link linkend="GooSemaphore">GooSemaphore</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-semaphore-down">goo_semaphore_down</link>                  (<link linkend="GooSemaphore">GooSemaphore</link> *self,
+                                                         <link linkend="gboolean">gboolean</link> timeout);
+<link linkend="void">void</link>                <link linkend="goo-semaphore-up">goo_semaphore_up</link>                    (<link linkend="GooSemaphore">GooSemaphore</link> *self);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooSemaphore" role="struct"/>GooSemaphore</title>
+<indexterm><primary>GooSemaphore</primary></indexterm><programlisting>typedef struct {
+        GCond *condition;
+        GMutex *mutex;
+        gint counter;
+} GooSemaphore;
+</programlisting>
+<para>
+A simple semaphore for threads syncronization</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="goo-semaphore-new" role="function"/>goo_semaphore_new ()</title>
+<indexterm><primary>goo_semaphore_new</primary></indexterm><programlisting><link linkend="GooSemaphore">GooSemaphore</link>*       goo_semaphore_new                   (<link linkend="gint">gint</link> counter);</programlisting>
+<para>
+Creates a new semaphore for threading syncronization</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>counter</parameter>&nbsp;:</term>
+<listitem><simpara> the semaphore's counter initial value
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GooSemaphore"><type>GooSemaphore</type></link> structure
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-semaphore-free" role="function"/>goo_semaphore_free ()</title>
+<indexterm><primary>goo_semaphore_free</primary></indexterm><programlisting><link linkend="void">void</link>                goo_semaphore_free                  (<link linkend="GooSemaphore">GooSemaphore</link> *self);</programlisting>
+<para>
+Free the structure</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="GooSemaphore"><type>GooSemaphore</type></link> structure
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-semaphore-down" role="function"/>goo_semaphore_down ()</title>
+<indexterm><primary>goo_semaphore_down</primary></indexterm><programlisting><link linkend="void">void</link>                goo_semaphore_down                  (<link linkend="GooSemaphore">GooSemaphore</link> *self,
+                                                         <link linkend="gboolean">gboolean</link> timeout);</programlisting>
+<para>
+While the counter is 0, the process will be stopped, waiting for
+an up signal</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="GooSemaphore"><type>GooSemaphore</type></link> structure
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>timeout</parameter>&nbsp;:</term>
+<listitem><simpara> TRUE for a timed semaphore, FALSE for an untimed semaphore
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-semaphore-up" role="function"/>goo_semaphore_up ()</title>
+<indexterm><primary>goo_semaphore_up</primary></indexterm><programlisting><link linkend="void">void</link>                goo_semaphore_up                    (<link linkend="GooSemaphore">GooSemaphore</link> *self);</programlisting>
+<para>
+Increments the semaphore's counter and signals the condition for thread
+execution continuation.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="GooSemaphore"><type>GooSemaphore</type></link> structure
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

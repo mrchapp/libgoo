@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooTiClock</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooTiPostProcessor.html" title="GooTiPostProcessor">
+<link rel="next" href="libgoo-GooTiMpeg4Dec.html" title="GooTiMpeg4Dec">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooTiPostProcessor.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooTiMpeg4Dec.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2559138" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2574328" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooTiClock"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2559138"></a><span class="refentrytitle">GooTiClock</span>
+</h2>
+<p>GooTiClock &#8212; This class represents an TI OMX clock.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-GooTiClock.html#GooTiClock">GooTiClock</a>;
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2574328"></a><h2>Description</h2>
+<p>
+This class represents an TI OMX clock. It is used by some other TI OMX
+components to synchronize each other.
+</p>
+<p>
+The instance of this class must be unique in all the TI OMX components,
+So it is managed by the <a href="libgoo-goo-component-factory.html#GooComponentFactory"><span class="type">GooComponentFactory</span></a>. The client code should not
+modify or access to this object.</p>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2604664"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2604675"></a><h3>
+<a name="GooTiClock"></a>GooTiClock</h3>
+<a class="indexterm" name="id2604687"></a><pre class="programlisting">typedef struct {
+        GooComponent parent;
+} GooTiClock;
+</pre>
+<p>
+
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

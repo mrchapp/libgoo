@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooObject">
+<refmeta>
+<refentrytitle role="top_of_page">GooObject</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooObject</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+                    <link linkend="GooObject">GooObject</link>;
+<link linkend="gchar">gchar</link>*              <link linkend="goo-object-get-name">goo_object_get_name</link>                 (<link linkend="GooObject">GooObject</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-object-set-name">goo_object_set_name</link>                 (<link linkend="GooObject">GooObject</link> *self,
+                                                         const <link linkend="gchar">gchar</link> *name);
+<link linkend="GooObject">GooObject</link>*          <link linkend="goo-object-get-owner">goo_object_get_owner</link>                (<link linkend="GooObject">GooObject</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-object-set-owner">goo_object_set_owner</link>                (<link linkend="GooObject">GooObject</link> *self,
+                                                         <link linkend="GooObject">GooObject</link> *owner);
+#define             <link linkend="GOO-OBJECT-NAME:CAPS">GOO_OBJECT_NAME</link>                     (obj)
+#define             <link linkend="GOO-OBJECT-PREFIX:CAPS">GOO_OBJECT_PREFIX</link>                   (obj)
+#define             <link linkend="GOO-OBJECT-OWNER:CAPS">GOO_OBJECT_OWNER</link>                    (obj)
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooObject" role="struct"/>GooObject</title>
+<indexterm><primary>GooObject</primary></indexterm><programlisting>typedef struct {
+	GObject parent;
+	
+	gchar* name;
+	gchar* prefix;
+	GooObject* owner;
+} GooObject;
+</programlisting>
+<para>
+The <link linkend="GooObject"><type>GooObject</type></link> structure. Use the functions to update the variables.</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term><link linkend="GObject">GObject</link>&nbsp;<structfield>parent</structfield>;</term>
+<listitem><simpara>
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="gchar">gchar</link>&nbsp;*<structfield>name</structfield>;</term>
+<listitem><simpara> the object's name. It is used for logging purposes.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="gchar">gchar</link>&nbsp;*<structfield>prefix</structfield>;</term>
+<listitem><simpara>
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="GooObject">GooObject</link>&nbsp;*<structfield>owner</structfield>;</term>
+<listitem><simpara> the object who owns this object (component/port relationship)
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-object-get-name" role="function"/>goo_object_get_name ()</title>
+<indexterm><primary>goo_object_get_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              goo_object_get_name                 (<link linkend="GooObject">GooObject</link> *self);</programlisting>
+<para>
+Returns a copy of the name of object. Caller should <link linkend="g-free"><function>g_free()</function></link> the return \
+value after usage. For a nameless object, this returns NULL, which you
+can safely <link linkend="g-free"><function>g_free()</function></link> as well.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooObject"><type>GooObject</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the name of object. <link linkend="g-free"><function>g_free()</function></link> after usage. MT safe.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-object-set-name" role="function"/>goo_object_set_name ()</title>
+<indexterm><primary>goo_object_set_name</primary></indexterm><programlisting><link linkend="void">void</link>                goo_object_set_name                 (<link linkend="GooObject">GooObject</link> *self,
+                                                         const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+Set the name of object. This function makes a copy of the provided name,
+so the caller retains ownership of the name it sent.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooObject"><type>GooObject</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="gchar"><type>gchar</type></link> with the object's name
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-object-get-owner" role="function"/>goo_object_get_owner ()</title>
+<indexterm><primary>goo_object_get_owner</primary></indexterm><programlisting><link linkend="GooObject">GooObject</link>*          goo_object_get_owner                (<link linkend="GooObject">GooObject</link> *self);</programlisting>
+<para>
+Gets the object's owner. This functions increases the refcount of the
+owner object so you should unref it after usage.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooObject"><type>GooObject</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The object's owner, this can be NULL if object has no parent.
+unref owner after usage. MT safe.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-object-set-owner" role="function"/>goo_object_set_owner ()</title>
+<indexterm><primary>goo_object_set_owner</primary></indexterm><programlisting><link linkend="void">void</link>                goo_object_set_owner                (<link linkend="GooObject">GooObject</link> *self,
+                                                         <link linkend="GooObject">GooObject</link> *owner);</programlisting>
+<para>
+Sets the owner of the object. The owner reference count will be
+incremented.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooObject"><type>GooObject</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>owner</parameter>&nbsp;:</term>
+<listitem><simpara> The new <link linkend="GooObject"><type>GooObject</type></link> owner object
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-NAME:CAPS" role="macro"/>GOO_OBJECT_NAME()</title>
+<indexterm><primary>GOO_OBJECT_NAME</primary></indexterm><programlisting>#define GOO_OBJECT_NAME(obj) (GOO_OBJECT(obj)-&gt;name)
+</programlisting>
+<para>
+Returns the pointer to the the object's name string. Be careful.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooObject"><type>GooObject</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-PREFIX:CAPS" role="macro"/>GOO_OBJECT_PREFIX()</title>
+<indexterm><primary>GOO_OBJECT_PREFIX</primary></indexterm><programlisting>#define GOO_OBJECT_PREFIX(obj) (GOO_OBJECT(obj)-&gt;prefix)
+</programlisting>
+<para>
+Returns the pointer to the the object's prefix string. Be careful.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooObject"><type>GooObject</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-OWNER:CAPS" role="macro"/>GOO_OBJECT_OWNER()</title>
+<indexterm><primary>GOO_OBJECT_OWNER</primary></indexterm><programlisting>#define GOO_OBJECT_OWNER(obj) (GOO_OBJECT(obj)-&gt;owner)
+</programlisting>
+<para>
+Access to the owner's object memory address. Be careful</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooObject"><type>GooObject</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

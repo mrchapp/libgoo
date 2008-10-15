@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<book id="index" xmlns:xi="http://www.w3.org/2003/XInclude">
+  <bookinfo>
+    <title>LibGoo Reference Manual</title>
+  </bookinfo>
+
+  <reference>
+    <title>API Reference</title>
+    <chapter id="libgoo">
+      <title>libgoo - main abstraction library</title>
+      <xi:include href="xml/goo-port-iterator.xml"/>
+      <xi:include href="xml/goo-component.xml"/>
+      <xi:include href="xml/goo-component-list.xml"/>
+      <xi:include href="xml/goo-component-factory.xml"/>
+      <xi:include href="xml/goo-component-iterator.xml"/>
+      <xi:include href="xml/goo-port-list.xml"/>
+      <xi:include href="xml/goo-iterator.xml"/>
+      <xi:include href="xml/goo-engine.xml"/>
+      <xi:include href="xml/goo-list.xml"/>
+      <xi:include href="xml/goo-port.xml"/>
+      <xi:include href="xml/goo-object.xml"/>
+      <xi:include href="xml/goo-semaphore.xml"/>
+      <xi:include href="xml/goo-utils.xml"/>
+      <xi:include href="xml/goo-eventhandler.xml"/>
+      <xi:include href="xml/goo-log.xml"/>
+    </chapter>
+    <chapter id="libgoo-ti">
+      <title>libgoo-ti - TI OpenMAX implementation components</title>
+      <xi:include href="xml/goo-ti-component-factory.xml"/>
+      <subtitle>Audio</subtitle>
+      <xi:include href="xml/goo-ti-audio-component.xml"/>
+      <xi:include href="xml/goo-ti-audio-encoder.xml"/>
+      <xi:include href="xml/goo-ti-audio-decoder.xml"/>
+      <xi:include href="xml/goo-ti-wbamrdec.xml"/>
+      <xi:include href="xml/goo-ti-wbamrenc.xml"/>
+      <xi:include href="xml/goo-ti-wmadec.xml"/>
+      <xi:include href="xml/goo-ti-aacdec.xml"/>
+      <xi:include href="xml/goo-ti-aacenc.xml"/>
+      <xi:include href="xml/goo-ti-wmvdec.xml"/>
+      <xi:include href="xml/goo-ti-pcmenc.xml"/>
+      <xi:include href="xml/goo-ti-nbamrdec.xml"/>
+      <xi:include href="xml/goo-ti-nbamrenc.xml"/>
+      <xi:include href="xml/goo-ti-mp3dec.xml"/>
+      <subtitle>Video</subtitle>
+      <xi:include href="xml/goo-ti-video-encoder.xml"/>	
+      <xi:include href="xml/goo-ti-video-decoder.xml"/>
+      <xi:include href="xml/goo-ti-h263dec.xml"/>
+      <xi:include href="xml/goo-ti-h263enc.xml"/>
+      <xi:include href="xml/goo-ti-h264dec.xml"/>
+      <xi:include href="xml/goo-ti-h264enc.xml"/>
+      <xi:include href="xml/goo-ti-mpeg4dec.xml"/>
+      <xi:include href="xml/goo-ti-mpeg4enc.xml"/>
+      <xi:include href="xml/goo-ti-post-processor.xml"/>
+      <xi:include href="xml/goo-ti-camera.xml"/>
+      <xi:include href="xml/goo-ti-vpp.xml"/>
+      <subtitle>Image</subtitle>
+      <xi:include href="xml/goo-ti-jpegdec.xml"/>
+      <xi:include href="xml/goo-ti-jpegenc.xml"/>
+      <subtitle>Misc</subtitle>
+      <xi:include href="xml/goo-ti-clock.xml"/>
+    </chapter>
+    <chapter id="libgoo-bellagio">
+      <title>libgoo-bellagio - Bellagio OpenMAX implementation components</title>
+      <xi:include href="xml/goo-bellagio-component-factory.xml"/>
+      <xi:include href="xml/goo-bellagio-mp3dec.xml"/>
+    </chapter>
+  </reference>
+</book>

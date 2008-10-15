@@ -1,0 +1,16 @@
+#!/bin/sh
+
+export GOO_DEBUG_LEVEL=${1:-5}
+
+log=~/check.log
+
+rm -f $log
+
+commands="@programs@"
+
+for i in $commands; do
+    echo $i
+    @directory@$i >> $log
+done
+
+exit 0

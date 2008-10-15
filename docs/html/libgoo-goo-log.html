@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>goo-log</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-goo-utils.html" title="goo-utils">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-goo-utils.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td>&#160;</td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2565144" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2611605" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-goo-log"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2565144"></a><span class="refentrytitle">goo-log</span>
+</h2>
+<p>goo-log &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+#define             <a href="libgoo-goo-log.html#GOO-DEBUG-LEVEL:CAPS">GOO_DEBUG_LEVEL</a>
+void                <a href="libgoo-goo-log.html#goo-log">goo_log</a>                             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> level,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *file,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *function,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> line,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *fmt,
+                                                         ...);
+void                <a href="libgoo-goo-log.html#goo-object-log">goo_object_log</a>                      (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *objname,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *prefix,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> level,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *file,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *function,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> line,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *fmt,
+                                                         ...);
+#define             <a href="libgoo-goo-log.html#GOO-LOG:CAPS">GOO_LOG</a>                             (level, ...)
+#define             <a href="libgoo-goo-log.html#GOO-DEBUG:CAPS">GOO_DEBUG</a>                           (...)
+#define             <a href="libgoo-goo-log.html#GOO-NOTICE:CAPS">GOO_NOTICE</a>                          (...)
+#define             <a href="libgoo-goo-log.html#GOO-INFO:CAPS">GOO_INFO</a>                            (...)
+#define             <a href="libgoo-goo-log.html#GOO-WARNING:CAPS">GOO_WARNING</a>                         (...)
+#define             <a href="libgoo-goo-log.html#GOO-ERROR:CAPS">GOO_ERROR</a>                           (...)
+#define             <a href="libgoo-goo-log.html#GOO-OBJECT-LOG:CAPS">GOO_OBJECT_LOG</a>                      (obj, level, ...)
+#define             <a href="libgoo-goo-log.html#GOO-OBJECT-DEBUG:CAPS">GOO_OBJECT_DEBUG</a>                    (obj, ...)
+#define             <a href="libgoo-goo-log.html#GOO-OBJECT-NOTICE:CAPS">GOO_OBJECT_NOTICE</a>                   (obj, ...)
+#define             <a href="libgoo-goo-log.html#GOO-OBJECT-INFO:CAPS">GOO_OBJECT_INFO</a>                     (obj, ...)
+#define             <a href="libgoo-goo-log.html#GOO-OBJECT-WARNING:CAPS">GOO_OBJECT_WARNING</a>                  (obj, ...)
+#define             <a href="libgoo-goo-log.html#GOO-OBJECT-ERROR:CAPS">GOO_OBJECT_ERROR</a>                    (obj, ...)
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2611605"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2611621"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2611631"></a><h3>
+<a name="GOO-DEBUG-LEVEL:CAPS"></a>GOO_DEBUG_LEVEL</h3>
+<a class="indexterm" name="id2611643"></a><pre class="programlisting">#define GOO_DEBUG_LEVEL "GOO_DEBUG_LEVEL"
+</pre>
+<p>
+String that specifies the environment variable name to set the debug level</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2611663"></a><h3>
+<a name="goo-log"></a>goo_log ()</h3>
+<a class="indexterm" name="id2611675"></a><pre class="programlisting">void                goo_log                             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> level,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *file,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *function,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> line,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *fmt,
+                                                         ...);</pre>
+<p>
+Writes a log message to the stdout</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>level</code></em>&#160;:</span></td>
+<td> log level
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>file</code></em>&#160;:</span></td>
+<td> the file name
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>function</code></em>&#160;:</span></td>
+<td> the function name
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>line</code></em>&#160;:</span></td>
+<td> the code line number
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>fmt</code></em>&#160;:</span></td>
+<td> the message format
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> the message
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2611825"></a><h3>
+<a name="goo-object-log"></a>goo_object_log ()</h3>
+<a class="indexterm" name="id2611838"></a><pre class="programlisting">void                goo_object_log                      (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *objname,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *prefix,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> level,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *file,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *function,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> line,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *fmt,
+                                                         ...);</pre>
+<p>
+Writes a log message to the stdout</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>objname</code></em>&#160;:</span></td>
+<td> the object's name
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>prefix</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>level</code></em>&#160;:</span></td>
+<td> log level
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>file</code></em>&#160;:</span></td>
+<td> the file name
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>function</code></em>&#160;:</span></td>
+<td> the function name
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>line</code></em>&#160;:</span></td>
+<td> the code line number
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>fmt</code></em>&#160;:</span></td>
+<td> the message format
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> the message
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2597622"></a><h3>
+<a name="GOO-LOG:CAPS"></a>GOO_LOG()</h3>
+<a class="indexterm" name="id2597634"></a><pre class="programlisting">#define GOO_LOG(level, ...) goo_log ((level), __FILE__, __PRETTY_FUNCTION__, __LINE__, __VA_ARGS__);
+</pre>
+<p>
+Macro for <a href="libgoo-goo-log.html#goo-log"><code class="function">goo_log()</code></a> function</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>level</code></em>&#160;:</span></td>
+<td> the <span class="type">GooLogLevel</span> of the message
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2597704"></a><h3>
+<a name="GOO-DEBUG:CAPS"></a>GOO_DEBUG()</h3>
+<a class="indexterm" name="id2597717"></a><pre class="programlisting">#define GOO_DEBUG(...)   GOO_LOG(GOO_LOG_DEBUG, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2597755"></a><h3>
+<a name="GOO-NOTICE:CAPS"></a>GOO_NOTICE()</h3>
+<a class="indexterm" name="id2597768"></a><pre class="programlisting">#define GOO_NOTICE(...)  GOO_LOG(GOO_LOG_NOTICE, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2597806"></a><h3>
+<a name="GOO-INFO:CAPS"></a>GOO_INFO()</h3>
+<a class="indexterm" name="id2597819"></a><pre class="programlisting">#define GOO_INFO(...)    GOO_LOG(GOO_LOG_INFO, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2612581"></a><h3>
+<a name="GOO-WARNING:CAPS"></a>GOO_WARNING()</h3>
+<a class="indexterm" name="id2612592"></a><pre class="programlisting">#define GOO_WARNING(...) GOO_LOG(GOO_LOG_WARNING, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2612631"></a><h3>
+<a name="GOO-ERROR:CAPS"></a>GOO_ERROR()</h3>
+<a class="indexterm" name="id2612644"></a><pre class="programlisting">#define GOO_ERROR(...)   GOO_LOG(GOO_LOG_ERROR, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2612682"></a><h3>
+<a name="GOO-OBJECT-LOG:CAPS"></a>GOO_OBJECT_LOG()</h3>
+<a class="indexterm" name="id2612694"></a><pre class="programlisting">#define GOO_OBJECT_LOG(obj, level, ...) goo_object_log (GOO_OBJECT_NAME (obj), GOO_OBJECT_PREFIX (obj), (level), __FILE__, __PRETTY_FUNCTION__, __LINE__, __VA_ARGS__);
+</pre>
+<p>
+Macro for <a href="libgoo-goo-log.html#goo-object-log"><code class="function">goo_object_log()</code></a> function</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> The <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> which generates the message
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>level</code></em>&#160;:</span></td>
+<td> the <span class="type">GooLogLevel</span> of the message
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2612787"></a><h3>
+<a name="GOO-OBJECT-DEBUG:CAPS"></a>GOO_OBJECT_DEBUG()</h3>
+<a class="indexterm" name="id2612799"></a><pre class="programlisting">#define GOO_OBJECT_DEBUG(obj, ...)   GOO_OBJECT_LOG(obj, GOO_LOG_DEBUG, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> The <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance which generates the message
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2612859"></a><h3>
+<a name="GOO-OBJECT-NOTICE:CAPS"></a>GOO_OBJECT_NOTICE()</h3>
+<a class="indexterm" name="id2612871"></a><pre class="programlisting">#define GOO_OBJECT_NOTICE(obj, ...)  GOO_OBJECT_LOG(obj, GOO_LOG_NOTICE, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> The <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance which generates the message
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2612931"></a><h3>
+<a name="GOO-OBJECT-INFO:CAPS"></a>GOO_OBJECT_INFO()</h3>
+<a class="indexterm" name="id2612942"></a><pre class="programlisting">#define GOO_OBJECT_INFO(obj, ...)    GOO_OBJECT_LOG(obj, GOO_LOG_INFO, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> The <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance which generates the message
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613003"></a><h3>
+<a name="GOO-OBJECT-WARNING:CAPS"></a>GOO_OBJECT_WARNING()</h3>
+<a class="indexterm" name="id2613015"></a><pre class="programlisting">#define GOO_OBJECT_WARNING(obj, ...) GOO_OBJECT_LOG(obj, GOO_LOG_WARNING, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> The <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance which generates the message
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613076"></a><h3>
+<a name="GOO-OBJECT-ERROR:CAPS"></a>GOO_OBJECT_ERROR()</h3>
+<a class="indexterm" name="id2613087"></a><pre class="programlisting">#define GOO_OBJECT_ERROR(obj, ...)   GOO_OBJECT_LOG(obj, GOO_LOG_ERROR, __VA_ARGS__)
+</pre>
+<p>
+Output a logging message.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> The <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance which generates the message
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td> printf-style message to output
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

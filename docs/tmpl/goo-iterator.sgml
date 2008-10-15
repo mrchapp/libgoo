@@ -1,0 +1,107 @@
+<!-- ##### SECTION Title ##### -->
+goo-iterator
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooList ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GooIterator ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GooIteratorIface ##### -->
+<para>
+
+</para>
+
+@parent: 
+@next_func: 
+@prev_func: 
+@first_func: 
+@nth_func: 
+@get_current_func: 
+@is_done_func: 
+@get_list_func: 
+
+<!-- ##### FUNCTION goo_iterator_next ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_iterator_prev ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_iterator_first ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_iterator_nth ##### -->
+<para>
+
+</para>
+
+@self: 
+@nth: 
+
+
+<!-- ##### FUNCTION goo_iterator_get_current ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_iterator_is_done ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_iterator_get_list ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+

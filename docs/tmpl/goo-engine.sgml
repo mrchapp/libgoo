@@ -1,0 +1,56 @@
+<!-- ##### SECTION Title ##### -->
+GooEngine
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooEngine ##### -->
+<para>
+
+</para>
+
+@parent: 
+@component: 
+@inport: 
+@instream: 
+@outport: 
+@outstream: 
+@incount: 
+@outcount: 
+@numbuffers: 
+@mainloop: 
+
+<!-- ##### FUNCTION goo_engine_new ##### -->
+<para>
+
+</para>
+
+@component: 
+@infile: 
+@outfile: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_engine_play ##### -->
+<para>
+
+</para>
+
+@self: 
+
+

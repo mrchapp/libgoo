@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="[Insert name here] Reference Manual" link="index.html" author="" name="libgoo">
+  <chapters>
+    <sub name="[Insert title here]" link="ch01.html">
+      <sub name="GooPortIterator" link="libgoo-GooPortIterator.html"/>
+      <sub name="GooComponent" link="libgoo-GooComponent.html"/>
+      <sub name="GooComponentList" link="libgoo-GooComponentList.html"/>
+      <sub name="goo-component-factory" link="libgoo-goo-component-factory.html"/>
+      <sub name="GooComponentIterator" link="libgoo-GooComponentIterator.html"/>
+      <sub name="GooPortList" link="libgoo-GooPortList.html"/>
+      <sub name="goo-iterator" link="libgoo-goo-iterator.html"/>
+      <sub name="GooEngine" link="libgoo-GooEngine.html"/>
+      <sub name="goo-list" link="libgoo-goo-list.html"/>
+      <sub name="GooPort" link="libgoo-GooPort.html"/>
+      <sub name="GooObject" link="libgoo-GooObject.html"/>
+      <sub name="GooTiPostProcessor" link="libgoo-GooTiPostProcessor.html"/>
+      <sub name="GooTiClock" link="libgoo-GooTiClock.html"/>
+      <sub name="GooTiMpeg4Dec" link="libgoo-GooTiMpeg4Dec.html"/>
+      <sub name="GooTiMpeg4Enc" link="libgoo-GooTiMpeg4Enc.html"/>
+      <sub name="GooTiJpegEnc" link="libgoo-GooTiJpegEnc.html"/>
+      <sub name="GooTiVideoEncoder" link="libgoo-GooTiVideoEncoder.html"/>
+      <sub name="GooTiVideoDecoder" link="libgoo-GooTiVideoDecoder.html"/>
+      <sub name="GooTiComponentFactory" link="libgoo-GooTiComponentFactory.html"/>
+      <sub name="GooTiCamera" link="libgoo-GooTiCamera.html"/>
+      <sub name="GooTiMp3Dec" link="libgoo-GooTiMp3Dec.html"/>
+      <sub name="GooTiAudioComponent" link="libgoo-GooTiAudioComponent.html"/>
+      <sub name="goo-semaphore" link="libgoo-goo-semaphore.html"/>
+      <sub name="goo-utils" link="libgoo-goo-utils.html"/>
+      <sub name="goo-log" link="libgoo-goo-log.html"/>
+    </sub>
+  </chapters>
+  <functions>
+    <function name="GooPortIterator" link="libgoo-GooPortIterator.html#GooPortIterator"/>
+    <function name="goo_port_iterator_new ()" link="libgoo-GooPortIterator.html#goo-port-iterator-new"/>
+    <function name="goo_port_iterator_set_list ()" link="libgoo-GooPortIterator.html#goo-port-iterator-set-list"/>
+    <function name="GooComponent" link="libgoo-GooComponent.html#GooComponent"/>
+    <function name="goo_component_load ()" link="libgoo-GooComponent.html#goo-component-load"/>
+    <function name="goo_component_unload ()" link="libgoo-GooComponent.html#goo-component-unload"/>
+    <function name="goo_component_set_state_idle ()" link="libgoo-GooComponent.html#goo-component-set-state-idle"/>
+    <function name="goo_component_set_state_executing ()" link="libgoo-GooComponent.html#goo-component-set-state-executing"/>
+    <function name="goo_component_set_state_loaded ()" link="libgoo-GooComponent.html#goo-component-set-state-loaded"/>
+    <function name="goo_component_wait_for_next_state ()" link="libgoo-GooComponent.html#goo-component-wait-for-next-state"/>
+    <function name="goo_component_get_state ()" link="libgoo-GooComponent.html#goo-component-get-state"/>
+    <function name="goo_component_load_ports ()" link="libgoo-GooComponent.html#goo-component-load-ports"/>
+    <function name="goo_component_configure_all_ports ()" link="libgoo-GooComponent.html#goo-component-configure-all-ports"/>
+    <function name="goo_component_set_ports_definition ()" link="libgoo-GooComponent.html#goo-component-set-ports-definition"/>
+    <function name="goo_component_validate_ports_definition ()" link="libgoo-GooComponent.html#goo-component-validate-ports-definition"/>
+    <function name="goo_component_allocate_port ()" link="libgoo-GooComponent.html#goo-component-allocate-port"/>
+    <function name="goo_component_allocate_all_ports ()" link="libgoo-GooComponent.html#goo-component-allocate-all-ports"/>
+    <function name="goo_component_disable_port ()" link="libgoo-GooComponent.html#goo-component-disable-port"/>
+    <function name="goo_component_disable_all_ports ()" link="libgoo-GooComponent.html#goo-component-disable-all-ports"/>
+    <function name="goo_component_deallocate_port ()" link="libgoo-GooComponent.html#goo-component-deallocate-port"/>
+    <function name="goo_component_deallocate_all_ports ()" link="libgoo-GooComponent.html#goo-component-deallocate-all-ports"/>
+    <function name="goo_component_prepare_all_ports ()" link="libgoo-GooComponent.html#goo-component-prepare-all-ports"/>
+    <function name="goo_component_iterate_ports ()" link="libgoo-GooComponent.html#goo-component-iterate-ports"/>
+    <function name="goo_component_iterate_input_ports ()" link="libgoo-GooComponent.html#goo-component-iterate-input-ports"/>
+    <function name="goo_component_iterate_output_ports ()" link="libgoo-GooComponent.html#goo-component-iterate-output-ports"/>
+    <function name="goo_component_get_port ()" link="libgoo-GooComponent.html#goo-component-get-port"/>
+    <function name="goo_component_set_parameter_by_name ()" link="libgoo-GooComponent.html#goo-component-set-parameter-by-name"/>
+    <function name="goo_component_set_parameter_by_index ()" link="libgoo-GooComponent.html#goo-component-set-parameter-by-index"/>
+    <function name="goo_component_get_parameter_by_name ()" link="libgoo-GooComponent.html#goo-component-get-parameter-by-name"/>
+    <function name="goo_component_get_parameter_by_index ()" link="libgoo-GooComponent.html#goo-component-get-parameter-by-index"/>
+    <function name="goo_component_set_config_by_name ()" link="libgoo-GooComponent.html#goo-component-set-config-by-name"/>
+    <function name="goo_component_set_config_by_index ()" link="libgoo-GooComponent.html#goo-component-set-config-by-index"/>
+    <function name="goo_component_get_config_by_name ()" link="libgoo-GooComponent.html#goo-component-get-config-by-name"/>
+    <function name="goo_component_get_config_by_index ()" link="libgoo-GooComponent.html#goo-component-get-config-by-index"/>
+    <function name="goo_component_load_parameters ()" link="libgoo-GooComponent.html#goo-component-load-parameters"/>
+    <function name="goo_component_set_parameters ()" link="libgoo-GooComponent.html#goo-component-set-parameters"/>
+    <function name="goo_component_set_done ()" link="libgoo-GooComponent.html#goo-component-set-done"/>
+    <function name="goo_component_is_done ()" link="libgoo-GooComponent.html#goo-component-is-done"/>
+    <function name="goo_component_wait_for_done ()" link="libgoo-GooComponent.html#goo-component-wait-for-done"/>
+    <function name="goo_component_release_buffer ()" link="libgoo-GooComponent.html#goo-component-release-buffer"/>
+    <function name="goo_component_send_eos ()" link="libgoo-GooComponent.html#goo-component-send-eos"/>
+    <function name="goo_component_set_tunnel ()" link="libgoo-GooComponent.html#goo-component-set-tunnel"/>
+    <function name="goo_component_set_tunnel_by_name ()" link="libgoo-GooComponent.html#goo-component-set-tunnel-by-name"/>
+    <function name="goo_component_set_clock ()" link="libgoo-GooComponent.html#goo-component-set-clock"/>
+    <function name="GooComponentList" link="libgoo-GooComponentList.html#GooComponentList"/>
+    <function name="goo_component_list_new ()" link="libgoo-GooComponentList.html#goo-component-list-new"/>
+    <function name="GooComponentFactory" link="libgoo-goo-component-factory.html#GooComponentFactory"/>
+    <function name="GooComponentFactoryIface" link="libgoo-goo-component-factory.html#GooComponentFactoryIface"/>
+    <function name="goo_component_factory_get_component ()" link="libgoo-goo-component-factory.html#goo-component-factory-get-component"/>
+    <function name="GooComponentIterator" link="libgoo-GooComponentIterator.html#GooComponentIterator"/>
+    <function name="goo_component_iterator_new ()" link="libgoo-GooComponentIterator.html#goo-component-iterator-new"/>
+    <function name="goo_component_iterator_set_list ()" link="libgoo-GooComponentIterator.html#goo-component-iterator-set-list"/>
+    <function name="GooPortList" link="libgoo-GooPortList.html#GooPortList"/>
+    <function name="goo_port_list_new ()" link="libgoo-GooPortList.html#goo-port-list-new"/>
+    <function name="GooList" link="libgoo-goo-iterator.html#GooList"/>
+    <function name="GooIterator" link="libgoo-goo-iterator.html#GooIterator"/>
+    <function name="GooIteratorIface" link="libgoo-goo-iterator.html#GooIteratorIface"/>
+    <function name="goo_iterator_next ()" link="libgoo-goo-iterator.html#goo-iterator-next"/>
+    <function name="goo_iterator_prev ()" link="libgoo-goo-iterator.html#goo-iterator-prev"/>
+    <function name="goo_iterator_first ()" link="libgoo-goo-iterator.html#goo-iterator-first"/>
+    <function name="goo_iterator_nth ()" link="libgoo-goo-iterator.html#goo-iterator-nth"/>
+    <function name="goo_iterator_get_current ()" link="libgoo-goo-iterator.html#goo-iterator-get-current"/>
+    <function name="goo_iterator_is_done ()" link="libgoo-goo-iterator.html#goo-iterator-is-done"/>
+    <function name="goo_iterator_get_list ()" link="libgoo-goo-iterator.html#goo-iterator-get-list"/>
+    <function name="GooEngine" link="libgoo-GooEngine.html#GooEngine"/>
+    <function name="goo_engine_new ()" link="libgoo-GooEngine.html#goo-engine-new"/>
+    <function name="goo_engine_play ()" link="libgoo-GooEngine.html#goo-engine-play"/>
+    <function name="GooListIface" link="libgoo-goo-list.html#GooListIface"/>
+    <function name="goo_list_get_length ()" link="libgoo-goo-list.html#goo-list-get-length"/>
+    <function name="goo_list_prepend ()" link="libgoo-goo-list.html#goo-list-prepend"/>
+    <function name="goo_list_append ()" link="libgoo-goo-list.html#goo-list-append"/>
+    <function name="goo_list_remove ()" link="libgoo-goo-list.html#goo-list-remove"/>
+    <function name="goo_list_foreach ()" link="libgoo-goo-list.html#goo-list-foreach"/>
+    <function name="goo_list_create_iterator ()" link="libgoo-goo-list.html#goo-list-create-iterator"/>
+    <function name="goo_list_copy ()" link="libgoo-goo-list.html#goo-list-copy"/>
+    <function name="GooPortProcessBufferFunction ()" link="libgoo-GooPort.html#GooPortProcessBufferFunction"/>
+    <function name="GooPort" link="libgoo-GooPort.html#GooPort"/>
+    <function name="GOO_PORT_GET_DEFINITION()" link="libgoo-GooPort.html#GOO-PORT-GET-DEFINITION:CAPS"/>
+    <function name="goo_port_new ()" link="libgoo-GooPort.html#goo-port-new"/>
+    <function name="goo_port_prepare_definition ()" link="libgoo-GooPort.html#goo-port-prepare-definition"/>
+    <function name="goo_port_allocate_buffer_header ()" link="libgoo-GooPort.html#goo-port-allocate-buffer-header"/>
+    <function name="goo_port_prepare_buffer_queue ()" link="libgoo-GooPort.html#goo-port-prepare-buffer-queue"/>
+    <function name="goo_port_allocate_buffers ()" link="libgoo-GooPort.html#goo-port-allocate-buffers"/>
+    <function name="goo_port_push_buffer ()" link="libgoo-GooPort.html#goo-port-push-buffer"/>
+    <function name="goo_port_grab_buffer ()" link="libgoo-GooPort.html#goo-port-grab-buffer"/>
+    <function name="goo_port_try_grab_buffer ()" link="libgoo-GooPort.html#goo-port-try-grab-buffer"/>
+    <function name="goo_port_set_eos ()" link="libgoo-GooPort.html#goo-port-set-eos"/>
+    <function name="goo_port_is_eos ()" link="libgoo-GooPort.html#goo-port-is-eos"/>
+    <function name="goo_port_is_tunneled ()" link="libgoo-GooPort.html#goo-port-is-tunneled"/>
+    <function name="goo_port_set_process_buffer_function ()" link="libgoo-GooPort.html#goo-port-set-process-buffer-function"/>
+    <function name="goo_port_process_buffer ()" link="libgoo-GooPort.html#goo-port-process-buffer"/>
+    <function name="GooObject" link="libgoo-GooObject.html#GooObject"/>
+    <function name="goo_object_get_name ()" link="libgoo-GooObject.html#goo-object-get-name"/>
+    <function name="goo_object_set_name ()" link="libgoo-GooObject.html#goo-object-set-name"/>
+    <function name="goo_object_get_owner ()" link="libgoo-GooObject.html#goo-object-get-owner"/>
+    <function name="goo_object_set_owner ()" link="libgoo-GooObject.html#goo-object-set-owner"/>
+    <function name="GOO_OBJECT_NAME()" link="libgoo-GooObject.html#GOO-OBJECT-NAME:CAPS"/>
+    <function name="GOO_OBJECT_PREFIX()" link="libgoo-GooObject.html#GOO-OBJECT-PREFIX:CAPS"/>
+    <function name="GOO_OBJECT_OWNER()" link="libgoo-GooObject.html#GOO-OBJECT-OWNER:CAPS"/>
+    <function name="enum GooTiPostProcessorRotation" link="libgoo-GooTiPostProcessor.html#GooTiPostProcessorRotation"/>
+    <function name="GooTiPostProcessor" link="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"/>
+    <function name="goo_ti_post_processor_set_rotation ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-rotation"/>
+    <function name="goo_ti_post_processor_get_rotation ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-rotation"/>
+    <function name="goo_ti_post_processor_set_xscale ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-xscale"/>
+    <function name="goo_ti_post_processor_get_xscale ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-xscale"/>
+    <function name="goo_ti_post_processor_set_yscale ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-yscale"/>
+    <function name="goo_ti_post_processor_get_yscale ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-yscale"/>
+    <function name="goo_ti_post_processor_set_xpos ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-xpos"/>
+    <function name="goo_ti_post_processor_get_xpos ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-xpos"/>
+    <function name="goo_ti_post_processor_set_ypos ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-ypos"/>
+    <function name="goo_ti_post_processor_get_ypos ()" link="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-ypos"/>
+    <function name="GooTiClock" link="libgoo-GooTiClock.html#GooTiClock"/>
+    <function name="GooTiMpeg4Dec" link="libgoo-GooTiMpeg4Dec.html#GooTiMpeg4Dec"/>
+    <function name="goo_ti_mpeg4dec_new ()" link="libgoo-GooTiMpeg4Dec.html#goo-ti-mpeg4dec-new"/>
+    <function name="GooTiMpeg4Enc" link="libgoo-GooTiMpeg4Enc.html#GooTiMpeg4Enc"/>
+    <function name="goo_ti_mpeg4enc_new ()" link="libgoo-GooTiMpeg4Enc.html#goo-ti-mpeg4enc-new"/>
+    <function name="GooTiJpegEncPriv" link="libgoo-GooTiJpegEnc.html#GooTiJpegEncPriv"/>
+    <function name="GooTiJpegEnc" link="libgoo-GooTiJpegEnc.html#GooTiJpegEnc"/>
+    <function name="GOO_TI_JPEGENC_GET_PARAM()" link="libgoo-GooTiJpegEnc.html#GOO-TI-JPEGENC-GET-PARAM:CAPS"/>
+    <function name="enum GooTiVideoEncoderControlRate" link="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoderControlRate"/>
+    <function name="GooTiVideoEncoder" link="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoder"/>
+    <function name="goo_ti_video_encoder_set_control_rate ()" link="libgoo-GooTiVideoEncoder.html#goo-ti-video-encoder-set-control-rate"/>
+    <function name="goo_ti_video_encoder_get_control_rate ()" link="libgoo-GooTiVideoEncoder.html#goo-ti-video-encoder-get-control-rate"/>
+    <function name="enum GooTiVideoDecoderProcessMode" link="libgoo-GooTiVideoDecoder.html#GooTiVideoDecoderProcessMode"/>
+    <function name="GooTiVideoDecoder" link="libgoo-GooTiVideoDecoder.html#GooTiVideoDecoder"/>
+    <function name="GooTiComponentFactory" link="libgoo-GooTiComponentFactory.html#GooTiComponentFactory"/>
+    <function name="goo_ti_component_factory_get_instance ()" link="libgoo-GooTiComponentFactory.html#goo-ti-component-factory-get-instance"/>
+    <function name="GooTiCameraPriv" link="libgoo-GooTiCamera.html#GooTiCameraPriv"/>
+    <function name="GooTiCamera" link="libgoo-GooTiCamera.html#GooTiCamera"/>
+    <function name="GOO_TI_CAMERA_GET_PARAM()" link="libgoo-GooTiCamera.html#GOO-TI-CAMERA-GET-PARAM:CAPS"/>
+    <function name="GooTiMp3Dec" link="libgoo-GooTiMp3Dec.html#GooTiMp3Dec"/>
+    <function name="GOO_TI_MP3DEC_GET_PARAM()" link="libgoo-GooTiMp3Dec.html#GOO-TI-MP3DEC-GET-PARAM:CAPS"/>
+    <function name="goo_ti_mp3dec_new ()" link="libgoo-GooTiMp3Dec.html#goo-ti-mp3dec-new"/>
+    <function name="GooTiAudioComponent" link="libgoo-GooTiAudioComponent.html#GooTiAudioComponent"/>
+    <function name="goo_ti_audio_component_set_dasf_mode ()" link="libgoo-GooTiAudioComponent.html#goo-ti-audio-component-set-dasf-mode"/>
+    <function name="goo_ti_audio_component_set_volume ()" link="libgoo-GooTiAudioComponent.html#goo-ti-audio-component-set-volume"/>
+    <function name="goo_ti_audio_component_set_mute ()" link="libgoo-GooTiAudioComponent.html#goo-ti-audio-component-set-mute"/>
+    <function name="goo_ti_audio_component_is_dasf_mode ()" link="libgoo-GooTiAudioComponent.html#goo-ti-audio-component-is-dasf-mode"/>
+    <function name="goo_ti_audio_component_get_volume ()" link="libgoo-GooTiAudioComponent.html#goo-ti-audio-component-get-volume"/>
+    <function name="goo_ti_audio_component_is_mute ()" link="libgoo-GooTiAudioComponent.html#goo-ti-audio-component-is-mute"/>
+    <function name="goo_ti_audio_component_get_stream_id ()" link="libgoo-GooTiAudioComponent.html#goo-ti-audio-component-get-stream-id"/>
+    <function name="GooSemaphore" link="libgoo-goo-semaphore.html#GooSemaphore"/>
+    <function name="goo_semaphore_new ()" link="libgoo-goo-semaphore.html#goo-semaphore-new"/>
+    <function name="goo_semaphore_free ()" link="libgoo-goo-semaphore.html#goo-semaphore-free"/>
+    <function name="goo_semaphore_down ()" link="libgoo-goo-semaphore.html#goo-semaphore-down"/>
+    <function name="goo_semaphore_up ()" link="libgoo-goo-semaphore.html#goo-semaphore-up"/>
+    <function name="GOO_BASE_PORT_BUFFER_PADDING" link="libgoo-goo-utils.html#GOO-BASE-PORT-BUFFER-PADDING:CAPS"/>
+    <function name="OMX_VERSION_MAJOR" link="libgoo-goo-utils.html#OMX-VERSION-MAJOR:CAPS"/>
+    <function name="OMX_VERSION_MINOR" link="libgoo-goo-utils.html#OMX-VERSION-MINOR:CAPS"/>
+    <function name="OMX_VERSION_REVISION" link="libgoo-goo-utils.html#OMX-VERSION-REVISION:CAPS"/>
+    <function name="OMX_VERSION_STEP" link="libgoo-goo-utils.html#OMX-VERSION-STEP:CAPS"/>
+    <function name="GOO_RUN()" link="libgoo-goo-utils.html#GOO-RUN:CAPS"/>
+    <function name="RETURN_GOO_RUN()" link="libgoo-goo-utils.html#RETURN-GOO-RUN:CAPS"/>
+    <function name="GOO_INIT_PARAM()" link="libgoo-goo-utils.html#GOO-INIT-PARAM:CAPS"/>
+    <function name="GOO_ARRAY_SIZE()" link="libgoo-goo-utils.html#GOO-ARRAY-SIZE:CAPS"/>
+    <function name="StateDesc" link="libgoo-goo-utils.html#StateDesc"/>
+    <function name="ErrorDesc" link="libgoo-goo-utils.html#ErrorDesc"/>
+    <function name="EventDesc" link="libgoo-goo-utils.html#EventDesc"/>
+    <function name="CommandDesc" link="libgoo-goo-utils.html#CommandDesc"/>
+    <function name="DirectionDesc" link="libgoo-goo-utils.html#DirectionDesc"/>
+    <function name="DomainDesc" link="libgoo-goo-utils.html#DomainDesc"/>
+    <function name="VideoCompressionDesc" link="libgoo-goo-utils.html#VideoCompressionDesc"/>
+    <function name="ColorDesc" link="libgoo-goo-utils.html#ColorDesc"/>
+    <function name="ResolutionInfo" link="libgoo-goo-utils.html#ResolutionInfo"/>
+    <function name="goo_strstate ()" link="libgoo-goo-utils.html#goo-strstate"/>
+    <function name="goo_strerror ()" link="libgoo-goo-utils.html#goo-strerror"/>
+    <function name="goo_strevent ()" link="libgoo-goo-utils.html#goo-strevent"/>
+    <function name="goo_strcommand ()" link="libgoo-goo-utils.html#goo-strcommand"/>
+    <function name="goo_strdirection ()" link="libgoo-goo-utils.html#goo-strdirection"/>
+    <function name="goo_strdomain ()" link="libgoo-goo-utils.html#goo-strdomain"/>
+    <function name="goo_strcolor ()" link="libgoo-goo-utils.html#goo-strcolor"/>
+    <function name="goo_strvideocompression ()" link="libgoo-goo-utils.html#goo-strvideocompression"/>
+    <function name="goo_get_resolution ()" link="libgoo-goo-utils.html#goo-get-resolution"/>
+    <function name="goo_strportdef ()" link="libgoo-goo-utils.html#goo-strportdef"/>
+    <function name="GOO_DEBUG_LEVEL" link="libgoo-goo-log.html#GOO-DEBUG-LEVEL:CAPS"/>
+    <function name="goo_log ()" link="libgoo-goo-log.html#goo-log"/>
+    <function name="goo_object_log ()" link="libgoo-goo-log.html#goo-object-log"/>
+    <function name="GOO_LOG()" link="libgoo-goo-log.html#GOO-LOG:CAPS"/>
+    <function name="GOO_DEBUG()" link="libgoo-goo-log.html#GOO-DEBUG:CAPS"/>
+    <function name="GOO_NOTICE()" link="libgoo-goo-log.html#GOO-NOTICE:CAPS"/>
+    <function name="GOO_INFO()" link="libgoo-goo-log.html#GOO-INFO:CAPS"/>
+    <function name="GOO_WARNING()" link="libgoo-goo-log.html#GOO-WARNING:CAPS"/>
+    <function name="GOO_ERROR()" link="libgoo-goo-log.html#GOO-ERROR:CAPS"/>
+    <function name="GOO_OBJECT_LOG()" link="libgoo-goo-log.html#GOO-OBJECT-LOG:CAPS"/>
+    <function name="GOO_OBJECT_DEBUG()" link="libgoo-goo-log.html#GOO-OBJECT-DEBUG:CAPS"/>
+    <function name="GOO_OBJECT_NOTICE()" link="libgoo-goo-log.html#GOO-OBJECT-NOTICE:CAPS"/>
+    <function name="GOO_OBJECT_INFO()" link="libgoo-goo-log.html#GOO-OBJECT-INFO:CAPS"/>
+    <function name="GOO_OBJECT_WARNING()" link="libgoo-goo-log.html#GOO-OBJECT-WARNING:CAPS"/>
+    <function name="GOO_OBJECT_ERROR()" link="libgoo-goo-log.html#GOO-OBJECT-ERROR:CAPS"/>
+  </functions>
+</book>

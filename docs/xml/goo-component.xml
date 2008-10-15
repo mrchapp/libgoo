@@ -1,0 +1,809 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooComponent">
+<refmeta>
+<refentrytitle role="top_of_page">GooComponent</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooComponent</refname>
+<refpurpose>Object which represents an OpenMAX component.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+                    <link linkend="GooComponent">GooComponent</link>;
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-load">goo_component_load</link>                  (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-unload">goo_component_unload</link>                (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-set-state-idle">goo_component_set_state_idle</link>        (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-set-state-executing">goo_component_set_state_executing</link>   (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-set-state-loaded">goo_component_set_state_loaded</link>      (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-wait-for-next-state">goo_component_wait_for_next_state</link>   (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="OMX-STATETYPE:CAPS">OMX_STATETYPE</link>       <link linkend="goo-component-get-state">goo_component_get_state</link>             (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-load-ports">goo_component_load_ports</link>            (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-configure-all-ports">goo_component_configure_all_ports</link>   (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-set-ports-definition">goo_component_set_ports_definition</link>  (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-validate-ports-definition">goo_component_validate_ports_definition</link>
+                                                        (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-allocate-port">goo_component_allocate_port</link>         (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="GooPort">GooPort</link> *port);
+<link linkend="void">void</link>                <link linkend="goo-component-allocate-all-ports">goo_component_allocate_all_ports</link>    (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-disable-port">goo_component_disable_port</link>          (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="GooPort">GooPort</link> *port);
+<link linkend="void">void</link>                <link linkend="goo-component-disable-all-ports">goo_component_disable_all_ports</link>     (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-deallocate-port">goo_component_deallocate_port</link>       (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="GooPort">GooPort</link> *port);
+<link linkend="void">void</link>                <link linkend="goo-component-deallocate-all-ports">goo_component_deallocate_all_ports</link>  (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-prepare-all-ports">goo_component_prepare_all_ports</link>     (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="GooIterator">GooIterator</link>*        <link linkend="goo-component-iterate-ports">goo_component_iterate_ports</link>         (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="GooIterator">GooIterator</link>*        <link linkend="goo-component-iterate-input-ports">goo_component_iterate_input_ports</link>   (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="GooIterator">GooIterator</link>*        <link linkend="goo-component-iterate-output-ports">goo_component_iterate_output_ports</link>  (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="GooPort">GooPort</link>*            <link linkend="goo-component-get-port">goo_component_get_port</link>              (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-set-parameter-by-name">goo_component_set_parameter_by_name</link> (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gpointer">gpointer</link> data);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-set-parameter-by-index">goo_component_set_parameter_by_index</link>
+                                                        (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-INDEXTYPE:CAPS">OMX_INDEXTYPE</link> index,
+                                                         <link linkend="gpointer">gpointer</link> data);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-get-parameter-by-name">goo_component_get_parameter_by_name</link> (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gpointer">gpointer</link> data);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-get-parameter-by-index">goo_component_get_parameter_by_index</link>
+                                                        (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-INDEXTYPE:CAPS">OMX_INDEXTYPE</link> index,
+                                                         <link linkend="gpointer">gpointer</link> data);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-set-config-by-name">goo_component_set_config_by_name</link>    (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gpointer">gpointer</link> data);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-set-config-by-index">goo_component_set_config_by_index</link>   (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-INDEXTYPE:CAPS">OMX_INDEXTYPE</link> index,
+                                                         <link linkend="gpointer">gpointer</link> data);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-get-config-by-name">goo_component_get_config_by_name</link>    (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gpointer">gpointer</link> data);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-get-config-by-index">goo_component_get_config_by_index</link>   (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-INDEXTYPE:CAPS">OMX_INDEXTYPE</link> index,
+                                                         <link linkend="gpointer">gpointer</link> data);
+<link linkend="void">void</link>                <link linkend="goo-component-load-parameters">goo_component_load_parameters</link>       (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-set-parameters">goo_component_set_parameters</link>        (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-set-done">goo_component_set_done</link>              (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-is-done">goo_component_is_done</link>               (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-wait-for-done">goo_component_wait_for_done</link>         (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-release-buffer">goo_component_release_buffer</link>        (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link> *buffer);
+<link linkend="void">void</link>                <link linkend="goo-component-send-eos">goo_component_send_eos</link>              (<link linkend="GooComponent">GooComponent</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-component-set-tunnel">goo_component_set_tunnel</link>            (<link linkend="GooComponent">GooComponent</link> *src,
+                                                         <link linkend="GooPort">GooPort</link> *srcport,
+                                                         <link linkend="GooComponent">GooComponent</link> *sink,
+                                                         <link linkend="GooPort">GooPort</link> *sinkport);
+<link linkend="void">void</link>                <link linkend="goo-component-set-tunnel-by-name">goo_component_set_tunnel_by_name</link>    (<link linkend="GooComponent">GooComponent</link> *src,
+                                                         <link linkend="gchar">gchar</link> *srcportname,
+                                                         <link linkend="GooComponent">GooComponent</link> *sink,
+                                                         <link linkend="gchar">gchar</link> *sinkportname);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-component-set-clock">goo_component_set_clock</link>             (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="GooComponent">GooComponent</link> *clock);
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+The <link linkend="GooComponent"><type>GooComponent</type></link> is a higher abstraction representation of an OpenMAX component.
+Establish the internal state of the component, control the streams and it is
+responsible of the comunication with the OMX Core.</para>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooComponent" role="struct"/>GooComponent</title>
+<indexterm><primary>GooComponent</primary></indexterm><programlisting>typedef struct {
+} GooComponent;
+</programlisting>
+<para>
+Represent a higher abstraction of an OpenMAX component.</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="goo-component-load" role="function"/>goo_component_load ()</title>
+<indexterm><primary>goo_component_load</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_load                  (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+This methods will locate the component specified, load that component
+into memory, and validate it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the component was loaded correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-unload" role="function"/>goo_component_unload ()</title>
+<indexterm><primary>goo_component_unload</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_unload                (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+This method will free the OMX component from memory.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the component is free correctly; FALSE if otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-state-idle" role="function"/>goo_component_set_state_idle ()</title>
+<indexterm><primary>goo_component_set_state_idle</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_set_state_idle        (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Set the component in Idle State.
+Before you call this method, you should loaded the component, loaded it
+ports and configured them, as the configured the component itself.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-state-executing" role="function"/>goo_component_set_state_executing ()</title>
+<indexterm><primary>goo_component_set_state_executing</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_set_state_executing   (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Set the component in Executing state.
+After calling this methods you should process the buffers interchange.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-state-loaded" role="function"/>goo_component_set_state_loaded ()</title>
+<indexterm><primary>goo_component_set_state_loaded</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_set_state_loaded      (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Set the compoment in Loaded state
+This state should be called when we're going to unload the component.
+The method disable and deallocates all the component's ports.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-wait-for-next-state" role="function"/>goo_component_wait_for_next_state ()</title>
+<indexterm><primary>goo_component_wait_for_next_state</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_wait_for_next_state   (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+This method will block the thread until the OMX component have changed his
+state to the new one specified previously.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-get-state" role="function"/>goo_component_get_state ()</title>
+<indexterm><primary>goo_component_get_state</primary></indexterm><programlisting><link linkend="OMX-STATETYPE:CAPS">OMX_STATETYPE</link>       goo_component_get_state             (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+This method executes the OMX_GetState macro to obtain the current
+component's state.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The <link linkend="OMX-STATETYPE:CAPS"><type>OMX_STATETYPE</type></link> current value
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-load-ports" role="function"/>goo_component_load_ports ()</title>
+<indexterm><primary>goo_component_load_ports</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_load_ports            (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+This function will load all the ports needed by the component.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the port were loaded correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-configure-all-ports" role="function"/>goo_component_configure_all_ports ()</title>
+<indexterm><primary>goo_component_configure_all_ports</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_configure_all_ports   (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Set in the OMX core the configuration of each port.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-ports-definition" role="function"/>goo_component_set_ports_definition ()</title>
+<indexterm><primary>goo_component_set_ports_definition</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_set_ports_definition  (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Set the port's definitions default values for each port in the component.
+This method should be overriden in every specfic component.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-validate-ports-definition" role="function"/>goo_component_validate_ports_definition ()</title>
+<indexterm><primary>goo_component_validate_ports_definition</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_validate_ports_definition
+                                                        (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Validates and calculates the assigned port's definitions values for each
+port in the component.
+This method should be overriden in every specfic component.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-allocate-port" role="function"/>goo_component_allocate_port ()</title>
+<indexterm><primary>goo_component_allocate_port</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_allocate_port         (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="GooPort">GooPort</link> *port);</programlisting>
+<para>
+Allocates the buffers memory to use in the specified port in the component.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>port</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-allocate-all-ports" role="function"/>goo_component_allocate_all_ports ()</title>
+<indexterm><primary>goo_component_allocate_all_ports</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_allocate_all_ports    (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Allocates the buffers memory to use in the specified port in the component.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-disable-port" role="function"/>goo_component_disable_port ()</title>
+<indexterm><primary>goo_component_disable_port</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_disable_port          (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="GooPort">GooPort</link> *port);</programlisting>
+<para>
+Ask to the component to disable the specified port</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>port</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-disable-all-ports" role="function"/>goo_component_disable_all_ports ()</title>
+<indexterm><primary>goo_component_disable_all_ports</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_disable_all_ports     (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Ask to the component to disable all the port in it</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-deallocate-port" role="function"/>goo_component_deallocate_port ()</title>
+<indexterm><primary>goo_component_deallocate_port</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_deallocate_port       (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="GooPort">GooPort</link> *port);</programlisting>
+<para>
+Free the memory allocated for the specified port's buffers.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>port</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-deallocate-all-ports" role="function"/>goo_component_deallocate_all_ports ()</title>
+<indexterm><primary>goo_component_deallocate_all_ports</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_deallocate_all_ports  (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Free the buffers of all the ports associated to this compoment</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-prepare-all-ports" role="function"/>goo_component_prepare_all_ports ()</title>
+<indexterm><primary>goo_component_prepare_all_ports</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_prepare_all_ports     (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Take all the output port and push all its buffers to the component
+to wait to be filled. This method should be called when the component
+is in transition from idel to executing.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-iterate-ports" role="function"/>goo_component_iterate_ports ()</title>
+<indexterm><primary>goo_component_iterate_ports</primary></indexterm><programlisting><link linkend="GooIterator">GooIterator</link>*        goo_component_iterate_ports         (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Retrieves an iterator of component's ports.  The iterator should be unref
+after usage.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="GooIterator"><type>GooIterator</type></link> of <link linkend="GooPort"><type>GooPort</type></link>. Unref each port after use.
+
+MT Safe.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-iterate-input-ports" role="function"/>goo_component_iterate_input_ports ()</title>
+<indexterm><primary>goo_component_iterate_input_ports</primary></indexterm><programlisting><link linkend="GooIterator">GooIterator</link>*        goo_component_iterate_input_ports   (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Retrieves an iterator of component's input ports.  The iterator should
+be unref after usage.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="GooIterator"><type>GooIterator</type></link> of input <link linkend="GooPort"><type>GooPort</type></link>. Unref each port after use.
+
+MT Safe.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-iterate-output-ports" role="function"/>goo_component_iterate_output_ports ()</title>
+<indexterm><primary>goo_component_iterate_output_ports</primary></indexterm><programlisting><link linkend="GooIterator">GooIterator</link>*        goo_component_iterate_output_ports  (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Retrieves an iterator of component's output ports.  The iterator should
+be unref after usage.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="GooIterator"><type>GooIterator</type></link> of output <link linkend="GooPort"><type>GooPort</type></link>. Unref each port after use.
+
+MT Safe.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-get-port" role="function"/>goo_component_get_port ()</title>
+<indexterm><primary>goo_component_get_port</primary></indexterm><programlisting><link linkend="GooPort">GooPort</link>*            goo_component_get_port              (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+Retrieves the requested port label with the given name.  It should be
+unref after usage.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> The name of the port. It could "input#" or "output#"
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The <link linkend="GooPort"><type>GooPort</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-parameter-by-name" role="function"/>goo_component_set_parameter_by_name ()</title>
+<indexterm><primary>goo_component_set_parameter_by_name</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_set_parameter_by_name (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Set a custom parameter in the OMX component referenced by its name.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> A string with the name of the custom parameter to set
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer to the data to set in the custom parameter
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the value is set correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-parameter-by-index" role="function"/>goo_component_set_parameter_by_index ()</title>
+<indexterm><primary>goo_component_set_parameter_by_index</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_set_parameter_by_index
+                                                        (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-INDEXTYPE:CAPS">OMX_INDEXTYPE</link> index,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Set a custom parameter in the OMX component referenced by its
+index value.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>index</parameter>&nbsp;:</term>
+<listitem><simpara> An enum value which identifies the custom parameter to set
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer to the data to set in the custom parameter
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the value is set correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-get-parameter-by-name" role="function"/>goo_component_get_parameter_by_name ()</title>
+<indexterm><primary>goo_component_get_parameter_by_name</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_get_parameter_by_name (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Get a custom parameter in the OMX component referenced by its name.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> A string with the name of the custom parameter to set
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer to the data to set in the custom parameter
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the value is set correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-get-parameter-by-index" role="function"/>goo_component_get_parameter_by_index ()</title>
+<indexterm><primary>goo_component_get_parameter_by_index</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_get_parameter_by_index
+                                                        (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-INDEXTYPE:CAPS">OMX_INDEXTYPE</link> index,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Get a custom parameter in the OMX component referenced by its
+index value.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>index</parameter>&nbsp;:</term>
+<listitem><simpara> An enum value which identifies the custom parameter to set
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer to the data to set in the custom parameter
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the value is set correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-config-by-name" role="function"/>goo_component_set_config_by_name ()</title>
+<indexterm><primary>goo_component_set_config_by_name</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_set_config_by_name    (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Set a custom configuration in the OMX component referenced by its name.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> A string with the name of the custom parameter to set
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer to the data to set in the custom parameter
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the value is set correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-config-by-index" role="function"/>goo_component_set_config_by_index ()</title>
+<indexterm><primary>goo_component_set_config_by_index</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_set_config_by_index   (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-INDEXTYPE:CAPS">OMX_INDEXTYPE</link> index,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Set a custom configuration in the OMX component referenced by its
+index value.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>index</parameter>&nbsp;:</term>
+<listitem><simpara> An enum value which identifies the custom parameter to set
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer to the data to set in the custom parameter
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the value is set correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-get-config-by-name" role="function"/>goo_component_get_config_by_name ()</title>
+<indexterm><primary>goo_component_get_config_by_name</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_get_config_by_name    (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Get a custom parameter in the OMX component referenced by its name.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> A string with the name of the custom parameter to get
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer where the data is going to be stored
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the value is get correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-get-config-by-index" role="function"/>goo_component_get_config_by_index ()</title>
+<indexterm><primary>goo_component_get_config_by_index</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_get_config_by_index   (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-INDEXTYPE:CAPS">OMX_INDEXTYPE</link> index,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Get a custom parameter in the OMX component referenced by its index.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>index</parameter>&nbsp;:</term>
+<listitem><simpara> An enum value of the custom parameter to get
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer where the data is going to be stored
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the value is get correctly; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-load-parameters" role="function"/>goo_component_load_parameters ()</title>
+<indexterm><primary>goo_component_load_parameters</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_load_parameters       (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Initializes all the miscellaneous parameters of the specific compoment.
+This is a pure virtual function which your component should override.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-parameters" role="function"/>goo_component_set_parameters ()</title>
+<indexterm><primary>goo_component_set_parameters</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_set_parameters        (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Configure all the miscellaneous parameters of the specific compoment.
+This is a pure virtual function which your component should override.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-done" role="function"/>goo_component_set_done ()</title>
+<indexterm><primary>goo_component_set_done</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_set_done              (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Mark the component if all the stream have been processed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-is-done" role="function"/>goo_component_is_done ()</title>
+<indexterm><primary>goo_component_is_done</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_is_done               (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+Check if the component have been processed all the stream</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the stream have been processed; FALSE otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-wait-for-done" role="function"/>goo_component_wait_for_done ()</title>
+<indexterm><primary>goo_component_wait_for_done</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_wait_for_done         (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+The thread will be block until the done condition is activated (this is a
+library user reponsability).</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-release-buffer" role="function"/>goo_component_release_buffer ()</title>
+<indexterm><primary>goo_component_release_buffer</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_release_buffer        (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link> *buffer);</programlisting>
+<para>
+This method will call the functions <link linkend="OMX-FillThisBuffer"><function>OMX_FillThisBuffer()</function></link> or
+<link linkend="OMX-EmptyThisBuffer"><function>OMX_EmptyThisBuffer()</function></link> depending on the port type defined in the buffer
+structure.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buffer</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="OMX-BUFFERHEADERTYPE:CAPS"><type>OMX_BUFFERHEADERTYPE</type></link> pointer
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-send-eos" role="function"/>goo_component_send_eos ()</title>
+<indexterm><primary>goo_component_send_eos</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_send_eos              (<link linkend="GooComponent">GooComponent</link> *self);</programlisting>
+<para>
+This method will send an empty buffer with the EOS flag raised to every
+input port if it is not tunneled and also it is not marked as EOS already.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-tunnel" role="function"/>goo_component_set_tunnel ()</title>
+<indexterm><primary>goo_component_set_tunnel</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_set_tunnel            (<link linkend="GooComponent">GooComponent</link> *src,
+                                                         <link linkend="GooPort">GooPort</link> *srcport,
+                                                         <link linkend="GooComponent">GooComponent</link> *sink,
+                                                         <link linkend="GooPort">GooPort</link> *sinkport);</programlisting>
+<para>
+This method will setup a tunnel between two GooComponents.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>src</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>srcport</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sink</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sinkport</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-tunnel-by-name" role="function"/>goo_component_set_tunnel_by_name ()</title>
+<indexterm><primary>goo_component_set_tunnel_by_name</primary></indexterm><programlisting><link linkend="void">void</link>                goo_component_set_tunnel_by_name    (<link linkend="GooComponent">GooComponent</link> *src,
+                                                         <link linkend="gchar">gchar</link> *srcportname,
+                                                         <link linkend="GooComponent">GooComponent</link> *sink,
+                                                         <link linkend="gchar">gchar</link> *sinkportname);</programlisting>
+<para>
+This method will setup a tunnel between two GooComponents.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>src</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>srcportname</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sink</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sinkportname</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-component-set-clock" role="function"/>goo_component_set_clock ()</title>
+<indexterm><primary>goo_component_set_clock</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_component_set_clock             (<link linkend="GooComponent">GooComponent</link> *self,
+                                                         <link linkend="GooComponent">GooComponent</link> *clock);</programlisting>
+<para>
+This method assigns a global clock component to the component.
+This methods is should be used only by the <link linkend="GooComponentFactory"><type>GooComponentFactory</type></link> instance.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GooComponent"><type>GooComponent</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>clock</parameter>&nbsp;:</term>
+<listitem><simpara> The factory's clock instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>See Also</title>
+<link linkend="GooPort"><type>GooPort</type></link>
+</refsect1>
+
+</refentry>

@@ -1,0 +1,43 @@
+<!-- ##### SECTION Title ##### -->
+GooTiJpegEnc
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooTiJpegEncPriv ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GooTiJpegEnc ##### -->
+<para>
+
+</para>
+
+@parent: 
+@param: 
+
+<!-- ##### MACRO GOO_TI_JPEGENC_GET_PARAM ##### -->
+<para>
+
+</para>
+
+@jpegenc: 
+
+

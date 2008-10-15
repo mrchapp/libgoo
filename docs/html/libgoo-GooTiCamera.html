@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooTiCamera</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooTiComponentFactory.html" title="GooTiComponentFactory">
+<link rel="next" href="libgoo-GooTiMp3Dec.html" title="GooTiMp3Dec">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooTiComponentFactory.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooTiMp3Dec.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2574545" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2581818" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooTiCamera"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2574545"></a><span class="refentrytitle">GooTiCamera</span>
+</h2>
+<p>GooTiCamera &#8212; Represent a TI OpenMAX camera component</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-GooTiCamera.html#GooTiCameraPriv">GooTiCameraPriv</a>;
+                    <a href="libgoo-GooTiCamera.html#GooTiCamera">GooTiCamera</a>;
+#define             <a href="libgoo-GooTiCamera.html#GOO-TI-CAMERA-GET-PARAM:CAPS">GOO_TI_CAMERA_GET_PARAM</a>             (camera)
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2581818"></a><h2>Description</h2>
+<p>
+The <a href="libgoo-GooTiCamera.html#GooTiCamera"><span class="type">GooTiCamera</span></a> is the abstraction of the OpenMAX camera component in
+the Texas Instrument implementation.</p>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2607381"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2607392"></a><h3>
+<a name="GooTiCameraPriv"></a>GooTiCameraPriv</h3>
+<a class="indexterm" name="id2607404"></a><pre class="programlisting">typedef struct _GooTiCameraPriv GooTiCameraPriv;</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2607421"></a><h3>
+<a name="GooTiCamera"></a>GooTiCamera</h3>
+<a class="indexterm" name="id2607433"></a><pre class="programlisting">typedef struct {
+        GooComponent parent;
+
+	OMX_PARAM_SENSORMODETYPE* param;
+
+	/* custom params */
+        guint display_width;
+        guint display_height;
+
+	/* this is only for 8x */
+	gboolean burst_mode;
+	gboolean native_rendering;
+	gboolean overlay;
+	guint pipeline;
+} GooTiCamera;
+</pre>
+<p>
+It is the OMX camera component</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><a href="libgoo-GooComponent.html#GooComponent">GooComponent</a>&#160;<em class="structfield"><code>parent</code></em>;</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term">OMX_PARAM_SENSORMODETYPE&#160;*<em class="structfield"><code>param</code></em>;</span></td>
+<td> The camera sensor configuration (<span class="type">OMX_PARAM_SENSORMODETYPE</span>)
+</td>
+</tr>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>&#160;<em class="structfield"><code>display_width</code></em>;</span></td>
+<td> The image width in the display (18.x viewfinding mode)
+</td>
+</tr>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>&#160;<em class="structfield"><code>display_height</code></em>;</span></td>
+<td> The image height in the display (18.x viewfinding mode)
+</td>
+</tr>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>&#160;<em class="structfield"><code>burst_mode</code></em>;</span></td>
+<td> Burst mode activated (8.x)
+</td>
+</tr>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>&#160;<em class="structfield"><code>native_rendering</code></em>;</span></td>
+<td> Activate  the native rendering (8.x)
+</td>
+</tr>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>&#160;<em class="structfield"><code>overlay</code></em>;</span></td>
+<td> Activate the overlay mode (8.x)
+</td>
+</tr>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>&#160;<em class="structfield"><code>pipeline</code></em>;</span></td>
+<td> Selecte the LCD pipeline (8.x)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2586777"></a><h3>
+<a name="GOO-TI-CAMERA-GET-PARAM:CAPS"></a>GOO_TI_CAMERA_GET_PARAM()</h3>
+<a class="indexterm" name="id2586788"></a><pre class="programlisting">#define GOO_TI_CAMERA_GET_PARAM(camera) (GOO_TI_CAMERA (camera)-&gt;param)
+</pre>
+<p>
+Gets the <span class="type">OMX_PARAM_SENSORMODETYPE</span> of the camera</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>camera</code></em>&#160;:</span></td>
+<td> A <a href="libgoo-GooTiCamera.html#GooTiCamera"><span class="type">GooTiCamera</span></a> instace
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2607734"></a><h2>See Also</h2>
+<a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a>
+</div>
+</div>
+</body>
+</html>

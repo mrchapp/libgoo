@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>goo-iterator</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooPortList.html" title="GooPortList">
+<link rel="next" href="libgoo-GooEngine.html" title="GooEngine">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooPortList.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooEngine.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2595905" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2583501" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-goo-iterator"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2595905"></a><span class="refentrytitle">goo-iterator</span>
+</h2>
+<p>goo-iterator &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-goo-iterator.html#GooList">GooList</a>;
+                    <a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>;
+                    <a href="libgoo-goo-iterator.html#GooIteratorIface">GooIteratorIface</a>;
+void                <a href="libgoo-goo-iterator.html#goo-iterator-next">goo_iterator_next</a>                   (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);
+void                <a href="libgoo-goo-iterator.html#goo-iterator-prev">goo_iterator_prev</a>                   (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);
+void                <a href="libgoo-goo-iterator.html#goo-iterator-first">goo_iterator_first</a>                  (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);
+void                <a href="libgoo-goo-iterator.html#goo-iterator-nth">goo_iterator_nth</a>                    (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> nth);
+<a href="libgoo-GooObject.html#GooObject">GooObject</a>*          <a href="libgoo-goo-iterator.html#goo-iterator-get-current">goo_iterator_get_current</a>            (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-goo-iterator.html#goo-iterator-is-done">goo_iterator_is_done</a>                (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);
+<a href="libgoo-goo-iterator.html#GooList">GooList</a>*            <a href="libgoo-goo-iterator.html#goo-iterator-get-list">goo_iterator_get_list</a>               (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2583501"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2583517"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2572856"></a><h3>
+<a name="GooList"></a>GooList</h3>
+<a class="indexterm" name="id2572868"></a><pre class="programlisting">typedef struct _GooList GooList;</pre>
+<p>
+An iterable list type</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2572887"></a><h3>
+<a name="GooIterator"></a>GooIterator</h3>
+<a class="indexterm" name="id2572899"></a><pre class="programlisting">typedef struct _GooIterator GooIterator;</pre>
+<p>
+An iterator for a <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> is used for iterating over a list. The iterator
+is an instance that keeps the position state information. The <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance
+will not by itself keep a position state. Only iterators can keep a position
+state for a list.</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2572936"></a><h3>
+<a name="GooIteratorIface"></a>GooIteratorIface</h3>
+<a class="indexterm" name="id2572948"></a><pre class="programlisting">typedef struct {
+	GTypeInterface parent;
+	
+	void (*next_func) (GooIterator *self);
+	void (*prev_func) (GooIterator *self);
+	void (*first_func) (GooIterator *self);
+	void (*nth_func) (GooIterator *self, guint nth);
+	GooObject* (*get_current_func) (GooIterator *self);
+
+	gboolean (*is_done_func) (GooIterator *self);
+	GooList* (*get_list_func) (GooIterator *self);
+} GooIteratorIface;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2572970"></a><h3>
+<a name="goo-iterator-next"></a>goo_iterator_next ()</h3>
+<a class="indexterm" name="id2572983"></a><pre class="programlisting">void                goo_iterator_next                   (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);</pre>
+<p>
+Moves the iterator to the next node</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2572211"></a><h3>
+<a name="goo-iterator-prev"></a>goo_iterator_prev ()</h3>
+<a class="indexterm" name="id2572223"></a><pre class="programlisting">void                goo_iterator_prev                   (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);</pre>
+<p>
+Moves the iterator to the previous node</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2572280"></a><h3>
+<a name="goo-iterator-first"></a>goo_iterator_first ()</h3>
+<a class="indexterm" name="id2572292"></a><pre class="programlisting">void                goo_iterator_first                  (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);</pre>
+<p>
+Moves the iterator to the first node</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2572348"></a><h3>
+<a name="goo-iterator-nth"></a>goo_iterator_nth ()</h3>
+<a class="indexterm" name="id2572361"></a><pre class="programlisting">void                goo_iterator_nth                    (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> nth);</pre>
+<p>
+Moves the iterator to the nth node</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>nth</code></em>&#160;:</span></td>
+<td> The nth position
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2559885"></a><h3>
+<a name="goo-iterator-get-current"></a>goo_iterator_get_current ()</h3>
+<a class="indexterm" name="id2559896"></a><pre class="programlisting"><a href="libgoo-GooObject.html#GooObject">GooObject</a>*          goo_iterator_get_current            (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);</pre>
+<p>
+Does not move the iterator. Returns the objecto at the curren position. If
+there's no current position, this method returns NULL. If not NULL, the
+returned value must be unreferenced after use.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> the current object or NULL
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2559966"></a><h3>
+<a name="goo-iterator-is-done"></a>goo_iterator_is_done ()</h3>
+<a class="indexterm" name="id2559978"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_iterator_is_done                (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);</pre>
+<p>
+Does the iterator point to some valid list item? You can use this property
+to make loops like:
+</p>
+<p>
+Example:
+</p>
+<div class="informalexample"><pre class="programlisting">
+GooList *list = goo_simple_list_new ();
+GooIterator *iter = goo_list_create_iterator (list);
+while (!goo_iterator_is_done (iter))
+{
+   GooObject *cur = goo_iterator_get_current (iter);
+   ...
+   g_object_unref (G_OBJECT (cur));
+   goo_iterator_next (iter);
+}
+g_object_unref (G_OBJECT (iter));
+g_object_unref (G_OBJECT (list));
+</pre></div>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if it points to a valid list item, FALSE otherwise
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2560062"></a><h3>
+<a name="goo-iterator-get-list"></a>goo_iterator_get_list ()</h3>
+<a class="indexterm" name="id2560073"></a><pre class="programlisting"><a href="libgoo-goo-iterator.html#GooList">GooList</a>*            goo_iterator_get_list               (<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a> *self);</pre>
+<p>
+Does not move the iterator. Returns the list of which this iterator is an
+iterator. The returned list object should be unreferenced after use.
+Remember when using this property that lists shouldn't change while
+iterating them.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> The <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance being iterated
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- ##### SECTION Title ##### -->
+GooTiComponentFactory
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooTiComponentFactory ##### -->
+<para>
+
+</para>
+
+@parent: 
+@components: 
+@clock: 
+
+<!-- ##### FUNCTION goo_ti_component_factory_get_instance ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

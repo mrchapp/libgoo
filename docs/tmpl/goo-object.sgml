@@ -1,0 +1,91 @@
+<!-- ##### SECTION Title ##### -->
+GooObject
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooObject ##### -->
+<para>
+
+</para>
+
+@parent: 
+@name: 
+@prefix: 
+@owner: 
+
+<!-- ##### FUNCTION goo_object_get_name ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_object_set_name ##### -->
+<para>
+
+</para>
+
+@self: 
+@name: 
+
+
+<!-- ##### FUNCTION goo_object_get_owner ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_object_set_owner ##### -->
+<para>
+
+</para>
+
+@self: 
+@owner: 
+
+
+<!-- ##### MACRO GOO_OBJECT_NAME ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO GOO_OBJECT_PREFIX ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO GOO_OBJECT_OWNER ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

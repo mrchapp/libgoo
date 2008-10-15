@@ -1,0 +1,90 @@
+<!-- ##### SECTION Title ##### -->
+GooTiAudioComponent
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooTiAudioComponent ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION goo_ti_audio_component_set_dasf_mode ##### -->
+<para>
+
+</para>
+
+@self: 
+@dasf_mode: 
+
+
+<!-- ##### FUNCTION goo_ti_audio_component_set_volume ##### -->
+<para>
+
+</para>
+
+@self: 
+@volume: 
+
+
+<!-- ##### FUNCTION goo_ti_audio_component_set_mute ##### -->
+<para>
+
+</para>
+
+@self: 
+@mute: 
+
+
+<!-- ##### FUNCTION goo_ti_audio_component_is_dasf_mode ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_ti_audio_component_get_volume ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_ti_audio_component_is_mute ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_ti_audio_component_get_stream_id ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+

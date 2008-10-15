@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-goo-log">
+<refmeta>
+<refentrytitle role="top_of_page">goo-log</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>goo-log</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+#define             <link linkend="GOO-DEBUG-LEVEL:CAPS">GOO_DEBUG_LEVEL</link>
+<link linkend="void">void</link>                <link linkend="goo-log">goo_log</link>                             (<link linkend="guint">guint</link> level,
+                                                         const <link linkend="gchar">gchar</link> *file,
+                                                         const <link linkend="gchar">gchar</link> *function,
+                                                         <link linkend="gint">gint</link> line,
+                                                         const <link linkend="gchar">gchar</link> *fmt,
+                                                         ...);
+<link linkend="void">void</link>                <link linkend="goo-object-log">goo_object_log</link>                      (const <link linkend="gchar">gchar</link> *objname,
+                                                         const <link linkend="gchar">gchar</link> *prefix,
+                                                         <link linkend="guint">guint</link> level,
+                                                         const <link linkend="gchar">gchar</link> *file,
+                                                         const <link linkend="gchar">gchar</link> *function,
+                                                         <link linkend="gint">gint</link> line,
+                                                         const <link linkend="gchar">gchar</link> *fmt,
+                                                         ...);
+#define             <link linkend="GOO-LOG:CAPS">GOO_LOG</link>                             (level, ...)
+#define             <link linkend="GOO-DEBUG:CAPS">GOO_DEBUG</link>                           (...)
+#define             <link linkend="GOO-NOTICE:CAPS">GOO_NOTICE</link>                          (...)
+#define             <link linkend="GOO-INFO:CAPS">GOO_INFO</link>                            (...)
+#define             <link linkend="GOO-WARNING:CAPS">GOO_WARNING</link>                         (...)
+#define             <link linkend="GOO-ERROR:CAPS">GOO_ERROR</link>                           (...)
+#define             <link linkend="GOO-OBJECT-LOG:CAPS">GOO_OBJECT_LOG</link>                      (obj, level, ...)
+#define             <link linkend="GOO-OBJECT-DEBUG:CAPS">GOO_OBJECT_DEBUG</link>                    (obj, ...)
+#define             <link linkend="GOO-OBJECT-NOTICE:CAPS">GOO_OBJECT_NOTICE</link>                   (obj, ...)
+#define             <link linkend="GOO-OBJECT-INFO:CAPS">GOO_OBJECT_INFO</link>                     (obj, ...)
+#define             <link linkend="GOO-OBJECT-WARNING:CAPS">GOO_OBJECT_WARNING</link>                  (obj, ...)
+#define             <link linkend="GOO-OBJECT-ERROR:CAPS">GOO_OBJECT_ERROR</link>                    (obj, ...)
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GOO-DEBUG-LEVEL:CAPS" role="macro"/>GOO_DEBUG_LEVEL</title>
+<indexterm><primary>GOO_DEBUG_LEVEL</primary></indexterm><programlisting>#define GOO_DEBUG_LEVEL "GOO_DEBUG_LEVEL"
+</programlisting>
+<para>
+String that specifies the environment variable name to set the debug level</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="goo-log" role="function"/>goo_log ()</title>
+<indexterm><primary>goo_log</primary></indexterm><programlisting><link linkend="void">void</link>                goo_log                             (<link linkend="guint">guint</link> level,
+                                                         const <link linkend="gchar">gchar</link> *file,
+                                                         const <link linkend="gchar">gchar</link> *function,
+                                                         <link linkend="gint">gint</link> line,
+                                                         const <link linkend="gchar">gchar</link> *fmt,
+                                                         ...);</programlisting>
+<para>
+Writes a log message to the stdout</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>level</parameter>&nbsp;:</term>
+<listitem><simpara> log level
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>file</parameter>&nbsp;:</term>
+<listitem><simpara> the file name
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>function</parameter>&nbsp;:</term>
+<listitem><simpara> the function name
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>line</parameter>&nbsp;:</term>
+<listitem><simpara> the code line number
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fmt</parameter>&nbsp;:</term>
+<listitem><simpara> the message format
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> the message
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-object-log" role="function"/>goo_object_log ()</title>
+<indexterm><primary>goo_object_log</primary></indexterm><programlisting><link linkend="void">void</link>                goo_object_log                      (const <link linkend="gchar">gchar</link> *objname,
+                                                         const <link linkend="gchar">gchar</link> *prefix,
+                                                         <link linkend="guint">guint</link> level,
+                                                         const <link linkend="gchar">gchar</link> *file,
+                                                         const <link linkend="gchar">gchar</link> *function,
+                                                         <link linkend="gint">gint</link> line,
+                                                         const <link linkend="gchar">gchar</link> *fmt,
+                                                         ...);</programlisting>
+<para>
+Writes a log message to the stdout</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>objname</parameter>&nbsp;:</term>
+<listitem><simpara> the object's name
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>prefix</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>level</parameter>&nbsp;:</term>
+<listitem><simpara> log level
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>file</parameter>&nbsp;:</term>
+<listitem><simpara> the file name
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>function</parameter>&nbsp;:</term>
+<listitem><simpara> the function name
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>line</parameter>&nbsp;:</term>
+<listitem><simpara> the code line number
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fmt</parameter>&nbsp;:</term>
+<listitem><simpara> the message format
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> the message
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-LOG:CAPS" role="macro"/>GOO_LOG()</title>
+<indexterm><primary>GOO_LOG</primary></indexterm><programlisting>#define GOO_LOG(level, ...) goo_log ((level), __FILE__, __PRETTY_FUNCTION__, __LINE__, __VA_ARGS__);
+</programlisting>
+<para>
+Macro for <link linkend="goo-log"><function>goo_log()</function></link> function</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>level</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="GooLogLevel"><type>GooLogLevel</type></link> of the message
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-DEBUG:CAPS" role="macro"/>GOO_DEBUG()</title>
+<indexterm><primary>GOO_DEBUG</primary></indexterm><programlisting>#define GOO_DEBUG(...)   GOO_LOG(GOO_LOG_DEBUG, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-NOTICE:CAPS" role="macro"/>GOO_NOTICE()</title>
+<indexterm><primary>GOO_NOTICE</primary></indexterm><programlisting>#define GOO_NOTICE(...)  GOO_LOG(GOO_LOG_NOTICE, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-INFO:CAPS" role="macro"/>GOO_INFO()</title>
+<indexterm><primary>GOO_INFO</primary></indexterm><programlisting>#define GOO_INFO(...)    GOO_LOG(GOO_LOG_INFO, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-WARNING:CAPS" role="macro"/>GOO_WARNING()</title>
+<indexterm><primary>GOO_WARNING</primary></indexterm><programlisting>#define GOO_WARNING(...) GOO_LOG(GOO_LOG_WARNING, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-ERROR:CAPS" role="macro"/>GOO_ERROR()</title>
+<indexterm><primary>GOO_ERROR</primary></indexterm><programlisting>#define GOO_ERROR(...)   GOO_LOG(GOO_LOG_ERROR, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-LOG:CAPS" role="macro"/>GOO_OBJECT_LOG()</title>
+<indexterm><primary>GOO_OBJECT_LOG</primary></indexterm><programlisting>#define GOO_OBJECT_LOG(obj, level, ...) goo_object_log (GOO_OBJECT_NAME (obj), GOO_OBJECT_PREFIX (obj), (level), __FILE__, __PRETTY_FUNCTION__, __LINE__, __VA_ARGS__);
+</programlisting>
+<para>
+Macro for <link linkend="goo-object-log"><function>goo_object_log()</function></link> function</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GooObject"><type>GooObject</type></link> which generates the message
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>level</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="GooLogLevel"><type>GooLogLevel</type></link> of the message
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-DEBUG:CAPS" role="macro"/>GOO_OBJECT_DEBUG()</title>
+<indexterm><primary>GOO_OBJECT_DEBUG</primary></indexterm><programlisting>#define GOO_OBJECT_DEBUG(obj, ...)   GOO_OBJECT_LOG(obj, GOO_LOG_DEBUG, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GooObject"><type>GooObject</type></link> instance which generates the message
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-NOTICE:CAPS" role="macro"/>GOO_OBJECT_NOTICE()</title>
+<indexterm><primary>GOO_OBJECT_NOTICE</primary></indexterm><programlisting>#define GOO_OBJECT_NOTICE(obj, ...)  GOO_OBJECT_LOG(obj, GOO_LOG_NOTICE, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GooObject"><type>GooObject</type></link> instance which generates the message
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-INFO:CAPS" role="macro"/>GOO_OBJECT_INFO()</title>
+<indexterm><primary>GOO_OBJECT_INFO</primary></indexterm><programlisting>#define GOO_OBJECT_INFO(obj, ...)    GOO_OBJECT_LOG(obj, GOO_LOG_INFO, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GooObject"><type>GooObject</type></link> instance which generates the message
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-WARNING:CAPS" role="macro"/>GOO_OBJECT_WARNING()</title>
+<indexterm><primary>GOO_OBJECT_WARNING</primary></indexterm><programlisting>#define GOO_OBJECT_WARNING(obj, ...) GOO_OBJECT_LOG(obj, GOO_LOG_WARNING, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GooObject"><type>GooObject</type></link> instance which generates the message
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-OBJECT-ERROR:CAPS" role="macro"/>GOO_OBJECT_ERROR()</title>
+<indexterm><primary>GOO_OBJECT_ERROR</primary></indexterm><programlisting>#define GOO_OBJECT_ERROR(obj, ...)   GOO_OBJECT_LOG(obj, GOO_LOG_ERROR, __VA_ARGS__)
+</programlisting>
+<para>
+Output a logging message.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GooObject"><type>GooObject</type></link> instance which generates the message
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara> printf-style message to output
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

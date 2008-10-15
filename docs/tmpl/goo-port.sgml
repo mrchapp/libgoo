@@ -1,0 +1,157 @@
+<!-- ##### SECTION Title ##### -->
+GooPort
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### USER_FUNCTION GooPortProcessBufferFunction ##### -->
+<para>
+
+</para>
+
+@port: 
+@buffer: 
+@data: 
+
+
+<!-- ##### STRUCT GooPort ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GOO_PORT_GET_DEFINITION ##### -->
+<para>
+
+</para>
+
+@port: 
+
+
+<!-- ##### FUNCTION goo_port_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_port_prepare_definition ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_port_allocate_buffer_header ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_port_prepare_buffer_queue ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_port_allocate_buffers ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_port_push_buffer ##### -->
+<para>
+
+</para>
+
+@self: 
+@buffer: 
+
+
+<!-- ##### FUNCTION goo_port_grab_buffer ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_port_try_grab_buffer ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_port_set_eos ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_port_is_eos ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_port_is_tunneled ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_port_set_process_buffer_function ##### -->
+<para>
+
+</para>
+
+@self: 
+@pbf: 
+
+
+<!-- ##### FUNCTION goo_port_process_buffer ##### -->
+<para>
+
+</para>
+
+@self: 
+@buffer: 
+@data: 
+
+

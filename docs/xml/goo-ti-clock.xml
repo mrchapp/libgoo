@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooTiClock">
+<refmeta>
+<refentrytitle role="top_of_page">GooTiClock</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooTiClock</refname>
+<refpurpose>This class represents an TI OMX clock.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+                    <link linkend="GooTiClock">GooTiClock</link>;
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+This class represents an TI OMX clock. It is used by some other TI OMX
+components to synchronize each other.
+</para>
+<para>
+The instance of this class must be unique in all the TI OMX components,
+So it is managed by the <link linkend="GooComponentFactory"><type>GooComponentFactory</type></link>. The client code should not
+modify or access to this object.</para>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooTiClock" role="struct"/>GooTiClock</title>
+<indexterm><primary>GooTiClock</primary></indexterm><programlisting>typedef struct {
+        GooComponent parent;
+} GooTiClock;
+</programlisting>
+<para>
+
+</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

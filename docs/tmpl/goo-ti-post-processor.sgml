@@ -1,0 +1,133 @@
+<!-- ##### SECTION Title ##### -->
+GooTiPostProcessor
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM GooTiPostProcessorRotation ##### -->
+<para>
+
+</para>
+
+@GOO_TI_POST_PROCESSOR_ROTATION_NONE: 
+@GOO_TI_POST_PROCESSOR_ROTATION_90: 
+@GOO_TI_POST_PROCESSOR_ROTATION_180: 
+@GOO_TI_POST_PROCESSOR_ROTATION_270: 
+
+<!-- ##### STRUCT GooTiPostProcessor ##### -->
+<para>
+
+</para>
+
+@parent: 
+@rotation: 
+@xscale: 
+@yscale: 
+@xpos: 
+@ypos: 
+
+<!-- ##### FUNCTION goo_ti_post_processor_set_rotation ##### -->
+<para>
+
+</para>
+
+@self: 
+@rotation: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_get_rotation ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_set_xscale ##### -->
+<para>
+
+</para>
+
+@self: 
+@xscale: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_get_xscale ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_set_yscale ##### -->
+<para>
+
+</para>
+
+@self: 
+@yscale: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_get_yscale ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_set_xpos ##### -->
+<para>
+
+</para>
+
+@self: 
+@xpos: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_get_xpos ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_set_ypos ##### -->
+<para>
+
+</para>
+
+@self: 
+@ypos: 
+
+
+<!-- ##### FUNCTION goo_ti_post_processor_get_ypos ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+

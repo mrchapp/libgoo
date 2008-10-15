@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooPort</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-goo-list.html" title="goo-list">
+<link rel="next" href="libgoo-GooObject.html" title="GooObject">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-goo-list.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooObject.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2596129" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2572806" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooPort"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2596129"></a><span class="refentrytitle">GooPort</span>
+</h2>
+<p>GooPort &#8212; Object which represents an OpenMAX port which is
+                    contained by components.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+void                (<a href="libgoo-GooPort.html#GooPortProcessBufferFunction">*GooPortProcessBufferFunction</a>)     (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *port,
+                                                         OMX_BUFFERHEADERTYPE *buffer,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+                    <a href="libgoo-GooPort.html#GooPort">GooPort</a>;
+#define             <a href="libgoo-GooPort.html#GOO-PORT-GET-DEFINITION:CAPS">GOO_PORT_GET_DEFINITION</a>             (port)
+<a href="libgoo-GooPort.html#GooPort">GooPort</a>*            <a href="libgoo-GooPort.html#goo-port-new">goo_port_new</a>                        ();
+void                <a href="libgoo-GooPort.html#goo-port-prepare-definition">goo_port_prepare_definition</a>         (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+void                <a href="libgoo-GooPort.html#goo-port-allocate-buffer-header">goo_port_allocate_buffer_header</a>     (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+void                <a href="libgoo-GooPort.html#goo-port-prepare-buffer-queue">goo_port_prepare_buffer_queue</a>       (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+void                <a href="libgoo-GooPort.html#goo-port-allocate-buffers">goo_port_allocate_buffers</a>           (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+void                <a href="libgoo-GooPort.html#goo-port-push-buffer">goo_port_push_buffer</a>                (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self,
+                                                         OMX_BUFFERHEADERTYPE *buffer);
+OMX_BUFFERHEADERTYPE* <a href="libgoo-GooPort.html#goo-port-grab-buffer">goo_port_grab_buffer</a>              (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+OMX_BUFFERHEADERTYPE* <a href="libgoo-GooPort.html#goo-port-try-grab-buffer">goo_port_try_grab_buffer</a>          (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+void                <a href="libgoo-GooPort.html#goo-port-set-eos">goo_port_set_eos</a>                    (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooPort.html#goo-port-is-eos">goo_port_is_eos</a>                     (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooPort.html#goo-port-is-tunneled">goo_port_is_tunneled</a>                (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);
+void                <a href="libgoo-GooPort.html#goo-port-set-process-buffer-function">goo_port_set_process_buffer_function</a>
+                                                        (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self,
+                                                         <a href="libgoo-GooPort.html#GooPortProcessBufferFunction">GooPortProcessBufferFunction</a> pbf);
+void                <a href="libgoo-GooPort.html#goo-port-process-buffer">goo_port_process_buffer</a>             (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self,
+                                                         OMX_BUFFERHEADERTYPE *buffer,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2572806"></a><h2>Description</h2>
+<p>
+A <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> configures the incoming and outgoing data throught it's
+"ports", also using these ports the OMX components are linked among them.
+This also means that the buffers interchange between the OMX thread and
+the client thread are done by the ports.
+</p>
+<p>
+The <span class="type">GooPorts</span> are created internally when the component is loaded. You must
+configure them before set the <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> in idle state.</p>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2571562"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2571573"></a><h3>
+<a name="GooPortProcessBufferFunction"></a>GooPortProcessBufferFunction ()</h3>
+<a class="indexterm" name="id2571584"></a><pre class="programlisting">void                (*GooPortProcessBufferFunction)     (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *port,
+                                                         OMX_BUFFERHEADERTYPE *buffer,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+A function that will be called on ports when processing buffers.
+The function typically puts data on the buffer from the source, if it is
+an input port; or pull out data from the buffer to the sink, if it is an
+output port.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>port</code></em>&#160;:</span></td>
+<td> The <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance that process the buffer
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>buffer</code></em>&#160;:</span></td>
+<td> The <span class="type">OMX_BUFFERHEADERTYPE</span> that is going to be processed,
+not <a
+href="/usr/share/gtk-doc/html/liboil/liboil-liboiljunk.html#NULL:CAPS"
+><code class="literal">NULL</code></a>.
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer to application data
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2571703"></a><h3>
+<a name="GooPort"></a>GooPort</h3>
+<a class="indexterm" name="id2571715"></a><pre class="programlisting">typedef struct {
+} GooPort;
+</pre>
+<p>
+Represent a higher abstraction of an OpenMAX port</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2571735"></a><h3>
+<a name="GOO-PORT-GET-DEFINITION:CAPS"></a>GOO_PORT_GET_DEFINITION()</h3>
+<a class="indexterm" name="id2571748"></a><pre class="programlisting">#define GOO_PORT_GET_DEFINITION(port) (GOO_PORT (port)-&gt;definition)
+</pre>
+<p>
+Extract the port's definition</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>port</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2571794"></a><h3>
+<a name="goo-port-new"></a>goo_port_new ()</h3>
+<a class="indexterm" name="id2598577"></a><pre class="programlisting"><a href="libgoo-GooPort.html#GooPort">GooPort</a>*            goo_port_new                        ();</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2598614"></a><h3>
+<a name="goo-port-prepare-definition"></a>goo_port_prepare_definition ()</h3>
+<a class="indexterm" name="id2598625"></a><pre class="programlisting">void                goo_port_prepare_definition         (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Initializes the <span class="type">OMX_PARAM_PORTDEFINITIONTYPE</span> structure.
+This method is used internally in the <span class="type">GooComponentClass</span>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2598697"></a><h3>
+<a name="goo-port-allocate-buffer-header"></a>goo_port_allocate_buffer_header ()</h3>
+<a class="indexterm" name="id2598711"></a><pre class="programlisting">void                goo_port_allocate_buffer_header     (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Allocate the memory needed by the <span class="type">OMX_BUFFERHEADERTYPE</span> array.
+This method is used internally in the <span class="type">GooComponentClass</span>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2598783"></a><h3>
+<a name="goo-port-prepare-buffer-queue"></a>goo_port_prepare_buffer_queue ()</h3>
+<a class="indexterm" name="id2598796"></a><pre class="programlisting">void                goo_port_prepare_buffer_queue       (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Initializes the async queue for buffer interchange.
+This method is used internally in the <span class="type">GooComponentClass</span>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instances
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2604852"></a><h3>
+<a name="goo-port-allocate-buffers"></a>goo_port_allocate_buffers ()</h3>
+<a class="indexterm" name="id2604863"></a><pre class="programlisting">void                goo_port_allocate_buffers           (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Allocates the array of buffers data where the buffers are going to be
+stored.
+This method should be called in the specific compoment.
+This method turns on the USE_BUFFER operation mode.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2604916"></a><h3>
+<a name="goo-port-push-buffer"></a>goo_port_push_buffer ()</h3>
+<a class="indexterm" name="id2604927"></a><pre class="programlisting">void                goo_port_push_buffer                (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self,
+                                                         OMX_BUFFERHEADERTYPE *buffer);</pre>
+<p>
+Push the pointer to the async queue in the port.
+This method is used only by the OMX callbacks in the <span class="type">GooComponentClass</span>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>buffer</code></em>&#160;:</span></td>
+<td> The <span class="type">GOO_BUFFERHEADERTYPE</span> pointer to the ready to use buffer.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2605014"></a><h3>
+<a name="goo-port-grab-buffer"></a>goo_port_grab_buffer ()</h3>
+<a class="indexterm" name="id2605025"></a><pre class="programlisting">OMX_BUFFERHEADERTYPE* goo_port_grab_buffer              (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Will pop a "ready to use" buffer from the async queue. If the queue
+is empty the thread is blocked until a buffer address arrive.
+This function blocks the thread until a new buffer is grabbed.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a <span class="type">OMX_BUFFERHEADERTYPE</span> pointer "ready to use"
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2605101"></a><h3>
+<a name="goo-port-try-grab-buffer"></a>goo_port_try_grab_buffer ()</h3>
+<a class="indexterm" name="id2605112"></a><pre class="programlisting">OMX_BUFFERHEADERTYPE* goo_port_try_grab_buffer          (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Will try to pop a "ready to use" buffer from the async queue. If the queue
+is empty, a NULL value will be returned.
+This function doesn't block the thread.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a <span class="type">OMX_BUFFERHEADERTYPE</span> pointer if there is already "a ready
+to use" buffer in the async queue. If there is not one, a NULL value is
+returned.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2605190"></a><h3>
+<a name="goo-port-set-eos"></a>goo_port_set_eos ()</h3>
+<a class="indexterm" name="id2605202"></a><pre class="programlisting">void                goo_port_set_eos                    (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Tells to the port that the End-Of-Stream have been processed in one
+of its buffers</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2605260"></a><h3>
+<a name="goo-port-is-eos"></a>goo_port_is_eos ()</h3>
+<a class="indexterm" name="id2605272"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_port_is_eos                     (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Notice is an EOS buffer have been processed in the port.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE is an EOS have been processed in the port
+              FALSE if no EOS flag have been processed
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2605342"></a><h3>
+<a name="goo-port-is-tunneled"></a>goo_port_is_tunneled ()</h3>
+<a class="indexterm" name="id2605354"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_port_is_tunneled                (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self);</pre>
+<p>
+Check if the port is marked as tunneled.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the port is tunneled, FALSE if not.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2605422"></a><h3>
+<a name="goo-port-set-process-buffer-function"></a>goo_port_set_process_buffer_function ()</h3>
+<a class="indexterm" name="id2605435"></a><pre class="programlisting">void                goo_port_set_process_buffer_function
+                                                        (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self,
+                                                         <a href="libgoo-GooPort.html#GooPortProcessBufferFunction">GooPortProcessBufferFunction</a> pbf);</pre>
+<p>
+Set the given process_buffer function for the port. The process_buffer
+function is called to process a <span class="type">OMX_BUFFERHEADERTYPE</span> arrived from the
+port. See <a href="libgoo-GooPort.html#GooPortProcessBufferFunction"><span class="type">GooPortProcessBufferFunction</span></a> for more details.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>pbf</code></em>&#160;:</span></td>
+<td> The <a href="libgoo-GooPort.html#GooPortProcessBufferFunction"><span class="type">GooPortProcessBufferFunction</span></a> to set
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2605540"></a><h3>
+<a name="goo-port-process-buffer"></a>goo_port_process_buffer ()</h3>
+<a class="indexterm" name="id2605551"></a><pre class="programlisting">void                goo_port_process_buffer             (<a href="libgoo-GooPort.html#GooPort">GooPort</a> *self,
+                                                         OMX_BUFFERHEADERTYPE *buffer,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Callback trigger.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>buffer</code></em>&#160;:</span></td>
+<td> An <span class="type">OMX_BUFFERHEADERTYPE</span> pointer
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A client data to pass to the client thread
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2605658"></a><h2>See Also</h2>
+<a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a>
+</div>
+</div>
+</body>
+</html>

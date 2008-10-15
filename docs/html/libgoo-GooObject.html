@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooObject</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooPort.html" title="GooPort">
+<link rel="next" href="libgoo-GooTiPostProcessor.html" title="GooTiPostProcessor">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooPort.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooTiPostProcessor.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2562005" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2566753" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooObject"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2562005"></a><span class="refentrytitle">GooObject</span>
+</h2>
+<p>GooObject &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-GooObject.html#GooObject">GooObject</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*              <a href="libgoo-GooObject.html#goo-object-get-name">goo_object_get_name</a>                 (<a href="libgoo-GooObject.html#GooObject">GooObject</a> *self);
+void                <a href="libgoo-GooObject.html#goo-object-set-name">goo_object_set_name</a>                 (<a href="libgoo-GooObject.html#GooObject">GooObject</a> *self,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);
+<a href="libgoo-GooObject.html#GooObject">GooObject</a>*          <a href="libgoo-GooObject.html#goo-object-get-owner">goo_object_get_owner</a>                (<a href="libgoo-GooObject.html#GooObject">GooObject</a> *self);
+void                <a href="libgoo-GooObject.html#goo-object-set-owner">goo_object_set_owner</a>                (<a href="libgoo-GooObject.html#GooObject">GooObject</a> *self,
+                                                         <a href="libgoo-GooObject.html#GooObject">GooObject</a> *owner);
+#define             <a href="libgoo-GooObject.html#GOO-OBJECT-NAME:CAPS">GOO_OBJECT_NAME</a>                     (obj)
+#define             <a href="libgoo-GooObject.html#GOO-OBJECT-PREFIX:CAPS">GOO_OBJECT_PREFIX</a>                   (obj)
+#define             <a href="libgoo-GooObject.html#GOO-OBJECT-OWNER:CAPS">GOO_OBJECT_OWNER</a>                    (obj)
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2566753"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2566769"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2566780"></a><h3>
+<a name="GooObject"></a>GooObject</h3>
+<a class="indexterm" name="id2566792"></a><pre class="programlisting">typedef struct {
+	GObject parent;
+	
+	gchar* name;
+	gchar* prefix;
+	GooObject* owner;
+} GooObject;
+</pre>
+<p>
+The <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> structure. Use the functions to update the variables.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>&#160;<em class="structfield"><code>parent</code></em>;</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>&#160;*<em class="structfield"><code>name</code></em>;</span></td>
+<td> the object's name. It is used for logging purposes.
+</td>
+</tr>
+<tr>
+<td><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>&#160;*<em class="structfield"><code>prefix</code></em>;</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term"><a href="libgoo-GooObject.html#GooObject">GooObject</a>&#160;*<em class="structfield"><code>owner</code></em>;</span></td>
+<td> the object who owns this object (component/port relationship)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2581990"></a><h3>
+<a name="goo-object-get-name"></a>goo_object_get_name ()</h3>
+<a class="indexterm" name="id2582003"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*              goo_object_get_name                 (<a href="libgoo-GooObject.html#GooObject">GooObject</a> *self);</pre>
+<p>
+Returns a copy of the name of object. Caller should <a
+href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a> the return \
+value after usage. For a nameless object, this returns NULL, which you
+can safely <a
+href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a> as well.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> the name of object. <a
+href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a> after usage. MT safe.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2509242"></a><h3>
+<a name="goo-object-set-name"></a>goo_object_set_name ()</h3>
+<a class="indexterm" name="id2509254"></a><pre class="programlisting">void                goo_object_set_name                 (<a href="libgoo-GooObject.html#GooObject">GooObject</a> *self,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);</pre>
+<p>
+Set the name of object. This function makes a copy of the provided name,
+so the caller retains ownership of the name it sent.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> An <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+><span class="type">gchar</span></a> with the object's name
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2509341"></a><h3>
+<a name="goo-object-get-owner"></a>goo_object_get_owner ()</h3>
+<a class="indexterm" name="id2509352"></a><pre class="programlisting"><a href="libgoo-GooObject.html#GooObject">GooObject</a>*          goo_object_get_owner                (<a href="libgoo-GooObject.html#GooObject">GooObject</a> *self);</pre>
+<p>
+Gets the object's owner. This functions increases the refcount of the
+owner object so you should unref it after usage.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> The object's owner, this can be NULL if object has no parent.
+unref owner after usage. MT safe.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2509422"></a><h3>
+<a name="goo-object-set-owner"></a>goo_object_set_owner ()</h3>
+<a class="indexterm" name="id2509434"></a><pre class="programlisting">void                goo_object_set_owner                (<a href="libgoo-GooObject.html#GooObject">GooObject</a> *self,
+                                                         <a href="libgoo-GooObject.html#GooObject">GooObject</a> *owner);</pre>
+<p>
+Sets the owner of the object. The owner reference count will be
+incremented.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>owner</code></em>&#160;:</span></td>
+<td> The new <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> owner object
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2603385"></a><h3>
+<a name="GOO-OBJECT-NAME:CAPS"></a>GOO_OBJECT_NAME()</h3>
+<a class="indexterm" name="id2603397"></a><pre class="programlisting">#define GOO_OBJECT_NAME(obj) (GOO_OBJECT(obj)-&gt;name)
+</pre>
+<p>
+Returns the pointer to the the object's name string. Be careful.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2603444"></a><h3>
+<a name="GOO-OBJECT-PREFIX:CAPS"></a>GOO_OBJECT_PREFIX()</h3>
+<a class="indexterm" name="id2603456"></a><pre class="programlisting">#define GOO_OBJECT_PREFIX(obj) (GOO_OBJECT(obj)-&gt;prefix)
+</pre>
+<p>
+Returns the pointer to the the object's prefix string. Be careful.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2603503"></a><h3>
+<a name="GOO-OBJECT-OWNER:CAPS"></a>GOO_OBJECT_OWNER()</h3>
+<a class="indexterm" name="id2603514"></a><pre class="programlisting">#define GOO_OBJECT_OWNER(obj) (GOO_OBJECT(obj)-&gt;owner)
+</pre>
+<p>
+Access to the owner's object memory address. Be careful</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooObject.html#GooObject"><span class="type">GooObject</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

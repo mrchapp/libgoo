@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooTiMpeg4Enc">
+<refmeta>
+<refentrytitle role="top_of_page">GooTiMpeg4Enc</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooTiMpeg4Enc</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+                    <link linkend="GooTiMpeg4Enc">GooTiMpeg4Enc</link>;
+<link linkend="GooComponent">GooComponent</link>*       <link linkend="goo-ti-mpeg4enc-new">goo_ti_mpeg4enc_new</link>                 ();
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooTiMpeg4Enc" role="struct"/>GooTiMpeg4Enc</title>
+<indexterm><primary>GooTiMpeg4Enc</primary></indexterm><programlisting>typedef struct {
+        GooTiVideoEncoder parent;
+	OMX_VIDEO_PARAM_MPEG4TYPE* level_param;	
+} GooTiMpeg4Enc;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-mpeg4enc-new" role="function"/>goo_ti_mpeg4enc_new ()</title>
+<indexterm><primary>goo_ti_mpeg4enc_new</primary></indexterm><programlisting><link linkend="GooComponent">GooComponent</link>*       goo_ti_mpeg4enc_new                 ();</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

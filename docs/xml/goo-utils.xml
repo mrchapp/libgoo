@@ -1,0 +1,508 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-goo-utils">
+<refmeta>
+<refentrytitle role="top_of_page">goo-utils</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>goo-utils</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+#define             <link linkend="GOO-BASE-PORT-BUFFER-PADDING:CAPS">GOO_BASE_PORT_BUFFER_PADDING</link>
+#define             <link linkend="OMX-VERSION-MAJOR:CAPS">OMX_VERSION_MAJOR</link>
+#define             <link linkend="OMX-VERSION-MINOR:CAPS">OMX_VERSION_MINOR</link>
+#define             <link linkend="OMX-VERSION-REVISION:CAPS">OMX_VERSION_REVISION</link>
+#define             <link linkend="OMX-VERSION-STEP:CAPS">OMX_VERSION_STEP</link>
+#define             <link linkend="GOO-RUN:CAPS">GOO_RUN</link>                             (cmd)
+#define             <link linkend="RETURN-GOO-RUN:CAPS">RETURN_GOO_RUN</link>                      (cmd)
+#define             <link linkend="GOO-INIT-PARAM:CAPS">GOO_INIT_PARAM</link>                      (st, t)
+#define             <link linkend="GOO-ARRAY-SIZE:CAPS">GOO_ARRAY_SIZE</link>                      (X)
+                    <link linkend="StateDesc">StateDesc</link>;
+                    <link linkend="ErrorDesc">ErrorDesc</link>;
+                    <link linkend="EventDesc">EventDesc</link>;
+                    <link linkend="CommandDesc">CommandDesc</link>;
+                    <link linkend="DirectionDesc">DirectionDesc</link>;
+                    <link linkend="DomainDesc">DomainDesc</link>;
+                    <link linkend="VideoCompressionDesc">VideoCompressionDesc</link>;
+                    <link linkend="ColorDesc">ColorDesc</link>;
+                    <link linkend="ResolutionInfo">ResolutionInfo</link>;
+const <link linkend="gchar">gchar</link>*        <link linkend="goo-strstate">goo_strstate</link>                        (<link linkend="OMX-STATETYPE:CAPS">OMX_STATETYPE</link> state);
+const <link linkend="gchar">gchar</link>*        <link linkend="goo-strerror">goo_strerror</link>                        (<link linkend="OMX-ERRORTYPE:CAPS">OMX_ERRORTYPE</link> error);
+const <link linkend="gchar">gchar</link>*        <link linkend="goo-strevent">goo_strevent</link>                        (<link linkend="OMX-EVENTTYPE:CAPS">OMX_EVENTTYPE</link> event);
+const <link linkend="gchar">gchar</link>*        <link linkend="goo-strcommand">goo_strcommand</link>                      (<link linkend="OMX-COMMANDTYPE:CAPS">OMX_COMMANDTYPE</link> command);
+const <link linkend="gchar">gchar</link>*        <link linkend="goo-strdirection">goo_strdirection</link>                    (<link linkend="OMX-DIRTYPE:CAPS">OMX_DIRTYPE</link> direction);
+const <link linkend="gchar">gchar</link>*        <link linkend="goo-strdomain">goo_strdomain</link>                       (<link linkend="OMX-PORTDOMAINTYPE:CAPS">OMX_PORTDOMAINTYPE</link> domain);
+const <link linkend="gchar">gchar</link>*        <link linkend="goo-strcolor">goo_strcolor</link>                        (<link linkend="OMX-COLOR-FORMATTYPE:CAPS">OMX_COLOR_FORMATTYPE</link> color);
+const <link linkend="gchar">gchar</link>*        <link linkend="goo-strvideocompression">goo_strvideocompression</link>             (<link linkend="OMX-VIDEO-CODINGTYPE:CAPS">OMX_VIDEO_CODINGTYPE</link> compression);
+<link linkend="ResolutionInfo">ResolutionInfo</link>      <link linkend="goo-get-resolution">goo_get_resolution</link>                  (const <link linkend="char">char</link> *size);
+<link linkend="gchar">gchar</link>*              <link linkend="goo-strportdef">goo_strportdef</link>                      (<link linkend="OMX-PARAM-PORTDEFINITIONTYPE:CAPS">OMX_PARAM_PORTDEFINITIONTYPE</link> *param);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GOO-BASE-PORT-BUFFER-PADDING:CAPS" role="macro"/>GOO_BASE_PORT_BUFFER_PADDING</title>
+<indexterm><primary>GOO_BASE_PORT_BUFFER_PADDING</primary></indexterm><programlisting>#define GOO_BASE_PORT_BUFFER_PADDING 256
+</programlisting>
+<para>
+The padding of the buffers data when the port allocates its own buffers</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="OMX-VERSION-MAJOR:CAPS" role="macro"/>OMX_VERSION_MAJOR</title>
+<indexterm><primary>OMX_VERSION_MAJOR</primary></indexterm><programlisting>#define OMX_VERSION_MAJOR    1
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="OMX-VERSION-MINOR:CAPS" role="macro"/>OMX_VERSION_MINOR</title>
+<indexterm><primary>OMX_VERSION_MINOR</primary></indexterm><programlisting>#define OMX_VERSION_MINOR    0
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="OMX-VERSION-REVISION:CAPS" role="macro"/>OMX_VERSION_REVISION</title>
+<indexterm><primary>OMX_VERSION_REVISION</primary></indexterm><programlisting>#define OMX_VERSION_REVISION 0
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="OMX-VERSION-STEP:CAPS" role="macro"/>OMX_VERSION_STEP</title>
+<indexterm><primary>OMX_VERSION_STEP</primary></indexterm><programlisting>#define OMX_VERSION_STEP     0
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GOO-RUN:CAPS" role="macro"/>GOO_RUN()</title>
+<indexterm><primary>GOO_RUN</primary></indexterm><programlisting>#define             GOO_RUN(cmd)</programlisting>
+<para>
+Execute and OMX's API instruction and assert it</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>cmd</parameter>&nbsp;:</term>
+<listitem><simpara> the OMX sentence to execute
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="RETURN-GOO-RUN:CAPS" role="macro"/>RETURN_GOO_RUN()</title>
+<indexterm><primary>RETURN_GOO_RUN</primary></indexterm><programlisting>#define             RETURN_GOO_RUN(cmd)</programlisting>
+<para>
+Execute and OMX's API instruction</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>cmd</parameter>&nbsp;:</term>
+<listitem><simpara> the OMX sentence to execute
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-INIT-PARAM:CAPS" role="macro"/>GOO_INIT_PARAM()</title>
+<indexterm><primary>GOO_INIT_PARAM</primary></indexterm><programlisting>#define             GOO_INIT_PARAM(st, t)</programlisting>
+<para>
+Initializes the OMX structure setting it nSize and nVersion fields</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>st</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>t</parameter>&nbsp;:</term>
+<listitem><simpara> The type of the OMX's structure
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-ARRAY-SIZE:CAPS" role="macro"/>GOO_ARRAY_SIZE()</title>
+<indexterm><primary>GOO_ARRAY_SIZE</primary></indexterm><programlisting>#define GOO_ARRAY_SIZE(X) (sizeof(X) / sizeof(X[0]))
+</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>X</parameter>&nbsp;:</term>
+<listitem><simpara> the array to measure
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="StateDesc" role="struct"/>StateDesc</title>
+<indexterm><primary>StateDesc</primary></indexterm><programlisting>typedef struct {
+	const OMX_STATETYPE state;
+	const gchar *desc;
+} StateDesc;
+</programlisting>
+<para>
+Explanation of each state index type</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term>const&nbsp;<link linkend="OMX-STATETYPE:CAPS">OMX_STATETYPE</link>&nbsp;<structfield>state</structfield>;</term>
+<listitem><simpara> The <link linkend="OMX-STATETYPE:CAPS"><type>OMX_STATETYPE</type></link> index
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term>const&nbsp;<link linkend="gchar">gchar</link>&nbsp;*<structfield>desc</structfield>;</term>
+<listitem><simpara> The description of the index
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="ErrorDesc" role="struct"/>ErrorDesc</title>
+<indexterm><primary>ErrorDesc</primary></indexterm><programlisting>typedef struct {
+	const OMX_ERRORTYPE error;
+	const gchar *desc;	
+} ErrorDesc;
+</programlisting>
+<para>
+Explanation of each error index type</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term>const&nbsp;<link linkend="OMX-ERRORTYPE:CAPS">OMX_ERRORTYPE</link>&nbsp;<structfield>error</structfield>;</term>
+<listitem><simpara> The <link linkend="OMX-ERRORTYPE:CAPS"><type>OMX_ERRORTYPE</type></link> index
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term>const&nbsp;<link linkend="gchar">gchar</link>&nbsp;*<structfield>desc</structfield>;</term>
+<listitem><simpara> The description of the index
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="EventDesc" role="struct"/>EventDesc</title>
+<indexterm><primary>EventDesc</primary></indexterm><programlisting>typedef struct {
+	const OMX_EVENTTYPE event;
+	const gchar *desc;	
+} EventDesc;
+</programlisting>
+<para>
+Explanation of each event index type</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term>const&nbsp;<link linkend="OMX-EVENTTYPE:CAPS">OMX_EVENTTYPE</link>&nbsp;<structfield>event</structfield>;</term>
+<listitem><simpara> The <link linkend="OMX-EVENTTYPE:CAPS"><type>OMX_EVENTTYPE</type></link> index
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term>const&nbsp;<link linkend="gchar">gchar</link>&nbsp;*<structfield>desc</structfield>;</term>
+<listitem><simpara> The description of the index
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="CommandDesc" role="struct"/>CommandDesc</title>
+<indexterm><primary>CommandDesc</primary></indexterm><programlisting>typedef struct {
+	const OMX_COMMANDTYPE command;
+	const gchar *desc;	
+} CommandDesc;
+</programlisting>
+<para>
+Explanation of each command index type</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term>const&nbsp;<link linkend="OMX-COMMANDTYPE:CAPS">OMX_COMMANDTYPE</link>&nbsp;<structfield>command</structfield>;</term>
+<listitem><simpara> The <link linkend="OMX-COMMANDTYPE:CAPS"><type>OMX_COMMANDTYPE</type></link> index
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term>const&nbsp;<link linkend="gchar">gchar</link>&nbsp;*<structfield>desc</structfield>;</term>
+<listitem><simpara> The description of the index
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="DirectionDesc" role="struct"/>DirectionDesc</title>
+<indexterm><primary>DirectionDesc</primary></indexterm><programlisting>typedef struct {
+	const OMX_DIRTYPE direction;
+	const gchar *desc;	
+} DirectionDesc;
+</programlisting>
+<para>
+Explanation of each direction index type</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term>const&nbsp;<link linkend="OMX-DIRTYPE:CAPS">OMX_DIRTYPE</link>&nbsp;<structfield>direction</structfield>;</term>
+<listitem><simpara> The <link linkend="OMX-DIRTYPE:CAPS"><type>OMX_DIRTYPE</type></link> index
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term>const&nbsp;<link linkend="gchar">gchar</link>&nbsp;*<structfield>desc</structfield>;</term>
+<listitem><simpara> The description of the index
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="DomainDesc" role="struct"/>DomainDesc</title>
+<indexterm><primary>DomainDesc</primary></indexterm><programlisting>typedef struct {
+	const OMX_PORTDOMAINTYPE domain;
+	const gchar *desc;
+} DomainDesc;
+</programlisting>
+<para>
+Explanation of each port domain index type</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term>const&nbsp;<link linkend="OMX-PORTDOMAINTYPE:CAPS">OMX_PORTDOMAINTYPE</link>&nbsp;<structfield>domain</structfield>;</term>
+<listitem><simpara> The <link linkend="OMX-PORTDOMAINTYPE:CAPS"><type>OMX_PORTDOMAINTYPE</type></link> index
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term>const&nbsp;<link linkend="gchar">gchar</link>&nbsp;*<structfield>desc</structfield>;</term>
+<listitem><simpara> The description of the index
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="VideoCompressionDesc" role="struct"/>VideoCompressionDesc</title>
+<indexterm><primary>VideoCompressionDesc</primary></indexterm><programlisting>typedef struct {
+	const OMX_VIDEO_CODINGTYPE compression;
+	const gchar *desc;
+} VideoCompressionDesc;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="ColorDesc" role="struct"/>ColorDesc</title>
+<indexterm><primary>ColorDesc</primary></indexterm><programlisting>typedef struct {
+	const OMX_COLOR_FORMATTYPE color;
+	const gchar *desc;
+} ColorDesc;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="ResolutionInfo" role="struct"/>ResolutionInfo</title>
+<indexterm><primary>ResolutionInfo</primary></indexterm><programlisting>typedef struct {
+        char *size;
+        unsigned int width;
+        unsigned int height;
+} ResolutionInfo;
+</programlisting>
+<para>
+Structure which define the different kind of resolutions</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term><link linkend="char">char</link>&nbsp;*<structfield>size</structfield>;</term>
+<listitem><simpara> the name of the resolution
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term>unsigned&nbsp;<link linkend="int">int</link>&nbsp;<structfield>width</structfield>;</term>
+<listitem><simpara> the width of the resolution
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term>unsigned&nbsp;<link linkend="int">int</link>&nbsp;<structfield>height</structfield>;</term>
+<listitem><simpara> the height of the resolution
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strstate" role="function"/>goo_strstate ()</title>
+<indexterm><primary>goo_strstate</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        goo_strstate                        (<link linkend="OMX-STATETYPE:CAPS">OMX_STATETYPE</link> state);</programlisting>
+<para>
+Get a description of the specified state</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>state</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="OMX-STATYETYPE:CAPS"><type>OMX_STATYETYPE</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a static string with the description.  This string should not be
+ modified nor freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strerror" role="function"/>goo_strerror ()</title>
+<indexterm><primary>goo_strerror</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        goo_strerror                        (<link linkend="OMX-ERRORTYPE:CAPS">OMX_ERRORTYPE</link> error);</programlisting>
+<para>
+Get a description of the specified error</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="OMX-ERRORTYPE:CAPS"><type>OMX_ERRORTYPE</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a static string with the description.  This string should not be
+ modified nor freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strevent" role="function"/>goo_strevent ()</title>
+<indexterm><primary>goo_strevent</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        goo_strevent                        (<link linkend="OMX-EVENTTYPE:CAPS">OMX_EVENTTYPE</link> event);</programlisting>
+<para>
+Get a description of the specified event</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>event</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="OMX-EVENTTYPE:CAPS"><type>OMX_EVENTTYPE</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a static string with the description.  This string should not be
+ modified nor freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strcommand" role="function"/>goo_strcommand ()</title>
+<indexterm><primary>goo_strcommand</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        goo_strcommand                      (<link linkend="OMX-COMMANDTYPE:CAPS">OMX_COMMANDTYPE</link> command);</programlisting>
+<para>
+Get a description of the specified command</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>command</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="OMX-COMMANDTYPE:CAPS"><type>OMX_COMMANDTYPE</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a static string with the description.  This string should not be
+ modified nor freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strdirection" role="function"/>goo_strdirection ()</title>
+<indexterm><primary>goo_strdirection</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        goo_strdirection                    (<link linkend="OMX-DIRTYPE:CAPS">OMX_DIRTYPE</link> direction);</programlisting>
+<para>
+Get a description of the specified direction</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>direction</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a static string with the description.  This string should not be
+ modified nor freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strdomain" role="function"/>goo_strdomain ()</title>
+<indexterm><primary>goo_strdomain</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        goo_strdomain                       (<link linkend="OMX-PORTDOMAINTYPE:CAPS">OMX_PORTDOMAINTYPE</link> domain);</programlisting>
+<para>
+Get a description of the specified domain</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>domain</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="OMX-PORTDOMAINTYPE:CAPS"><type>OMX_PORTDOMAINTYPE</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a static string with the description.  This string should not be
+ modified nor freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strcolor" role="function"/>goo_strcolor ()</title>
+<indexterm><primary>goo_strcolor</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        goo_strcolor                        (<link linkend="OMX-COLOR-FORMATTYPE:CAPS">OMX_COLOR_FORMATTYPE</link> color);</programlisting>
+<para>
+Get a description of the specified color</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>color</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="OMX-COLOR-FORMATTYPE:CAPS"><type>OMX_COLOR_FORMATTYPE</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a static string with the description.  This string should not be
+ modified nor freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strvideocompression" role="function"/>goo_strvideocompression ()</title>
+<indexterm><primary>goo_strvideocompression</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        goo_strvideocompression             (<link linkend="OMX-VIDEO-CODINGTYPE:CAPS">OMX_VIDEO_CODINGTYPE</link> compression);</programlisting>
+<para>
+Get a description of the specified compression format</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>compression</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a static string with the description.  This string should not be
+ modified nor freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-get-resolution" role="function"/>goo_get_resolution ()</title>
+<indexterm><primary>goo_get_resolution</primary></indexterm><programlisting><link linkend="ResolutionInfo">ResolutionInfo</link>      goo_get_resolution                  (const <link linkend="char">char</link> *size);</programlisting>
+<para>
+Search in the resolution types for name of the specified resolution
+and brings back the information of that resolution</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>size</parameter>&nbsp;:</term>
+<listitem><simpara> The name of the resolution
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A <link linkend="ResolutionInfo"><type>ResolutionInfo</type></link> structure
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-strportdef" role="function"/>goo_strportdef ()</title>
+<indexterm><primary>goo_strportdef</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              goo_strportdef                      (<link linkend="OMX-PARAM-PORTDEFINITIONTYPE:CAPS">OMX_PARAM_PORTDEFINITIONTYPE</link> *param);</programlisting>
+<para>
+Generats a printable string with the data int the
+<link linkend="OMX-PARAM-PORTDEFINITIONTYPE:CAPS"><type>OMX_PARAM_PORTDEFINITIONTYPE</type></link> structure. The string must be g_free after
+use.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>param</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer to an <link linkend="OMX-PARAM-PORTDEFINITIONTYPE:CAPS"><type>OMX_PARAM_PORTDEFINITIONTYPE</type></link> structure
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A printable string with a dump of the
+              <link linkend="OMX-PARAM-PORTDEFINITIONTYPE:CAPS"><type>OMX_PARAM_PORTDEFINITIONTYPE</type></link> structure.
+
+The string returned must be g_free.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

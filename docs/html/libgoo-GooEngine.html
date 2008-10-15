@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooEngine</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-goo-iterator.html" title="goo-iterator">
+<link rel="next" href="libgoo-goo-list.html" title="goo-list">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-goo-iterator.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-goo-list.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2566268" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2554404" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooEngine"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2566268"></a><span class="refentrytitle">GooEngine</span>
+</h2>
+<p>GooEngine &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-GooEngine.html#GooEngine">GooEngine</a>;
+<a href="libgoo-GooEngine.html#GooEngine">GooEngine</a>*          <a href="libgoo-GooEngine.html#goo-engine-new">goo_engine_new</a>                      (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *component,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *infile,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *outfile);
+void                <a href="libgoo-GooEngine.html#goo-engine-play">goo_engine_play</a>                     (<a href="libgoo-GooEngine.html#GooEngine">GooEngine</a> *self);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2554404"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2554420"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2554431"></a><h3>
+<a name="GooEngine"></a>GooEngine</h3>
+<a class="indexterm" name="id2554443"></a><pre class="programlisting">typedef struct {
+        GooObject parent;
+
+        GooComponent* component;
+        
+        GooPort* inport;
+        FILE* instream;
+
+        GooPort* outport;
+        FILE* outstream;
+
+        gint incount, outcount, numbuffers;
+
+	gboolean mainloop;
+} GooEngine;
+</pre>
+<p>
+A simple object for testing OpenMAX components</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2554467"></a><h3>
+<a name="goo-engine-new"></a>goo_engine_new ()</h3>
+<a class="indexterm" name="id2554479"></a><pre class="programlisting"><a href="libgoo-GooEngine.html#GooEngine">GooEngine</a>*          goo_engine_new                      (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *component,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *infile,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *outfile);</pre>
+<p>
+Creates a new <a href="libgoo-GooEngine.html#GooEngine"><span class="type">GooEngine</span></a> instance</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>component</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance in Executing state
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>infile</code></em>&#160;:</span></td>
+<td> the input file filename, may be <a
+href="/usr/share/gtk-doc/html/liboil/liboil-liboiljunk.html#NULL:CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>outfile</code></em>&#160;:</span></td>
+<td> the output file filename, may be <a
+href="/usr/share/gtk-doc/html/liboil/liboil-liboiljunk.html#NULL:CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a <a href="libgoo-GooEngine.html#GooEngine"><span class="type">GooEngine</span></a> instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2576601"></a><h3>
+<a name="goo-engine-play"></a>goo_engine_play ()</h3>
+<a class="indexterm" name="id2576613"></a><pre class="programlisting">void                goo_engine_play                     (<a href="libgoo-GooEngine.html#GooEngine">GooEngine</a> *self);</pre>
+<p>
+Interchange buffers</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooEngine.html#GooEngine"><span class="type">GooEngine</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>goo-semaphore</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooTiAudioComponent.html" title="GooTiAudioComponent">
+<link rel="next" href="libgoo-goo-utils.html" title="goo-utils">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooTiAudioComponent.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-goo-utils.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2590888" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2610441" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-goo-semaphore"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2590888"></a><span class="refentrytitle">goo-semaphore</span>
+</h2>
+<p>goo-semaphore &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a>;
+<a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a>*       <a href="libgoo-goo-semaphore.html#goo-semaphore-new">goo_semaphore_new</a>                   (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> counter);
+void                <a href="libgoo-goo-semaphore.html#goo-semaphore-free">goo_semaphore_free</a>                  (<a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a> *self);
+void                <a href="libgoo-goo-semaphore.html#goo-semaphore-down">goo_semaphore_down</a>                  (<a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> timeout);
+void                <a href="libgoo-goo-semaphore.html#goo-semaphore-up">goo_semaphore_up</a>                    (<a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a> *self);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2610441"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2610456"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2610467"></a><h3>
+<a name="GooSemaphore"></a>GooSemaphore</h3>
+<a class="indexterm" name="id2610480"></a><pre class="programlisting">typedef struct {
+        GCond *condition;
+        GMutex *mutex;
+        gint counter;
+} GooSemaphore;
+</pre>
+<p>
+A simple semaphore for threads syncronization</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2610501"></a><h3>
+<a name="goo-semaphore-new"></a>goo_semaphore_new ()</h3>
+<a class="indexterm" name="id2610514"></a><pre class="programlisting"><a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a>*       goo_semaphore_new                   (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> counter);</pre>
+<p>
+Creates a new semaphore for threading syncronization</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>counter</code></em>&#160;:</span></td>
+<td> the semaphore's counter initial value
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new <a href="libgoo-goo-semaphore.html#GooSemaphore"><span class="type">GooSemaphore</span></a> structure
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2610582"></a><h3>
+<a name="goo-semaphore-free"></a>goo_semaphore_free ()</h3>
+<a class="indexterm" name="id2610594"></a><pre class="programlisting">void                goo_semaphore_free                  (<a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a> *self);</pre>
+<p>
+Free the structure</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> an <a href="libgoo-goo-semaphore.html#GooSemaphore"><span class="type">GooSemaphore</span></a> structure
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2606218"></a><h3>
+<a name="goo-semaphore-down"></a>goo_semaphore_down ()</h3>
+<a class="indexterm" name="id2606230"></a><pre class="programlisting">void                goo_semaphore_down                  (<a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> timeout);</pre>
+<p>
+While the counter is 0, the process will be stopped, waiting for
+an up signal</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> an <a href="libgoo-goo-semaphore.html#GooSemaphore"><span class="type">GooSemaphore</span></a> structure
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>timeout</code></em>&#160;:</span></td>
+<td> TRUE for a timed semaphore, FALSE for an untimed semaphore
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2606311"></a><h3>
+<a name="goo-semaphore-up"></a>goo_semaphore_up ()</h3>
+<a class="indexterm" name="id2606323"></a><pre class="programlisting">void                goo_semaphore_up                    (<a href="libgoo-goo-semaphore.html#GooSemaphore">GooSemaphore</a> *self);</pre>
+<p>
+Increments the semaphore's counter and signals the condition for thread
+execution continuation.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> an <a href="libgoo-goo-semaphore.html#GooSemaphore"><span class="type">GooSemaphore</span></a> structure
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

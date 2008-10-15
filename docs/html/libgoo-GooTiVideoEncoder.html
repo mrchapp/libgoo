@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooTiVideoEncoder</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooTiJpegEnc.html" title="GooTiJpegEnc">
+<link rel="next" href="libgoo-GooTiVideoDecoder.html" title="GooTiVideoDecoder">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooTiJpegEnc.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooTiVideoDecoder.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2555651" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2604343" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooTiVideoEncoder"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2555651"></a><span class="refentrytitle">GooTiVideoEncoder</span>
+</h2>
+<p>GooTiVideoEncoder &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+enum                <a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoderControlRate">GooTiVideoEncoderControlRate</a>;
+                    <a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoder">GooTiVideoEncoder</a>;
+void                <a href="libgoo-GooTiVideoEncoder.html#goo-ti-video-encoder-set-control-rate">goo_ti_video_encoder_set_control_rate</a>
+                                                        (<a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoder">GooTiVideoEncoder</a> *self,
+                                                         <a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoderControlRate">GooTiVideoEncoderControlRate</a> control_rate);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a href="libgoo-GooTiVideoEncoder.html#goo-ti-video-encoder-get-control-rate">goo_ti_video_encoder_get_control_rate</a>
+                                                        (<a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoder">GooTiVideoEncoder</a> *self);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2604343"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2604359"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2604370"></a><h3>
+<a name="GooTiVideoEncoderControlRate"></a>enum GooTiVideoEncoderControlRate</h3>
+<a class="indexterm" name="id2604381"></a><pre class="programlisting">typedef enum GooTiVideoEncoderControlRate
+{
+	GOO_TI_VIDEO_ENCODER_CR_DISABLE,
+	GOO_TI_VIDEO_ENCODER_CR_VARIABLE,
+	GOO_TI_VIDEO_ENCODER_CR_CONSTANT,	
+	GOO_TI_VIDEO_ENCODER_CR_VARIABLE_SKIP,
+	GOO_TI_VIDEO_ENCODER_CR_CONSTANT_SKIP
+
+} GooTiVideoEncoderControlRate;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2604400"></a><h3>
+<a name="GooTiVideoEncoder"></a>GooTiVideoEncoder</h3>
+<a class="indexterm" name="id2604413"></a><pre class="programlisting">typedef struct {
+        GooComponent parent;
+	OMX_VIDEO_PARAM_BITRATETYPE* control_rate_param;
+	guint frame_interval;
+} GooTiVideoEncoder;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2604431"></a><h3>
+<a name="goo-ti-video-encoder-set-control-rate"></a>goo_ti_video_encoder_set_control_rate ()</h3>
+<a class="indexterm" name="id2606501"></a><pre class="programlisting">void                goo_ti_video_encoder_set_control_rate
+                                                        (<a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoder">GooTiVideoEncoder</a> *self,
+                                                         <a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoderControlRate">GooTiVideoEncoderControlRate</a> control_rate);</pre>
+<p>
+This method will set the type of frame streaming on
+component.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoder"><span class="type">GooTiVideoEncoder</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>control_rate</code></em>&#160;:</span></td>
+<td> a GooTiVideoEncoderControlRate value
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2606582"></a><h3>
+<a name="goo-ti-video-encoder-get-control-rate"></a>goo_ti_video_encoder_get_control_rate ()</h3>
+<a class="indexterm" name="id2606596"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               goo_ti_video_encoder_get_control_rate
+                                                        (<a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoder">GooTiVideoEncoder</a> *self);</pre>
+<p>
+Return the mode of frame processing operation.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiVideoEncoder.html#GooTiVideoEncoder"><span class="type">GooTiVideoEncoder</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> GooTiVideoEncoderControlRate enum value.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

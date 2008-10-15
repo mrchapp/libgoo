@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooPort">
+<refmeta>
+<refentrytitle role="top_of_page">GooPort</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooPort</refname>
+<refpurpose>Object which represents an OpenMAX port which is
+                    contained by components.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+<link linkend="void">void</link>                (<link linkend="GooPortProcessBufferFunction">*GooPortProcessBufferFunction</link>)     (<link linkend="GooPort">GooPort</link> *port,
+                                                         <link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link> *buffer,
+                                                         <link linkend="gpointer">gpointer</link> data);
+                    <link linkend="GooPort">GooPort</link>;
+#define             <link linkend="GOO-PORT-GET-DEFINITION:CAPS">GOO_PORT_GET_DEFINITION</link>             (port)
+<link linkend="GooPort">GooPort</link>*            <link linkend="goo-port-new">goo_port_new</link>                        ();
+<link linkend="void">void</link>                <link linkend="goo-port-prepare-definition">goo_port_prepare_definition</link>         (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-port-allocate-buffer-header">goo_port_allocate_buffer_header</link>     (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-port-prepare-buffer-queue">goo_port_prepare_buffer_queue</link>       (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-port-allocate-buffers">goo_port_allocate_buffers</link>           (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-port-push-buffer">goo_port_push_buffer</link>                (<link linkend="GooPort">GooPort</link> *self,
+                                                         <link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link> *buffer);
+<link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link>* <link linkend="goo-port-grab-buffer">goo_port_grab_buffer</link>              (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link>* <link linkend="goo-port-try-grab-buffer">goo_port_try_grab_buffer</link>          (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-port-set-eos">goo_port_set_eos</link>                    (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-port-is-eos">goo_port_is_eos</link>                     (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-port-is-tunneled">goo_port_is_tunneled</link>                (<link linkend="GooPort">GooPort</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-port-set-process-buffer-function">goo_port_set_process_buffer_function</link>
+                                                        (<link linkend="GooPort">GooPort</link> *self,
+                                                         <link linkend="GooPortProcessBufferFunction">GooPortProcessBufferFunction</link> pbf);
+<link linkend="void">void</link>                <link linkend="goo-port-process-buffer">goo_port_process_buffer</link>             (<link linkend="GooPort">GooPort</link> *self,
+                                                         <link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link> *buffer,
+                                                         <link linkend="gpointer">gpointer</link> data);
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+A <link linkend="GooComponent"><type>GooComponent</type></link> configures the incoming and outgoing data throught it's
+"ports", also using these ports the OMX components are linked among them.
+This also means that the buffers interchange between the OMX thread and
+the client thread are done by the ports.
+</para>
+<para>
+The <link linkend="GooPorts"><type>GooPorts</type></link> are created internally when the component is loaded. You must
+configure them before set the <link linkend="GooComponent"><type>GooComponent</type></link> in idle state.</para>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooPortProcessBufferFunction" role="function"/>GooPortProcessBufferFunction ()</title>
+<indexterm><primary>GooPortProcessBufferFunction</primary></indexterm><programlisting><link linkend="void">void</link>                (*GooPortProcessBufferFunction)     (<link linkend="GooPort">GooPort</link> *port,
+                                                         <link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link> *buffer,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+A function that will be called on ports when processing buffers.
+The function typically puts data on the buffer from the source, if it is
+an input port; or pull out data from the buffer to the sink, if it is an
+output port.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>port</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GooPort"><type>GooPort</type></link> instance that process the buffer
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buffer</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="OMX-BUFFERHEADERTYPE:CAPS"><type>OMX_BUFFERHEADERTYPE</type></link> that is going to be processed,
+not <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A pointer to application data
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GooPort" role="struct"/>GooPort</title>
+<indexterm><primary>GooPort</primary></indexterm><programlisting>typedef struct {
+} GooPort;
+</programlisting>
+<para>
+Represent a higher abstraction of an OpenMAX port</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GOO-PORT-GET-DEFINITION:CAPS" role="macro"/>GOO_PORT_GET_DEFINITION()</title>
+<indexterm><primary>GOO_PORT_GET_DEFINITION</primary></indexterm><programlisting>#define GOO_PORT_GET_DEFINITION(port) (GOO_PORT (port)-&gt;definition)
+</programlisting>
+<para>
+Extract the port's definition</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>port</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-new" role="function"/>goo_port_new ()</title>
+<indexterm><primary>goo_port_new</primary></indexterm><programlisting><link linkend="GooPort">GooPort</link>*            goo_port_new                        ();</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-prepare-definition" role="function"/>goo_port_prepare_definition ()</title>
+<indexterm><primary>goo_port_prepare_definition</primary></indexterm><programlisting><link linkend="void">void</link>                goo_port_prepare_definition         (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Initializes the <link linkend="OMX-PARAM-PORTDEFINITIONTYPE:CAPS"><type>OMX_PARAM_PORTDEFINITIONTYPE</type></link> structure.
+This method is used internally in the <link linkend="GooComponentClass"><type>GooComponentClass</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-allocate-buffer-header" role="function"/>goo_port_allocate_buffer_header ()</title>
+<indexterm><primary>goo_port_allocate_buffer_header</primary></indexterm><programlisting><link linkend="void">void</link>                goo_port_allocate_buffer_header     (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Allocate the memory needed by the <link linkend="OMX-BUFFERHEADERTYPE:CAPS"><type>OMX_BUFFERHEADERTYPE</type></link> array.
+This method is used internally in the <link linkend="GooComponentClass"><type>GooComponentClass</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-prepare-buffer-queue" role="function"/>goo_port_prepare_buffer_queue ()</title>
+<indexterm><primary>goo_port_prepare_buffer_queue</primary></indexterm><programlisting><link linkend="void">void</link>                goo_port_prepare_buffer_queue       (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Initializes the async queue for buffer interchange.
+This method is used internally in the <link linkend="GooComponentClass"><type>GooComponentClass</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instances
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-allocate-buffers" role="function"/>goo_port_allocate_buffers ()</title>
+<indexterm><primary>goo_port_allocate_buffers</primary></indexterm><programlisting><link linkend="void">void</link>                goo_port_allocate_buffers           (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Allocates the array of buffers data where the buffers are going to be
+stored.
+This method should be called in the specific compoment.
+This method turns on the USE_BUFFER operation mode.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-push-buffer" role="function"/>goo_port_push_buffer ()</title>
+<indexterm><primary>goo_port_push_buffer</primary></indexterm><programlisting><link linkend="void">void</link>                goo_port_push_buffer                (<link linkend="GooPort">GooPort</link> *self,
+                                                         <link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link> *buffer);</programlisting>
+<para>
+Push the pointer to the async queue in the port.
+This method is used only by the OMX callbacks in the <link linkend="GooComponentClass"><type>GooComponentClass</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buffer</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GOO-BUFFERHEADERTYPE:CAPS"><type>GOO_BUFFERHEADERTYPE</type></link> pointer to the ready to use buffer.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-grab-buffer" role="function"/>goo_port_grab_buffer ()</title>
+<indexterm><primary>goo_port_grab_buffer</primary></indexterm><programlisting><link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link>* goo_port_grab_buffer              (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Will pop a "ready to use" buffer from the async queue. If the queue
+is empty the thread is blocked until a buffer address arrive.
+This function blocks the thread until a new buffer is grabbed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="OMX-BUFFERHEADERTYPE:CAPS"><type>OMX_BUFFERHEADERTYPE</type></link> pointer "ready to use"
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-try-grab-buffer" role="function"/>goo_port_try_grab_buffer ()</title>
+<indexterm><primary>goo_port_try_grab_buffer</primary></indexterm><programlisting><link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link>* goo_port_try_grab_buffer          (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Will try to pop a "ready to use" buffer from the async queue. If the queue
+is empty, a NULL value will be returned.
+This function doesn't block the thread.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="OMX-BUFFERHEADERTYPE:CAPS"><type>OMX_BUFFERHEADERTYPE</type></link> pointer if there is already "a ready
+to use" buffer in the async queue. If there is not one, a NULL value is
+returned.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-set-eos" role="function"/>goo_port_set_eos ()</title>
+<indexterm><primary>goo_port_set_eos</primary></indexterm><programlisting><link linkend="void">void</link>                goo_port_set_eos                    (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Tells to the port that the End-Of-Stream have been processed in one
+of its buffers</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-is-eos" role="function"/>goo_port_is_eos ()</title>
+<indexterm><primary>goo_port_is_eos</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_port_is_eos                     (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Notice is an EOS buffer have been processed in the port.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE is an EOS have been processed in the port
+              FALSE if no EOS flag have been processed
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-is-tunneled" role="function"/>goo_port_is_tunneled ()</title>
+<indexterm><primary>goo_port_is_tunneled</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_port_is_tunneled                (<link linkend="GooPort">GooPort</link> *self);</programlisting>
+<para>
+Check if the port is marked as tunneled.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if the port is tunneled, FALSE if not.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-set-process-buffer-function" role="function"/>goo_port_set_process_buffer_function ()</title>
+<indexterm><primary>goo_port_set_process_buffer_function</primary></indexterm><programlisting><link linkend="void">void</link>                goo_port_set_process_buffer_function
+                                                        (<link linkend="GooPort">GooPort</link> *self,
+                                                         <link linkend="GooPortProcessBufferFunction">GooPortProcessBufferFunction</link> pbf);</programlisting>
+<para>
+Set the given process_buffer function for the port. The process_buffer
+function is called to process a <link linkend="OMX-BUFFERHEADERTYPE:CAPS"><type>OMX_BUFFERHEADERTYPE</type></link> arrived from the
+port. See <link linkend="GooPortProcessBufferFunction"><type>GooPortProcessBufferFunction</type></link> for more details.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pbf</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GooPortProcessBufferFunction"><type>GooPortProcessBufferFunction</type></link> to set
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-port-process-buffer" role="function"/>goo_port_process_buffer ()</title>
+<indexterm><primary>goo_port_process_buffer</primary></indexterm><programlisting><link linkend="void">void</link>                goo_port_process_buffer             (<link linkend="GooPort">GooPort</link> *self,
+                                                         <link linkend="OMX-BUFFERHEADERTYPE:CAPS">OMX_BUFFERHEADERTYPE</link> *buffer,
+                                                         <link linkend="gpointer">gpointer</link> data);</programlisting>
+<para>
+Callback trigger.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooPort"><type>GooPort</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buffer</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="OMX-BUFFERHEADERTYPE:CAPS"><type>OMX_BUFFERHEADERTYPE</type></link> pointer
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> A client data to pass to the client thread
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>See Also</title>
+<link linkend="GooComponent"><type>GooComponent</type></link>
+</refsect1>
+
+</refentry>

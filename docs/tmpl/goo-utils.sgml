@@ -1,0 +1,252 @@
+<!-- ##### SECTION Title ##### -->
+goo-utils
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GOO_BASE_PORT_BUFFER_PADDING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OMX_VERSION_MAJOR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OMX_VERSION_MINOR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OMX_VERSION_REVISION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OMX_VERSION_STEP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GOO_RUN ##### -->
+<para>
+
+</para>
+
+@cmd: 
+
+
+<!-- ##### MACRO RETURN_GOO_RUN ##### -->
+<para>
+
+</para>
+
+@cmd: 
+
+
+<!-- ##### MACRO GOO_INIT_PARAM ##### -->
+<para>
+
+</para>
+
+@st: 
+@t: 
+
+
+<!-- ##### MACRO GOO_ARRAY_SIZE ##### -->
+<para>
+
+</para>
+
+@X: 
+
+
+<!-- ##### STRUCT StateDesc ##### -->
+<para>
+
+</para>
+
+@state: 
+@desc: 
+
+<!-- ##### STRUCT ErrorDesc ##### -->
+<para>
+
+</para>
+
+@error: 
+@desc: 
+
+<!-- ##### STRUCT EventDesc ##### -->
+<para>
+
+</para>
+
+@event: 
+@desc: 
+
+<!-- ##### STRUCT CommandDesc ##### -->
+<para>
+
+</para>
+
+@command: 
+@desc: 
+
+<!-- ##### STRUCT DirectionDesc ##### -->
+<para>
+
+</para>
+
+@direction: 
+@desc: 
+
+<!-- ##### STRUCT DomainDesc ##### -->
+<para>
+
+</para>
+
+@domain: 
+@desc: 
+
+<!-- ##### STRUCT VideoCompressionDesc ##### -->
+<para>
+
+</para>
+
+@compression: 
+@desc: 
+
+<!-- ##### STRUCT ColorDesc ##### -->
+<para>
+
+</para>
+
+@color: 
+@desc: 
+
+<!-- ##### STRUCT ResolutionInfo ##### -->
+<para>
+
+</para>
+
+@size: 
+@width: 
+@height: 
+
+<!-- ##### FUNCTION goo_strstate ##### -->
+<para>
+
+</para>
+
+@state: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_strerror ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_strevent ##### -->
+<para>
+
+</para>
+
+@event: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_strcommand ##### -->
+<para>
+
+</para>
+
+@command: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_strdirection ##### -->
+<para>
+
+</para>
+
+@direction: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_strdomain ##### -->
+<para>
+
+</para>
+
+@domain: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_strcolor ##### -->
+<para>
+
+</para>
+
+@color: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_strvideocompression ##### -->
+<para>
+
+</para>
+
+@compression: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_get_resolution ##### -->
+<para>
+
+</para>
+
+@size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_strportdef ##### -->
+<para>
+
+</para>
+
+@param: 
+@Returns: 
+
+

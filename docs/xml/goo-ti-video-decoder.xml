@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooTiVideoDecoder">
+<refmeta>
+<refentrytitle role="top_of_page">GooTiVideoDecoder</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooTiVideoDecoder</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+enum                <link linkend="GooTiVideoDecoderProcessMode">GooTiVideoDecoderProcessMode</link>;
+                    <link linkend="GooTiVideoDecoder">GooTiVideoDecoder</link>;
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooTiVideoDecoderProcessMode" role="enum"/>enum GooTiVideoDecoderProcessMode</title>
+<indexterm><primary>GooTiVideoDecoderProcessMode</primary></indexterm><programlisting>typedef enum GooTiVideoDecoderProcessMode
+{
+	GOO_TI_VIDEO_DECODER_FRAMEMODE,
+	GOO_TI_VIDEO_DECODER_STREAMMODE
+
+} GooTiVideoDecoderProcessMode;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GooTiVideoDecoder" role="struct"/>GooTiVideoDecoder</title>
+<indexterm><primary>GooTiVideoDecoder</primary></indexterm><programlisting>typedef struct {
+        GooComponent parent;
+
+        gboolean process_mode;
+} GooTiVideoDecoder;
+</programlisting>
+<para>
+
+</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

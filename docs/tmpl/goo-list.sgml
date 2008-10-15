@@ -1,0 +1,99 @@
+<!-- ##### SECTION Title ##### -->
+goo-list
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooListIface ##### -->
+<para>
+
+</para>
+
+@parent: 
+@get_length_func: 
+@prepend_func: 
+@append_func: 
+@remove_func: 
+@foreach_func: 
+@copy_func: 
+@create_iterator_func: 
+
+<!-- ##### FUNCTION goo_list_get_length ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_list_prepend ##### -->
+<para>
+
+</para>
+
+@self: 
+@item: 
+
+
+<!-- ##### FUNCTION goo_list_append ##### -->
+<para>
+
+</para>
+
+@self: 
+@item: 
+
+
+<!-- ##### FUNCTION goo_list_remove ##### -->
+<para>
+
+</para>
+
+@self: 
+@item: 
+
+
+<!-- ##### FUNCTION goo_list_foreach ##### -->
+<para>
+
+</para>
+
+@self: 
+@func: 
+@user_data: 
+
+
+<!-- ##### FUNCTION goo_list_create_iterator ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_list_copy ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+

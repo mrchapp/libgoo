@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooTiJpegEnc">
+<refmeta>
+<refentrytitle role="top_of_page">GooTiJpegEnc</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooTiJpegEnc</refname>
+<refpurpose>Represent a TI OpenMAX JPEG encoder component</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+                    <link linkend="GooTiJpegEncPriv">GooTiJpegEncPriv</link>;
+                    <link linkend="GooTiJpegEnc">GooTiJpegEnc</link>;
+#define             <link linkend="GOO-TI-JPEGENC-GET-PARAM:CAPS">GOO_TI_JPEGENC_GET_PARAM</link>            (jpegenc)
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+The <link linkend="GooTiJpegEnc"><type>GooTiJpegEnc</type></link> is the abstraction of the OpenMAX JPEG encoder component
+in the Texas Instrument implementation.</para>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooTiJpegEncPriv" role="struct"/>GooTiJpegEncPriv</title>
+<indexterm><primary>GooTiJpegEncPriv</primary></indexterm><programlisting>typedef struct _GooTiJpegEncPriv GooTiJpegEncPriv;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GooTiJpegEnc" role="struct"/>GooTiJpegEnc</title>
+<indexterm><primary>GooTiJpegEnc</primary></indexterm><programlisting>typedef struct {
+        GooComponent parent;
+        OMX_IMAGE_PARAM_QFACTORTYPE* param;
+} GooTiJpegEnc;
+</programlisting>
+<para>
+It is the OMX JPEG encoder component</para>
+<para>
+
+</para><variablelist role="struct">
+<varlistentry>
+<term><link linkend="GooComponent">GooComponent</link>&nbsp;<structfield>parent</structfield>;</term>
+<listitem><simpara>
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="OMX-IMAGE-PARAM-QFACTORTYPE:CAPS">OMX_IMAGE_PARAM_QFACTORTYPE</link>&nbsp;*<structfield>param</structfield>;</term>
+<listitem><simpara> The <link linkend="OMX-IMAGE-PARAM-QFACTORTYPE:CAPS"><type>OMX_IMAGE_PARAM_QFACTORTYPE</type></link> structure
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GOO-TI-JPEGENC-GET-PARAM:CAPS" role="macro"/>GOO_TI_JPEGENC_GET_PARAM()</title>
+<indexterm><primary>GOO_TI_JPEGENC_GET_PARAM</primary></indexterm><programlisting>#define GOO_TI_JPEGENC_GET_PARAM(jpegenc) (GOO_TI_JPEGENC (jpegenc)-&gt;param)
+</programlisting>
+<para>
+Gets the <link linkend="OMX-IMAGE-PARAM-QFACTORTYPE:CAPS"><type>OMX_IMAGE_PARAM_QFACTORTYPE</type></link> of the jpegenc</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>jpegenc</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GooTiJpegEnc"><type>GooTiJpegEnc</type></link> instace
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>See Also</title>
+<link linkend="GooComponent"><type>GooComponent</type></link>
+</refsect1>
+
+</refentry>

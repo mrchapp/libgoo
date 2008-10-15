@@ -1,0 +1,36 @@
+<!-- ##### SECTION Title ##### -->
+GooTiMpeg4Dec
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooTiMpeg4Dec ##### -->
+<para>
+
+</para>
+
+@parent: 
+
+<!-- ##### FUNCTION goo_ti_mpeg4dec_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

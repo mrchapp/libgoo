@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+GooTiCamera
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooTiCameraPriv ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GooTiCamera ##### -->
+<para>
+
+</para>
+
+@parent: 
+@param: 
+@display_width: 
+@display_height: 
+@burst_mode: 
+@native_rendering: 
+@overlay: 
+@pipeline: 
+
+<!-- ##### MACRO GOO_TI_CAMERA_GET_PARAM ##### -->
+<para>
+
+</para>
+
+@camera: 
+
+

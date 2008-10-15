@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-goo-iterator">
+<refmeta>
+<refentrytitle role="top_of_page">goo-iterator</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>goo-iterator</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+                    <link linkend="GooList">GooList</link>;
+                    <link linkend="GooIterator">GooIterator</link>;
+                    <link linkend="GooIteratorIface">GooIteratorIface</link>;
+<link linkend="void">void</link>                <link linkend="goo-iterator-next">goo_iterator_next</link>                   (<link linkend="GooIterator">GooIterator</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-iterator-prev">goo_iterator_prev</link>                   (<link linkend="GooIterator">GooIterator</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-iterator-first">goo_iterator_first</link>                  (<link linkend="GooIterator">GooIterator</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-iterator-nth">goo_iterator_nth</link>                    (<link linkend="GooIterator">GooIterator</link> *self,
+                                                         <link linkend="guint">guint</link> nth);
+<link linkend="GooObject">GooObject</link>*          <link linkend="goo-iterator-get-current">goo_iterator_get_current</link>            (<link linkend="GooIterator">GooIterator</link> *self);
+<link linkend="gboolean">gboolean</link>            <link linkend="goo-iterator-is-done">goo_iterator_is_done</link>                (<link linkend="GooIterator">GooIterator</link> *self);
+<link linkend="GooList">GooList</link>*            <link linkend="goo-iterator-get-list">goo_iterator_get_list</link>               (<link linkend="GooIterator">GooIterator</link> *self);
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooList" role="struct"/>GooList</title>
+<indexterm><primary>GooList</primary></indexterm><programlisting>typedef struct _GooList GooList;</programlisting>
+<para>
+An iterable list type</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GooIterator" role="struct"/>GooIterator</title>
+<indexterm><primary>GooIterator</primary></indexterm><programlisting>typedef struct _GooIterator GooIterator;</programlisting>
+<para>
+An iterator for a <link linkend="GooList"><type>GooList</type></link> is used for iterating over a list. The iterator
+is an instance that keeps the position state information. The <link linkend="GooList"><type>GooList</type></link> instance
+will not by itself keep a position state. Only iterators can keep a position
+state for a list.</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GooIteratorIface" role="struct"/>GooIteratorIface</title>
+<indexterm><primary>GooIteratorIface</primary></indexterm><programlisting>typedef struct {
+	GTypeInterface parent;
+	
+	void (*next_func) (GooIterator *self);
+	void (*prev_func) (GooIterator *self);
+	void (*first_func) (GooIterator *self);
+	void (*nth_func) (GooIterator *self, guint nth);
+	GooObject* (*get_current_func) (GooIterator *self);
+
+	gboolean (*is_done_func) (GooIterator *self);
+	GooList* (*get_list_func) (GooIterator *self);
+} GooIteratorIface;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="goo-iterator-next" role="function"/>goo_iterator_next ()</title>
+<indexterm><primary>goo_iterator_next</primary></indexterm><programlisting><link linkend="void">void</link>                goo_iterator_next                   (<link linkend="GooIterator">GooIterator</link> *self);</programlisting>
+<para>
+Moves the iterator to the next node</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooIterator"><type>GooIterator</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-iterator-prev" role="function"/>goo_iterator_prev ()</title>
+<indexterm><primary>goo_iterator_prev</primary></indexterm><programlisting><link linkend="void">void</link>                goo_iterator_prev                   (<link linkend="GooIterator">GooIterator</link> *self);</programlisting>
+<para>
+Moves the iterator to the previous node</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooIterator"><type>GooIterator</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-iterator-first" role="function"/>goo_iterator_first ()</title>
+<indexterm><primary>goo_iterator_first</primary></indexterm><programlisting><link linkend="void">void</link>                goo_iterator_first                  (<link linkend="GooIterator">GooIterator</link> *self);</programlisting>
+<para>
+Moves the iterator to the first node</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooIterator"><type>GooIterator</type></link> instance
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-iterator-nth" role="function"/>goo_iterator_nth ()</title>
+<indexterm><primary>goo_iterator_nth</primary></indexterm><programlisting><link linkend="void">void</link>                goo_iterator_nth                    (<link linkend="GooIterator">GooIterator</link> *self,
+                                                         <link linkend="guint">guint</link> nth);</programlisting>
+<para>
+Moves the iterator to the nth node</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooIterator"><type>GooIterator</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>nth</parameter>&nbsp;:</term>
+<listitem><simpara> The nth position
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-iterator-get-current" role="function"/>goo_iterator_get_current ()</title>
+<indexterm><primary>goo_iterator_get_current</primary></indexterm><programlisting><link linkend="GooObject">GooObject</link>*          goo_iterator_get_current            (<link linkend="GooIterator">GooIterator</link> *self);</programlisting>
+<para>
+Does not move the iterator. Returns the objecto at the curren position. If
+there's no current position, this method returns NULL. If not NULL, the
+returned value must be unreferenced after use.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooIterator"><type>GooIterator</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the current object or NULL
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-iterator-is-done" role="function"/>goo_iterator_is_done ()</title>
+<indexterm><primary>goo_iterator_is_done</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            goo_iterator_is_done                (<link linkend="GooIterator">GooIterator</link> *self);</programlisting>
+<para>
+Does the iterator point to some valid list item? You can use this property
+to make loops like:
+</para>
+<para>
+Example:
+<informalexample><programlisting>
+GooList *list = goo_simple_list_new ();
+GooIterator *iter = goo_list_create_iterator (list);
+while (!goo_iterator_is_done (iter))
+{
+   GooObject *cur = goo_iterator_get_current (iter);
+   ...
+   g_object_unref (G_OBJECT (cur));
+   goo_iterator_next (iter);
+}
+g_object_unref (G_OBJECT (iter));
+g_object_unref (G_OBJECT (list));
+</programlisting></informalexample></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooIterator"><type>GooIterator</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if it points to a valid list item, FALSE otherwise
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-iterator-get-list" role="function"/>goo_iterator_get_list ()</title>
+<indexterm><primary>goo_iterator_get_list</primary></indexterm><programlisting><link linkend="GooList">GooList</link>*            goo_iterator_get_list               (<link linkend="GooIterator">GooIterator</link> *self);</programlisting>
+<para>
+Does not move the iterator. Returns the list of which this iterator is an
+iterator. The returned list object should be unreferenced after use.
+Remember when using this property that lists shouldn't change while
+iterating them.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooIterator"><type>GooIterator</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The <link linkend="GooList"><type>GooList</type></link> instance being iterated
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

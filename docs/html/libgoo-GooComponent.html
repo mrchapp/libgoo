@@ -1,0 +1,1371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooComponent</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooPortIterator.html" title="GooPortIterator">
+<link rel="next" href="libgoo-GooComponentList.html" title="GooComponentList">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooPortIterator.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooComponentList.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2560453" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2564991" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooComponent"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2560453"></a><span class="refentrytitle">GooComponent</span>
+</h2>
+<p>GooComponent &#8212; Object which represents an OpenMAX component.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-GooComponent.html#GooComponent">GooComponent</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-load">goo_component_load</a>                  (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-unload">goo_component_unload</a>                (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-set-state-idle">goo_component_set_state_idle</a>        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-set-state-executing">goo_component_set_state_executing</a>   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-set-state-loaded">goo_component_set_state_loaded</a>      (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-wait-for-next-state">goo_component_wait_for_next_state</a>   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+OMX_STATETYPE       <a href="libgoo-GooComponent.html#goo-component-get-state">goo_component_get_state</a>             (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-load-ports">goo_component_load_ports</a>            (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-configure-all-ports">goo_component_configure_all_ports</a>   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-set-ports-definition">goo_component_set_ports_definition</a>  (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-validate-ports-definition">goo_component_validate_ports_definition</a>
+                                                        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-allocate-port">goo_component_allocate_port</a>         (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *port);
+void                <a href="libgoo-GooComponent.html#goo-component-allocate-all-ports">goo_component_allocate_all_ports</a>    (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-disable-port">goo_component_disable_port</a>          (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *port);
+void                <a href="libgoo-GooComponent.html#goo-component-disable-all-ports">goo_component_disable_all_ports</a>     (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-deallocate-port">goo_component_deallocate_port</a>       (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *port);
+void                <a href="libgoo-GooComponent.html#goo-component-deallocate-all-ports">goo_component_deallocate_all_ports</a>  (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-prepare-all-ports">goo_component_prepare_all_ports</a>     (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>*        <a href="libgoo-GooComponent.html#goo-component-iterate-ports">goo_component_iterate_ports</a>         (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>*        <a href="libgoo-GooComponent.html#goo-component-iterate-input-ports">goo_component_iterate_input_ports</a>   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>*        <a href="libgoo-GooComponent.html#goo-component-iterate-output-ports">goo_component_iterate_output_ports</a>  (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+<a href="libgoo-GooPort.html#GooPort">GooPort</a>*            <a href="libgoo-GooComponent.html#goo-component-get-port">goo_component_get_port</a>              (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-set-parameter-by-name">goo_component_set_parameter_by_name</a> (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-set-parameter-by-index">goo_component_set_parameter_by_index</a>
+                                                        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_INDEXTYPE index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-get-parameter-by-name">goo_component_get_parameter_by_name</a> (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-get-parameter-by-index">goo_component_get_parameter_by_index</a>
+                                                        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_INDEXTYPE index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-set-config-by-name">goo_component_set_config_by_name</a>    (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-set-config-by-index">goo_component_set_config_by_index</a>   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_INDEXTYPE index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-get-config-by-name">goo_component_get_config_by_name</a>    (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-get-config-by-index">goo_component_get_config_by_index</a>   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_INDEXTYPE index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a href="libgoo-GooComponent.html#goo-component-load-parameters">goo_component_load_parameters</a>       (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-set-parameters">goo_component_set_parameters</a>        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-set-done">goo_component_set_done</a>              (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-is-done">goo_component_is_done</a>               (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-wait-for-done">goo_component_wait_for_done</a>         (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-release-buffer">goo_component_release_buffer</a>        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_BUFFERHEADERTYPE *buffer);
+void                <a href="libgoo-GooComponent.html#goo-component-send-eos">goo_component_send_eos</a>              (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);
+void                <a href="libgoo-GooComponent.html#goo-component-set-tunnel">goo_component_set_tunnel</a>            (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *src,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *srcport,
+                                                         <a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *sink,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *sinkport);
+void                <a href="libgoo-GooComponent.html#goo-component-set-tunnel-by-name">goo_component_set_tunnel_by_name</a>    (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *src,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *srcportname,
+                                                         <a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *sink,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *sinkportname);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a href="libgoo-GooComponent.html#goo-component-set-clock">goo_component_set_clock</a>             (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *clock);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2564991"></a><h2>Description</h2>
+<p>
+The <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> is a higher abstraction representation of an OpenMAX component.
+Establish the internal state of the component, control the streams and it is
+responsible of the comunication with the OMX Core.</p>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2599608"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2599617"></a><h3>
+<a name="GooComponent"></a>GooComponent</h3>
+<a class="indexterm" name="id2599628"></a><pre class="programlisting">typedef struct {
+} GooComponent;
+</pre>
+<p>
+Represent a higher abstraction of an OpenMAX component.</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2599646"></a><h3>
+<a name="goo-component-load"></a>goo_component_load ()</h3>
+<a class="indexterm" name="id2599657"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_load                  (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+This methods will locate the component specified, load that component
+into memory, and validate it.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the component was loaded correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2599720"></a><h3>
+<a name="goo-component-unload"></a>goo_component_unload ()</h3>
+<a class="indexterm" name="id2599730"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_unload                (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+This method will free the OMX component from memory.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the component is free correctly; FALSE if otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2599792"></a><h3>
+<a name="goo-component-set-state-idle"></a>goo_component_set_state_idle ()</h3>
+<a class="indexterm" name="id2599804"></a><pre class="programlisting">void                goo_component_set_state_idle        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Set the component in Idle State.
+Before you call this method, you should loaded the component, loaded it
+ports and configured them, as the configured the component itself.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2599858"></a><h3>
+<a name="goo-component-set-state-executing"></a>goo_component_set_state_executing ()</h3>
+<a class="indexterm" name="id2599872"></a><pre class="programlisting">void                goo_component_set_state_executing   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Set the component in Executing state.
+After calling this methods you should process the buffers interchange.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2599924"></a><h3>
+<a name="goo-component-set-state-loaded"></a>goo_component_set_state_loaded ()</h3>
+<a class="indexterm" name="id2599936"></a><pre class="programlisting">void                goo_component_set_state_loaded      (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Set the compoment in Loaded state
+This state should be called when we're going to unload the component.
+The method disable and deallocates all the component's ports.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2599990"></a><h3>
+<a name="goo-component-wait-for-next-state"></a>goo_component_wait_for_next_state ()</h3>
+<a class="indexterm" name="id2600003"></a><pre class="programlisting">void                goo_component_wait_for_next_state   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+This method will block the thread until the OMX component have changed his
+state to the new one specified previously.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600056"></a><h3>
+<a name="goo-component-get-state"></a>goo_component_get_state ()</h3>
+<a class="indexterm" name="id2600066"></a><pre class="programlisting">OMX_STATETYPE       goo_component_get_state             (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+This method executes the OMX_GetState macro to obtain the current
+component's state.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> A <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> The <span class="type">OMX_STATETYPE</span> current value
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600134"></a><h3>
+<a name="goo-component-load-ports"></a>goo_component_load_ports ()</h3>
+<a class="indexterm" name="id2600144"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_load_ports            (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+This function will load all the ports needed by the component.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the port were loaded correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600206"></a><h3>
+<a name="goo-component-configure-all-ports"></a>goo_component_configure_all_ports ()</h3>
+<a class="indexterm" name="id2600219"></a><pre class="programlisting">void                goo_component_configure_all_ports   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Set in the OMX core the configuration of each port.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600271"></a><h3>
+<a name="goo-component-set-ports-definition"></a>goo_component_set_ports_definition ()</h3>
+<a class="indexterm" name="id2600284"></a><pre class="programlisting">void                goo_component_set_ports_definition  (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Set the port's definitions default values for each port in the component.
+This method should be overriden in every specfic component.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> A <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600336"></a><h3>
+<a name="goo-component-validate-ports-definition"></a>goo_component_validate_ports_definition ()</h3>
+<a class="indexterm" name="id2600349"></a><pre class="programlisting">void                goo_component_validate_ports_definition
+                                                        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Validates and calculates the assigned port's definitions values for each
+port in the component.
+This method should be overriden in every specfic component.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> A <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600404"></a><h3>
+<a name="goo-component-allocate-port"></a>goo_component_allocate_port ()</h3>
+<a class="indexterm" name="id2600415"></a><pre class="programlisting">void                goo_component_allocate_port         (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *port);</pre>
+<p>
+Allocates the buffers memory to use in the specified port in the component.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>port</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600492"></a><h3>
+<a name="goo-component-allocate-all-ports"></a>goo_component_allocate_all_ports ()</h3>
+<a class="indexterm" name="id2600505"></a><pre class="programlisting">void                goo_component_allocate_all_ports    (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Allocates the buffers memory to use in the specified port in the component.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600557"></a><h3>
+<a name="goo-component-disable-port"></a>goo_component_disable_port ()</h3>
+<a class="indexterm" name="id2600568"></a><pre class="programlisting">void                goo_component_disable_port          (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *port);</pre>
+<p>
+Ask to the component to disable the specified port</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>port</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600645"></a><h3>
+<a name="goo-component-disable-all-ports"></a>goo_component_disable_all_ports ()</h3>
+<a class="indexterm" name="id2600657"></a><pre class="programlisting">void                goo_component_disable_all_ports     (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Ask to the component to disable all the port in it</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600709"></a><h3>
+<a name="goo-component-deallocate-port"></a>goo_component_deallocate_port ()</h3>
+<a class="indexterm" name="id2600721"></a><pre class="programlisting">void                goo_component_deallocate_port       (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *port);</pre>
+<p>
+Free the memory allocated for the specified port's buffers.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>port</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600799"></a><h3>
+<a name="goo-component-deallocate-all-ports"></a>goo_component_deallocate_all_ports ()</h3>
+<a class="indexterm" name="id2600812"></a><pre class="programlisting">void                goo_component_deallocate_all_ports  (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Free the buffers of all the ports associated to this compoment</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600863"></a><h3>
+<a name="goo-component-prepare-all-ports"></a>goo_component_prepare_all_ports ()</h3>
+<a class="indexterm" name="id2600876"></a><pre class="programlisting">void                goo_component_prepare_all_ports     (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Take all the output port and push all its buffers to the component
+to wait to be filled. This method should be called when the component
+is in transition from idel to executing.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2600930"></a><h3>
+<a name="goo-component-iterate-ports"></a>goo_component_iterate_ports ()</h3>
+<a class="indexterm" name="id2600941"></a><pre class="programlisting"><a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>*        goo_component_iterate_ports         (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Retrieves an iterator of component's ports.  The iterator should be unref
+after usage.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> an <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> the <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> of <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a>. Unref each port after use.
+
+MT Safe.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601016"></a><h3>
+<a name="goo-component-iterate-input-ports"></a>goo_component_iterate_input_ports ()</h3>
+<a class="indexterm" name="id2601029"></a><pre class="programlisting"><a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>*        goo_component_iterate_input_ports   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Retrieves an iterator of component's input ports.  The iterator should
+be unref after usage.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> an <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> the <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> of input <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a>. Unref each port after use.
+
+MT Safe.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601104"></a><h3>
+<a name="goo-component-iterate-output-ports"></a>goo_component_iterate_output_ports ()</h3>
+<a class="indexterm" name="id2601117"></a><pre class="programlisting"><a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>*        goo_component_iterate_output_ports  (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Retrieves an iterator of component's output ports.  The iterator should
+be unref after usage.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> an <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> the <a href="libgoo-goo-iterator.html#GooIterator"><span class="type">GooIterator</span></a> of output <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a>. Unref each port after use.
+
+MT Safe.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601192"></a><h3>
+<a name="goo-component-get-port"></a>goo_component_get_port ()</h3>
+<a class="indexterm" name="id2601202"></a><pre class="programlisting"><a href="libgoo-GooPort.html#GooPort">GooPort</a>*            goo_component_get_port              (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);</pre>
+<p>
+Retrieves the requested port label with the given name.  It should be
+unref after usage.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> The name of the port. It could "input#" or "output#"
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> The <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> or <a
+href="/usr/share/gtk-doc/html/liboil/liboil-liboiljunk.html#NULL:CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601298"></a><h3>
+<a name="goo-component-set-parameter-by-name"></a>goo_component_set_parameter_by_name ()</h3>
+<a class="indexterm" name="id2601311"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_set_parameter_by_name (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Set a custom parameter in the OMX component referenced by its name.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> A string with the name of the custom parameter to set
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer to the data to set in the custom parameter
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the value is set correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601414"></a><h3>
+<a name="goo-component-set-parameter-by-index"></a>goo_component_set_parameter_by_index ()</h3>
+<a class="indexterm" name="id2601426"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_set_parameter_by_index
+                                                        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_INDEXTYPE index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Set a custom parameter in the OMX component referenced by its
+index value.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>index</code></em>&#160;:</span></td>
+<td> An enum value which identifies the custom parameter to set
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer to the data to set in the custom parameter
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the value is set correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601531"></a><h3>
+<a name="goo-component-get-parameter-by-name"></a>goo_component_get_parameter_by_name ()</h3>
+<a class="indexterm" name="id2601544"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_get_parameter_by_name (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Get a custom parameter in the OMX component referenced by its name.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> A string with the name of the custom parameter to set
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer to the data to set in the custom parameter
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the value is set correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601646"></a><h3>
+<a name="goo-component-get-parameter-by-index"></a>goo_component_get_parameter_by_index ()</h3>
+<a class="indexterm" name="id2601659"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_get_parameter_by_index
+                                                        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_INDEXTYPE index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Get a custom parameter in the OMX component referenced by its
+index value.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>index</code></em>&#160;:</span></td>
+<td> An enum value which identifies the custom parameter to set
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer to the data to set in the custom parameter
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the value is set correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601763"></a><h3>
+<a name="goo-component-set-config-by-name"></a>goo_component_set_config_by_name ()</h3>
+<a class="indexterm" name="id2601776"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_set_config_by_name    (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Set a custom configuration in the OMX component referenced by its name.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> A string with the name of the custom parameter to set
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer to the data to set in the custom parameter
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the value is set correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601879"></a><h3>
+<a name="goo-component-set-config-by-index"></a>goo_component_set_config_by_index ()</h3>
+<a class="indexterm" name="id2601892"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_set_config_by_index   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_INDEXTYPE index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Set a custom configuration in the OMX component referenced by its
+index value.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>index</code></em>&#160;:</span></td>
+<td> An enum value which identifies the custom parameter to set
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer to the data to set in the custom parameter
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the value is set correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2601995"></a><h3>
+<a name="goo-component-get-config-by-name"></a>goo_component_get_config_by_name ()</h3>
+<a class="indexterm" name="id2602007"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_get_config_by_name    (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Get a custom parameter in the OMX component referenced by its name.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> A string with the name of the custom parameter to get
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer where the data is going to be stored
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the value is get correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602110"></a><h3>
+<a name="goo-component-get-config-by-index"></a>goo_component_get_config_by_index ()</h3>
+<a class="indexterm" name="id2602123"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_get_config_by_index   (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_INDEXTYPE index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+Get a custom parameter in the OMX component referenced by its index.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>index</code></em>&#160;:</span></td>
+<td> An enum value of the custom parameter to get
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
+<td> A pointer where the data is going to be stored
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the value is get correctly; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602225"></a><h3>
+<a name="goo-component-load-parameters"></a>goo_component_load_parameters ()</h3>
+<a class="indexterm" name="id2602238"></a><pre class="programlisting">void                goo_component_load_parameters       (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Initializes all the miscellaneous parameters of the specific compoment.
+This is a pure virtual function which your component should override.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602291"></a><h3>
+<a name="goo-component-set-parameters"></a>goo_component_set_parameters ()</h3>
+<a class="indexterm" name="id2602304"></a><pre class="programlisting">void                goo_component_set_parameters        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Configure all the miscellaneous parameters of the specific compoment.
+This is a pure virtual function which your component should override.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602358"></a><h3>
+<a name="goo-component-set-done"></a>goo_component_set_done ()</h3>
+<a class="indexterm" name="id2602371"></a><pre class="programlisting">void                goo_component_set_done              (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Mark the component if all the stream have been processed.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602430"></a><h3>
+<a name="goo-component-is-done"></a>goo_component_is_done ()</h3>
+<a class="indexterm" name="id2602443"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_is_done               (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+Check if the component have been processed all the stream</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> TRUE if the stream have been processed; FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602513"></a><h3>
+<a name="goo-component-wait-for-done"></a>goo_component_wait_for_done ()</h3>
+<a class="indexterm" name="id2602527"></a><pre class="programlisting">void                goo_component_wait_for_done         (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+The thread will be block until the done condition is activated (this is a
+library user reponsability).</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> A <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602585"></a><h3>
+<a name="goo-component-release-buffer"></a>goo_component_release_buffer ()</h3>
+<a class="indexterm" name="id2602599"></a><pre class="programlisting">void                goo_component_release_buffer        (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         OMX_BUFFERHEADERTYPE *buffer);</pre>
+<p>
+This method will call the functions <code class="function">OMX_FillThisBuffer()</code> or
+<code class="function">OMX_EmptyThisBuffer()</code> depending on the port type defined in the buffer
+structure.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>buffer</code></em>&#160;:</span></td>
+<td> An <span class="type">OMX_BUFFERHEADERTYPE</span> pointer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602707"></a><h3>
+<a name="goo-component-send-eos"></a>goo_component_send_eos ()</h3>
+<a class="indexterm" name="id2602720"></a><pre class="programlisting">void                goo_component_send_eos              (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self);</pre>
+<p>
+This method will send an empty buffer with the EOS flag raised to every
+input port if it is not tunneled and also it is not marked as EOS already.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602780"></a><h3>
+<a name="goo-component-set-tunnel"></a>goo_component_set_tunnel ()</h3>
+<a class="indexterm" name="id2602794"></a><pre class="programlisting">void                goo_component_set_tunnel            (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *src,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *srcport,
+                                                         <a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *sink,
+                                                         <a href="libgoo-GooPort.html#GooPort">GooPort</a> *sinkport);</pre>
+<p>
+This method will setup a tunnel between two GooComponents.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>src</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>srcport</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>sink</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>sinkport</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a> instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2602938"></a><h3>
+<a name="goo-component-set-tunnel-by-name"></a>goo_component_set_tunnel_by_name ()</h3>
+<a class="indexterm" name="id2602952"></a><pre class="programlisting">void                goo_component_set_tunnel_by_name    (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *src,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *srcportname,
+                                                         <a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *sink,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *sinkportname);</pre>
+<p>
+This method will setup a tunnel between two GooComponents.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>src</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>srcportname</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>sink</code></em>&#160;:</span></td>
+<td> a <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>sinkportname</code></em>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2603082"></a><h3>
+<a name="goo-component-set-clock"></a>goo_component_set_clock ()</h3>
+<a class="indexterm" name="id2603096"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            goo_component_set_clock             (<a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *self,
+                                                         <a href="libgoo-GooComponent.html#GooComponent">GooComponent</a> *clock);</pre>
+<p>
+This method assigns a global clock component to the component.
+This methods is should be used only by the <a href="libgoo-goo-component-factory.html#GooComponentFactory"><span class="type">GooComponentFactory</span></a> instance.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> A <a href="libgoo-GooComponent.html#GooComponent"><span class="type">GooComponent</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>clock</code></em>&#160;:</span></td>
+<td> The factory's clock instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2603196"></a><h2>See Also</h2>
+<a href="libgoo-GooPort.html#GooPort"><span class="type">GooPort</span></a>
+</div>
+</div>
+</body>
+</html>

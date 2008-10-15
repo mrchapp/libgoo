@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooPortList">
+<refmeta>
+<refentrytitle role="top_of_page">GooPortList</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooPortList</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+                    <link linkend="GooPortList">GooPortList</link>;
+<link linkend="GooList">GooList</link>*            <link linkend="goo-port-list-new">goo_port_list_new</link>                   (void);
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooPortList" role="struct"/>GooPortList</title>
+<indexterm><primary>GooPortList</primary></indexterm><programlisting>typedef struct {
+        GObject parent;
+        GList* first;
+        GMutex* list_lock;
+} GooPortList;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="goo-port-list-new" role="function"/>goo_port_list_new ()</title>
+<indexterm><primary>goo_port_list_new</primary></indexterm><programlisting><link linkend="GooList">GooList</link>*            goo_port_list_new                   (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

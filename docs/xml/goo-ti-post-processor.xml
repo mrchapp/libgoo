@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooTiPostProcessor">
+<refmeta>
+<refentrytitle role="top_of_page">GooTiPostProcessor</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooTiPostProcessor</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+enum                <link linkend="GooTiPostProcessorRotation">GooTiPostProcessorRotation</link>;
+                    <link linkend="GooTiPostProcessor">GooTiPostProcessor</link>;
+<link linkend="void">void</link>                <link linkend="goo-ti-post-processor-set-rotation">goo_ti_post_processor_set_rotation</link>  (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="GooTiPostProcessorRotation">GooTiPostProcessorRotation</link> rotation);
+<link linkend="guint">guint</link>               <link linkend="goo-ti-post-processor-get-rotation">goo_ti_post_processor_get_rotation</link>  (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-ti-post-processor-set-xscale">goo_ti_post_processor_set_xscale</link>    (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="gint">gint</link> xscale);
+<link linkend="gint">gint</link>                <link linkend="goo-ti-post-processor-get-xscale">goo_ti_post_processor_get_xscale</link>    (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-ti-post-processor-set-yscale">goo_ti_post_processor_set_yscale</link>    (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="gint">gint</link> yscale);
+<link linkend="gint">gint</link>                <link linkend="goo-ti-post-processor-get-yscale">goo_ti_post_processor_get_yscale</link>    (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-ti-post-processor-set-xpos">goo_ti_post_processor_set_xpos</link>      (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="gint">gint</link> xpos);
+<link linkend="gint">gint</link>                <link linkend="goo-ti-post-processor-get-xpos">goo_ti_post_processor_get_xpos</link>      (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);
+<link linkend="void">void</link>                <link linkend="goo-ti-post-processor-set-ypos">goo_ti_post_processor_set_ypos</link>      (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="gint">gint</link> ypos);
+<link linkend="gint">gint</link>                <link linkend="goo-ti-post-processor-get-ypos">goo_ti_post_processor_get_ypos</link>      (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooTiPostProcessorRotation" role="enum"/>enum GooTiPostProcessorRotation</title>
+<indexterm><primary>GooTiPostProcessorRotation</primary></indexterm><programlisting>typedef enum GooTiPostProcessorRotation
+{
+	GOO_TI_POST_PROCESSOR_ROTATION_NONE = 0,
+	GOO_TI_POST_PROCESSOR_ROTATION_90 = 90,
+	GOO_TI_POST_PROCESSOR_ROTATION_180 = 180,
+	GOO_TI_POST_PROCESSOR_ROTATION_270 = 270
+
+} GooTiPostProcessorRotation;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GooTiPostProcessor" role="struct"/>GooTiPostProcessor</title>
+<indexterm><primary>GooTiPostProcessor</primary></indexterm><programlisting>typedef struct {
+        GooComponent parent;
+
+	guint rotation;
+	guint xscale;
+	guint yscale;
+	guint xpos;
+	guint ypos;
+} GooTiPostProcessor;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-set-rotation" role="function"/>goo_ti_post_processor_set_rotation ()</title>
+<indexterm><primary>goo_ti_post_processor_set_rotation</primary></indexterm><programlisting><link linkend="void">void</link>                goo_ti_post_processor_set_rotation  (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="GooTiPostProcessorRotation">GooTiPostProcessorRotation</link> rotation);</programlisting>
+<para>
+This method will set a rotation in the output of the 
+video Post Processor display.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>rotation</parameter>&nbsp;:</term>
+<listitem><simpara> a GooTiPostProcessorRotation value
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-get-rotation" role="function"/>goo_ti_post_processor_get_rotation ()</title>
+<indexterm><primary>goo_ti_post_processor_get_rotation</primary></indexterm><programlisting><link linkend="guint">guint</link>               goo_ti_post_processor_get_rotation  (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);</programlisting>
+<para>
+Return the value of the rotation set on the video Post Processor.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> 0, 90, 180 or 270 degrees of rotation.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-set-xscale" role="function"/>goo_ti_post_processor_set_xscale ()</title>
+<indexterm><primary>goo_ti_post_processor_set_xscale</primary></indexterm><programlisting><link linkend="void">void</link>                goo_ti_post_processor_set_xscale    (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="gint">gint</link> xscale);</programlisting>
+<para>
+This method will set a hardware X scale factor in the output of the 
+video Post Processor display.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>xscale</parameter>&nbsp;:</term>
+<listitem><simpara> a 0 - 200 range of X axis scaling factor
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-get-xscale" role="function"/>goo_ti_post_processor_get_xscale ()</title>
+<indexterm><primary>goo_ti_post_processor_get_xscale</primary></indexterm><programlisting><link linkend="gint">gint</link>                goo_ti_post_processor_get_xscale    (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);</programlisting>
+<para>
+Return the value of the hardware X scaling factor.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> 0 - 200 range.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-set-yscale" role="function"/>goo_ti_post_processor_set_yscale ()</title>
+<indexterm><primary>goo_ti_post_processor_set_yscale</primary></indexterm><programlisting><link linkend="void">void</link>                goo_ti_post_processor_set_yscale    (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="gint">gint</link> yscale);</programlisting>
+<para>
+This method will set a hardware Y scale factor in the output of the 
+video Post Processor display.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>yscale</parameter>&nbsp;:</term>
+<listitem><simpara> a 0 - 200 range of Y axis scaling factor
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-get-yscale" role="function"/>goo_ti_post_processor_get_yscale ()</title>
+<indexterm><primary>goo_ti_post_processor_get_yscale</primary></indexterm><programlisting><link linkend="gint">gint</link>                goo_ti_post_processor_get_yscale    (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);</programlisting>
+<para>
+Return the value of the hardware Y scaling factor.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> 0 - 200 range.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-set-xpos" role="function"/>goo_ti_post_processor_set_xpos ()</title>
+<indexterm><primary>goo_ti_post_processor_set_xpos</primary></indexterm><programlisting><link linkend="void">void</link>                goo_ti_post_processor_set_xpos      (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="gint">gint</link> xpos);</programlisting>
+<para>
+This method will set an offset to the display area of the 
+video Post Processor display.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>xpos</parameter>&nbsp;:</term>
+<listitem><simpara> a int range of X axis offset
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-get-xpos" role="function"/>goo_ti_post_processor_get_xpos ()</title>
+<indexterm><primary>goo_ti_post_processor_get_xpos</primary></indexterm><programlisting><link linkend="gint">gint</link>                goo_ti_post_processor_get_xpos      (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);</programlisting>
+<para>
+Return the value of the hardware X offset.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The position in X where the frame will be displayed
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-set-ypos" role="function"/>goo_ti_post_processor_set_ypos ()</title>
+<indexterm><primary>goo_ti_post_processor_set_ypos</primary></indexterm><programlisting><link linkend="void">void</link>                goo_ti_post_processor_set_ypos      (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self,
+                                                         <link linkend="gint">gint</link> ypos);</programlisting>
+<para>
+This method will set an offset to the display area of the 
+video Post Processor display.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ypos</parameter>&nbsp;:</term>
+<listitem><simpara> a int range of Y axis offset
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-post-processor-get-ypos" role="function"/>goo_ti_post_processor_get_ypos ()</title>
+<indexterm><primary>goo_ti_post_processor_get_ypos</primary></indexterm><programlisting><link linkend="gint">gint</link>                goo_ti_post_processor_get_ypos      (<link linkend="GooTiPostProcessor">GooTiPostProcessor</link> *self);</programlisting>
+<para>
+Return the value of the hardware Y offset.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiPostProcessor"><type>GooTiPostProcessor</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Max int.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

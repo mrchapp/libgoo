@@ -1,0 +1,785 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>goo-utils</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-goo-semaphore.html" title="goo-semaphore">
+<link rel="next" href="libgoo-goo-log.html" title="goo-log">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-goo-semaphore.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-goo-log.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2586077" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2610046" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-goo-utils"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2586077"></a><span class="refentrytitle">goo-utils</span>
+</h2>
+<p>goo-utils &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+#define             <a href="libgoo-goo-utils.html#GOO-BASE-PORT-BUFFER-PADDING:CAPS">GOO_BASE_PORT_BUFFER_PADDING</a>
+#define             <a href="libgoo-goo-utils.html#OMX-VERSION-MAJOR:CAPS">OMX_VERSION_MAJOR</a>
+#define             <a href="libgoo-goo-utils.html#OMX-VERSION-MINOR:CAPS">OMX_VERSION_MINOR</a>
+#define             <a href="libgoo-goo-utils.html#OMX-VERSION-REVISION:CAPS">OMX_VERSION_REVISION</a>
+#define             <a href="libgoo-goo-utils.html#OMX-VERSION-STEP:CAPS">OMX_VERSION_STEP</a>
+#define             <a href="libgoo-goo-utils.html#GOO-RUN:CAPS">GOO_RUN</a>                             (cmd)
+#define             <a href="libgoo-goo-utils.html#RETURN-GOO-RUN:CAPS">RETURN_GOO_RUN</a>                      (cmd)
+#define             <a href="libgoo-goo-utils.html#GOO-INIT-PARAM:CAPS">GOO_INIT_PARAM</a>                      (st, t)
+#define             <a href="libgoo-goo-utils.html#GOO-ARRAY-SIZE:CAPS">GOO_ARRAY_SIZE</a>                      (X)
+                    <a href="libgoo-goo-utils.html#StateDesc">StateDesc</a>;
+                    <a href="libgoo-goo-utils.html#ErrorDesc">ErrorDesc</a>;
+                    <a href="libgoo-goo-utils.html#EventDesc">EventDesc</a>;
+                    <a href="libgoo-goo-utils.html#CommandDesc">CommandDesc</a>;
+                    <a href="libgoo-goo-utils.html#DirectionDesc">DirectionDesc</a>;
+                    <a href="libgoo-goo-utils.html#DomainDesc">DomainDesc</a>;
+                    <a href="libgoo-goo-utils.html#VideoCompressionDesc">VideoCompressionDesc</a>;
+                    <a href="libgoo-goo-utils.html#ColorDesc">ColorDesc</a>;
+                    <a href="libgoo-goo-utils.html#ResolutionInfo">ResolutionInfo</a>;
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a href="libgoo-goo-utils.html#goo-strstate">goo_strstate</a>                        (OMX_STATETYPE state);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a href="libgoo-goo-utils.html#goo-strerror">goo_strerror</a>                        (OMX_ERRORTYPE error);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a href="libgoo-goo-utils.html#goo-strevent">goo_strevent</a>                        (OMX_EVENTTYPE event);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a href="libgoo-goo-utils.html#goo-strcommand">goo_strcommand</a>                      (OMX_COMMANDTYPE command);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a href="libgoo-goo-utils.html#goo-strdirection">goo_strdirection</a>                    (OMX_DIRTYPE direction);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a href="libgoo-goo-utils.html#goo-strdomain">goo_strdomain</a>                       (OMX_PORTDOMAINTYPE domain);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a href="libgoo-goo-utils.html#goo-strcolor">goo_strcolor</a>                        (OMX_COLOR_FORMATTYPE color);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a href="libgoo-goo-utils.html#goo-strvideocompression">goo_strvideocompression</a>             (OMX_VIDEO_CODINGTYPE compression);
+<a href="libgoo-goo-utils.html#ResolutionInfo">ResolutionInfo</a>      <a href="libgoo-goo-utils.html#goo-get-resolution">goo_get_resolution</a>                  (const char *size);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*              <a href="libgoo-goo-utils.html#goo-strportdef">goo_strportdef</a>                      (OMX_PARAM_PORTDEFINITIONTYPE *param);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2610046"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2610061"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2610072"></a><h3>
+<a name="GOO-BASE-PORT-BUFFER-PADDING:CAPS"></a>GOO_BASE_PORT_BUFFER_PADDING</h3>
+<a class="indexterm" name="id2610083"></a><pre class="programlisting">#define GOO_BASE_PORT_BUFFER_PADDING 256
+</pre>
+<p>
+The padding of the buffers data when the port allocates its own buffers</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2610103"></a><h3>
+<a name="OMX-VERSION-MAJOR:CAPS"></a>OMX_VERSION_MAJOR</h3>
+<a class="indexterm" name="id2610115"></a><pre class="programlisting">#define OMX_VERSION_MAJOR    1
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2610130"></a><h3>
+<a name="OMX-VERSION-MINOR:CAPS"></a>OMX_VERSION_MINOR</h3>
+<a class="indexterm" name="id2610142"></a><pre class="programlisting">#define OMX_VERSION_MINOR    0
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2610157"></a><h3>
+<a name="OMX-VERSION-REVISION:CAPS"></a>OMX_VERSION_REVISION</h3>
+<a class="indexterm" name="id2610168"></a><pre class="programlisting">#define OMX_VERSION_REVISION 0
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2608512"></a><h3>
+<a name="OMX-VERSION-STEP:CAPS"></a>OMX_VERSION_STEP</h3>
+<a class="indexterm" name="id2608524"></a><pre class="programlisting">#define OMX_VERSION_STEP     0
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2608539"></a><h3>
+<a name="GOO-RUN:CAPS"></a>GOO_RUN()</h3>
+<a class="indexterm" name="id2608552"></a><pre class="programlisting">#define             GOO_RUN(cmd)</pre>
+<p>
+Execute and OMX's API instruction and assert it</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>cmd</code></em>&#160;:</span></td>
+<td> the OMX sentence to execute
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2608590"></a><h3>
+<a name="RETURN-GOO-RUN:CAPS"></a>RETURN_GOO_RUN()</h3>
+<a class="indexterm" name="id2608602"></a><pre class="programlisting">#define             RETURN_GOO_RUN(cmd)</pre>
+<p>
+Execute and OMX's API instruction</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>cmd</code></em>&#160;:</span></td>
+<td> the OMX sentence to execute
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2608641"></a><h3>
+<a name="GOO-INIT-PARAM:CAPS"></a>GOO_INIT_PARAM()</h3>
+<a class="indexterm" name="id2608654"></a><pre class="programlisting">#define             GOO_INIT_PARAM(st, t)</pre>
+<p>
+Initializes the OMX structure setting it nSize and nVersion fields</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>st</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>t</code></em>&#160;:</span></td>
+<td> The type of the OMX's structure
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2608708"></a><h3>
+<a name="GOO-ARRAY-SIZE:CAPS"></a>GOO_ARRAY_SIZE()</h3>
+<a class="indexterm" name="id2608720"></a><pre class="programlisting">#define GOO_ARRAY_SIZE(X) (sizeof(X) / sizeof(X[0]))
+</pre>
+<p>
+</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>X</code></em>&#160;:</span></td>
+<td> the array to measure
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2608759"></a><h3>
+<a name="StateDesc"></a>StateDesc</h3>
+<a class="indexterm" name="id2608771"></a><pre class="programlisting">typedef struct {
+	const OMX_STATETYPE state;
+	const gchar *desc;
+} StateDesc;
+</pre>
+<p>
+Explanation of each state index type</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term">const&#160;OMX_STATETYPE&#160;<em class="structfield"><code>state</code></em>;</span></td>
+<td> The <span class="type">OMX_STATETYPE</span> index
+</td>
+</tr>
+<tr>
+<td><span class="term">const&#160;<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>&#160;*<em class="structfield"><code>desc</code></em>;</span></td>
+<td> The description of the index
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2608848"></a><h3>
+<a name="ErrorDesc"></a>ErrorDesc</h3>
+<a class="indexterm" name="id2608860"></a><pre class="programlisting">typedef struct {
+	const OMX_ERRORTYPE error;
+	const gchar *desc;	
+} ErrorDesc;
+</pre>
+<p>
+Explanation of each error index type</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term">const&#160;OMX_ERRORTYPE&#160;<em class="structfield"><code>error</code></em>;</span></td>
+<td> The <span class="type">OMX_ERRORTYPE</span> index
+</td>
+</tr>
+<tr>
+<td><span class="term">const&#160;<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>&#160;*<em class="structfield"><code>desc</code></em>;</span></td>
+<td> The description of the index
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2608937"></a><h3>
+<a name="EventDesc"></a>EventDesc</h3>
+<a class="indexterm" name="id2613164"></a><pre class="programlisting">typedef struct {
+	const OMX_EVENTTYPE event;
+	const gchar *desc;	
+} EventDesc;
+</pre>
+<p>
+Explanation of each event index type</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term">const&#160;OMX_EVENTTYPE&#160;<em class="structfield"><code>event</code></em>;</span></td>
+<td> The <span class="type">OMX_EVENTTYPE</span> index
+</td>
+</tr>
+<tr>
+<td><span class="term">const&#160;<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>&#160;*<em class="structfield"><code>desc</code></em>;</span></td>
+<td> The description of the index
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613232"></a><h3>
+<a name="CommandDesc"></a>CommandDesc</h3>
+<a class="indexterm" name="id2613243"></a><pre class="programlisting">typedef struct {
+	const OMX_COMMANDTYPE command;
+	const gchar *desc;	
+} CommandDesc;
+</pre>
+<p>
+Explanation of each command index type</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term">const&#160;OMX_COMMANDTYPE&#160;<em class="structfield"><code>command</code></em>;</span></td>
+<td> The <span class="type">OMX_COMMANDTYPE</span> index
+</td>
+</tr>
+<tr>
+<td><span class="term">const&#160;<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>&#160;*<em class="structfield"><code>desc</code></em>;</span></td>
+<td> The description of the index
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613318"></a><h3>
+<a name="DirectionDesc"></a>DirectionDesc</h3>
+<a class="indexterm" name="id2613330"></a><pre class="programlisting">typedef struct {
+	const OMX_DIRTYPE direction;
+	const gchar *desc;	
+} DirectionDesc;
+</pre>
+<p>
+Explanation of each direction index type</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term">const&#160;OMX_DIRTYPE&#160;<em class="structfield"><code>direction</code></em>;</span></td>
+<td> The <span class="type">OMX_DIRTYPE</span> index
+</td>
+</tr>
+<tr>
+<td><span class="term">const&#160;<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>&#160;*<em class="structfield"><code>desc</code></em>;</span></td>
+<td> The description of the index
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613408"></a><h3>
+<a name="DomainDesc"></a>DomainDesc</h3>
+<a class="indexterm" name="id2613420"></a><pre class="programlisting">typedef struct {
+	const OMX_PORTDOMAINTYPE domain;
+	const gchar *desc;
+} DomainDesc;
+</pre>
+<p>
+Explanation of each port domain index type</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term">const&#160;OMX_PORTDOMAINTYPE&#160;<em class="structfield"><code>domain</code></em>;</span></td>
+<td> The <span class="type">OMX_PORTDOMAINTYPE</span> index
+</td>
+</tr>
+<tr>
+<td><span class="term">const&#160;<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>&#160;*<em class="structfield"><code>desc</code></em>;</span></td>
+<td> The description of the index
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613497"></a><h3>
+<a name="VideoCompressionDesc"></a>VideoCompressionDesc</h3>
+<a class="indexterm" name="id2613508"></a><pre class="programlisting">typedef struct {
+	const OMX_VIDEO_CODINGTYPE compression;
+	const gchar *desc;
+} VideoCompressionDesc;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613525"></a><h3>
+<a name="ColorDesc"></a>ColorDesc</h3>
+<a class="indexterm" name="id2613537"></a><pre class="programlisting">typedef struct {
+	const OMX_COLOR_FORMATTYPE color;
+	const gchar *desc;
+} ColorDesc;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613554"></a><h3>
+<a name="ResolutionInfo"></a>ResolutionInfo</h3>
+<a class="indexterm" name="id2613566"></a><pre class="programlisting">typedef struct {
+        char *size;
+        unsigned int width;
+        unsigned int height;
+} ResolutionInfo;
+</pre>
+<p>
+Structure which define the different kind of resolutions</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term">char&#160;*<em class="structfield"><code>size</code></em>;</span></td>
+<td> the name of the resolution
+</td>
+</tr>
+<tr>
+<td><span class="term">unsigned&#160;int&#160;<em class="structfield"><code>width</code></em>;</span></td>
+<td> the width of the resolution
+</td>
+</tr>
+<tr>
+<td><span class="term">unsigned&#160;int&#160;<em class="structfield"><code>height</code></em>;</span></td>
+<td> the height of the resolution
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2593468"></a><h3>
+<a name="goo-strstate"></a>goo_strstate ()</h3>
+<a class="indexterm" name="id2595303"></a><pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        goo_strstate                        (OMX_STATETYPE state);</pre>
+<p>
+Get a description of the specified state</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>state</code></em>&#160;:</span></td>
+<td> The <span class="type">OMX_STATYETYPE</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a static string with the description.  This string should not be
+ modified nor freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613716"></a><h3>
+<a name="goo-strerror"></a>goo_strerror ()</h3>
+<a class="indexterm" name="id2613727"></a><pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        goo_strerror                        (OMX_ERRORTYPE error);</pre>
+<p>
+Get a description of the specified error</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></td>
+<td> The <span class="type">OMX_ERRORTYPE</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a static string with the description.  This string should not be
+ modified nor freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613790"></a><h3>
+<a name="goo-strevent"></a>goo_strevent ()</h3>
+<a class="indexterm" name="id2613800"></a><pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        goo_strevent                        (OMX_EVENTTYPE event);</pre>
+<p>
+Get a description of the specified event</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>event</code></em>&#160;:</span></td>
+<td> The <span class="type">OMX_EVENTTYPE</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a static string with the description.  This string should not be
+ modified nor freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613864"></a><h3>
+<a name="goo-strcommand"></a>goo_strcommand ()</h3>
+<a class="indexterm" name="id2613874"></a><pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        goo_strcommand                      (OMX_COMMANDTYPE command);</pre>
+<p>
+Get a description of the specified command</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>command</code></em>&#160;:</span></td>
+<td> The <span class="type">OMX_COMMANDTYPE</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a static string with the description.  This string should not be
+ modified nor freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2613937"></a><h3>
+<a name="goo-strdirection"></a>goo_strdirection ()</h3>
+<a class="indexterm" name="id2613948"></a><pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        goo_strdirection                    (OMX_DIRTYPE direction);</pre>
+<p>
+Get a description of the specified direction</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>direction</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a static string with the description.  This string should not be
+ modified nor freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2614005"></a><h3>
+<a name="goo-strdomain"></a>goo_strdomain ()</h3>
+<a class="indexterm" name="id2614015"></a><pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        goo_strdomain                       (OMX_PORTDOMAINTYPE domain);</pre>
+<p>
+Get a description of the specified domain</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>domain</code></em>&#160;:</span></td>
+<td> The <span class="type">OMX_PORTDOMAINTYPE</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a static string with the description.  This string should not be
+ modified nor freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2614078"></a><h3>
+<a name="goo-strcolor"></a>goo_strcolor ()</h3>
+<a class="indexterm" name="id2614089"></a><pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        goo_strcolor                        (OMX_COLOR_FORMATTYPE color);</pre>
+<p>
+Get a description of the specified color</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>color</code></em>&#160;:</span></td>
+<td> The <span class="type">OMX_COLOR_FORMATTYPE</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a static string with the description.  This string should not be
+ modified nor freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2614152"></a><h3>
+<a name="goo-strvideocompression"></a>goo_strvideocompression ()</h3>
+<a class="indexterm" name="id2614162"></a><pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        goo_strvideocompression             (OMX_VIDEO_CODINGTYPE compression);</pre>
+<p>
+Get a description of the specified compression format</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>compression</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a static string with the description.  This string should not be
+ modified nor freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2614219"></a><h3>
+<a name="goo-get-resolution"></a>goo_get_resolution ()</h3>
+<a class="indexterm" name="id2614230"></a><pre class="programlisting"><a href="libgoo-goo-utils.html#ResolutionInfo">ResolutionInfo</a>      goo_get_resolution                  (const char *size);</pre>
+<p>
+Search in the resolution types for name of the specified resolution
+and brings back the information of that resolution</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>size</code></em>&#160;:</span></td>
+<td> The name of the resolution
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A <a href="libgoo-goo-utils.html#ResolutionInfo"><span class="type">ResolutionInfo</span></a> structure
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2614292"></a><h3>
+<a name="goo-strportdef"></a>goo_strportdef ()</h3>
+<a class="indexterm" name="id2614303"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*              goo_strportdef                      (OMX_PARAM_PORTDEFINITIONTYPE *param);</pre>
+<p>
+Generats a printable string with the data int the
+<span class="type">OMX_PARAM_PORTDEFINITIONTYPE</span> structure. The string must be g_free after
+use.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>param</code></em>&#160;:</span></td>
+<td> A pointer to an <span class="type">OMX_PARAM_PORTDEFINITIONTYPE</span> structure
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A printable string with a dump of the
+              <span class="type">OMX_PARAM_PORTDEFINITIONTYPE</span> structure.
+
+The string returned must be g_free.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libgoo-GooTiVideoEncoder">
+<refmeta>
+<refentrytitle role="top_of_page">GooTiVideoEncoder</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBGOO Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GooTiVideoEncoder</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+
+
+enum                <link linkend="GooTiVideoEncoderControlRate">GooTiVideoEncoderControlRate</link>;
+                    <link linkend="GooTiVideoEncoder">GooTiVideoEncoder</link>;
+<link linkend="void">void</link>                <link linkend="goo-ti-video-encoder-set-control-rate">goo_ti_video_encoder_set_control_rate</link>
+                                                        (<link linkend="GooTiVideoEncoder">GooTiVideoEncoder</link> *self,
+                                                         <link linkend="GooTiVideoEncoderControlRate">GooTiVideoEncoderControlRate</link> control_rate);
+<link linkend="guint">guint</link>               <link linkend="goo-ti-video-encoder-get-control-rate">goo_ti_video_encoder_get_control_rate</link>
+                                                        (<link linkend="GooTiVideoEncoder">GooTiVideoEncoder</link> *self);
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GooTiVideoEncoderControlRate" role="enum"/>enum GooTiVideoEncoderControlRate</title>
+<indexterm><primary>GooTiVideoEncoderControlRate</primary></indexterm><programlisting>typedef enum GooTiVideoEncoderControlRate
+{
+	GOO_TI_VIDEO_ENCODER_CR_DISABLE,
+	GOO_TI_VIDEO_ENCODER_CR_VARIABLE,
+	GOO_TI_VIDEO_ENCODER_CR_CONSTANT,	
+	GOO_TI_VIDEO_ENCODER_CR_VARIABLE_SKIP,
+	GOO_TI_VIDEO_ENCODER_CR_CONSTANT_SKIP
+
+} GooTiVideoEncoderControlRate;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GooTiVideoEncoder" role="struct"/>GooTiVideoEncoder</title>
+<indexterm><primary>GooTiVideoEncoder</primary></indexterm><programlisting>typedef struct {
+        GooComponent parent;
+	OMX_VIDEO_PARAM_BITRATETYPE* control_rate_param;
+	guint frame_interval;
+} GooTiVideoEncoder;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-video-encoder-set-control-rate" role="function"/>goo_ti_video_encoder_set_control_rate ()</title>
+<indexterm><primary>goo_ti_video_encoder_set_control_rate</primary></indexterm><programlisting><link linkend="void">void</link>                goo_ti_video_encoder_set_control_rate
+                                                        (<link linkend="GooTiVideoEncoder">GooTiVideoEncoder</link> *self,
+                                                         <link linkend="GooTiVideoEncoderControlRate">GooTiVideoEncoderControlRate</link> control_rate);</programlisting>
+<para>
+This method will set the type of frame streaming on
+component.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiVideoEncoder"><type>GooTiVideoEncoder</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>control_rate</parameter>&nbsp;:</term>
+<listitem><simpara> a GooTiVideoEncoderControlRate value
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="goo-ti-video-encoder-get-control-rate" role="function"/>goo_ti_video_encoder_get_control_rate ()</title>
+<indexterm><primary>goo_ti_video_encoder_get_control_rate</primary></indexterm><programlisting><link linkend="guint">guint</link>               goo_ti_video_encoder_get_control_rate
+                                                        (<link linkend="GooTiVideoEncoder">GooTiVideoEncoder</link> *self);</programlisting>
+<para>
+Return the mode of frame processing operation.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara> An <link linkend="GooTiVideoEncoder"><type>GooTiVideoEncoder</type></link> instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> GooTiVideoEncoderControlRate enum value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

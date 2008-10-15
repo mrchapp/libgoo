@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GooTiPostProcessor</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooObject.html" title="GooObject">
+<link rel="next" href="libgoo-GooTiClock.html" title="GooTiClock">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooObject.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooTiClock.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2561528" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2579081" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-GooTiPostProcessor"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2561528"></a><span class="refentrytitle">GooTiPostProcessor</span>
+</h2>
+<p>GooTiPostProcessor &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+enum                <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessorRotation">GooTiPostProcessorRotation</a>;
+                    <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a>;
+void                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-rotation">goo_ti_post_processor_set_rotation</a>  (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessorRotation">GooTiPostProcessorRotation</a> rotation);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-rotation">goo_ti_post_processor_get_rotation</a>  (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);
+void                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-xscale">goo_ti_post_processor_set_xscale</a>    (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> xscale);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-xscale">goo_ti_post_processor_get_xscale</a>    (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);
+void                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-yscale">goo_ti_post_processor_set_yscale</a>    (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> yscale);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-yscale">goo_ti_post_processor_get_yscale</a>    (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);
+void                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-xpos">goo_ti_post_processor_set_xpos</a>      (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> xpos);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-xpos">goo_ti_post_processor_get_xpos</a>      (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);
+void                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-set-ypos">goo_ti_post_processor_set_ypos</a>      (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> ypos);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a href="libgoo-GooTiPostProcessor.html#goo-ti-post-processor-get-ypos">goo_ti_post_processor_get_ypos</a>      (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2579081"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2579096"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2579107"></a><h3>
+<a name="GooTiPostProcessorRotation"></a>enum GooTiPostProcessorRotation</h3>
+<a class="indexterm" name="id2579119"></a><pre class="programlisting">typedef enum GooTiPostProcessorRotation
+{
+	GOO_TI_POST_PROCESSOR_ROTATION_NONE = 0,
+	GOO_TI_POST_PROCESSOR_ROTATION_90 = 90,
+	GOO_TI_POST_PROCESSOR_ROTATION_180 = 180,
+	GOO_TI_POST_PROCESSOR_ROTATION_270 = 270
+
+} GooTiPostProcessorRotation;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2579138"></a><h3>
+<a name="GooTiPostProcessor"></a>GooTiPostProcessor</h3>
+<a class="indexterm" name="id2579151"></a><pre class="programlisting">typedef struct {
+        GooComponent parent;
+
+	guint rotation;
+	guint xscale;
+	guint yscale;
+	guint xpos;
+	guint ypos;
+} GooTiPostProcessor;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2579169"></a><h3>
+<a name="goo-ti-post-processor-set-rotation"></a>goo_ti_post_processor_set_rotation ()</h3>
+<a class="indexterm" name="id2603801"></a><pre class="programlisting">void                goo_ti_post_processor_set_rotation  (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessorRotation">GooTiPostProcessorRotation</a> rotation);</pre>
+<p>
+This method will set a rotation in the output of the 
+video Post Processor display.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>rotation</code></em>&#160;:</span></td>
+<td> a GooTiPostProcessorRotation value
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2603880"></a><h3>
+<a name="goo-ti-post-processor-get-rotation"></a>goo_ti_post_processor_get_rotation ()</h3>
+<a class="indexterm" name="id2603893"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               goo_ti_post_processor_get_rotation  (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);</pre>
+<p>
+Return the value of the rotation set on the video Post Processor.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> 0, 90, 180 or 270 degrees of rotation.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2603961"></a><h3>
+<a name="goo-ti-post-processor-set-xscale"></a>goo_ti_post_processor_set_xscale ()</h3>
+<a class="indexterm" name="id2603974"></a><pre class="programlisting">void                goo_ti_post_processor_set_xscale    (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> xscale);</pre>
+<p>
+This method will set a hardware X scale factor in the output of the 
+video Post Processor display.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>xscale</code></em>&#160;:</span></td>
+<td> a 0 - 200 range of X axis scaling factor
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2604054"></a><h3>
+<a name="goo-ti-post-processor-get-xscale"></a>goo_ti_post_processor_get_xscale ()</h3>
+<a class="indexterm" name="id2570839"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                goo_ti_post_processor_get_xscale    (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);</pre>
+<p>
+Return the value of the hardware X scaling factor.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> 0 - 200 range.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2570908"></a><h3>
+<a name="goo-ti-post-processor-set-yscale"></a>goo_ti_post_processor_set_yscale ()</h3>
+<a class="indexterm" name="id2570921"></a><pre class="programlisting">void                goo_ti_post_processor_set_yscale    (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> yscale);</pre>
+<p>
+This method will set a hardware Y scale factor in the output of the 
+video Post Processor display.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>yscale</code></em>&#160;:</span></td>
+<td> a 0 - 200 range of Y axis scaling factor
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2571002"></a><h3>
+<a name="goo-ti-post-processor-get-yscale"></a>goo_ti_post_processor_get_yscale ()</h3>
+<a class="indexterm" name="id2571015"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                goo_ti_post_processor_get_yscale    (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);</pre>
+<p>
+Return the value of the hardware Y scaling factor.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> 0 - 200 range.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2571084"></a><h3>
+<a name="goo-ti-post-processor-set-xpos"></a>goo_ti_post_processor_set_xpos ()</h3>
+<a class="indexterm" name="id2571098"></a><pre class="programlisting">void                goo_ti_post_processor_set_xpos      (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> xpos);</pre>
+<p>
+This method will set an offset to the display area of the 
+video Post Processor display.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>xpos</code></em>&#160;:</span></td>
+<td> a int range of X axis offset
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2607076"></a><h3>
+<a name="goo-ti-post-processor-get-xpos"></a>goo_ti_post_processor_get_xpos ()</h3>
+<a class="indexterm" name="id2607088"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                goo_ti_post_processor_get_xpos      (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);</pre>
+<p>
+Return the value of the hardware X offset.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> The position in X where the frame will be displayed
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2607153"></a><h3>
+<a name="goo-ti-post-processor-set-ypos"></a>goo_ti_post_processor_set_ypos ()</h3>
+<a class="indexterm" name="id2607166"></a><pre class="programlisting">void                goo_ti_post_processor_set_ypos      (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> ypos);</pre>
+<p>
+This method will set an offset to the display area of the 
+video Post Processor display.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>ypos</code></em>&#160;:</span></td>
+<td> a int range of Y axis offset
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2607247"></a><h3>
+<a name="goo-ti-post-processor-get-ypos"></a>goo_ti_post_processor_get_ypos ()</h3>
+<a class="indexterm" name="id2607260"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                goo_ti_post_processor_get_ypos      (<a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor">GooTiPostProcessor</a> *self);</pre>
+<p>
+Return the value of the hardware Y offset.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-GooTiPostProcessor.html#GooTiPostProcessor"><span class="type">GooTiPostProcessor</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> Max int.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

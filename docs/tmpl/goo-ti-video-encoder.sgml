@@ -1,0 +1,59 @@
+<!-- ##### SECTION Title ##### -->
+GooTiVideoEncoder
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM GooTiVideoEncoderControlRate ##### -->
+<para>
+
+</para>
+
+@GOO_TI_VIDEO_ENCODER_CR_DISABLE: 
+@GOO_TI_VIDEO_ENCODER_CR_VARIABLE: 
+@GOO_TI_VIDEO_ENCODER_CR_CONSTANT: 
+@GOO_TI_VIDEO_ENCODER_CR_VARIABLE_SKIP: 
+@GOO_TI_VIDEO_ENCODER_CR_CONSTANT_SKIP: 
+
+<!-- ##### STRUCT GooTiVideoEncoder ##### -->
+<para>
+
+</para>
+
+@parent: 
+@control_rate_param: 
+@frame_interval: 
+
+<!-- ##### FUNCTION goo_ti_video_encoder_set_control_rate ##### -->
+<para>
+
+</para>
+
+@self: 
+@control_rate: 
+
+
+<!-- ##### FUNCTION goo_ti_video_encoder_get_control_rate ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+

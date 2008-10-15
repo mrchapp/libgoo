@@ -1,0 +1,37 @@
+<!-- ##### SECTION Title ##### -->
+GooTiVideoDecoder
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM GooTiVideoDecoderProcessMode ##### -->
+<para>
+
+</para>
+
+@GOO_TI_VIDEO_DECODER_FRAMEMODE: 
+@GOO_TI_VIDEO_DECODER_STREAMMODE: 
+
+<!-- ##### STRUCT GooTiVideoDecoder ##### -->
+<para>
+
+</para>
+
+@parent: 
+@process_mode: 
+

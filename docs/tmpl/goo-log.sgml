@@ -1,0 +1,160 @@
+<!-- ##### SECTION Title ##### -->
+goo-log
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GOO_DEBUG_LEVEL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION goo_log ##### -->
+<para>
+
+</para>
+
+@level: 
+@file: 
+@function: 
+@line: 
+@fmt: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION goo_object_log ##### -->
+<para>
+
+</para>
+
+@objname: 
+@prefix: 
+@level: 
+@file: 
+@function: 
+@line: 
+@fmt: 
+@Varargs: 
+
+
+<!-- ##### MACRO GOO_LOG ##### -->
+<para>
+
+</para>
+
+@level: 
+@...: 
+
+
+<!-- ##### MACRO GOO_DEBUG ##### -->
+<para>
+
+</para>
+
+@...: 
+
+
+<!-- ##### MACRO GOO_NOTICE ##### -->
+<para>
+
+</para>
+
+@...: 
+
+
+<!-- ##### MACRO GOO_INFO ##### -->
+<para>
+
+</para>
+
+@...: 
+
+
+<!-- ##### MACRO GOO_WARNING ##### -->
+<para>
+
+</para>
+
+@...: 
+
+
+<!-- ##### MACRO GOO_ERROR ##### -->
+<para>
+
+</para>
+
+@...: 
+
+
+<!-- ##### MACRO GOO_OBJECT_LOG ##### -->
+<para>
+
+</para>
+
+@obj: 
+@level: 
+@...: 
+
+
+<!-- ##### MACRO GOO_OBJECT_DEBUG ##### -->
+<para>
+
+</para>
+
+@obj: 
+@...: 
+
+
+<!-- ##### MACRO GOO_OBJECT_NOTICE ##### -->
+<para>
+
+</para>
+
+@obj: 
+@...: 
+
+
+<!-- ##### MACRO GOO_OBJECT_INFO ##### -->
+<para>
+
+</para>
+
+@obj: 
+@...: 
+
+
+<!-- ##### MACRO GOO_OBJECT_WARNING ##### -->
+<para>
+
+</para>
+
+@obj: 
+@...: 
+
+
+<!-- ##### MACRO GOO_OBJECT_ERROR ##### -->
+<para>
+
+</para>
+
+@obj: 
+@...: 
+
+

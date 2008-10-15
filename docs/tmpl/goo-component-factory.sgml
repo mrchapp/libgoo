@@ -1,0 +1,45 @@
+<!-- ##### SECTION Title ##### -->
+goo-component-factory
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooComponentFactory ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GooComponentFactoryIface ##### -->
+<para>
+
+</para>
+
+@parent: 
+@get_component_func: 
+
+<!-- ##### FUNCTION goo_component_factory_get_component ##### -->
+<para>
+
+</para>
+
+@self: 
+@type: 
+@Returns: 
+
+

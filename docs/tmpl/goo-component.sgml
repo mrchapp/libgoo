@@ -1,0 +1,393 @@
+<!-- ##### SECTION Title ##### -->
+GooComponent
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooComponent ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION goo_component_load ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_unload ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_set_state_idle ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_set_state_executing ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_set_state_loaded ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_wait_for_next_state ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_get_state ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_load_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_configure_all_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_set_ports_definition ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_validate_ports_definition ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_allocate_port ##### -->
+<para>
+
+</para>
+
+@self: 
+@port: 
+
+
+<!-- ##### FUNCTION goo_component_allocate_all_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_disable_port ##### -->
+<para>
+
+</para>
+
+@self: 
+@port: 
+
+
+<!-- ##### FUNCTION goo_component_disable_all_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_deallocate_port ##### -->
+<para>
+
+</para>
+
+@self: 
+@port: 
+
+
+<!-- ##### FUNCTION goo_component_deallocate_all_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_prepare_all_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_iterate_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_iterate_input_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_iterate_output_ports ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_get_port ##### -->
+<para>
+
+</para>
+
+@self: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_set_parameter_by_name ##### -->
+<para>
+
+</para>
+
+@self: 
+@name: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_set_parameter_by_index ##### -->
+<para>
+
+</para>
+
+@self: 
+@index: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_get_parameter_by_name ##### -->
+<para>
+
+</para>
+
+@self: 
+@name: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_get_parameter_by_index ##### -->
+<para>
+
+</para>
+
+@self: 
+@index: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_set_config_by_name ##### -->
+<para>
+
+</para>
+
+@self: 
+@name: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_set_config_by_index ##### -->
+<para>
+
+</para>
+
+@self: 
+@index: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_get_config_by_name ##### -->
+<para>
+
+</para>
+
+@self: 
+@name: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_get_config_by_index ##### -->
+<para>
+
+</para>
+
+@self: 
+@index: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_load_parameters ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_set_parameters ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_set_done ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_is_done ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION goo_component_wait_for_done ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_release_buffer ##### -->
+<para>
+
+</para>
+
+@self: 
+@buffer: 
+
+
+<!-- ##### FUNCTION goo_component_send_eos ##### -->
+<para>
+
+</para>
+
+@self: 
+
+
+<!-- ##### FUNCTION goo_component_set_tunnel ##### -->
+<para>
+
+</para>
+
+@src: 
+@srcport: 
+@sink: 
+@sinkport: 
+
+
+<!-- ##### FUNCTION goo_component_set_tunnel_by_name ##### -->
+<para>
+
+</para>
+
+@src: 
+@srcportname: 
+@sink: 
+@sinkportname: 
+
+
+<!-- ##### FUNCTION goo_component_set_clock ##### -->
+<para>
+
+</para>
+
+@self: 
+@clock: 
+@Returns: 
+
+

@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>goo-list</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="index.html" title="[Insert name here] Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgoo-GooEngine.html" title="GooEngine">
+<link rel="next" href="libgoo-GooPort.html" title="GooPort">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgoo-GooEngine.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">[Insert name here] Reference Manual</th>
+<td><a accesskey="n" href="libgoo-GooPort.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2571501" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2562944" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgoo-goo-list"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2571501"></a><span class="refentrytitle">goo-list</span>
+</h2>
+<p>goo-list &#8212; </p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="libgoo-goo-list.html#GooListIface">GooListIface</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a href="libgoo-goo-list.html#goo-list-get-length">goo_list_get_length</a>                 (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self);
+void                <a href="libgoo-goo-list.html#goo-list-prepend">goo_list_prepend</a>                    (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self,
+                                                         <a href="libgoo-GooObject.html#GooObject">GooObject</a> *item);
+void                <a href="libgoo-goo-list.html#goo-list-append">goo_list_append</a>                     (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self,
+                                                         <a href="libgoo-GooObject.html#GooObject">GooObject</a> *item);
+void                <a href="libgoo-goo-list.html#goo-list-remove">goo_list_remove</a>                     (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self,
+                                                         <a href="libgoo-GooObject.html#GooObject">GooObject</a> *item);
+void                <a href="libgoo-goo-list.html#goo-list-foreach">goo_list_foreach</a>                    (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GFunc"
+>GFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>*        <a href="libgoo-goo-list.html#goo-list-create-iterator">goo_list_create_iterator</a>            (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self);
+<a href="libgoo-goo-iterator.html#GooList">GooList</a>*            <a href="libgoo-goo-list.html#goo-list-copy">goo_list_copy</a>                       (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2562944"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2595655"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2595666"></a><h3>
+<a name="GooListIface"></a>GooListIface</h3>
+<a class="indexterm" name="id2595678"></a><pre class="programlisting">typedef struct {
+        GTypeInterface parent;
+
+        guint (*get_length_func) (GooList *self);
+        void (*prepend_func) (GooList *self, GooObject* item);
+        void (*append_func) (GooList *self, GooObject* item);
+        void (*remove_func) (GooList *self, GooObject* item);
+        void (*foreach_func) (GooList *self, GFunc func, gpointer user_data);
+        GooList* (*copy_func) (GooList *self);
+        GooIterator* (*create_iterator_func) (GooList *self);
+} GooListIface;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2595702"></a><h3>
+<a name="goo-list-get-length"></a>goo_list_get_length ()</h3>
+<a class="indexterm" name="id2595715"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               goo_list_get_length                 (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self);</pre>
+<p>
+</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> the length of the list
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2595782"></a><h3>
+<a name="goo-list-prepend"></a>goo_list_prepend ()</h3>
+<a class="indexterm" name="id2595794"></a><pre class="programlisting">void                goo_list_prepend                    (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self,
+                                                         <a href="libgoo-GooObject.html#GooObject">GooObject</a> *item);</pre>
+<p>
+Prepends an item to a list. You can only prepend items that inherit from the
+GooObject base item. That's because the goo list infrastructure does 
+reference counting. It effectively means that indeed you can't use non 
+GooObject types in a goo list. But there's not a single situation where 
+you must do that. If you must store a non GooObject in a list, you shouldn't
+use the goo infrastructure for this. Consider using a doubly linked list
+or a pointer array or any other list-type available on your development
+platform.
+</p>
+<p>
+However, goo lists can cope with any valid GooObject. Not just the 
+GooObjects implemented by the goo framework.
+</p>
+<p>
+All reference handling in goo is reference neutral. Also the lists. This
+means that if your plan is to reparent the item to the list, that you should
+take care of that by, after prepending or appending it, unreferencing it to 
+get rid of its initial reference. If you don't want to reparent, but you do
+want to destroy your item once removed from the list, then you must 
+unreference your items twice. Note that reparenting is highly recommended
+in most such cases (because it's a much cleaner way). However, if reparented
+and the list itself gets destroyed, then the item will also get unreferenced.
+</p>
+<p>
+Reparenting indeed means reparenting. Okay? Loosing your parent reference
+means loosing your reason of existance. So you'll get destroyed.
+</p>
+<p>
+Implementers: if you have to choose, make this one the fast one</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
+<td> the item to prepend
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2555791"></a><h3>
+<a name="goo-list-append"></a>goo_list_append ()</h3>
+<a class="indexterm" name="id2555804"></a><pre class="programlisting">void                goo_list_append                     (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self,
+                                                         <a href="libgoo-GooObject.html#GooObject">GooObject</a> *item);</pre>
+<p>
+Appends an item to a list. You can only append items that inherit from the
+GooObject base item. That's because the goo list infrastructure does 
+reference counting. It effectively means that indeed you can't use non 
+GooObject types in a goo list. But there's not a single situation where 
+you must do that. If you must store a non GooObject in a list, you shouldn't
+use the goo infrastructure for this. Consider using a doubly linked list
+or a pointer array or any other list-type available on your development
+platform.
+</p>
+<p>
+However, goo lists can cope with any valid GooObject. Not just the 
+GooObjects implemented by the goo framework.
+</p>
+<p>
+All reference handling in goo is reference neutral. Also the lists. This
+means that if your plan is to reparent the item to the list, that you should
+take care of that by, after prepending or appending it, unreferencing it to 
+get rid of its initial reference. If you don't want to reparent, but you do
+want to destroy your item once removed from the list, then you must 
+unreference your items twice. Note that reparenting is highly recommended
+in most such cases (because it's a much cleaner way). However, if reparented
+and the list itself gets destroyed, then the item will also get unreferenced.
+</p>
+<p>
+Reparenting indeed means reparenting. Okay? Loosing your parent reference
+means loosing your reason of existance. So you'll get destroyed.
+</p>
+<p>
+Implementers: if you have to choose, make the prepend one the fast one</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
+<td> the item to append
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2555911"></a><h3>
+<a name="goo-list-remove"></a>goo_list_remove ()</h3>
+<a class="indexterm" name="id2555924"></a><pre class="programlisting">void                goo_list_remove                     (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self,
+                                                         <a href="libgoo-GooObject.html#GooObject">GooObject</a> *item);</pre>
+<p>
+Removes an item from a list.  Removing a item might invalidate all existing
+iterators or put them in an unknown and unspecified state. You'll need to 
+recreate the iterator(s) if you remove an item to be certain.
+</p>
+<p>
+If you want to clear a list, consider using the goo_list_foreach or simply
+destroy the list instance and construct a new one. If you want to remove
+specific items from a list, consider using a second list. You should not
+attempt to remove items from a list while an (any) iterator is active on the
+same list.
+</p>
+<p>
+Example (removing even items):
+</p>
+<div class="informalexample"><pre class="programlisting">
+GooList *toremovefrom = ...
+GooList *removethese = goo_simple_list_new ();
+GooIterator *iter = goo_list_create_iterator (toremovefrom);
+int i = 0;
+while (!goo_iterator_is_done (iter))
+{
+     if (i % 2 == 0)
+     {
+          GooObject *obj = goo_iterator_get_current (iter);
+          goo_list_prepend (removethese, obj);
+          g_object_unref (G_OBJECT (obj));
+     }
+     i++;
+     goo_iterator_next (iter);
+}
+g_object_unref (G_OBJECT (iter));
+iter = goo_list_create_iterator (removethese);
+while (!goo_iterator_is_done (iter))
+{
+     GooObject *obj = goo_iterator_get_current (iter);
+     goo_list_remove (toremovefrom, obj);
+     g_object_unref (G_OBJECT (obj));
+     goo_iterator_next (iter);
+}
+g_object_unref (G_OBJECT (iter));
+g_object_unref (G_OBJECT (removethese));
+g_object_unref (G_OBJECT (toremovefrom));
+</pre></div>
+<p>
+</p>
+<p>
+There's no guarantee whatsoever that existing iterators of <em class="parameter"><code>self</code></em> will be
+valid after this method returned. 
+</p>
+<p>
+Note that if you didn't remove the initial reference when putting the item
+in the list, this remove will not take of that initial reference either.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
+<td> the item to remove
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2598990"></a><h3>
+<a name="goo-list-foreach"></a>goo_list_foreach ()</h3>
+<a class="indexterm" name="id2599002"></a><pre class="programlisting">void                goo_list_foreach                    (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GFunc"
+>GFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+Calls a function for each element in a <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a>. It will use an internal
+iteration which you don't have to worry about. 
+</p>
+<p>
+Example:
+</p>
+<div class="informalexample"><pre class="programlisting">
+static void
+list_foreach_item (GooHeader *header, gpointer user_data)
+{
+     g_print ("%s\n", goo_header_get_subject (header));
+}
+</pre></div>
+<p>
+</p>
+<p>
+</p>
+<div class="informalexample"><pre class="programlisting">
+GooFolder *folder = ...
+GooList *headers = goo_simple_list_new ();
+goo_folder_get_headers (folder, headers, FALSE);
+goo_list_foreach (headers, list_foreach_item, NULL);
+g_object_unref (G_OBJECT (list));
+</pre></div>
+<p>
+</p>
+<p>
+The purpose of this method is to have a fast foreach iteration. Using this
+is faster than inventing your own foreach loop using the is_done and next
+methods. The order is guaranteed to be the first element first, the last 
+element last. If during the iteration you don't remove items, it's guaranteed
+that all current items will be iterated.
+</p>
+<p>
+In the func implementation and during the foreach operation you shouldn't
+append, remove nor prepend items to the list. In multithreaded environments
+it's advisable to introduce a lock when using this functionality.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>func</code></em>&#160;:</span></td>
+<td> the function to call with each element's data.
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
+<td> user data to pass to the function.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2599153"></a><h3>
+<a name="goo-list-create-iterator"></a>goo_list_create_iterator ()</h3>
+<a class="indexterm" name="id2599164"></a><pre class="programlisting"><a href="libgoo-goo-iterator.html#GooIterator">GooIterator</a>*        goo_list_create_iterator            (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self);</pre>
+<p>
+Creates a new iterator instance for the list. The initial position
+of the iterator is the first element.
+</p>
+<p>
+An iterator is a position indicator for a list. It keeps the position
+state of a list iteration. The list itself does not keep any position 
+information. Consuming multiple iterator instances makes it possible to
+have multiple list iterations simultanously (i.e. multiple threads or in
+in a loop that simultanously works with multiple position states in a
+single list).
+</p>
+<p>
+Example:
+</p>
+<div class="informalexample"><pre class="programlisting">
+GooList *list = goo_simple_list_new ();
+GooIterator *iter1 = goo_list_create_iterator (list);
+GooIterator *iter2 = goo_list_create_iterator (list);
+while (!goo_iterator_is_done (iter1))
+{
+     while (!goo_iterator_is_done (iter2))
+           goo_iterator_next (iter2);
+     goo_iterator_next (iter1);
+}
+g_object_unref (G_OBJECT (iter1));
+g_object_unref (G_OBJECT (iter2));
+g_object_unref (G_OBJECT (list));
+</pre></div>
+<p>
+</p>
+<p>
+The reason why the method isn't called get_iterator is because it's a
+object creation method (a factory method). It's not a property. It
+effectively creates a new instance of an iterator. The returned iterator
+object should (therefore) be unreferenced after use.
+</p>
+<p>
+Implementers: For custom lists you must create a private iterator type and
+return a new instance of it. You shouldn't make the internal API of that
+type public.
+</p>
+<p>
+The developer will always only use the GooIterator interface API on
+instances of your type. You must therefore return your private iterator
+type, that implements GooIterator, here.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A new iterator for the list <em class="parameter"><code>self</code></em>
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2599288"></a><h3>
+<a name="goo-list-copy"></a>goo_list_copy ()</h3>
+<a class="indexterm" name="id2599300"></a><pre class="programlisting"><a href="libgoo-goo-iterator.html#GooList">GooList</a>*            goo_list_copy                       (<a href="libgoo-goo-iterator.html#GooList">GooList</a> *self);</pre>
+<p>
+Creates a shallow copy of the list. It doesn't copy the items. It,
+however, creates a new list with new references to the same
+items. The items will get an extra reference added for the new list
+being their second parent, setting their reference count to for
+example two. Which means that both lists (the original and the
+copy) must be unreferenced after use.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>self</code></em>&#160;:</span></td>
+<td> An <a href="libgoo-goo-iterator.html#GooList"><span class="type">GooList</span></a> instance
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A copy of this list
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

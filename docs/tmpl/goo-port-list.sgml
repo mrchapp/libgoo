@@ -1,0 +1,38 @@
+<!-- ##### SECTION Title ##### -->
+GooPortList
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GooPortList ##### -->
+<para>
+
+</para>
+
+@parent: 
+@first: 
+@list_lock: 
+
+<!-- ##### FUNCTION goo_port_list_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
