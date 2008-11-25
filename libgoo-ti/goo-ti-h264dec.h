@@ -42,6 +42,8 @@ G_BEGIN_DECLS
 
 typedef struct _GooTiH264Dec GooTiH264Dec;
 typedef struct _GooTiH264DecClass GooTiH264DecClass;
+typedef struct _GooTiH264DecPriv GooTiH264DecPriv;
+
 
 struct _GooTiH264Dec
 {
@@ -52,6 +54,16 @@ struct _GooTiH264DecClass
 {
 	GooTiVideoDecoderClass parent_class;
 };
+
+typedef enum
+{
+        GOO_TI_H264DEC_NALU_BYTES_TYPE_0B,
+        GOO_TI_H264DEC_NALU_BYTES_TYPE_1B,
+        GOO_TI_H264DEC_NALU_BYTES_TYPE_2B,
+        GOO_TI_H264DEC_NALU_BYTES_TYPE_3B,
+        GOO_TI_H264DEC_NALU_BYTES_TYPE_4B,
+} GooTiH264NALUBytesType;
+
 
 /* functions */
 GType goo_ti_h264dec_get_type (void);

@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
  */
 
 #ifdef HAVE_CONFIG_H
@@ -26,6 +26,50 @@
 
 #include <goo-ti-h264dec.h>
 #include <goo-utils.h>
+
+#define DEFAULT_NALU_BYTES_TYPE GOO_TI_H264DEC_NALU_BYTES_TYPE_4B
+
+enum _GooTiH264DecProp
+{
+        PROP_0,
+        PROP_H264BYTETYPE,
+};
+
+struct _GooTiH264DecPriv
+{
+	gint NALU_bytes_type;
+	gboolean bBigEnd;
+};
+
+#define GOO_TI_H264DEC_GET_PRIVATE(obj) \
+	(G_TYPE_INSTANCE_GET_PRIVATE ((obj), GOO_TYPE_TI_H264DEC, GooTiH264DecPriv))
+	
+#define GOO_TI_H264DEC_NALU_BYTE_TYPE \
+	(goo_ti_h264dec_NALU_bytes_type_get_type())
+
+static GType
+goo_ti_h264dec_NALU_bytes_type_get_type ()
+{
+	static GType goo_ti_h264dec_NALU_bytes_type_type = 0;
+	static GEnumValue goo_ti_h264dec_NALU_bytes_type[] =
+	{
+		{ GOO_TI_H264DEC_NALU_BYTES_TYPE_0B,	"0", "Bitstream mode" },
+		{ GOO_TI_H264DEC_NALU_BYTES_TYPE_1B,	"1", "NALU 1 bytes wide" },
+		{ GOO_TI_H264DEC_NALU_BYTES_TYPE_2B,	"2", "NALU 2 bytes wide" },	
+		{ GOO_TI_H264DEC_NALU_BYTES_TYPE_2B,	"3", "NALU 3 bytes wide" },			
+		{ GOO_TI_H264DEC_NALU_BYTES_TYPE_4B,	"4", "NALU 4 bytes wide" },
+		{ 0, NULL, NULL },
+	};
+
+	if (!goo_ti_h264dec_NALU_bytes_type_type)
+	{
+		goo_ti_h264dec_NALU_bytes_type_type = g_enum_register_static
+			("GooTiH264NALUBytesType",
+			 goo_ti_h264dec_NALU_bytes_type);
+	}
+
+	return goo_ti_h264dec_NALU_bytes_type_type;
+}	
 
 G_DEFINE_TYPE (GooTiH264Dec, goo_ti_h264dec, GOO_TYPE_TI_VIDEO_DECODER)
 
@@ -144,6 +188,108 @@ goo_ti_h264dec_validate_ports_definitions (GooComponent* component)
 	return;
 }
 
+ 
+
+static void
+goo_ti_h264dec_set_parameters (GooComponent* component)
+{
+        g_assert (GOO_IS_TI_H264DEC (component));
+		GooTiH264Dec* self = GOO_TI_H264DEC (component);               
+		GooTiH264DecPriv* priv = GOO_TI_H264DEC_GET_PRIVATE (self);
+        g_assert (component->cur_state == OMX_StateLoaded);
+
+
+        GOO_OBJECT_DEBUG (self, "");
+
+        OMX_INDEXTYPE index, index2;
+
+        GOO_RUN (
+                OMX_GetExtensionIndex (component->handle,
+                              "OMX.TI.VideoDecode.Param.H264BitStreamFormat",
+                              &index)
+                );
+
+        GOO_RUN (
+                OMX_SetParameter (component->handle,
+                                  index, &priv->NALU_bytes_type)
+                );
+
+        GOO_OBJECT_DEBUG (self, "NALU_bytes_type = %d", priv->NALU_bytes_type);
+        
+        
+ #if 1
+ 		if (priv->NALU_bytes_type)
+        {
+        	priv->bBigEnd = OMX_TRUE;
+        	GOO_RUN (
+                	OMX_GetExtensionIndex (component->handle,
+                    	            "OMX.TI.VideoDecode.Param.IsNALBigEndian",
+                	                &index2)
+            	    );               
+       
+        	GOO_RUN (
+                	OMX_SetParameter (component->handle,
+                	                  index2, &priv->bBigEnd)
+            	    );
+
+        	GOO_OBJECT_DEBUG (self, "NALU_BigEndian = %d", priv->bBigEnd);
+		}
+#endif
+        
+		(*GOO_COMPONENT_CLASS (goo_ti_h264dec_parent_class)->set_parameters_func) (component);
+
+
+        return;
+
+}
+
+static void
+goo_ti_h264dec_set_property (GObject* object, guint prop_id,
+                                     const GValue* value, GParamSpec* spec)
+{
+        g_assert (GOO_IS_TI_H264DEC (object));
+        GooTiH264Dec* self = GOO_TI_H264DEC (object);
+		GooTiH264DecPriv* priv =
+			GOO_TI_H264DEC_GET_PRIVATE (self);
+
+        switch (prop_id)
+        {
+        case PROP_H264BYTETYPE:
+                priv->NALU_bytes_type = g_value_get_enum (value);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
+                break;
+        }
+
+        return;
+}
+
+
+static void
+goo_ti_h264dec_get_property (GObject* object, guint prop_id,
+                                     GValue* value, GParamSpec* spec)
+{
+        g_assert (GOO_IS_TI_H264DEC (object));
+        GooTiH264Dec* self = GOO_TI_H264DEC (object);
+		GooTiH264DecPriv* priv =
+			GOO_TI_H264DEC_GET_PRIVATE (self);
+
+        switch (prop_id)
+        {
+        case PROP_H264BYTETYPE:
+                g_value_set_enum (value, priv->NALU_bytes_type);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
+                break;
+        }
+
+        return;
+}
+
+
+
 static void
 goo_ti_h264dec_init (GooTiH264Dec* self)
 {
@@ -153,10 +299,25 @@ goo_ti_h264dec_init (GooTiH264Dec* self)
 static void
 goo_ti_h264dec_class_init (GooTiH264DecClass* klass)
 {
+	GObjectClass* g_klass = G_OBJECT_CLASS (klass);
+
+	g_type_class_add_private (g_klass, sizeof (GooTiH264DecPriv));
+	g_klass->set_property = goo_ti_h264dec_set_property;
+	g_klass->get_property = goo_ti_h264dec_get_property;
+
+	GParamSpec* spec = NULL;
+	spec = g_param_spec_enum ("NALU-byte-type", "NAL units size",
+				  "Selects between 0, 1 2 or 4 bytes",
+				  GOO_TI_H264DEC_NALU_BYTE_TYPE,
+				  DEFAULT_NALU_BYTES_TYPE, G_PARAM_READWRITE);
+	g_object_class_install_property (g_klass, PROP_H264BYTETYPE, spec);
+	
 	GooComponentClass* o_klass = GOO_COMPONENT_CLASS (klass);
+	
 	o_klass->validate_ports_definition_func =
 		goo_ti_h264dec_validate_ports_definitions;
-
+	o_klass->set_parameters_func =
+		goo_ti_h264dec_set_parameters;
 	return;
 }
 
