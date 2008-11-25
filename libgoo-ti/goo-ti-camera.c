@@ -965,7 +965,7 @@ goo_ti_camera_get_postproc (GooComponent* self)
 	return retval;
 }
 
-/* must send to idle the postprocessor tunnel before us */
+/* must send to idle the postprocessor tunnel after camera   */
 static void
 goo_ti_camera_propagate_idle (GooComponent* self)
 {
@@ -992,11 +992,6 @@ goo_ti_camera_propagate_idle (GooComponent* self)
 		);
 	GOO_OBJECT_UNLOCK (postproc);
 #endif
-
-
-	/* This is a spec violation  */
-	g_print ("INFORMATION (workaround): "
-		 "Implementing workaround for idle state camera\n");
 
 	goo_component_wait_for_next_state (postproc);
 
@@ -1032,11 +1027,8 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 		g_assert (FALSE);
 	}
 
-	/* we need the postprocessor in idle before us */
-	goo_ti_camera_propagate_idle (self);
-
 	GOO_OBJECT_INFO (self, "Sending idle state command");
-
+	
 	GOO_OBJECT_LOCK (self);
 	GOO_RUN (
 		OMX_SendCommand (self->handle,
@@ -1045,6 +1037,9 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 				 NULL)
 		);
 	GOO_OBJECT_UNLOCK (self);
+
+	/* we need the postprocessor in idle after camera*/
+	goo_ti_camera_propagate_idle (self);
 
 	if (tmpstate == OMX_StateLoaded)
 	{
@@ -1103,10 +1098,6 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 		);
 	GOO_OBJECT_UNLOCK (postproc);
 #endif
-
-	/* This is a spec violation  */
-	g_print ("INFORMATION (workaround): "
-		 "Implementing workaround for execution state camera\n");
 
 	goo_component_wait_for_next_state (postproc);
 
