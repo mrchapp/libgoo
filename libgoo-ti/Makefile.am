@@ -37,12 +37,14 @@ libgoo_ti_la_sources = \
 	goo-ti-mp3dec.c \
 	goo-ti-wmadec.c \
 	goo-ti-pcmdec.c \
+	goo-ti-imaadpcmdec.c \
 	goo-ti-gsmhrdec.c \
 	goo-ti-g722dec.c \
 	goo-ti-g711dec.c \
 	goo-ti-aacdec.c \
 	goo-ti-video-decoder.c \
 	goo-ti-mpeg4dec.c \
+	goo-ti-sparkdec.c \
 	goo-ti-video-encoder.c \
 	goo-ti-mpeg4enc.c \
 	goo-ti-post-processor.c \
@@ -76,6 +78,7 @@ libgoo_ti_la_headers = \
 	goo-ti-mp3dec.h \
 	goo-ti-wmadec.h \
 	goo-ti-pcmdec.h \
+	goo-ti-imaadpcmdec.h \
 	goo-ti-gsmhrdec.h \
 	goo-ti-g722dec.h \
 	goo-ti-g711dec.h \
@@ -84,6 +87,7 @@ libgoo_ti_la_headers = \
 	goo-ti-mpeg4dec.h \
 	goo-ti-video-encoder.h \
 	goo-ti-mpeg4enc.h \
+	goo-ti-sparkdec.h \
 	goo-ti-post-processor.h \
 	goo-ti-jpegenc.h \
 	goo-ti-clock.h \

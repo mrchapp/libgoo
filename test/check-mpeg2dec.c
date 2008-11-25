@@ -134,7 +134,7 @@ process (gchar *infile, gint width, gint height, gint outcolor, GooTiVideoDecode
 START_TEST (BF0170)
 {
 	process ("/omx/patterns/akiyo_frame.m2v",
-		 176, 144, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 176, 144, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST
@@ -142,7 +142,7 @@ END_TEST
 START_TEST (BF0171)
 {
 	process ("/omx/patterns/TankT80UK_CIF.m2v",
-		 352, 288, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 352, 288, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST
@@ -150,7 +150,7 @@ END_TEST
 START_TEST (BF0172)
 {
 	process ("/omx/patterns/ForeMan_VGA.m2v",
-		 640, 480, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 640, 480, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST
@@ -182,7 +182,7 @@ END_TEST
 START_TEST (BF0176)
 {
 	process ("/omx/patterns/akiyo_frame.m2v",
-		 176, 144, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_STREAMMODE);
+		 176, 144, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_STREAMMODE);
 	return;
 }
 END_TEST
@@ -190,7 +190,7 @@ END_TEST
 START_TEST (BF0177)
 {
 	process ("/omx/patterns/TankT80UK_CIF.m2v",
-		 352, 288, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_STREAMMODE);
+		 352, 288, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_STREAMMODE);
 	return;
 }
 END_TEST
@@ -198,7 +198,7 @@ END_TEST
 START_TEST (BF0178)
 {
 	process ("/omx/patterns/ForeMan_VGA.m2v",
-		 640, 480, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_STREAMMODE);
+		 640, 480, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_STREAMMODE);
 	return;
 }
 END_TEST

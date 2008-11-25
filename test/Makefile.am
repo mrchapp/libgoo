@@ -12,6 +12,7 @@ check_PROGRAMS = \
 	check-mp3dec \
 	check-wmadec \
 	check-pcmdec \
+	check-imaadpcmdec \
 	check-gsmhrdec \
 	check-g722dec \
 	check-g711dec \

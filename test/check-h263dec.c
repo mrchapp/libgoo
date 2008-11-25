@@ -142,7 +142,7 @@ END_TEST
 START_TEST (BF0021)
 {
 	process ("/omx/patterns/foreman_cif_bp20_15fps_128kbps.263",
-		 352, 288, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 352, 288, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST
@@ -150,7 +150,7 @@ END_TEST
 START_TEST (BF0023)
 {
 	process ("/omx/patterns/carphone_qcif_bp10_15fps_64kbps.263",
-		 176, 144, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 176, 144, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST
@@ -158,7 +158,7 @@ END_TEST
 START_TEST (BF0024)
 {
 	process ("/omx/patterns/foreman_cif_bp20_15fps_128kbps.263",
-		 352, 288, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 352, 288, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST
@@ -166,7 +166,7 @@ END_TEST
 START_TEST (BF0025)
 {
 	process ("/omx/patterns/foreman_cif_bp30_30fps_384kbps.263",
-		 352, 288, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 352, 288, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST
@@ -174,7 +174,7 @@ END_TEST
 START_TEST (BF0026)
 {
 	process ("/omx/patterns/carphone_qcif_bp45_15fps_128kbps.263",
-		 176, 144, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 176, 144, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST
@@ -199,7 +199,7 @@ END_TEST
 START_TEST (BF0158)
 {
 	process ("/omx/patterns/foreman_cif_bp45_30fps_2mbps.263",
-		 352, 288, OMX_COLOR_FormatYUV420Planar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
+		 352, 288, OMX_COLOR_FormatYUV420PackedPlanar, GOO_TI_VIDEO_DECODER_FRAMEMODE);
 	return;
 }
 END_TEST

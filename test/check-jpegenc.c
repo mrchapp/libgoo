@@ -138,7 +138,7 @@ process (gchar* filename, gint colorformat, gint width, gint height)
 START_TEST (test_jpegenc_0)
 {
         process ("/omx/patterns/JPGE_CONF_011.yuv",
-                 OMX_COLOR_FormatYUV420Planar, 176, 144);
+                 OMX_COLOR_FormatYUV420PackedPlanar, 176, 144);
         return;
 }
 END_TEST
@@ -178,7 +178,7 @@ END_TEST
 START_TEST (test_jpegenc_5)
 {
           process ("/omx/patterns/JPGE_CONF_037.yuv",
-                 OMX_COLOR_FormatYUV420Planar, 704, 576);
+                 OMX_COLOR_FormatYUV420PackedPlanar, 704, 576);
         return;
 }
 END_TEST

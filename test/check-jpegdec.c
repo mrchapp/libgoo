@@ -109,7 +109,7 @@ get_color_format (const guchar *data)
 
 	if (temp == 4 && H[0] == 2)
 	{
-		return OMX_COLOR_FormatYUV420Planar;
+		return OMX_COLOR_FormatYUV420PackedPlanar;
 	}
 
 	if (temp == 4 && H[0] == 4)
@@ -396,7 +396,7 @@ process (gchar* filename)
 		{
 		case 1:
 			param->format.image.eColorFormat =
-				OMX_COLOR_FormatYUV420Planar;
+				OMX_COLOR_FormatYUV420PackedPlanar;
 			break;
 		case 2:
 			param->format.image.eColorFormat =

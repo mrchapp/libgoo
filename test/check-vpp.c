@@ -166,8 +166,8 @@ END_TEST
 START_TEST (test_vpp_2)
 {
 	process ("/omx/patterns/JPGE_CONF_011.yuv",
-		 176, 144, OMX_COLOR_FormatYUV420Planar,
-		 352, 288, OMX_COLOR_FormatYUV420Planar,
+		 176, 144, OMX_COLOR_FormatYUV420PackedPlanar,
+		 352, 288, OMX_COLOR_FormatYUV420PackedPlanar,
 		 GOO_TI_VPP_ROTATION_90);
 
 	return;
@@ -178,7 +178,7 @@ START_TEST (test_vpp_3)
 {
 	process ("/omx/patterns/uxga.yuv",
 		 1600, 1200, OMX_COLOR_FormatCbYCrY,
-		 320, 240, OMX_COLOR_FormatYUV420Planar,
+		 320, 240, OMX_COLOR_FormatYUV420PackedPlanar,
 		 GOO_TI_VPP_ROTATION_270);
 
 	return;
@@ -189,7 +189,7 @@ START_TEST (test_vpp_4)
 {
 	process ("/omx/patterns/foreman_qcif_422i.yuv",
 		 176, 144, OMX_COLOR_FormatYCbYCr,
-		 352, 288, OMX_COLOR_FormatYUV420Planar,
+		 352, 288, OMX_COLOR_FormatYUV420PackedPlanar,
 		 GOO_TI_VPP_ROTATION_NONE);
 
 	return;

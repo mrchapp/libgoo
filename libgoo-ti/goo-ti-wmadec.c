@@ -34,8 +34,8 @@
 #define DASF_PARAM_NAME "OMX.TI.index.config.wmaheaderinfo"
 #define FRAME_PARAM_NAME "OMX.TI.index.config.wmaheaderinfo"
 #define STREAMID_PARAM_NAME "OMX.TI.index.config.wmastreamIDinfo"
-#define INPUT_BUFFERSIZE (4096)
-#define OUTPUT_BUFFERSIZE (4096 * 2 * 2)
+#define INPUT_BUFFERSIZE (4096 * 2)
+#define OUTPUT_BUFFERSIZE (4096 * 4)
 
 
 G_DEFINE_TYPE (GooTiWmaDec, goo_ti_wmadec, GOO_TYPE_TI_AUDIO_DECODER)

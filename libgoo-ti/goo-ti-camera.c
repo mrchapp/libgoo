@@ -815,7 +815,7 @@ goo_ti_camera_validate (GooComponent* component)
 				sensor->sFrameSize.nWidth *
 				sensor->sFrameSize.nHeight * 2;
 			break;
-		case OMX_COLOR_FormatYUV420Planar:
+		case OMX_COLOR_FormatYUV420PackedPlanar:
 			param->nBufferSize =
 				sensor->sFrameSize.nWidth *
 				sensor->sFrameSize.nHeight * 1.5;
@@ -857,7 +857,7 @@ goo_ti_camera_validate (GooComponent* component)
 				param->format.video.nFrameWidth *
 				param->format.video.nFrameHeight * 2;
 			break;
-		case OMX_COLOR_FormatYUV420Planar:
+		case OMX_COLOR_FormatYUV420PackedPlanar:
 			param->nBufferSize =
 				param->format.video.nFrameWidth *
 				param->format.video.nFrameHeight * 1.5;
@@ -899,7 +899,7 @@ goo_ti_camera_validate (GooComponent* component)
 				param->format.video.nFrameWidth *
 				param->format.video.nFrameHeight * 2;
 			break;
-		case OMX_COLOR_FormatYUV420Planar:
+		case OMX_COLOR_FormatYUV420PackedPlanar:
 			param->nBufferSize =
 				param->format.video.nFrameWidth *
 				param->format.video.nFrameHeight * 1.5;

@@ -44,11 +44,13 @@
 #include <goo-ti-mp3dec.h>
 #include <goo-ti-wmadec.h>
 #include <goo-ti-pcmdec.h>
+#include <goo-ti-imaadpcmdec.h>
 #include <goo-ti-gsmhrdec.h>
 #include <goo-ti-g722dec.h>
 #include <goo-ti-g711dec.h>
 #include <goo-ti-aacdec.h>
 #include <goo-ti-mpeg4dec.h>
+#include <goo-ti-sparkdec.h>
 #include <goo-ti-mpeg4enc.h>
 #include <goo-ti-post-processor.h>
 #include <goo-ti-jpegenc.h>
@@ -84,11 +86,13 @@ static struct _component_entry _components[] =
 	{ "mp3dec", GOO_TI_MP3_DECODER, goo_ti_mp3dec_get_type, 0 },
 	{ "wmadec", GOO_TI_WMA_DECODER, goo_ti_wmadec_get_type, 0 },
 	{ "pcmdec", GOO_TI_PCM_DECODER, goo_ti_pcmdec_get_type, 0 },
+	{ "imaadpcmdec", GOO_TI_IMAADPCM_DECODER, goo_ti_imaadpcmdec_get_type, 0 },
 	{ "gsmhrdec", GOO_TI_GSMHR_DECODER, goo_ti_gsmhrdec_get_type, 0 },
 	{ "g722dec", GOO_TI_G722_DECODER, goo_ti_g722dec_get_type, 0 },
 	{ "g711dec", GOO_TI_G711_DECODER, goo_ti_g711dec_get_type, 0 },
 	{ "aacdec", GOO_TI_AAC_DECODER, goo_ti_aacdec_get_type, 0 },
 	{ "mpeg4dec", GOO_TI_MPEG4_DECODER, goo_ti_mpeg4dec_get_type, 0 },
+	{ "sparkdec", GOO_TI_SPARK_DECODER, goo_ti_sparkdec_get_type, 0 },
 	{ "h264dec", GOO_TI_H264_DECODER, goo_ti_h264dec_get_type, 0 },
 	{ "h263dec", GOO_TI_H263_DECODER, goo_ti_h263dec_get_type, 0 },
 	{ "mpeg4enc", GOO_TI_MPEG4_ENCODER, goo_ti_mpeg4enc_get_type, 0 },

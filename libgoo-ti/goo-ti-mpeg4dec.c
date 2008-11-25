@@ -63,7 +63,7 @@ goo_ti_mpeg4dec_validate_ports_definitions (GooComponent* component)
                                 param->format.video.nFrameWidth *
                                 param->format.video.nFrameHeight / 2;
                         break;
-                case OMX_COLOR_FormatYUV420Planar:
+                case OMX_COLOR_FormatYUV420PackedPlanar:
                         param->nBufferSize =
                                 (param->format.video.nFrameWidth *
                                  param->format.video.nFrameHeight * 3) / 8;
@@ -95,7 +95,7 @@ goo_ti_mpeg4dec_validate_ports_definitions (GooComponent* component)
                                 param->format.video.nFrameWidth *
                                 param->format.video.nFrameHeight * 2;
                         break;
-                case OMX_COLOR_FormatYUV420Planar:
+                case OMX_COLOR_FormatYUV420PackedPlanar:
                         param->nBufferSize =
                                 param->format.video.nFrameWidth *
                                 param->format.video.nFrameHeight * 1.5;

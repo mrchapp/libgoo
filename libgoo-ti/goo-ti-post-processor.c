@@ -645,7 +645,7 @@ goo_ti_post_processor_validate (GooComponent* component)
 
 		switch (param->format.video.eColorFormat)
 		{
-		case OMX_COLOR_FormatYUV420Planar:
+		case OMX_COLOR_FormatYUV420PackedPlanar:
 			/* I420 */
 			param->nBufferSize =
 				param->format.video.nFrameWidth *

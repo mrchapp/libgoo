@@ -308,7 +308,7 @@ static void goo_ti_jpegdec_multiple_in_chromaformat(guint input_format, guint xo
 
 	switch(input_format){
 
-	case OMX_COLOR_FormatYUV420Planar:
+	case OMX_COLOR_FormatYUV420PackedPlanar:
 		if(!goo_ti_jpegdec_is_multiple(xorg, factors[0][0]) || !goo_ti_jpegdec_is_multiple(yorg, factors[0][1])){
 			g_critical("The properties of subregion must be number multiples of (%d, %d) respectively \n",factors[0][0], factors[0][1] );
 
@@ -440,7 +440,7 @@ goo_ti_jpegdec_validate (GooComponent* component)
 		else
 		{
 			param->format.image.eColorFormat =
-				OMX_COLOR_FormatYUV420Planar;
+				OMX_COLOR_FormatYUV420PackedPlanar;
 		}
 
 		g_assert (param->nBufferSize > 0);
@@ -493,7 +493,7 @@ goo_ti_jpegdec_validate (GooComponent* component)
 		/** @fix known issue in OMX/SN **/
 		if (color == OMX_COLOR_FormatYUV444Interleaved &&
 		    param->format.image.eColorFormat ==
-		    OMX_COLOR_FormatYUV420Planar)
+		    OMX_COLOR_FormatYUV420PackedPlanar)
 		{
 			GOO_OBJECT_ERROR (self, "Cannot output 420Planar when the input is 444Interleaved (known issue)");
 			g_assert (FALSE);
@@ -501,8 +501,8 @@ goo_ti_jpegdec_validate (GooComponent* component)
 
 		switch (param->format.image.eColorFormat)
 		{
-		case OMX_COLOR_FormatYUV420Planar:
-			if (color == OMX_COLOR_FormatYUV420Planar ||
+		case OMX_COLOR_FormatYUV420PackedPlanar:
+			if (color == OMX_COLOR_FormatYUV420PackedPlanar ||
 			    color == OMX_COLOR_FormatYUV411Planar)
 			{
 				param->nBufferSize = width * height * 3 / 2;

@@ -797,7 +797,7 @@ goo_ti_vpp_validate_ports (GooComponent* component)
 
 		switch (param->format.video.eColorFormat)
 		{
-		case OMX_COLOR_FormatYUV420Planar:
+		case OMX_COLOR_FormatYUV420PackedPlanar:
 			param->format.video.cMIMEType = "video/x-raw-yuv";
 			param->nBufferSize =
 				param->format.video.nFrameWidth *
@@ -962,7 +962,7 @@ goo_ti_vpp_validate_ports (GooComponent* component)
 
 		switch (param->format.video.eColorFormat)
 		{
-		case OMX_COLOR_FormatYUV420Planar:
+		case OMX_COLOR_FormatYUV420PackedPlanar:
 			param->nBufferSize =
 				param->format.video.nFrameWidth *
 				param->format.video.nFrameHeight * 1.5;

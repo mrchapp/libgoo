@@ -490,7 +490,7 @@ goo_ti_jpegenc_validate (GooComponent* component)
 		case OMX_COLOR_FormatCbYCrY:
 			param->nBufferSize = width * height * 2;
 		break;
-		case OMX_COLOR_FormatYUV420Planar:
+		case OMX_COLOR_FormatYUV420PackedPlanar:
             /* as in test app */
 			param->nBufferSize = width * height * 1.5;
 			break;
@@ -535,7 +535,7 @@ goo_ti_jpegenc_validate (GooComponent* component)
             case OMX_COLOR_FormatCbYCrY:
                 param->nBufferSize = width * height * 2;
                 break;
-            case OMX_COLOR_FormatYUV420Planar:
+            case OMX_COLOR_FormatYUV420PackedPlanar:
                 param->nBufferSize = width * height * 1.5;
                 break;
             default:
