@@ -33,8 +33,8 @@
 #define DASF_PARAM_NAME "OMX.TI.index.config.mp3headerinfo"
 #define FRAME_PARAM_NAME "OMX.TI.index.config.mp3headerinfo"
 #define STREAMID_PARAM_NAME "OMX.TI.index.config.mp3streamIDinfo"
-#define INPUT_BUFFERSIZE 4 * 1024
-#define OUTPUT_BUFFERSIZE 4 * 1024
+#define INPUT_BUFFERSIZE 2304
+#define OUTPUT_BUFFERSIZE 36864
 
 G_DEFINE_TYPE (GooTiMp3Dec, goo_ti_mp3dec, GOO_TYPE_TI_AUDIO_DECODER)
 
