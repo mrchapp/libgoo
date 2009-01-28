@@ -25,6 +25,7 @@
 
 #include <goo-component.h>
 #include <goo-ti-post-processor.h>
+#include <goo-ti-video-encoder.h>
 
 G_BEGIN_DECLS
 

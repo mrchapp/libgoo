@@ -504,7 +504,7 @@ goo_component_get_peer_component (GooComponent* self, GooPort* port)
  * This function sets a port as a supplier or
  * non supplier.
  */
-static void
+void
 goo_component_set_supplier_port (GooComponent *self, GooPort *port,
 				 OMX_BUFFERSUPPLIERTYPE stype)
 {
@@ -3079,10 +3079,10 @@ goo_component_set_tunnel (GooComponent* src,  GooPort* srcport,
 	GOO_OBJECT_UNLOCK (src);
 
 	goo_port_set_peer (srcport, sinkport);
-
+/*
 	goo_component_set_supplier_port (src, srcport, index);
 	goo_component_set_supplier_port (sink, sinkport, index);
-
+*/
 	GOO_OBJECT_DEBUG (src, "");
 	GOO_OBJECT_DEBUG (sink, "");
 

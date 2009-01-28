@@ -39,6 +39,7 @@
 GooComponentFactory* factory;
 GooComponent* camera;
 GooComponent* preview;
+GooComponent* venc;
 GRand* rnd;
 
 const gchar* titlefmt = "\n\t*** %s ***\n";
@@ -71,7 +72,7 @@ teardown (void)
 }
 
 void
-capture (gchar* filename, gchar* resolution, gboolean oneshot,
+capture (gchar* filename, const gchar* resolution, 
 	 guint numbuffers, guint colorformat, guint framerate,
 	 OMX_WHITEBALCONTROLTYPE balance, GooTiCameraZoom zoom)
 {
@@ -79,7 +80,6 @@ capture (gchar* filename, gchar* resolution, gboolean oneshot,
 	g_assert (resolution != NULL);
 
 	ResolutionInfo rinfo = goo_get_resolution (resolution);
-	ResolutionInfo vfres = goo_get_resolution ("pal");
 
 	g_assert (rinfo.width != 0 && rinfo.height != 0);
 
@@ -88,8 +88,8 @@ capture (gchar* filename, gchar* resolution, gboolean oneshot,
 		OMX_PARAM_SENSORMODETYPE* sensor = NULL;
 		sensor = GOO_TI_CAMERA_GET_PARAM (camera);
 
-		sensor->bOneShot  = oneshot;
-		sensor->nFrameRate = (oneshot) ? 0 : framerate;
+		sensor->bOneShot = OMX_FALSE;
+		sensor->nFrameRate = framerate;
 		sensor->sFrameSize.nWidth  = rinfo.width;
 		sensor->sFrameSize.nHeight = rinfo.height;
 	}
@@ -102,11 +102,8 @@ capture (gchar* filename, gchar* resolution, gboolean oneshot,
 		OMX_PARAM_PORTDEFINITIONTYPE *param = NULL;
 		param = GOO_PORT_GET_DEFINITION (port);
 
-		gint width = MIN (vfres.width, rinfo.width);
-		gint height = MIN (vfres.height, rinfo.height);
-
-		param->format.video.nFrameWidth  = width;
-		param->format.video.nFrameHeight = height;
+		param->format.video.nFrameWidth  = rinfo.width;
+		param->format.video.nFrameHeight = rinfo.height;
 		param->format.video.eColorFormat = OMX_COLOR_FormatCbYCrY;
 
 		g_object_unref (port);
@@ -120,11 +117,8 @@ capture (gchar* filename, gchar* resolution, gboolean oneshot,
 		OMX_PARAM_PORTDEFINITIONTYPE *param = NULL;
 		param = GOO_PORT_GET_DEFINITION (port);
 
-		gint width = MIN (vfres.width, rinfo.width);
-		gint height = MIN (vfres.height, rinfo.height);
-
-		param->format.video.nFrameWidth  = width;
-		param->format.video.nFrameHeight = height;
+		param->format.video.nFrameWidth  = rinfo.width;
+		param->format.video.nFrameHeight = rinfo.height;
 		param->format.video.eColorFormat = OMX_COLOR_FormatCbYCrY;
 
 		/* goo_component_disable_port (camera, port); */
@@ -140,14 +134,7 @@ capture (gchar* filename, gchar* resolution, gboolean oneshot,
 		OMX_PARAM_PORTDEFINITIONTYPE *param = NULL;
 		param = GOO_PORT_GET_DEFINITION (port);
 
-		if (oneshot)
-		{
-			param->format.image.eColorFormat = colorformat;
-		}
-		else
-		{
-			param->format.video.eColorFormat = colorformat;
-		}
+		param->format.video.eColorFormat = colorformat;
 
 		g_object_unref (port);
 	}
@@ -160,38 +147,97 @@ capture (gchar* filename, gchar* resolution, gboolean oneshot,
 		OMX_PARAM_PORTDEFINITIONTYPE *param = NULL;
 		param = GOO_PORT_GET_DEFINITION (port);
 
-		gint width = MIN (vfres.width, rinfo.width);
-		gint height = MIN (vfres.height, rinfo.height);
-
-		param->format.video.nFrameWidth  = width;
-		param->format.video.nFrameHeight = height;
+		param->format.video.nFrameWidth  = rinfo.width;
+		param->format.video.nFrameHeight = rinfo.height;
 		param->format.video.eColorFormat = OMX_COLOR_FormatCbYCrY;
 
-		/* goo_component_disable_port (camera, port); */
+		goo_component_disable_port (camera, port);
 
 		g_object_unref (port);
 	}
+						     
+	/* video encoder port configuration */
+	{
+		/* video encoder instanciation */
+		/* we cannot do it in the setup because we should choose in run 
+		 * time which encoder we want */
+		venc = goo_component_factory_get_component (factory,
+						     GOO_TI_H264_ENCODER);
+						    
+		gint bitrate = 4000000;
+		gint level = 128;
 
-	goo_component_set_tunnel_by_name (camera, "output0",
-					  preview, "input0",
+		/* video properties */
+		g_object_set (G_OBJECT (venc),
+			"level", level,
+			"control-rate", GOO_TI_VIDEO_ENCODER_CR_VARIABLE,
+			NULL);
+
+		/* input port */
+		{
+			GooPort* port = goo_component_get_port (venc, "input0");
+			g_assert (port != NULL);
+			OMX_PARAM_PORTDEFINITIONTYPE* param =
+				GOO_PORT_GET_DEFINITION (port);
+
+			param->nBufferCountActual = 4;
+			param->format.video.nFrameWidth = rinfo.width;
+			param->format.video.nFrameHeight = rinfo.height;
+			param->format.video.eColorFormat = colorformat;
+			param->format.video.xFramerate = framerate;
+
+			g_object_unref (port);
+		}
+
+		/* output port */
+		{
+			GooPort* port = goo_component_get_port (venc, "output0");
+			g_assert (port != NULL);
+			OMX_PARAM_PORTDEFINITIONTYPE* param =
+				GOO_PORT_GET_DEFINITION (port);
+
+			param->nBufferCountActual = 4;
+			param->format.video.nFrameWidth = rinfo.width;
+			param->format.video.nFrameHeight = rinfo.height;
+			param->format.video.nBitrate = bitrate;
+			param->format.video.eCompressionFormat = OMX_VIDEO_CodingAVC;
+
+			g_object_unref (port);
+		}
+	}
+	
+	goo_component_set_tunnel_by_name (camera, "output1",
+					  venc, "input0",
 					  OMX_BufferSupplyInput);
-
 
 	/* the engine must know about the tunnel */
 	GooEngine* engine = goo_engine_new (
-		camera,
+		venc,
 		NULL,
 		filename
 		);
 
 	g_object_set (engine, "num-buffers", numbuffers, NULL);
 
+	goo_component_set_tunnel_by_name (camera, "output0",
+					  preview, "input0",
+					  OMX_BufferSupplyInput);
+
+	{
+		GooPort* port = goo_component_get_port (preview, "input0");
+		g_assert (port != NULL);
+		goo_component_set_supplier_port (preview, port,
+                     OMX_BufferSupplyInput);
+        g_object_unref (port);
+	}
+	
+	
 	goo_component_set_state_idle (camera);
 
 	/* camera custom config params */
 	{
+		g_print("\n **************************************entramos a las configuraciones : vstab no esta activado **********************\n");
 		g_object_set (camera,
-			      "vstab", TRUE,
 			      "brightness", g_rand_int_range (rnd, 0, 100),
 			      "contrast", g_rand_int_range (rnd, -100, 100),
 			      NULL);
@@ -206,7 +252,6 @@ capture (gchar* filename, gchar* resolution, gboolean oneshot,
 			g_object_set (camera, "zoom", zoom, NULL);
 		}
 	}
-
 
 	/* postproc custom params */
 	{
@@ -223,119 +268,29 @@ capture (gchar* filename, gchar* resolution, gboolean oneshot,
 
 	goo_component_set_state_executing (camera);
 
+	/* venc custom params */
+	{
+		g_object_set (venc, "frame-interval", 30, NULL);
+	}
+
 	g_object_set (camera, "capture", TRUE, NULL);
 	goo_engine_play (engine);
 	g_object_set (camera, "capture", FALSE, NULL);
 
 	goo_component_set_state_idle (camera);
+
 	goo_component_set_state_loaded (camera);
+	goo_component_set_state_loaded (venc);
 
 	g_object_unref (G_OBJECT (engine));
-
+	g_object_unref(venc);
 	return;
 }
-
-/* ================================================================ */
-/* == Still image capture                                           */
-/* ================================================================ */
-
-START_TEST (BF50_1)
-{
-	T ("CAMERA SHOT QCIF");
-	capture ("/tmp/camera_shot_qcif_yuy2.yuv", "qcif", TRUE, 10,
-		 OMX_COLOR_FormatYCbYCr, 0,
-		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
-
-	return;
-}
-END_TEST
-
-START_TEST (BF50_2)
-{
-	T ("CAMERA SHOT SVGA");
-	capture ("/tmp/camera_shot_svga_uyvy.yuv", "svga", TRUE, 5,
-		 OMX_COLOR_FormatCbYCrY, 0,
-		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
-
-	return;
-}
-END_TEST
-
-START_TEST (BF50_3)
-{
-	T ("CAMERA SHOT XVGA");
-	capture ("/tmp/camera_shot_xvga_yuy2.yuv", "xvga", TRUE, 3,
-		 OMX_COLOR_FormatYCbYCr, 0,
-		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
-
-	return;
-}
-END_TEST
-
-START_TEST (BF51)
-{
-	T ("CAMERA SHOT SXGA");
-	capture ("/tmp/camera_shot_sxvga_uyvy.yuv", "sxvga", TRUE, 2,
-		 OMX_COLOR_FormatCbYCrY, 0,
-		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
-
-	return;
-}
-END_TEST
-
-START_TEST (BF52)
-{
-	T ("CAMERA SHOT UXGA");
-	capture ("/tmp/camera_shot_uxvga_yuy2.yuv", "uxvga", TRUE, 1,
-		 OMX_COLOR_FormatYCbYCr, 0,
-		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
-
-	return;
-}
-END_TEST
-
-START_TEST (BF53)
-{
-	T ("CAMERA SHOT QXGA");
-	capture ("/tmp/camera_shot_uxvga_yuy2.yuv", "qxga", TRUE, 1,
-		 OMX_COLOR_FormatYCbYCr, 0,
-		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
-
-	return;
-}
-END_TEST
-
-START_TEST (BF54)
-{
-	T ("CAMERA SHOT WQXGA");
-	capture ("/tmp/camera_shot_uxvga_yuy2.yuv", "wqxga", TRUE, 1,
-		 OMX_COLOR_FormatYCbYCr, 0,
-		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
-
-	return;
-}
-END_TEST
-
-START_TEST (BF55)
-{
-	T ("CAMERA SHOT QSXGA");
-	capture ("/tmp/camera_shot_uxvga_yuy2.yuv", "qsxga", TRUE, 1,
-		 OMX_COLOR_FormatYCbYCr, 0,
-		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
-
-	return;
-}
-END_TEST
-
-
-/* ================================================================ */
-/* == Video capture with viewfinder & preview                       */
-/* ================================================================ */
 
 START_TEST (BF1)
 {
 	T ("CAMERA VIDEO QCIF YCbYCr");
-	capture ("/dev/null", "qcif", FALSE, 100, OMX_COLOR_FormatYCbYCr, 30,
+	capture ("/dev/null", "qcif", 100, OMX_COLOR_FormatYCbYCr, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -345,7 +300,7 @@ END_TEST
 START_TEST (BF2)
 {
 	T ("CAMERA VIDEO QVGA YCbYCr");
-	capture ("/dev/null", "qvga", FALSE, 30, OMX_COLOR_FormatYCbYCr, 30,
+	capture ("/dev/null", "qvga", 30, OMX_COLOR_FormatYCbYCr, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -355,7 +310,7 @@ END_TEST
 START_TEST (BF3)
 {
 	T ("CAMERA VIDEO CIF YCbYCr");
-	capture ("/dev/null", "cif", FALSE, 50, OMX_COLOR_FormatYCbYCr, 30,
+	capture ("/dev/null", "cif", 50, OMX_COLOR_FormatYCbYCr, 30,
 		OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -365,7 +320,7 @@ END_TEST
 START_TEST (BF4)
 {
 	T ("CAMERA VIDEO VGA YCbYCr");
-	capture ("/dev/null", "vga", FALSE, 20, OMX_COLOR_FormatYCbYCr, 30,
+	capture ("/dev/null", "vga", 20, OMX_COLOR_FormatYCbYCr, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -375,7 +330,7 @@ END_TEST
 START_TEST (BF5)
 {
 	T ("CAMERA VIDEO D1 NTSC YCbYCr");
-	capture ("/dev/null", "d1ntsc", FALSE, 20, OMX_COLOR_FormatYCbYCr, 30,
+	capture ("/dev/null", "d1ntsc", 20, OMX_COLOR_FormatYCbYCr, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -385,7 +340,7 @@ END_TEST
 START_TEST (BF6)
 {
 	T ("CAMERA VIDEO PAL YCbYCr");
-	capture ("/dev/null", "pal", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("video_test6.h264", "pal", 100, OMX_COLOR_FormatCbYCrY, 25,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -395,7 +350,7 @@ END_TEST
 START_TEST (BF7)
 {
 	T ("CAMERA VIDEO QCIF CbYCrY");
-	capture ("/dev/null", "qcif", FALSE, 100, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "qcif", 100, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -405,7 +360,7 @@ END_TEST
 START_TEST (BF8)
 {
 	T ("CAMERA VIDEO QVGA CbYCrY");
-	capture ("/dev/null", "qvga", FALSE, 30, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "qvga", 30, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -415,7 +370,7 @@ END_TEST
 START_TEST (BF9)
 {
 	T ("CAMERA VIDEO CIF CbYCrY");
-	capture ("/dev/null", "cif", FALSE, 50, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "cif", 50, OMX_COLOR_FormatCbYCrY, 30,
 		OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -425,7 +380,7 @@ END_TEST
 START_TEST (BF10)
 {
 	T ("CAMERA VIDEO VGA CbYCrY");
-	capture ("/dev/null", "vga", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "vga", 20, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -435,7 +390,7 @@ END_TEST
 START_TEST (BF11)
 {
 	T ("CAMERA VIDEO D1 NTSC CbYCrY");
-	capture ("/dev/null", "d1ntsc", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "d1ntsc", 20, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -445,7 +400,7 @@ END_TEST
 START_TEST (BF12)
 {
 	T ("CAMERA VIDEO PAL CbYCrY");
-	capture ("/dev/null", "pal", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "pal", 20, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -459,7 +414,7 @@ END_TEST
 START_TEST (BF19)
 {
 	T ("CAMERA VIDEO CIF 2X");
-	capture ("/dev/null", "cif", FALSE, 50, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "cif", 50, OMX_COLOR_FormatCbYCrY, 30,
 		OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_2X);
 
 	return;
@@ -469,7 +424,7 @@ END_TEST
 START_TEST (BF20)
 {
 	T ("CAMERA VIDEO CIF 3X");
-	capture ("/dev/null", "cif", FALSE, 50, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "cif", 50, OMX_COLOR_FormatCbYCrY, 30,
 		OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_3X);
 
 	return;
@@ -479,7 +434,7 @@ END_TEST
 START_TEST (BF21)
 {
 	T ("CAMERA VIDEO CIF 4X");
-	capture ("/dev/null", "cif", FALSE, 50, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "cif", 50, OMX_COLOR_FormatCbYCrY, 30,
 		OMX_WhiteBalControlAuto, GOO_TI_CAMERA_ZOOM_4X);
 
 	return;
@@ -493,7 +448,7 @@ END_TEST
 START_TEST (BF56)
 {
 	T ("CAMERA VIDEO VGA DAY LIGHT");
-	capture ("/dev/null", "vga", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "vga", 20, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlSunLight, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -503,7 +458,7 @@ END_TEST
 START_TEST (BF58)
 {
 	T ("CAMERA VIDEO VGA INCANDESCENT");
-	capture ("/dev/null", "vga", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "vga", 20, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlIncandescent, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -513,7 +468,7 @@ END_TEST
 START_TEST (BF60)
 {
 	T ("CAMERA VIDEO VGA FLUORESCENT");
-	capture ("/dev/null", "vga", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "vga", 20, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlFluorescent, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -523,7 +478,7 @@ END_TEST
 START_TEST (BF62)
 {
 	T ("CAMERA VIDEO VGA HORIZON");
-	capture ("/dev/null", "vga", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "vga", 20, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlHorizon, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -533,7 +488,7 @@ END_TEST
 START_TEST (BF64)
 {
 	T ("CAMERA VIDEO VGA HORIZON");
-	capture ("/dev/null", "vga", FALSE, 20, OMX_COLOR_FormatCbYCrY, 30,
+	capture ("/dev/null", "vga", 20, OMX_COLOR_FormatCbYCrY, 30,
 		 OMX_WhiteBalControlShade, GOO_TI_CAMERA_ZOOM_1X);
 
 	return;
@@ -556,14 +511,6 @@ goo_suite (gchar* srd)
 
 	GHashTable *ht = g_hash_table_new (g_str_hash, g_str_equal);
 
-	g_hash_table_insert (ht, "BF50_1", BF50_1);
-	g_hash_table_insert (ht, "BF50_2", BF50_2);
-	g_hash_table_insert (ht, "BF50_3", BF50_3);
-	g_hash_table_insert (ht, "BF51", BF51);
-	g_hash_table_insert (ht, "BF52", BF52);
-	g_hash_table_insert (ht, "BF53", BF53);
-	g_hash_table_insert (ht, "BF54", BF54);
-	g_hash_table_insert (ht, "BF55", BF55);  /* kernel oops! */
 	g_hash_table_insert (ht, "BF1", BF1);
 	g_hash_table_insert (ht, "BF2", BF2);
 	g_hash_table_insert (ht, "BF3", BF3);
@@ -612,7 +559,6 @@ parse_options (int *argc, char **argv[])
 	GOptionEntry options[] = {
 		{ "test", 't', 0, G_OPTION_ARG_STRING, &testopt,
 		  "Test option: ("
-		  "BF50_1/BF50_2/BF50_3/BF51/BF52/BF53/BF54/BF55/"
 		  "BF1/BF2/BF3/BF4/BF5/BF6/BF7/BF8/BF9/BF10/BF11/BF12"
 		  "BF19/BF20/BF21/BF56/BF58/BF60/BF62/BF64)", "S" },
 		{ NULL }
