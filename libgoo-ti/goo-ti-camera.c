@@ -798,7 +798,6 @@ goo_ti_camera_validate (GooComponent* component)
 			param->format.video.nFrameHeight =
 				sensor->sFrameSize.nHeight;
 
-			g_print ("\nSensor TI-CAMERA /n dwidth = %d | dheight = %d\n", param->format.video.nFrameWidth, param->format.video.nFrameHeight);
 			g_assert (sensor->nFrameRate > 0);
 
 			param->format.video.cMIMEType = "video/x-raw-yuv";
@@ -844,7 +843,7 @@ goo_ti_camera_validate (GooComponent* component)
 		/* let's use the max available resolution */
 		g_assert (param->format.video.nFrameWidth <= rinfo.width);
 		g_assert (param->format.video.nFrameHeight <= rinfo.height);
-		g_print ("\nviewfinding TI-CAMERA /n dwidth = %d | dheight = %d\n", param->format.video.nFrameWidth, param->format.video.nFrameHeight);
+		
 		param->format.video.cMIMEType = "video/x-raw-yuv";
 
 		param->format.video.eCompressionFormat =
@@ -1238,16 +1237,13 @@ goo_ti_camera_venc_set_loaded (GooComponent* self)
 
 	if (videoenc == NULL)
 	{
-			g_print ("\n videoenc == NULL, No entra al loaded\n");
 		return;
 	}
 	
 	if (self->cur_state == OMX_StateIdle)
 	{
-		g_print ("\n disable_all_ports videoenc \n");
 		goo_component_disable_all_ports (videoenc);
 	}
-	g_print ("\n videoenc != NULL\n");
 	goo_component_set_state_loaded (videoenc);
 
 	goo_component_wait_for_next_state (videoenc);		 
