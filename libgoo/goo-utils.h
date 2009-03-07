@@ -446,12 +446,14 @@ const static ResolutionInfo resinfo[] =
 	{ "svga",   800,  600  },
 	{ "wvga",   864,  864  },  /* WVGA Landscape/Portrait */
 	{ "xvga",   1024, 768  },
+	{ "720p",   1280, 720  },
 	{ "sxvga",  1280, 1024 },
 	{ "uxvga",  1600, 1200 },
 	{ "qxga",   2048, 1536 },
 	{ "wqxga",  2560, 1600 },
 	{ "qsxga",  2560, 2048 }
 };
+
 
 const gchar* goo_strstate (OMX_STATETYPE state);
 const gchar* goo_strerror (OMX_ERRORTYPE error);

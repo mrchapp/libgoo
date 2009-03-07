@@ -669,7 +669,7 @@ goo_ti_camera_set_parameters (GooComponent* component)
 					      OMX_IndexParamCommonSensorMode,
 					      self->param);
 
-	GOO_OBJECT_DEBUG (self, "");
+	GOO_OBJECT_DEBUG (self, "set parameters exit");
 
 	return;
 }
@@ -724,7 +724,7 @@ goo_ti_camera_validate (GooComponent* component)
 	OMX_PARAM_SENSORMODETYPE* sensor;
 	sensor = GOO_TI_CAMERA_GET_PARAM (self);
 
-	ResolutionInfo rinfo = goo_get_resolution ("pal");
+	ResolutionInfo rinfo = goo_get_resolution ("720p");
 
 	/* param */
 	{
@@ -745,8 +745,8 @@ goo_ti_camera_validate (GooComponent* component)
 
 			}
 		}
-		else if ((sensor->sFrameSize.nWidth <= 640) ||
-			 (sensor->sFrameSize.nHeight <= 480))
+		else if ((sensor->sFrameSize.nWidth <= 1280) ||
+			 (sensor->sFrameSize.nHeight <= 720))
 		{
 			if (sensor->bOneShot == OMX_TRUE)
 			{
@@ -791,11 +791,14 @@ goo_ti_camera_validate (GooComponent* component)
 			color_format = param->format.video.eColorFormat;
 
 			/* synch data */
+			
+
 			param->format.video.nFrameWidth =
 				sensor->sFrameSize.nWidth;
 			param->format.video.nFrameHeight =
 				sensor->sFrameSize.nHeight;
 
+			g_print ("\nSensor TI-CAMERA /n dwidth = %d | dheight = %d\n", param->format.video.nFrameWidth, param->format.video.nFrameHeight);
 			g_assert (sensor->nFrameRate > 0);
 
 			param->format.video.cMIMEType = "video/x-raw-yuv";
@@ -837,12 +840,11 @@ goo_ti_camera_validate (GooComponent* component)
 		GooPort* port = goo_ti_camera_get_port (self,
 							PORT_VIEWFINDING);
 		param = GOO_PORT_GET_DEFINITION (port);
-
 		/* sync data */
 		/* let's use the max available resolution */
 		g_assert (param->format.video.nFrameWidth <= rinfo.width);
 		g_assert (param->format.video.nFrameHeight <= rinfo.height);
-
+		g_print ("\nviewfinding TI-CAMERA /n dwidth = %d | dheight = %d\n", param->format.video.nFrameWidth, param->format.video.nFrameHeight);
 		param->format.video.cMIMEType = "video/x-raw-yuv";
 
 		param->format.video.eCompressionFormat =
@@ -1014,6 +1016,7 @@ goo_ti_camera_get_postproc (GooComponent* self)
 static void
 goo_ti_camera_pp_set_idle (GooComponent* self)
 {
+	
 	GooComponent *postproc = goo_ti_camera_get_postproc (self);
 
 	if (postproc == NULL)
@@ -1024,7 +1027,9 @@ goo_ti_camera_pp_set_idle (GooComponent* self)
 	GOO_OBJECT_INFO (postproc, "Sending idle state command");
 
 	/* Sending postprocessor to idle state */
-
+#if 1
+	goo_component_set_state_idle (postproc);
+#else
 	GOO_OBJECT_LOCK (postproc);
 	postproc->next_state = OMX_StateIdle;
 	GOO_RUN (
@@ -1034,9 +1039,11 @@ goo_ti_camera_pp_set_idle (GooComponent* self)
 				 NULL)
 		);
 	GOO_OBJECT_UNLOCK (postproc);
+#endif
+
 	goo_component_wait_for_next_state (postproc);
 	g_object_unref (postproc);
-			
+	
 	return;
 }
 
@@ -1050,13 +1057,13 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 		return;
 	}
 
-#if 0	
+#if 1	
 	goo_component_set_state_idle (videoenc);
 #else
 	GOO_OBJECT_INFO (videoenc, "Sending idle state command");
 	
 	OMX_STATETYPE tmpstate = videoenc->cur_state;
-	
+
 	/* Sending videoenc to idle state */
 
 	GOO_OBJECT_LOCK (videoenc);
@@ -1068,13 +1075,12 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 		 		NULL)
 		);
 	GOO_OBJECT_UNLOCK (videoenc);
-		
+	
+
 	if (tmpstate == OMX_StateLoaded)
 	{
 		goo_component_allocate_all_ports (videoenc);
 	}
-			
-	goo_component_wait_for_next_state (videoenc);
 	
 	if (tmpstate == OMX_StateExecuting)
 	{
@@ -1082,8 +1088,9 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 		goo_component_flush_all_ports (videoenc);
 	}
 #endif
-			 
+	goo_component_wait_for_next_state (videoenc);		 
 	g_object_unref (videoenc);	
+	return;
 }
 
 static void
@@ -1168,6 +1175,127 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 
 /*
  * Check if output ports are in tunnel mode. If so, send peer components
+ * to LOADED state recursively
+ */
+static void
+goo_ti_camera_propagate_loaded (GooComponent* self)
+{
+	GooComponent* postproc = goo_ti_camera_get_postproc (self);
+
+	if (postproc != NULL)
+	{
+		GOO_OBJECT_INFO (postproc, "Sending load state command");
+
+		goo_component_set_state_loaded (postproc);
+
+		goo_component_wait_for_next_state (postproc);
+
+		g_object_unref (postproc);
+	}
+
+	GooComponent* videoenc = goo_ti_camera_get_videoenc (self);
+	
+	if (videoenc != NULL)
+	{
+		GOO_OBJECT_INFO (videoenc, "Sending executing state command");
+
+		goo_component_set_state_loaded (videoenc);
+		goo_component_wait_for_next_state (videoenc);
+	
+		g_object_unref (videoenc);
+	}
+
+	return;
+}
+/* must send to idle the postprocessor tunnel after camera   */
+static void
+goo_ti_camera_pp_set_loaded (GooComponent* self)
+{
+	
+	GooComponent *postproc = goo_ti_camera_get_postproc (self);
+
+	if (postproc == NULL)
+	{
+		return;
+	}
+
+	GOO_OBJECT_INFO (postproc, "Sending idle state command");
+
+	/* Sending postprocessor to idle state */
+	goo_component_set_state_loaded (postproc);
+
+	goo_component_wait_for_next_state (postproc);
+	g_object_unref (postproc);
+	
+	return;
+}
+
+
+static void
+goo_ti_camera_venc_set_loaded (GooComponent* self)
+{
+	GooComponent *videoenc = goo_ti_camera_get_videoenc (self);
+
+	if (videoenc == NULL)
+	{
+			g_print ("\n videoenc == NULL, No entra al loaded\n");
+		return;
+	}
+	
+	if (self->cur_state == OMX_StateIdle)
+	{
+		g_print ("\n disable_all_ports videoenc \n");
+		goo_component_disable_all_ports (videoenc);
+	}
+	g_print ("\n videoenc != NULL\n");
+	goo_component_set_state_loaded (videoenc);
+
+	goo_component_wait_for_next_state (videoenc);		 
+	g_object_unref (videoenc);	
+	return;
+}
+
+static void
+goo_ti_camera_set_state_loaded (GooComponent* self)
+{
+	self->next_state = OMX_StateLoaded;
+
+	goo_ti_camera_pp_set_loaded (self);
+
+	GOO_OBJECT_INFO (self, "Sending load state command");
+
+	GOO_OBJECT_LOCK (self);
+	GOO_RUN (
+		OMX_SendCommand (self->handle,
+				 OMX_CommandStateSet,
+				 self->next_state,
+				 NULL)
+		);
+	GOO_OBJECT_UNLOCK (self);
+	
+	goo_component_wait_for_next_state (self);
+	
+	goo_ti_camera_venc_set_loaded (self);
+	
+	if (self->cur_state == OMX_StateIdle)
+	{
+		goo_component_disable_all_ports (self);
+	}
+	
+	
+	if (self->cur_state == OMX_StateIdle &&
+	    self->next_state == OMX_StateLoaded)
+	{
+		goo_component_deallocate_all_ports (self);
+	}
+
+	self->configured = FALSE;	
+	return;
+}
+
+
+/*
+ * Check if output ports are in tunnel mode. If so, send peer components
  * to EXECUTING state recursively
  */
 static void
@@ -1217,10 +1345,10 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 #endif
 
 		goo_component_wait_for_next_state (videoenc);
-
+	
 		g_object_unref (videoenc);
 	}
-	
+
 	return;
 }
 
@@ -1421,7 +1549,7 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 	c_klass->set_parameters_func = goo_ti_camera_set_parameters;
 	c_klass->load_parameters_func = goo_ti_camera_load_parameters;
 	c_klass->validate_ports_definition_func = goo_ti_camera_validate;
-	
+	c_klass->set_state_loaded_func = goo_ti_camera_set_state_loaded;
 	c_klass->set_state_idle_func = goo_ti_camera_set_state_idle;
 	c_klass->set_state_executing_func = goo_ti_camera_set_state_executing;
 	/* c_klass->flush_port_func = goo_ti_camera_flush_port; */

@@ -206,12 +206,13 @@ goo_ti_video_encoder_validate_ports_definition (GooComponent* component)
 		g_assert (port != NULL);
 
 		param = GOO_PORT_GET_DEFINITION (port);
+		
 
-/* 		param->nBufferSize = */
-/* 				param->format.video.nFrameWidth * */
-/* 				param->format.video.nFrameHeight / 2; */
+ 		param->nBufferSize = 
+ 				param->format.video.nFrameWidth *
+ 				param->format.video.nFrameHeight / 2; 
 
-		param->nBufferSize = DEFAULT_OUTPUT_BUFFER_SIZE;
+		/*param->nBufferSize = DEFAULT_OUTPUT_BUFFER_SIZE;*/
 
 		g_object_unref (iter);
 		g_object_unref (port);
