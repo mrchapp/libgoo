@@ -186,6 +186,7 @@ GooIterator* goo_component_iterate_output_ports (GooComponent* self);
 GooPort* goo_component_get_port (GooComponent* self, gchar* name);
 GooComponent* goo_component_get_peer_component (GooComponent* self,
 						GooPort* port);
+GooComponent * goo_component_get_tunnel_head (GooComponent *self);
 gboolean goo_component_is_my_port (GooComponent* self, GooPort* port);
 gboolean goo_component_set_clock (GooComponent* self, GooComponent* clock);
 

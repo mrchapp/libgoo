@@ -495,6 +495,60 @@ goo_component_get_peer_component (GooComponent* self, GooPort* port)
 }
 
 /**
+ * If this component is in a tunnel, iterate upstream (through the inports)
+ * to find the first component in the tunnel.  Otherwise return self.
+ *
+ * This allows downstream components to do things like:
+ * <pre>
+ *   goo_component_set_state_xyz (
+ *     goo_component_get_tunnel_head (component));
+ * </pre>
+ * to initiate a state change
+ *
+ * return: the component that is the beginning of the tunnel, or 'self'
+ *   if no tunnel.  The return value must be unrefed after usage.
+ */
+GooComponent *
+goo_component_get_tunnel_head (GooComponent *self)
+{
+GOO_OBJECT_DEBUG (self, "");
+
+	g_assert (GOO_IS_COMPONENT (self));
+	GooComponent *result = NULL;
+
+	GooIterator* iter = goo_component_iterate_input_ports (self);
+	while (!goo_iterator_is_done (iter) && !result)
+	{
+		GooPort* port = GOO_PORT (goo_iterator_get_current (iter));
+GOO_OBJECT_DEBUG (self, "found port %s (%d, %d)", GOO_OBJECT_NAME (port), goo_port_is_tunneled (port), goo_port_is_enabled (port));
+		if (goo_port_is_tunneled (port) && goo_port_is_enabled (port))
+		{
+			GOO_OBJECT_DEBUG (self, "Found a tunneled input port");
+
+			GooComponent *peer = goo_component_get_peer_component (self, port);
+GOO_OBJECT_DEBUG (self, "peer=0x%08x", peer);
+
+			if (peer)
+			{
+				result = goo_component_get_tunnel_head (peer);
+				g_object_unref (peer);
+			}
+		}
+		g_object_unref (port);
+		goo_iterator_next (iter);
+	}
+	g_object_unref (iter);
+
+GOO_OBJECT_DEBUG (self, "result=0x%08x", result);
+	if (!result)
+	{
+		result = g_object_ref (self);
+	}
+
+	return result;
+}
+
+/**
  * goo_component_set_supplier_port:
  * @self: A #GooComponent instance
  * @port: A #GooPort instance
