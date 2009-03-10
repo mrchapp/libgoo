@@ -63,6 +63,7 @@
 #include <goo-ti-jpegdec.h>
 #include <goo-ti-mpeg2dec.h>
 #include <goo-ti-gsmfrdec.h>
+#include <goo-ti-armaacdec.h>
 
 struct _component_entry
 {
@@ -74,6 +75,7 @@ struct _component_entry
 
 static struct _component_entry _components[] =
 {
+    { "armaacdec", GOO_TI_ARMAAC_DECODER, goo_ti_armaacdec_get_type, 0 },
 	{ "wbamrdec", GOO_TI_WBAMR_DECODER, goo_ti_wbamrdec_get_type, 0 },
 	{ "gsmfrdec", GOO_TI_GSMFR_DECODER, goo_ti_gsmfrdec_get_type, 0 },
 	{ "nbamrdec", GOO_TI_NBAMR_DECODER, goo_ti_nbamrdec_get_type, 0 },
