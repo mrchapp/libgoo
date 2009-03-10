@@ -42,6 +42,7 @@ libgoo_ti_la_sources = \
 	goo-ti-g722dec.c \
 	goo-ti-g711dec.c \
 	goo-ti-aacdec.c \
+	goo-ti-armaacdec.c \
 	goo-ti-video-decoder.c \
 	goo-ti-mpeg4dec.c \
 	goo-ti-sparkdec.c \
@@ -83,6 +84,7 @@ libgoo_ti_la_headers = \
 	goo-ti-g722dec.h \
 	goo-ti-g711dec.h \
 	goo-ti-aacdec.h \
+	goo-ti-armaacdec.h \
 	goo-ti-video-decoder.h \
 	goo-ti-mpeg4dec.h \
 	goo-ti-video-encoder.h \
