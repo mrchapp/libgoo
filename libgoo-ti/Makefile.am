@@ -34,6 +34,7 @@ libgoo_ti_la_sources = \
 	goo-ti-wbamrenc.c \
 	goo-ti-gsmfrenc.c \
 	goo-ti-aacenc.c \
+	goo-ti-armaacenc.c \
 	goo-ti-mp3dec.c \
 	goo-ti-wmadec.c \
 	goo-ti-pcmdec.c \
@@ -76,6 +77,7 @@ libgoo_ti_la_headers = \
 	goo-ti-wbamrenc.h \
 	goo-ti-gsmfrenc.h \
 	goo-ti-aacenc.h \
+	goo-ti-armaacenc.h \
 	goo-ti-mp3dec.h \
 	goo-ti-wmadec.h \
 	goo-ti-pcmdec.h \
