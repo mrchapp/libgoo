@@ -58,10 +58,10 @@ struct _GooTiArmAacDecClass
 };
 
 /**
- * GOO_TI_AMRAACDEC_GET_PARAM:
- * @dec: a #GooTiAmrAacDec instance
+ * GOO_TI_ARMAACDEC_GET_PARAM:
+ * @dec: a #GooTiArmAacDec instance
  *
- * Gets the OMX_AUDIO_PARAM_ structure of the AMRAAC component.
+ * Gets the OMX_AUDIO_PARAM_ structure of the ARMAAC component.
  *
  * Return value: The OMX_AUDIO_PARAM_ pointer.
  */
@@ -75,4 +75,4 @@ GooComponent* goo_ti_armaacdec_new ();
 G_END_DECLS
 
 
-#endif /* _GOO_TI_AMRAACDEC_H_ */
+#endif /* _GOO_TI_ARMAACDEC_H_ */

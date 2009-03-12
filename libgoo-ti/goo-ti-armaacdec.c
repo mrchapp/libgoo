@@ -112,7 +112,7 @@ static void
 goo_ti_armaacdec_set_parameters (GooComponent* component)
 {
         g_assert (GOO_IS_TI_ARMAACDEC (component));
-        GooTiAacDec* self = GOO_TI_ARMAACDEC (component);
+        GooTiArmAacDec* self = GOO_TI_ARMAACDEC (component);
         g_assert (self->input_port_param != NULL);
         g_assert (self->output_port_param != NULL);
         g_assert (component->cur_state == OMX_StateLoaded);
@@ -132,7 +132,7 @@ static void
 goo_ti_armaacdec_validate_ports_definitions (GooComponent* component)
 {
 	g_assert (GOO_IS_TI_ARMAACDEC (component));
-	GooTiAacDec* self = GOO_TI_ARMAACDEC (component);
+	GooTiArmAacDec* self = GOO_TI_ARMAACDEC (component);
 	g_assert (self->input_port_param != NULL);
 	g_assert (self->output_port_param != NULL);
 	g_assert (component->cur_state == OMX_StateLoaded);
