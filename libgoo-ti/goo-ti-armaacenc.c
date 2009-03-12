@@ -85,7 +85,7 @@ _output_buffer_size (GooTiArmAacEnc* self)
 	g_assert (GOO_IS_TI_ARMAACENC (self));
 
 	OMX_AUDIO_PARAM_AACPROFILETYPE* param = NULL;
-	param = GOO_TI_AACENC_GET_OUTPUT_PORT_PARAM (self);
+	param = GOO_TI_ARMAACENC_GET_OUTPUT_PORT_PARAM (self);
 
 	gfloat avgframesiz = 0;
 	gfloat fps = 0;
@@ -193,7 +193,7 @@ _validate_parameters_combination (OMX_AUDIO_PARAM_AACPROFILETYPE* param)
 
 static void
 _goo_ti_armaacenc_set_bit_rate_mode (GooTiArmAacEnc *self,
-				  GooTiAmrAacEncBitRateMode bit_rate_mode)
+				  GooTiArmAacEncBitRateMode bit_rate_mode)
 {
 	g_assert (self != NULL);
 	GooTiAudioComponent *me = GOO_TI_AUDIO_COMPONENT (self);
@@ -227,7 +227,7 @@ static void
 goo_ti_armaacenc_set_property (GObject *object, guint prop_id,
 			    const GValue* value, GParamSpec *spec)
 {
-	g_assert (GOO_IS_TI_AACENC (object));
+	g_assert (GOO_IS_TI_ARMAACENC (object));
 	GooTiArmAacEnc *self = GOO_TI_ARMAACENC (object);
 
 	switch ( prop_id )
@@ -250,7 +250,7 @@ goo_ti_armaacenc_get_property (GObject *object, guint prop_id,
 			    GValue* value, GParamSpec *spec)
 {
 	g_assert (GOO_IS_TI_ARMAACENC (object));
-	GooTiAacEnc *self = GOO_TI_ARMAACENC (object);
+	GooTiArmAacEnc *self = GOO_TI_ARMAACENC (object);
 
 	switch ( prop_id )
 	{
@@ -317,7 +317,7 @@ goo_ti_armaacenc_finalize (GObject* object)
 	}
 
 
-	(*G_OBJECT_CLASS (goo_ti_aacenc_parent_class)->finalize) (object);
+	(*G_OBJECT_CLASS (goo_ti_armaacenc_parent_class)->finalize) (object);
 
 	return;
 }
