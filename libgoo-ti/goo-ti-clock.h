@@ -56,6 +56,8 @@ struct _GooTiClockClass
 
 GType goo_ti_clock_get_type (void);
 gint64 goo_ti_clock_get_timestamp (GooTiClock* self);
+void goo_ti_clock_set_starttime (GooTiClock* self, gint64 time_start);
+
 
 G_END_DECLS
 

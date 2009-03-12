@@ -693,21 +693,10 @@ goo_ti_post_processor_set_starttime (GooComponent* component, gint64 time_start)
 	if (factory->clock != NULL)
 	{
 		GooComponent *clock = g_object_ref (factory->clock);
-
-		OMX_TIME_CONFIG_TIMESTAMPTYPE* param;
-		param = g_new0 (OMX_TIME_CONFIG_TIMESTAMPTYPE, 1);
-		GOO_INIT_PARAM (param, OMX_TIME_CONFIG_TIMESTAMPTYPE);
-
-		param->nTimestamp = time_start;
-
-		goo_component_set_config_by_index (clock,
-						OMX_IndexConfigTimeClientStartTime, param);
-
+		goo_ti_clock_set_starttime (clock, time_start);
 		g_object_unref (clock);
-		g_free (param);
-		g_object_unref (factory);
-
 	}
+	g_object_unref (factory);
 }
 
 

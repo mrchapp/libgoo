@@ -48,7 +48,7 @@ enum _GooTiClockProp
 	PROP_TIMESTAMP
 };
 
-G_DEFINE_TYPE (GooTiClock, goo_ti_clock, GOO_TYPE_COMPONENT)
+G_DEFINE_TYPE (GooTiClock, goo_ti_clock, GOO_TYPE_COMPONENT);
 
 /**
  * goo_ti_clock_get_timestamp:
@@ -77,6 +77,26 @@ goo_ti_clock_get_timestamp (GooTiClock* self)
 	g_free (param);
 
 	return ts;
+}
+
+/**
+ * Reset the start-time of the clock
+ */
+void
+goo_ti_clock_set_starttime (GooTiClock* self, gint64 time_start)
+{
+	g_assert (GOO_IS_TI_CLOCK (self));
+	GOO_OBJECT_INFO (self, "time_start=%lld", time_start);
+	OMX_TIME_CONFIG_TIMESTAMPTYPE* param =
+		g_new0 (OMX_TIME_CONFIG_TIMESTAMPTYPE, 1);
+	GOO_INIT_PARAM (param, OMX_TIME_CONFIG_TIMESTAMPTYPE);
+
+	param->nTimestamp = time_start;
+
+	goo_component_set_config_by_index (self,
+					OMX_IndexConfigTimeClientStartTime, param);
+
+	g_free (param);
 }
 
 static void
