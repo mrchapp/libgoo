@@ -68,10 +68,10 @@ struct _GooTiArmAacEncClass
  * Return value: The #OMX_AUDIO_PARAM_PCMMODETYPE pointer.
  */
 #define GOO_TI_ARMAACENC_GET_INPUT_PORT_PARAM(enc) \
-	(GOO_TI_AACENC (enc)->input_port_param)
+	(GOO_TI_ARMAACENC (enc)->input_port_param)
 
 /**
- * GOO_TI_AACENC_GET_OUTPUT_PARAM:
+ * GOO_TI_ARMAACENC_GET_OUTPUT_PARAM:
  * @enc: a #GooTiAacEnc instance
  *
  * Gets the #OMX_AUDIO_PARAM_AACPROFILETYPE structure of the AAC component.
