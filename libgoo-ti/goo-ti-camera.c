@@ -526,8 +526,7 @@ _goo_ti_camera_set_vstab_mode (GooTiCamera* self, gboolean vstab_mode)
 	OMX_PARAM_PORTDEFINITIONTYPE* param;
 	param = GOO_PORT_GET_DEFINITION (port);
 
-	if (vstab_mode == TRUE &&
-	    param->format.video.eColorFormat == OMX_COLOR_FormatCbYCrY)
+	if (vstab_mode == TRUE)
 	{
 		GOO_OBJECT_DEBUG (self, "activating vstab");
 
