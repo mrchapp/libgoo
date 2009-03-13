@@ -526,7 +526,7 @@ _goo_ti_camera_set_vstab_mode (GooTiCamera* self, gboolean vstab_mode)
 	OMX_PARAM_PORTDEFINITIONTYPE* param;
 	param = GOO_PORT_GET_DEFINITION (port);
 
-	if (vstab_mode == TRUE)
+	if (vstab_mode == TRUE /*&&   param->format.video.eColorFormat == OMX_COLOR_FormatYCbYCr*/)
 		
 	{
 		GOO_OBJECT_DEBUG (self, "activating vstab");
@@ -540,6 +540,7 @@ _goo_ti_camera_set_vstab_mode (GooTiCamera* self, gboolean vstab_mode)
 		goo_component_set_config_by_index (GOO_COMPONENT (self),
 						   OMX_IndexConfigCommonFrameStabilisation,
 						   param);
+
 		g_free (param);
 	}
 
@@ -999,8 +1000,6 @@ goo_ti_camera_pp_set_idle (GooComponent* self)
 		return;
 	}
 
-	GOO_OBJECT_INFO (postproc, "Sending idle state command");
-
 	/* Sending postprocessor to idle state */
 #if 1
 	goo_component_set_state_idle (postproc);
@@ -1015,7 +1014,6 @@ goo_ti_camera_pp_set_idle (GooComponent* self)
 		);
 	GOO_OBJECT_UNLOCK (postproc);
 #endif
-
 	goo_component_wait_for_next_state (postproc);
 	g_object_unref (postproc);
 			
@@ -1061,14 +1059,16 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 	{
 		goo_component_allocate_all_ports (videoenc);
 	}
-			
+
+	goo_component_wait_for_next_state (videoenc);		 		
 	if (tmpstate == OMX_StateExecuting)
 	{
 		/* unblock all the async_queues */
 		goo_component_flush_all_ports (videoenc);
 	}
-#endif
-	goo_component_wait_for_next_state (videoenc);		 
+	
+#endif	
+	goo_component_wait_for_next_state (videoenc);	
 	g_object_unref (videoenc);	
 	return;
 }
@@ -1137,17 +1137,16 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 		g_assert (FALSE);
 	}
 
-	GOO_OBJECT_INFO (self, "Sending idle state command");
-		
-	/* we need the postprocessor in idle before camera*/
-	goo_ti_camera_pp_set_idle (self);
-	
+	if (tmpstate == OMX_StateLoaded)
+	{
+		goo_ti_camera_pp_set_idle (self);
+	}
 	if (tmpstate == OMX_StateExecuting)
 	{
 		goo_ti_camera_venc_set_idle (self);
 		goo_ti_camera_jpeg_set_idle (self);
 	}
-	
+		
 	GOO_OBJECT_LOCK (self);
 	GOO_RUN (
 		OMX_SendCommand (self->handle,
@@ -1168,13 +1167,12 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 	{
 	}
 
-	goo_component_wait_for_next_state (self);
-
-	if (tmpstate == OMX_StateLoaded)
+	if (tmpstate == OMX_StateExecuting)
 	{
-		goo_ti_camera_venc_set_idle (self);
-		goo_ti_camera_jpeg_set_idle (self);
+		goo_ti_camera_pp_set_idle (self);
 	}
+
+	goo_component_wait_for_next_state (self);
 	
 	if (tmpstate == OMX_StateExecuting)
 	{
@@ -1187,8 +1185,13 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 		g_object_unref (port);
 	}
 
-	GOO_OBJECT_DEBUG (self, "");
 
+	if (tmpstate == OMX_StateLoaded)
+	{
+		goo_ti_camera_venc_set_idle (self);
+		goo_ti_camera_jpeg_set_idle (self);
+	}
+	
 	return;
 }
 
@@ -1233,7 +1236,6 @@ goo_ti_camera_venc_set_loaded (GooComponent* self)
 	
 	goo_component_set_state_loaded (videoenc);
 	
-	
 	goo_component_wait_for_next_state (videoenc);		 
 	g_object_unref (videoenc);	
 	return;
@@ -1246,7 +1248,6 @@ goo_ti_camera_jpeg_set_loaded (GooComponent* self)
 
 	if (jpegenc == NULL)
 	{
-		
 		return;
 	}
 	
@@ -1255,10 +1256,7 @@ goo_ti_camera_jpeg_set_loaded (GooComponent* self)
 		return;
 	}
 	
-
 	goo_component_set_state_loaded (jpegenc);
-	
-	
 	
 	goo_component_wait_for_next_state (jpegenc);		 
 	g_object_unref (jpegenc);	
@@ -1270,14 +1268,9 @@ goo_ti_camera_set_state_loaded (GooComponent* self)
 {
 	self->next_state = OMX_StateLoaded;
 	
-	
-
 	goo_ti_camera_pp_set_loaded (self);
 
-	
-	
 	GOO_OBJECT_INFO (self, "Sending load state command");
-	
 	GOO_OBJECT_LOCK (self);
 	GOO_RUN (
 		OMX_SendCommand (self->handle,
@@ -1288,10 +1281,8 @@ goo_ti_camera_set_state_loaded (GooComponent* self)
 	GOO_OBJECT_UNLOCK (self);
 	
 	goo_ti_camera_venc_set_loaded (self);
-	goo_ti_camera_jpeg_set_loaded (self);
-	
-
-	
+	goo_ti_camera_jpeg_set_loaded (self);	
+		
 	if (self->cur_state == OMX_StateIdle &&
 	    self->next_state == OMX_StateLoaded)
 	{
@@ -1358,7 +1349,31 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 
 		g_object_unref (videoenc);
 	}
+/*
+	GooComponent* jpegenc = goo_ti_camera_get_enc (self);
+	
+	if (jpegenc != NULL)
+	{
+		GOO_OBJECT_INFO (jpegenc, "Sending executing state command");
+#if 1
+		goo_component_set_state_executing (jpegenc);
+#else
+		GOO_OBJECT_LOCK (jpegenc);
+		jpegenc->next_state = OMX_StateExecuting;
+		GOO_RUN (
+			OMX_SendCommand (jpegenc->handle,
+					 OMX_CommandStateSet,
+					 jpegenc->next_state,
+				 	NULL)
+			);
+		GOO_OBJECT_UNLOCK (jpegenc);
+#endif
 
+		goo_component_wait_for_next_state (jpegenc);
+
+		g_object_unref (jpegenc);
+	}
+*/	
 	return;
 }
 
