@@ -769,8 +769,6 @@ goo_ti_camera_validate (GooComponent* component)
 			color_format = param->format.video.eColorFormat;
 
 			/* synch data */
-			
-
 			param->format.video.nFrameWidth =
 				sensor->sFrameSize.nWidth;
 			param->format.video.nFrameHeight =
@@ -1060,7 +1058,7 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 		goo_component_allocate_all_ports (videoenc);
 	}
 
-	goo_component_wait_for_next_state (videoenc);		 		
+	goo_component_wait_for_next_state (videoenc);
 	if (tmpstate == OMX_StateExecuting)
 	{
 		/* unblock all the async_queues */
@@ -1068,8 +1066,8 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 	}
 	
 #endif	
-	goo_component_wait_for_next_state (videoenc);	
-	g_object_unref (videoenc);	
+	goo_component_wait_for_next_state (videoenc);
+	g_object_unref (videoenc);
 	return;
 }
 
@@ -1083,7 +1081,7 @@ goo_ti_camera_jpeg_set_idle (GooComponent* self)
 	{
 		return;
 	}
-	else if(!GOO_IS_TI_JPEGENC (jpegenc) )
+	else if(!GOO_IS_TI_JPEGENC (jpegenc))
 	{
 		return;
 	}
@@ -1236,8 +1234,8 @@ goo_ti_camera_venc_set_loaded (GooComponent* self)
 	
 	goo_component_set_state_loaded (videoenc);
 	
-	goo_component_wait_for_next_state (videoenc);		 
-	g_object_unref (videoenc);	
+	goo_component_wait_for_next_state (videoenc);
+	g_object_unref (videoenc);
 	return;
 }
 
@@ -1258,8 +1256,8 @@ goo_ti_camera_jpeg_set_loaded (GooComponent* self)
 	
 	goo_component_set_state_loaded (jpegenc);
 	
-	goo_component_wait_for_next_state (jpegenc);		 
-	g_object_unref (jpegenc);	
+	goo_component_wait_for_next_state (jpegenc);
+	g_object_unref (jpegenc);
 	return;
 }
 
@@ -1281,7 +1279,7 @@ goo_ti_camera_set_state_loaded (GooComponent* self)
 	GOO_OBJECT_UNLOCK (self);
 	
 	goo_ti_camera_venc_set_loaded (self);
-	goo_ti_camera_jpeg_set_loaded (self);	
+	goo_ti_camera_jpeg_set_loaded (self);
 		
 	if (self->cur_state == OMX_StateIdle &&
 	    self->next_state == OMX_StateLoaded)
