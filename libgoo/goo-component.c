@@ -1184,15 +1184,22 @@ goo_component_flush_port_default (GooComponent* self, GooPort* port)
 		g_object_set (port, "queued", prev_port_enqueue, NULL);
 	}
 
-	if (!goo_port_is_tunneled (port))
+	if (!goo_port_is_tunneled (port) && !goo_port_is_disabled (port))
 	{
-		gint buffer_queued = g_async_queue_length (port->buffer_queue);
-		GOO_OBJECT_INFO (port, "%d buffers queued", buffer_queued);
+		if (port->buffer_queue)
+		{
+			gint buffer_queued = g_async_queue_length (port->buffer_queue);
+			GOO_OBJECT_INFO (port, "%d buffers queued", buffer_queued);
 
 #if 0 /* @todo: check this assertion */
-		/* this thread is blocking so we substract 1 */
-		g_assert (buffer_count - 1 == buffer_queued);
+			/* this thread is blocking so we substract 1 */
+			g_assert (buffer_count - 1 == buffer_queued);
 #endif
+		}
+		else
+		{
+			GOO_OBJECT_WARNING (port, "warning: tunneled port, but no buffer_queue??");
+		}
 	}
 
 	GOO_OBJECT_DEBUG (self, "");
