@@ -481,9 +481,7 @@ goo_ti_jpegenc_validate (GooComponent* component)
         guint width = param->format.image.nFrameWidth;
         guint height = param->format.image.nFrameHeight;
 
-		g_print("\n GOO-TI-JPEG IN nFrameWidth = %d , nFrameHeight = %d \n", 
-		width, height);
-		
+			
 		/* the buffer size must be multiple of 16 */
 		width = GOO_ROUND_UP_16 (width);
 		height = GOO_ROUND_UP_16 (height);
@@ -529,9 +527,7 @@ goo_ti_jpegenc_validate (GooComponent* component)
 		guint width = param->format.image.nFrameWidth;
         guint height = param->format.image.nFrameHeight;
 
-		g_print("\n GOO-TI-JPEG OUT nFrameWidth = %d , nFrameHeight = %d \n", 
-		width, height);
-        /* the buffer size must be multiple of 16 */
+		/* the buffer size must be multiple of 16 */
 		width = GOO_ROUND_UP_16 (width);
 		height = GOO_ROUND_UP_16 (height);
 

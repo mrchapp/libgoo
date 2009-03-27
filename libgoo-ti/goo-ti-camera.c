@@ -744,7 +744,7 @@ goo_ti_camera_validate (GooComponent* component)
 
 		OMX_COLOR_FORMATTYPE color_format;
 
-		if (sensor->bOneShot == TRUE)
+		if (param->eDomain == OMX_PortDomainImage)
 		{
 			color_format = param->format.image.eColorFormat;
 
@@ -761,8 +761,10 @@ goo_ti_camera_validate (GooComponent* component)
 
 			param->format.image.eCompressionFormat =
 			     OMX_IMAGE_CodingUnused;
+			     
+			param->nBufferCountActual = 1;
 
-			param->eDomain = OMX_PortDomainImage;
+			/*param->eDomain = OMX_PortDomainImage;*/
 		}
 		else
 		{
@@ -781,7 +783,7 @@ goo_ti_camera_validate (GooComponent* component)
 			param->format.video.eCompressionFormat =
 			     OMX_VIDEO_CodingUnused;
 
-			param->eDomain = OMX_PortDomainVideo;
+			/*param->eDomain = OMX_PortDomainVideo; */
 		}
 
 		switch (color_format)
@@ -1347,7 +1349,7 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 
 		g_object_unref (videoenc);
 	}
-/*
+
 	GooComponent* jpegenc = goo_ti_camera_get_enc (self);
 	
 	if (jpegenc != NULL)
@@ -1371,7 +1373,7 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 
 		g_object_unref (jpegenc);
 	}
-*/	
+	
 	return;
 }
 
