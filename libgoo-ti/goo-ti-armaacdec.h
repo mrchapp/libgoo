@@ -70,7 +70,7 @@ struct _GooTiArmAacDecClass
 
 /* functions */
 GType goo_ti_armaacdec_get_type (void);
-GooComponent* goo_ti_armaacdec_new ();
+/*GooComponent* goo_ti_armaacdec_new ();*/
 
 G_END_DECLS
 
