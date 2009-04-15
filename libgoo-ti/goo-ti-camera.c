@@ -51,6 +51,7 @@ enum _GooTiCameraProp
 	PROP_BRIGHTNESS,
 	PROP_CAPTURE_MODE,
 	PROP_BALANCE,
+	PROP_EXPOSURE,
 	PROP_ZOOM,
 	PROP_VSTAB
 };
@@ -67,6 +68,7 @@ struct _GooTiCameraPriv
 	gboolean capturemode;
 	GooTiCameraZoom zoom;
 	OMX_WHITEBALCONTROLTYPE balance;
+	OMX_EXPOSURECONTROLTYPE exposure;
 };
 
 #define GOO_TI_CAMERA_GET_PRIVATE(obj) \
@@ -121,7 +123,29 @@ goo_ti_camera_white_balance_type ()
 	return type;
 }
 
+GType
+goo_ti_camera_exposure_type ()
+{
+	static GType type = 0;
+
+	if (type == 0)
+	{
+		static const GEnumValue values[] = {
+			{ OMX_ExposureControlOff, "Off", "No exposure" },
+			{ OMX_ExposureControlAuto, "Auto", "Auto exposure" },
+			{ 0, NULL, NULL },
+		};
+
+		type = g_enum_register_static ("GooTiCameraExposure",
+					       values);
+	}
+
+	return type;
+}
+
+
 /* default values */
+#define DEFAULT_EXPOSURE   OMX_ExposureControlAuto
 #define DEFAULT_BALANCE    OMX_WhiteBalControlAuto
 #define DEFAULT_ZOOM       GOO_TI_CAMERA_ZOOM_1X
 #define DEFAULT_CAPTURE    FALSE
@@ -281,6 +305,55 @@ _goo_ti_camera_get_brightness (GooTiCamera* self)
 	return retval;
 }
 
+static OMX_EXPOSURECONTROLTYPE
+_goo_ti_camera_get_exposure (GooTiCamera* self)
+{
+	g_assert (self != NULL);
+	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
+
+
+	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+	OMX_EXPOSURECONTROLTYPE retval;
+	retval = priv->balance;
+
+	GOO_OBJECT_DEBUG (self, "");
+
+	return retval;
+}
+
+
+static void
+_goo_ti_camera_set_exposure (GooTiCamera* self,
+				  OMX_EXPOSURECONTROLTYPE type)
+{
+	g_assert (self != NULL);
+	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
+
+	/* currently implemented controls */
+	g_assert (type == OMX_ExposureControlOff     ||
+		  type == OMX_ExposureControlAuto);
+
+	OMX_CONFIG_EXPOSURECONTROLTYPE* param;
+	param = g_new0 (OMX_CONFIG_EXPOSURECONTROLTYPE, 1);
+	GOO_INIT_PARAM (param, OMX_CONFIG_EXPOSURECONTROLTYPE);
+
+	param->eExposureControl = type;
+
+	goo_component_set_config_by_index (GOO_COMPONENT (self),
+					   OMX_IndexConfigCommonExposure,
+					   param);
+
+	g_free (param);
+
+	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+	priv->exposure = type;
+
+	GOO_OBJECT_DEBUG (self, "");
+
+	return;
+}
+
+
 static void
 _goo_ti_camera_set_white_balance (GooTiCamera* self,
 				  OMX_WHITEBALCONTROLTYPE type)
@@ -289,7 +362,8 @@ _goo_ti_camera_set_white_balance (GooTiCamera* self,
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
 
 	/* currently implemented controls */
-	g_assert (type == OMX_WhiteBalControlAuto         ||
+	g_assert (type == OMX_WhiteBalControlOff     ||
+		  type == OMX_WhiteBalControlAuto         ||
 		  type == OMX_WhiteBalControlSunLight     ||
 		  type == OMX_WhiteBalControlShade        ||
 		  type == OMX_WhiteBalControlFluorescent  ||
@@ -526,8 +600,8 @@ _goo_ti_camera_set_vstab_mode (GooTiCamera* self, gboolean vstab_mode)
 	OMX_PARAM_PORTDEFINITIONTYPE* param;
 	param = GOO_PORT_GET_DEFINITION (port);
 
-	if (vstab_mode == TRUE /*&&   param->format.video.eColorFormat == OMX_COLOR_FormatYCbYCr*/)
-		
+	if (vstab_mode == TRUE)
+
 	{
 		GOO_OBJECT_DEBUG (self, "activating vstab");
 
@@ -753,7 +827,7 @@ goo_ti_camera_validate (GooComponent* component)
 				sensor->sFrameSize.nWidth;
 			param->format.image.nFrameHeight =
 				sensor->sFrameSize.nHeight;
-				
+
 			/* the frame rate is always 0 */
 			sensor->nFrameRate = 0;
 
@@ -761,7 +835,7 @@ goo_ti_camera_validate (GooComponent* component)
 
 			param->format.image.eCompressionFormat =
 			     OMX_IMAGE_CodingUnused;
-			     
+
 			param->nBufferCountActual = 1;
 
 			/*param->eDomain = OMX_PortDomainImage;*/
@@ -775,27 +849,27 @@ goo_ti_camera_validate (GooComponent* component)
 				sensor->sFrameSize.nWidth;
 			param->format.video.nFrameHeight =
 				sensor->sFrameSize.nHeight;
-			
+
 			g_assert (sensor->nFrameRate > 0);
 
 			param->format.video.cMIMEType = "video/x-raw-yuv";
 
 			param->format.video.eCompressionFormat =
 			     OMX_VIDEO_CodingUnused;
-
 			/*param->eDomain = OMX_PortDomainVideo; */
 		}
 
 		switch (color_format)
 		{
-		case OMX_COLOR_FormatCbYCrY:
-		case OMX_COLOR_FormatYCbYCr:
+
+		case OMX_COLOR_FormatCbYCrY:      			/* UYVY */
+		case OMX_COLOR_FormatYCbYCr:				/* YUY2 */
 		case OMX_COLOR_Format16bitRGB565:
 			param->nBufferSize =
 				sensor->sFrameSize.nWidth *
 				sensor->sFrameSize.nHeight * 2;
 			break;
-		case OMX_COLOR_FormatYUV420PackedPlanar:
+		case OMX_COLOR_FormatYUV420PackedPlanar:	/*I420*/
 			param->nBufferSize =
 				sensor->sFrameSize.nWidth *
 				sensor->sFrameSize.nHeight * 1.5;
@@ -821,7 +895,7 @@ goo_ti_camera_validate (GooComponent* component)
 		/* let's use the max available resolution */
 		g_assert (param->format.video.nFrameWidth <= rinfo.width);
 		g_assert (param->format.video.nFrameHeight <= rinfo.height);
-		
+
 		param->format.video.cMIMEType = "video/x-raw-yuv";
 
 		param->format.video.eCompressionFormat =
@@ -925,7 +999,7 @@ goo_ti_camera_get_enc (GooComponent* self)
 
 		GooPort *peer_port;
 		peer_port = goo_port_get_peer (port);
-		
+
 		g_assert (peer_port != NULL);
 
 		retval = GOO_COMPONENT (
@@ -969,7 +1043,7 @@ goo_ti_camera_get_postproc (GooComponent* self)
 
 		GooPort *peer_port;
 		peer_port = goo_port_get_peer (port);
-		
+
 		g_assert (peer_port != NULL);
 
 		retval = GOO_COMPONENT (
@@ -992,7 +1066,7 @@ goo_ti_camera_get_postproc (GooComponent* self)
 static void
 goo_ti_camera_pp_set_idle (GooComponent* self)
 {
-	
+
 	GooComponent *postproc = goo_ti_camera_get_postproc (self);
 
 	if (postproc == NULL)
@@ -1016,7 +1090,7 @@ goo_ti_camera_pp_set_idle (GooComponent* self)
 #endif
 	goo_component_wait_for_next_state (postproc);
 	g_object_unref (postproc);
-			
+
 	return;
 }
 
@@ -1034,14 +1108,14 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 	{
 		return;
 	}
-	
-#if 1	
+
+#if 1
 	goo_component_set_state_idle (videoenc);
 #else
 	GOO_OBJECT_INFO (videoenc, "Sending idle state command");
-	
+
 	OMX_STATETYPE tmpstate = videoenc->cur_state;
-	
+
 	/* Sending videoenc to idle state */
 
 	GOO_OBJECT_LOCK (videoenc);
@@ -1053,7 +1127,7 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 		 		NULL)
 		);
 	GOO_OBJECT_UNLOCK (videoenc);
-		
+
 
 	if (tmpstate == OMX_StateLoaded)
 	{
@@ -1066,8 +1140,8 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 		/* unblock all the async_queues */
 		goo_component_flush_all_ports (videoenc);
 	}
-	
-#endif	
+
+#endif
 	goo_component_wait_for_next_state (videoenc);
 	g_object_unref (videoenc);
 	return;
@@ -1076,7 +1150,7 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 static void
 goo_ti_camera_jpeg_set_idle (GooComponent* self)
 {
-	
+
 	GooComponent *jpegenc = goo_ti_camera_get_enc (self);
 
 	if (jpegenc == NULL)
@@ -1107,7 +1181,7 @@ goo_ti_camera_jpeg_set_idle (GooComponent* self)
 
 	goo_component_wait_for_next_state (jpegenc);
 	g_object_unref (jpegenc);
-			
+
 	return;
 }
 static void
@@ -1146,7 +1220,7 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 		goo_ti_camera_venc_set_idle (self);
 		goo_ti_camera_jpeg_set_idle (self);
 	}
-		
+
 	GOO_OBJECT_LOCK (self);
 	GOO_RUN (
 		OMX_SendCommand (self->handle,
@@ -1155,7 +1229,7 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 				 NULL)
 		);
 	GOO_OBJECT_UNLOCK (self);
-	
+
 	if (tmpstate == OMX_StateLoaded)
 	{
 		goo_component_allocate_all_ports (self);
@@ -1173,7 +1247,7 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 	}
 
 	goo_component_wait_for_next_state (self);
-	
+
 	if (tmpstate == OMX_StateExecuting)
 	{
 		/* unblock all the async_queues */
@@ -1191,7 +1265,7 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 		goo_ti_camera_venc_set_idle (self);
 		goo_ti_camera_jpeg_set_idle (self);
 	}
-	
+
 	return;
 }
 
@@ -1200,7 +1274,7 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 static void
 goo_ti_camera_pp_set_loaded (GooComponent* self)
 {
-	
+
 	GooComponent *postproc = goo_ti_camera_get_postproc (self);
 
 	if (postproc == NULL)
@@ -1215,7 +1289,7 @@ goo_ti_camera_pp_set_loaded (GooComponent* self)
 
 	goo_component_wait_for_next_state (postproc);
 	g_object_unref (postproc);
-	
+
 	return;
 }
 
@@ -1233,9 +1307,9 @@ goo_ti_camera_venc_set_loaded (GooComponent* self)
 	{
 		return;
 	}
-	
+
 	goo_component_set_state_loaded (videoenc);
-	
+
 	goo_component_wait_for_next_state (videoenc);
 	g_object_unref (videoenc);
 	return;
@@ -1250,14 +1324,14 @@ goo_ti_camera_jpeg_set_loaded (GooComponent* self)
 	{
 		return;
 	}
-	
+
 	else if(!GOO_IS_TI_JPEGENC (jpegenc) )
 	{
 		return;
 	}
-	
+
 	goo_component_set_state_loaded (jpegenc);
-	
+
 	goo_component_wait_for_next_state (jpegenc);
 	g_object_unref (jpegenc);
 	return;
@@ -1267,7 +1341,7 @@ static void
 goo_ti_camera_set_state_loaded (GooComponent* self)
 {
 	self->next_state = OMX_StateLoaded;
-	
+
 	goo_ti_camera_pp_set_loaded (self);
 
 	GOO_OBJECT_INFO (self, "Sending load state command");
@@ -1279,19 +1353,19 @@ goo_ti_camera_set_state_loaded (GooComponent* self)
 				 NULL)
 		);
 	GOO_OBJECT_UNLOCK (self);
-	
+
 	goo_ti_camera_venc_set_loaded (self);
 	goo_ti_camera_jpeg_set_loaded (self);
-		
+
 	if (self->cur_state == OMX_StateIdle &&
 	    self->next_state == OMX_StateLoaded)
 	{
 		goo_component_deallocate_all_ports (self);
 	}
-	
+
 	goo_component_propagate_wait_for_next_state (self);
 	self->configured = FALSE;
-	
+
 	return;
 }
 
@@ -1327,7 +1401,7 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 	}
 
 	GooComponent* videoenc = goo_ti_camera_get_enc (self);
-	
+
 	if (videoenc != NULL)
 	{
 		GOO_OBJECT_INFO (videoenc, "Sending executing state command");
@@ -1351,7 +1425,7 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 	}
 
 	GooComponent* jpegenc = goo_ti_camera_get_enc (self);
-	
+
 	if (jpegenc != NULL)
 	{
 		GOO_OBJECT_INFO (jpegenc, "Sending executing state command");
@@ -1373,7 +1447,7 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 
 		g_object_unref (jpegenc);
 	}
-	
+
 	return;
 }
 
@@ -1438,6 +1512,10 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 		_goo_ti_camera_set_white_balance (self,
 						  g_value_get_enum (value));
 		break;
+	case PROP_EXPOSURE:
+		_goo_ti_camera_set_exposure (self,
+						  g_value_get_enum (value));
+		break;
 	case PROP_VSTAB:
 		_goo_ti_camera_set_vstab_mode (self,
 					       g_value_get_boolean (value));
@@ -1476,6 +1554,10 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 		g_value_set_enum (value,
 				  _goo_ti_camera_get_white_balance (self));
 		break;
+	case PROP_EXPOSURE:
+		g_value_set_enum (value,
+				  _goo_ti_camera_get_exposure (self));
+		break;
 	case PROP_VSTAB:
 		g_value_set_boolean (value,
 				     _goo_ti_camera_get_vstab_mode (self));
@@ -1501,6 +1583,7 @@ goo_ti_camera_init (GooTiCamera* self)
 	priv->capturemode = FALSE;
 	priv->zoom = DEFAULT_ZOOM;
 	priv->balance = DEFAULT_BALANCE;
+	priv->exposure = DEFAULT_EXPOSURE;
 
 	return;
 }
@@ -1564,6 +1647,14 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 				  DEFAULT_BALANCE,
 				  G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_BALANCE, spec);
+
+	spec = g_param_spec_enum ("exposure",
+				  "Exposure control",
+				  "Set the exposure mode",
+				  GOO_TI_CAMERA_EXPOSURE,
+				  DEFAULT_EXPOSURE,
+				  G_PARAM_READWRITE);
+	g_object_class_install_property (g_klass, PROP_EXPOSURE, spec);
 
 	spec = g_param_spec_boolean ("vstab", "Video stabilization",
 				     "Video stabilization",
