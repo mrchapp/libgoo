@@ -37,6 +37,7 @@
 
 #include <goo-ti-jpegenc.h>
 #include <goo-utils.h>
+#include "OMX_JpegEnc_CustomCmd.h"
 
 #define ID "OMX.TI.JPEG.encoder"
 
@@ -66,23 +67,17 @@ typedef struct _APP_INFO {
 
 typedef enum OMX_JPEGE_INDEXTYPE
 {
-    OMX_IndexCustomCommentFlag = 0xFF000001,
-	OMX_IndexCustomCommentString = 0xFF000002,
-	OMX_IndexCustomInputFrameWidth,
-	OMX_IndexCustomInputFrameHeight,
-	OMX_IndexCustomThumbnailAPP0_INDEX,
-	OMX_IndexCustomThumbnailAPP0_W,
-	OMX_IndexCustomThumbnailAPP0_H,
-	OMX_IndexCustomThumbnailAPP0_BUF,
-	OMX_IndexCustomThumbnailAPP1_INDEX,
-	OMX_IndexCustomThumbnailAPP1_W,
-	OMX_IndexCustomThumbnailAPP1_H,
-	OMX_IndexCustomThumbnailAPP1_BUF,
-	OMX_IndexCustomThumbnailAPP13_INDEX,
-	OMX_IndexCustomThumbnailAPP13_W,
-	OMX_IndexCustomThumbnailAPP13_H,
-	OMX_IndexCustomThumbnailAPP13_BUF,
-	OMX_IndexCustomDRI
+	OMX_IndexCustomCommentFlag = 0xFF000001,
+    OMX_IndexCustomCommentString = 0xFF000002,
+    OMX_IndexCustomInputFrameWidth,
+    OMX_IndexCustomInputFrameHeight,
+    OMX_IndexCustomAPP0,
+    OMX_IndexCustomAPP1,
+    OMX_IndexCustomAPP13,
+    OMX_IndexCustomQFactor,
+    OMX_IndexCustomDRI,
+    OMX_IndexCustomHuffmanTable
+
 } OMX_INDEXIMAGETYPE;
 
 struct _ThumbnailJpegPrivate
@@ -105,7 +100,8 @@ struct _ThumbnailJpegPrivate
 #define THUMBNAIL_WIDTH 128
 #define THUMBNAIL_HEIGHT 96
 
-OMX_U8 APPLICATION1[300]={
+
+OMX_U8 APPLICATION1_THUMB[]={
 /* 0 */0, 0, 0, 0, 0x45, 0x78, 0x69, 0x66, 0x00, 0x00,      /* Indicate Exif Data*/
 /* 10 */ 0x49, 0x49,                                                  /* "Intel" type byte align*/
 0x2A, 0x00,                                             /* Confirm "Intel" type byte align*/
@@ -197,6 +193,7 @@ OMX_U8 APPLICATION1[300]={
 /*191*/            0xff, 0xff,0xff, 0xff,  /* Legth of thumbnail data*/
 };
 
+
 /*Set the fist 4 bytes to 0*/
 OMX_U8 APPLICATION13[200] = {
     0x00, 0x00, 0x00, 0x00, /*We should set the first 4 bytes to 0 */
@@ -213,7 +210,16 @@ OMX_U8 APPLICATION13[200] = {
 
 };
 
-OMX_U8 APPLICATION0[10]={0, 0, 0, 0, 0x0a,0x0b,0x0c,0x0d,0x0e,0x0f};
+OMX_U8 APPLICATION0[19]={0, 0, 0, 0,
+	0x4A, 0x46, 0x49, 0x46, 0x00, // JFIF Identifier
+	0x01, 0x02, // Version
+	0x00, // X and Y Unit Densities.
+	0x00, 0x08, // Horizontal Pixel density
+	0x00, 0x09, // Vertical Pixel density
+	0x00,
+	0x00,
+	0x00,
+};
 
 G_DEFINE_TYPE (GooTiJpegEnc, goo_ti_jpegenc, GOO_TYPE_COMPONENT)
 
@@ -224,7 +230,7 @@ _goo_ti_jpegenc_set_comment (GooTiJpegEnc* self)
         g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
         gint flag;
 
-        if (self->comment != NULL && strlen (self->comment) != 0)
+		if (self->comment != NULL && strlen (self->comment) != 0)
         {
 			GOO_OBJECT_DEBUG (self, "comment");
             flag = 1;
@@ -268,7 +274,6 @@ _goo_ti_jpegenc_set_thumbnail(GooTiJpegEnc* self, guint prop_id)
 {
 		g_assert (self != NULL);
 		g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
-		APP_INFO app_info;
 		guint flag = 0;
 
 		switch (prop_id)
@@ -277,30 +282,29 @@ _goo_ti_jpegenc_set_thumbnail(GooTiJpegEnc* self, guint prop_id)
 			{
 				if(self->thumbnail->APP1_Index)
 				{
-					flag = 1;
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP1_INDEX,
-														&flag);
-					app_info.app = (OMX_U8 *)g_malloc(sizeof(APPLICATION1));
-					memcpy(app_info.app, APPLICATION1, sizeof(APPLICATION1));
-					app_info.size = sizeof(APPLICATION1);
+					JPEG_APPTHUMB_MARKER sAPP1;
+
+					sAPP1.bMarkerEnabled = (gboolean)TRUE;
+
+					/* set JFIF marker buffer */
+					sAPP1.nThumbnailWidth = self->thumbnail->APP1_width;
+					sAPP1.nThumbnailHeight = self->thumbnail->APP1_height;
+
+					sAPP1.nMarkerSize = sizeof(APPLICATION1_THUMB);
+					sAPP1.pMarkerBuffer = APPLICATION1_THUMB;
+
 					flag = self->thumbnail->width;
-					app_info.app[58] = flag & 0xFF;
-					app_info.app[59] = (flag >> 8) & 0xFF;
+					sAPP1.pMarkerBuffer[152] = flag & 0xFF;
+					sAPP1.pMarkerBuffer[153] = (flag >> 8) & 0xFF;
+
 					flag = self->thumbnail->height;
-					app_info.app[70] = flag;
-					app_info.app[71] = (flag >> 8) & 0xFF;
+					sAPP1.pMarkerBuffer[164] = flag;
+					sAPP1.pMarkerBuffer[165] = (flag >> 8) & 0xFF;
+					g_print ("\n En set config\n");
+
 					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP1_BUF,
-														&app_info);
-					flag = self->thumbnail->APP1_width;
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP1_W,
-														&flag);
-					flag = self->thumbnail->APP1_height;
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP1_H,
-														&flag);
+														OMX_IndexCustomAPP1,
+														&sAPP1);
 				}
 				break;
 			}
@@ -308,24 +312,17 @@ _goo_ti_jpegenc_set_thumbnail(GooTiJpegEnc* self, guint prop_id)
 			{
 				if(self->thumbnail->APP13_Index)
 				{
-					flag = 1;
+					JPEG_APP13_MARKER sAPP13;
+
+					sAPP13.bMarkerEnabled = (gboolean)TRUE;
+
+					/* set JFIF marker buffer */
+					sAPP13.nMarkerSize = sizeof(APPLICATION13);
+					sAPP13.pMarkerBuffer = APPLICATION13;
+
 					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP13_INDEX,
-														&flag);
-					app_info.app = (OMX_U8 *)g_malloc(sizeof(APPLICATION13));
-					memcpy(app_info.app, APPLICATION13, sizeof(APPLICATION13));
-					app_info.size = sizeof(APPLICATION13);
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP13_BUF,
-														&app_info);
-					flag = self->thumbnail->APP13_width;
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP13_W,
-														&flag);
-					flag = self->thumbnail->APP13_height;
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP13_H,
-														&flag);
+														OMX_IndexCustomAPP13,
+														&sAPP13);
 				}
 				break;
 			}
@@ -333,22 +330,17 @@ _goo_ti_jpegenc_set_thumbnail(GooTiJpegEnc* self, guint prop_id)
 			{
 				if(self->thumbnail->APP0_Index)
 				{
-					flag = 1;
+					JPEG_APPTHUMB_MARKER sAPP0;
+					/* set JFIF marker buffer */
+					sAPP0.bMarkerEnabled = (gboolean)TRUE;
+					sAPP0.nMarkerSize = sizeof(APPLICATION0);
+					sAPP0.pMarkerBuffer = APPLICATION0;
+					sAPP0.nThumbnailWidth = self->thumbnail->APP0_width;
+					sAPP0.nThumbnailHeight = self->thumbnail->APP0_height;
+
 					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP0_INDEX,
-														&flag);
-					app_info.size = 0;
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP0_BUF,
-														&app_info);
-					flag = self->thumbnail->APP0_width;
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP0_W,
-														&flag);
-					flag = self->thumbnail->APP0_height;
-					goo_component_set_config_by_index (GOO_COMPONENT (self),
-														OMX_IndexCustomThumbnailAPP0_H,
-														&flag);
+														OMX_IndexCustomAPP0,
+														&sAPP0);
 				}
 				break;
 			}
@@ -481,7 +473,7 @@ goo_ti_jpegenc_validate (GooComponent* component)
         guint width = param->format.image.nFrameWidth;
         guint height = param->format.image.nFrameHeight;
 
-			
+
 		/* the buffer size must be multiple of 16 */
 		width = GOO_ROUND_UP_16 (width);
 		height = GOO_ROUND_UP_16 (height);
@@ -555,6 +547,7 @@ goo_ti_jpegenc_validate (GooComponent* component)
 		_goo_ti_jpegenc_set_thumbnail (self, prop_id);
 		prop_id = PROP_APP0I;
 		_goo_ti_jpegenc_set_thumbnail (self, prop_id);*/
+
 		_goo_ti_jpegenc_set_comment (self);
 
         g_object_unref (iter);
