@@ -177,6 +177,13 @@ goo_ti_armaacdec_validate_ports_definitions (GooComponent* component)
 }
 
 static void
+goo_ti_armaacdec_flush_port_default (GooComponent* self, GooPort* port)
+{
+	GOO_OBJECT_DEBUG (self, "Component does not flush the ports");
+	GOO_OBJECT_DEBUG (self, "Working around OMAPS00198926");
+}
+
+static void
 goo_ti_armaacdec_class_init (GooTiArmAacDecClass* klass)
 {
 	GObjectClass* g_klass = G_OBJECT_CLASS (klass);
@@ -187,6 +194,10 @@ goo_ti_armaacdec_class_init (GooTiArmAacDecClass* klass)
 	o_klass->set_parameters_func = goo_ti_armaacdec_set_parameters;
 	o_klass->validate_ports_definition_func =
 		goo_ti_armaacdec_validate_ports_definitions;
+
+	GooComponentClass *c_klass = NULL;
+	c_klass = GOO_COMPONENT_CLASS(klass);
+	c_klass->flush_port_func = goo_ti_armaacdec_flush_port_default;
 
 	return;
 }
