@@ -748,43 +748,6 @@ goo_ti_camera_set_parameters (GooComponent* component)
 	return;
 }
 
-/**
- * swap_color_format:
- * @self: A #GooTiCamera instance
- *
- * Change from oneshot domain to video domain.
- */
-static void
-swap_color_format (GooTiCamera* self)
-{
-	g_assert (self != NULL);
-
-	OMX_PARAM_PORTDEFINITIONTYPE *param = NULL;
-	OMX_PARAM_SENSORMODETYPE* sensor = NULL;
-	sensor = GOO_TI_CAMERA_GET_PARAM (self);
-
-	GooPort* port = goo_ti_camera_get_port (self, PORT_CAPTURE);
-	param = GOO_PORT_GET_DEFINITION (port);
-
-	if (sensor->bOneShot == OMX_TRUE)
-	{
-		/* before we were FALSE */
-		param->format.image.eColorFormat =
-			param->format.video.eColorFormat;
-	}
-	else
-	{
-		/* before we were TRUE */
-		param->format.video.eColorFormat =
-			param->format.image.eColorFormat;
-	}
-
-	g_object_unref (port);
-
-	GOO_OBJECT_DEBUG (self, "");
-
-	return;
-}
 
 static void
 goo_ti_camera_validate (GooComponent* component)
@@ -1190,7 +1153,7 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 	OMX_STATETYPE tmpstate = self->cur_state;
 	self->next_state = OMX_StateIdle;
 
-	gboolean prev_outport_queue;
+	gboolean prev_outport_queue = TRUE;
 
 	if (tmpstate == OMX_StateLoaded)
 	{

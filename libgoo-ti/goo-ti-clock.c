@@ -93,7 +93,7 @@ goo_ti_clock_set_starttime (GooTiClock* self, gint64 time_start)
 
 	param->nTimestamp = time_start;
 
-	goo_component_set_config_by_index (self,
+	goo_component_set_config_by_index (GOO_COMPONENT (self),
 					OMX_IndexConfigTimeClientStartTime, param);
 
 	g_free (param);
