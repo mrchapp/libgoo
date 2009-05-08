@@ -683,12 +683,14 @@ _goo_ti_camera_set_capture_mode (GooTiCamera* self, gboolean capture_mode)
 
 	if ((capture_mode == FALSE) && (priv->capturemode == TRUE))
 	{
+		/** We are not using the thumbnail port at the moment*/
+		/**
 		GOO_OBJECT_INFO (self, "Preparing thumbnail port");
 		GooPort* port = goo_ti_camera_get_port (GOO_TI_CAMERA (self),
 							PORT_THUMBNAIL);
 		goo_component_prepare_port (GOO_COMPONENT (self), port);
 		g_object_unref (port);
-
+		**/
 		priv->capturemode = FALSE;
 	}
 #endif
