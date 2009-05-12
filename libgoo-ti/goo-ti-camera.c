@@ -53,7 +53,8 @@ enum _GooTiCameraProp
 	PROP_BALANCE,
 	PROP_EXPOSURE,
 	PROP_ZOOM,
-	PROP_VSTAB
+	PROP_VSTAB,
+	PROP_FOCUS
 };
 
 enum _GooTiCameraPorts
@@ -152,6 +153,7 @@ goo_ti_camera_exposure_type ()
 #define DEFAULT_BRIGHTNESS 50
 #define DEFAULT_CONTRAST   0
 #define DEFAULT_VSTAB      FALSE
+#define DEFAULT_FOCUS      TRUE
 
 G_DEFINE_TYPE (GooTiCamera, goo_ti_camera, GOO_TYPE_COMPONENT)
 
@@ -305,6 +307,43 @@ _goo_ti_camera_get_brightness (GooTiCamera* self)
 	return retval;
 }
 
+
+static void
+_goo_ti_camera_set_focus (GooTiCamera* self, gboolean autofocus)
+{
+	g_assert (GOO_IS_TI_CAMERA (self));
+	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
+
+	if (autofocus == TRUE )
+	{
+		OMX_BOOL param = (autofocus == TRUE) ? OMX_TRUE : OMX_FALSE;
+
+		goo_component_set_config_by_index (GOO_COMPONENT (self),
+							OMX_IndexConfigCommonFocusRegion, &param);
+	}
+	GOO_OBJECT_DEBUG (self, "");
+	return;
+}
+
+static gboolean
+_goo_ti_camera_get_focus (GooTiCamera* self)
+{
+	g_assert (self != NULL);
+	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
+
+	OMX_BOOL param;
+	goo_component_get_config_by_index (GOO_COMPONENT (self),
+					   OMX_IndexConfigCommonFocusRegion,
+					   &param);
+
+	GOO_OBJECT_DEBUG (self, "");
+
+	gboolean retval = param;
+
+	return retval;
+}
+
+
 static OMX_EXPOSURECONTROLTYPE
 _goo_ti_camera_get_exposure (GooTiCamera* self)
 {
@@ -314,7 +353,7 @@ _goo_ti_camera_get_exposure (GooTiCamera* self)
 
 	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 	OMX_EXPOSURECONTROLTYPE retval;
-	retval = priv->balance;
+	retval = priv->exposure;
 
 	GOO_OBJECT_DEBUG (self, "");
 
@@ -1481,6 +1520,10 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 		_goo_ti_camera_set_exposure (self,
 						  g_value_get_enum (value));
 		break;
+	case PROP_FOCUS:
+		_goo_ti_camera_set_focus (self,
+						  g_value_get_boolean (value));
+		break;
 	case PROP_VSTAB:
 		_goo_ti_camera_set_vstab_mode (self,
 					       g_value_get_boolean (value));
@@ -1522,6 +1565,10 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 	case PROP_EXPOSURE:
 		g_value_set_enum (value,
 				  _goo_ti_camera_get_exposure (self));
+		break;
+	case PROP_FOCUS:
+		g_value_set_boolean (value,
+				  _goo_ti_camera_get_focus (self));
 		break;
 	case PROP_VSTAB:
 		g_value_set_boolean (value,
@@ -1615,11 +1662,17 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 
 	spec = g_param_spec_enum ("exposure",
 				  "Exposure control",
-				  "Set the exposure mode",
+				  "Set/Get the exposure mode",
 				  GOO_TI_CAMERA_EXPOSURE,
 				  DEFAULT_EXPOSURE,
 				  G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_EXPOSURE, spec);
+
+	spec = g_param_spec_boolean ("focus",
+				  "Focus control",
+				  "Set/Get the autofocus mode ",
+				  DEFAULT_FOCUS, G_PARAM_READWRITE);
+	g_object_class_install_property (g_klass, PROP_FOCUS, spec);
 
 	spec = g_param_spec_boolean ("vstab", "Video stabilization",
 				     "Video stabilization",
