@@ -1647,6 +1647,18 @@ goo_component_configure_port (GooComponent* self, GooPort* port)
 				  GOO_PORT_GET_DEFINITION (port))
 		);
 
+	GOO_OBJECT_DEBUG (port, "nBufferSize to OMX #%d  !!!!!",
+					GOO_PORT_GET_DEFINITION (port)->nBufferSize);
+
+	GOO_RUN (
+		OMX_GetParameter (self->handle,
+				  OMX_IndexParamPortDefinition,
+				  GOO_PORT_GET_DEFINITION (port))
+		);
+
+	GOO_OBJECT_DEBUG (port, "nBufferSize from OMX #%d  !!!!!",
+					GOO_PORT_GET_DEFINITION (port)->nBufferSize);
+
 	GOO_OBJECT_UNLOCK (self);
 
 	GOO_OBJECT_DEBUG (port, "Port #%d configured",
