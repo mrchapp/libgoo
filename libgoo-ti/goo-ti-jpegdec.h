@@ -81,6 +81,12 @@ typedef struct OMX_CUSTOM_IMAGE_DECODE_SUBREGION
 }OMX_CUSTOM_IMAGE_DECODE_SUBREGION;
 
 
+typedef struct OMX_CUSTOM_RESOLUTION
+{
+	OMX_U32 nWidth;
+	OMX_U32 nHeight;
+}OMX_CUSTOM_RESOLUTION;
+
 /**
  * GooTiJpegDec:
  * @param: The #OMX_IMAGE_PARAM_QFACTORTYPE structure
@@ -94,6 +100,7 @@ struct _GooTiJpegDec
 	gboolean progressive;
 	OMX_CUSTOM_IMAGE_DECODE_SECTION* section_decode;
 	OMX_CUSTOM_IMAGE_DECODE_SUBREGION* subregion_decode;
+	OMX_CUSTOM_RESOLUTION* max_res;
 };
 
 struct _GooTiJpegDecClass
@@ -103,6 +110,7 @@ struct _GooTiJpegDecClass
 
 #define GOO_TI_JPEGDEC_GET_SECTION_DECODE(jpegdec) (GOO_TI_JPEGDEC (jpegdec)->section_decode)
 #define GOO_TI_JPEGDEC_GET_SUBREGION_DECODE(jpegdec) (GOO_TI_JPEGDEC (jpegdec)->subregion_decode)
+#define GOO_TI_JPEGDEC_GET_MAXRES_DECODE(jpegdec) (GOO_TI_JPEGDEC (jpegdec)->max_res)
 
 
 GType goo_ti_jpegdec_scale_get_type();

@@ -208,17 +208,20 @@ goo_ti_jpegdec_load_parameters (GooComponent* component)
         g_assert (GOO_IS_TI_JPEGDEC (component));
         GooTiJpegDec* self = GOO_TI_JPEGDEC (component);
 
-        g_assert (self->section_decode == NULL);
+    g_assert (self->section_decode == NULL);
 	g_assert (self->subregion_decode == NULL);
+	g_assert (self->max_res == NULL);
 
-        g_assert (component->cur_state != OMX_StateInvalid);
+    g_assert (component->cur_state != OMX_StateInvalid);
 
-        self->section_decode = g_new0 (OMX_CUSTOM_IMAGE_DECODE_SECTION, 1);
+    self->section_decode = g_new0 (OMX_CUSTOM_IMAGE_DECODE_SECTION, 1);
 	self->subregion_decode = g_new0 (OMX_CUSTOM_IMAGE_DECODE_SUBREGION, 1);
+	self->max_res = g_new0 (OMX_CUSTOM_RESOLUTION, 1);
 
 
 	GOO_INIT_PARAM (self->section_decode, OMX_CUSTOM_IMAGE_DECODE_SECTION);
 	GOO_INIT_PARAM (self->subregion_decode, OMX_CUSTOM_IMAGE_DECODE_SUBREGION);
+	GOO_INIT_PARAM (self->subregion_decode, OMX_CUSTOM_RESOLUTION);
 
 	GOO_OBJECT_DEBUG (self, "");
 
@@ -233,21 +236,22 @@ goo_ti_jpegdec_set_parameters (GooComponent* component)
 
 	OMX_CUSTOM_IMAGE_DECODE_SECTION* pSectionDecode;
 	OMX_CUSTOM_IMAGE_DECODE_SUBREGION* pSubRegionDecode;
+	OMX_CUSTOM_RESOLUTION *pMaxResolution;
 
-
-        g_assert (self->section_decode != NULL);
+    g_assert (self->section_decode != NULL);
 	g_assert (self->subregion_decode != NULL);
+	g_assert (self->max_res != NULL);
 
-        g_assert (component->cur_state == OMX_StateLoaded);
+    g_assert (component->cur_state == OMX_StateLoaded);
 
-        pSectionDecode = g_new0 (OMX_CUSTOM_IMAGE_DECODE_SECTION, 1);
+    pSectionDecode = g_new0 (OMX_CUSTOM_IMAGE_DECODE_SECTION, 1);
 	GOO_INIT_PARAM (pSectionDecode, OMX_CUSTOM_IMAGE_DECODE_SECTION);
 
 	pSubRegionDecode = g_new0 (OMX_CUSTOM_IMAGE_DECODE_SUBREGION, 1);
 	GOO_INIT_PARAM (pSubRegionDecode, OMX_CUSTOM_IMAGE_DECODE_SUBREGION);
 
-
-
+    pMaxResolution = g_new0 (OMX_CUSTOM_RESOLUTION, 1);
+    GOO_INIT_PARAM (self->subregion_decode, OMX_CUSTOM_RESOLUTION);
 
 	/* Section decoding */
 	goo_component_get_parameter_by_name(component,
@@ -268,8 +272,6 @@ goo_ti_jpegdec_set_parameters (GooComponent* component)
 					    pSectionDecode);
 
 
-
-
 	/* SubRegion decoding */
 	goo_component_get_parameter_by_name(component,
 					    "OMX.TI.JPEG.decode.Param.SubRegionDecode",
@@ -283,6 +285,19 @@ goo_ti_jpegdec_set_parameters (GooComponent* component)
         goo_component_set_parameter_by_name (component,
 					    "OMX.TI.JPEG.decode.Param.SubRegionDecode",
 					    pSubRegionDecode);
+
+	/*Max resolution */
+
+	goo_component_get_parameter_by_name(component,
+					    "OMX.TI.JPEG.decode.Param.SetMaxResolution",
+					    pMaxResolution);
+
+	pMaxResolution->nWidth = (self->max_res)->nWidth;
+	pMaxResolution->nHeight = (self->max_res)->nHeight;
+
+	goo_component_set_parameter_by_name (component,
+					    "OMX.TI.JPEG.decode.Param.SetMaxResolution",
+					    pMaxResolution);
 
         GOO_OBJECT_DEBUG (self, "");
 
@@ -372,6 +387,7 @@ goo_ti_jpegdec_validate (GooComponent* component)
 		g_assert (section_decode->nMCURow >= 0 && section_decode->nMCURow < 32);
 
 	}
+
 	/* Subregion decoding */
 	{
 		OMX_CUSTOM_IMAGE_DECODE_SUBREGION* subregion_decode;
@@ -430,15 +446,23 @@ goo_ti_jpegdec_validate (GooComponent* component)
 		color = param->format.image.eColorFormat;
 
 		if (color == OMX_COLOR_FormatYCbYCr ||
-		    color == OMX_COLOR_FormatYUV444Interleaved ||
+		    /*color == OMX_COLOR_FormatYUV444Interleaved ||*/
 		    color == OMX_COLOR_FormatUnused ||
 		    color == OMX_COLOR_FormatCbYCrY)
 		{
+			g_print("@@@@@@@@@@OMX_COLOR_FormatYCbYCr\n");
 			param->format.image.eColorFormat =
 				OMX_COLOR_FormatCbYCrY;
 		}
+		else if (color == OMX_COLOR_FormatYUV444Interleaved)
+		{
+			g_print("@@@@@@@@@@OMX_COLOR_FormatYUV444Interleaved\n");
+			param->format.image.eColorFormat =
+				OMX_COLOR_FormatYUV444Interleaved;
+		}
 		else
 		{
+			g_print("@@@@@@@@@@OMX_COLOR_FormatYUV420PackedPlanar\n");
 			param->format.image.eColorFormat =
 				OMX_COLOR_FormatYUV420PackedPlanar;
 		}
@@ -452,6 +476,8 @@ goo_ti_jpegdec_validate (GooComponent* component)
 
 		width = param->format.image.nFrameWidth;
 		height = param->format.image.nFrameHeight;
+
+		g_print(" ### ENTRADA ### ancho: %d , alto:%d \n", width, height );
 
 		g_object_unref (iter);
 		g_object_unref (port);
@@ -490,6 +516,8 @@ goo_ti_jpegdec_validate (GooComponent* component)
 		width = param->format.image.nFrameWidth;
 		height = param->format.image.nFrameHeight;
 
+		g_print("####  SALIDA ####  ancho: %d , alto:%d \n", width, height );
+
 		/** @fix known issue in OMX/SN **/
 		if (color == OMX_COLOR_FormatYUV444Interleaved &&
 		    param->format.image.eColorFormat ==
@@ -506,18 +534,16 @@ goo_ti_jpegdec_validate (GooComponent* component)
 			    color == OMX_COLOR_FormatYUV411Planar)
 			{
 				param->nBufferSize = width * height * 3 / 2;
-			}
-			else if (color == OMX_COLOR_FormatCbYCrY ||
-				 color == OMX_COLOR_FormatYUV444Interleaved)
-			{
-				param->nBufferSize = width * height * 2;
+				g_print("*************************OMX_COLOR_FormatYUV420PackedPlanar\n");
 			}
 			else
 			{
+				g_print("????????\n");
 				g_assert_not_reached ();
 			}
 			break;
 		case OMX_COLOR_FormatCbYCrY:
+			 g_print("*********************OMX_COLOR_FormatCbYCrY\n");
 		case OMX_COLOR_Format16bitRGB565:
 			param->nBufferSize = width * height * 2;
 			break;
