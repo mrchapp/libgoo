@@ -300,7 +300,6 @@ _goo_ti_jpegenc_set_thumbnail(GooTiJpegEnc* self, guint prop_id)
 					flag = self->thumbnail->height;
 					sAPP1.pMarkerBuffer[164] = flag;
 					sAPP1.pMarkerBuffer[165] = (flag >> 8) & 0xFF;
-					g_print ("\n En set config\n");
 
 					goo_component_set_config_by_index (GOO_COMPONENT (self),
 														OMX_IndexCustomAPP1,

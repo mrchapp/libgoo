@@ -450,19 +450,16 @@ goo_ti_jpegdec_validate (GooComponent* component)
 		    color == OMX_COLOR_FormatUnused ||
 		    color == OMX_COLOR_FormatCbYCrY)
 		{
-			g_print("@@@@@@@@@@OMX_COLOR_FormatYCbYCr\n");
 			param->format.image.eColorFormat =
 				OMX_COLOR_FormatCbYCrY;
 		}
 		else if (color == OMX_COLOR_FormatYUV444Interleaved)
 		{
-			g_print("@@@@@@@@@@OMX_COLOR_FormatYUV444Interleaved\n");
 			param->format.image.eColorFormat =
 				OMX_COLOR_FormatYUV444Interleaved;
 		}
 		else
 		{
-			g_print("@@@@@@@@@@OMX_COLOR_FormatYUV420PackedPlanar\n");
 			param->format.image.eColorFormat =
 				OMX_COLOR_FormatYUV420PackedPlanar;
 		}
@@ -476,8 +473,6 @@ goo_ti_jpegdec_validate (GooComponent* component)
 
 		width = param->format.image.nFrameWidth;
 		height = param->format.image.nFrameHeight;
-
-		g_print(" ### ENTRADA ### ancho: %d , alto:%d \n", width, height );
 
 		g_object_unref (iter);
 		g_object_unref (port);
@@ -516,8 +511,6 @@ goo_ti_jpegdec_validate (GooComponent* component)
 		width = param->format.image.nFrameWidth;
 		height = param->format.image.nFrameHeight;
 
-		g_print("####  SALIDA ####  ancho: %d , alto:%d \n", width, height );
-
 		/** @fix known issue in OMX/SN **/
 		if (color == OMX_COLOR_FormatYUV444Interleaved &&
 		    param->format.image.eColorFormat ==
@@ -534,16 +527,14 @@ goo_ti_jpegdec_validate (GooComponent* component)
 			    color == OMX_COLOR_FormatYUV411Planar)
 			{
 				param->nBufferSize = width * height * 3 / 2;
-				g_print("*************************OMX_COLOR_FormatYUV420PackedPlanar\n");
+
 			}
 			else
 			{
-				g_print("????????\n");
 				g_assert_not_reached ();
 			}
 			break;
 		case OMX_COLOR_FormatCbYCrY:
-			 g_print("*********************OMX_COLOR_FormatCbYCrY\n");
 		case OMX_COLOR_Format16bitRGB565:
 			param->nBufferSize = width * height * 2;
 			break;
