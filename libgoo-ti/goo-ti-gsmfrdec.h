@@ -58,9 +58,9 @@ struct _GooTiGsmFrDecClass
 };
 
 /**
- *  GOO_TI_GSMDEC_GET_PARAM:
- *  @dec: a #GooTiGsmDec instance
- *  Gets the OMX_AUDIO_PARAM_ structure of the GSM component.
+ *  GOO_TI_GSMFRDEC_GET_PARAM:
+ *  @dec: a #GooTiGsmFrDec instance
+ *  Gets the OMX_AUDIO_PARAM_ structure of the GSM-FR component.
  *  Return value: The OMX_AUDIO_PARAM_ pointer.
  */
 #define GOO_TI_GSMFRDEC_GET_INPUT_PORT_PARAM(dec) \
@@ -70,9 +70,7 @@ struct _GooTiGsmFrDecClass
 
 /* functions */
 GType goo_ti_gsmfrdec_get_type (void);
-
-#define INPUT_GSMFRDEC_BUFFER_SIZE 34
-#define OUTPUT_GSMFRDEC_BUFFER_SIZE 320
+GooComponent *goo_ti_gsmfrdec_new ();
 
 G_END_DECLS
 #endif   /* _GOO_TI_GSMFRDEC_H_ */
