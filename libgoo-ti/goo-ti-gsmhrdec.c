@@ -26,9 +26,6 @@
 
 #include <goo-ti-gsmhrdec.h>
 #include <goo-utils.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #define ID "OMX.TI.GSMHR.decode"
 #define DATAPATH_PARAM_NAME "OMX.TI.index.config.gsmhr.datapath"
@@ -37,7 +34,6 @@
 #define STREAMID_PARAM_NAME "OMX.TI.index.config.gsmhrstreamIDinfo"
 #define INPUT_GSMHRDEC_BUFFER_SIZE 15
 #define OUTPUT_GSMHRDEC_BUFFER_SIZE 320
-
 
 G_DEFINE_TYPE (GooTiGsmHrDec, goo_ti_gsmhrdec, GOO_TYPE_TI_AUDIO_DECODER)
 
@@ -50,10 +46,14 @@ static void
 goo_ti_gsmhrdec_init (GooTiGsmHrDec* self)
 {
     GOO_COMPONENT (self)->id = g_strdup (ID);
-    GOO_TI_AUDIO_COMPONENT (self)->dasf_param_name = g_strdup (DASF_PARAM_NAME);
-    GOO_TI_AUDIO_COMPONENT (self)->frame_param_name = g_strdup (FRAME_PARAM_NAME);
-    GOO_TI_AUDIO_COMPONENT (self)->streamid_param_name = g_strdup (STREAMID_PARAM_NAME);
-    GOO_TI_AUDIO_COMPONENT (self)->datapath_param_name = g_strdup (DATAPATH_PARAM_NAME);
+    GOO_TI_AUDIO_COMPONENT (self)->dasf_param_name =
+        g_strdup (DASF_PARAM_NAME);
+    GOO_TI_AUDIO_COMPONENT (self)->frame_param_name =
+        g_strdup (FRAME_PARAM_NAME);
+    GOO_TI_AUDIO_COMPONENT (self)->streamid_param_name =
+        g_strdup (STREAMID_PARAM_NAME);
+    GOO_TI_AUDIO_COMPONENT (self)->datapath_param_name =
+        g_strdup (DATAPATH_PARAM_NAME);
 
     self->input_port_param = NULL;
     self->output_port_param = NULL;
@@ -92,22 +92,21 @@ goo_ti_gsmhrdec_load_parameters(GooComponent* component)
     GooTiGsmHrDec *self = GOO_TI_GSMHRDEC (component);
     g_assert (self->input_port_param == NULL);
     g_assert (self->output_port_param == NULL);
-//    g_assert (component->cur_state != OMX_StateInvalid);
+    g_assert (component->cur_state != OMX_StateInvalid);
 
-    GOO_OBJECT_DEBUG (self, "goo_ti_gsmhrdec_load_parameters\n");
+    GOO_OBJECT_DEBUG (self, "");
 
-    {
-        self->input_port_param = g_new0 (OMX_AUDIO_PARAM_GSMHRTYPE, 1);
-        GOO_INIT_PARAM (self->input_port_param, OMX_AUDIO_PARAM_GSMHRTYPE);
-	goo_component_get_parameter_by_index (component, OMX_IndexParamAudioGsm_HR, self->input_port_param);
-    }
+    GOO_OBJECT_DEBUG (self, "Loading input port");
+    self->input_port_param = g_new0 (OMX_AUDIO_PARAM_GSMHRTYPE, 1);
+    GOO_INIT_PARAM (self->input_port_param, OMX_AUDIO_PARAM_GSMHRTYPE);
 
-    {
+    GOO_OBJECT_DEBUG (self, "Loading output port");
+    self->output_port_param = g_new0 (OMX_AUDIO_PARAM_PCMMODETYPE, 1);
+    GOO_INIT_PARAM (self->output_port_param, OMX_AUDIO_PARAM_PCMMODETYPE);
 
-        self->output_port_param = g_new0 (OMX_AUDIO_PARAM_PCMMODETYPE, 1);
-	GOO_INIT_PARAM (self->output_port_param, OMX_AUDIO_PARAM_PCMMODETYPE);
-	//goo_component_get_parameter_by_index (component, OMX_IndexParamAudioGsmPcm, self->output_port_param);
-    }
+    goo_component_get_parameter_by_index (component,
+                                            OMX_IndexParamAudioGsm_HR,
+                                            self->input_port_param);
 
     goo_ti_audio_component_audio_manager_activate (GOO_TI_AUDIO_COMPONENT (component));
 
@@ -121,7 +120,9 @@ goo_ti_gsmhrdec_set_parameters(GooComponent* component)
     GooTiGsmHrDec* self = GOO_TI_GSMHRDEC (component);
     g_assert (G_LIKELY(self->input_port_param));
     g_assert (G_LIKELY(self->output_port_param));
-//    g_assert (component->cur_state == OMX_StateLoaded);
+    g_assert (component->cur_state == OMX_StateLoaded);
+
+    GOO_OBJECT_DEBUG (self, "");
 
 #if 0
     goo_component_set_parameter_by_index (component,
@@ -142,24 +143,23 @@ goo_ti_gsmhrdec_validate_ports_definitions(GooComponent* component)
 {
     g_assert (GOO_IS_TI_GSMHRDEC(component));
     GooTiGsmHrDec* self = GOO_TI_GSMHRDEC (component);
-    g_assert (G_LIKELY(self->input_port_param));
-    g_assert (G_LIKELY(self->output_port_param));
-//    g_assert (component->cur_state == OMX_StateLoaded);
+    g_assert (self->input_port_param != NULL);
+    g_assert (self->output_port_param != NULL);
+    g_assert (component->cur_state == OMX_StateLoaded);
 
-    OMX_PARAM_PORTDEFINITIONTYPE *def = NULL;
+    GOO_OBJECT_DEBUG (self, "Enter");
 
     /* input */
     {
-        GooIterator *iter = goo_component_iterate_input_ports (component);
+        GooIterator *iter =
+            goo_component_iterate_input_ports (component);
         goo_iterator_nth (iter, 0);
         GooPort* port = GOO_PORT (goo_iterator_get_current (iter));
         g_assert (port != NULL);
 
-	def = GOO_PORT_GET_DEFINITION (port);
-
-        def->nBufferSize = INPUT_GSMHRDEC_BUFFER_SIZE;
-        def->format.audio.eEncoding = OMX_AUDIO_CodingGSMHR;
-        def->format.audio.cMIMEType = "audio/x-adpcm";
+        GOO_PORT_GET_DEFINITION (port)->nBufferSize = INPUT_GSMHRDEC_BUFFER_SIZE;
+        GOO_PORT_GET_DEFINITION (port)->format.audio.eEncoding = OMX_AUDIO_CodingGSMHR;
+        GOO_PORT_GET_DEFINITION (port)->format.audio.cMIMEType = "audio/x-adpcm";
 
         g_object_unref (iter);
         g_object_unref (port);
@@ -167,17 +167,17 @@ goo_ti_gsmhrdec_validate_ports_definitions(GooComponent* component)
 
     /* output */
     {
-        GooIterator* iter = goo_component_iterate_output_ports (component);
+        GooIterator* iter =
+            goo_component_iterate_output_ports (component);
         goo_iterator_nth (iter, 0);
         GooPort* port = GOO_PORT (goo_iterator_get_current (iter));
         g_assert (port != NULL);
 
-	def = GOO_PORT_GET_DEFINITION (port);
+        GOO_PORT_GET_DEFINITION (port)->nBufferSize = OUTPUT_GSMHRDEC_BUFFER_SIZE;
+        GOO_PORT_GET_DEFINITION (port)->format.audio.eEncoding = OMX_AUDIO_CodingPCM;
+        GOO_PORT_GET_DEFINITION (port)->format.audio.cMIMEType = "audio/x-raw-int";
 
-        def->nBufferSize = OUTPUT_GSMHRDEC_BUFFER_SIZE;
-        def->format.audio.eEncoding = OMX_AUDIO_CodingPCM;
-        def->format.audio.cMIMEType = "audio/x-raw-int";
-	g_object_unref (iter);
+        g_object_unref (iter);
         g_object_unref (port);
     }
 

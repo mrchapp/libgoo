@@ -70,11 +70,7 @@ struct _GooTiGsmHrDecClass
 
 /* functions */
 GType goo_ti_gsmhrdec_get_type (void);
-
-#define INPUT_GSMHRDEC_BUFFER_SIZE 15
-#define OUTPUT_GSMHRDEC_BUFFER_SIZE 320
+GooComponent *goo_ti_gsmhrdec_new ();
 
 G_END_DECLS
-
 #endif   /* _GOO_TI_GSMHRDEC_H_ */
-
