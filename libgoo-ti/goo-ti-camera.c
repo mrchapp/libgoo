@@ -694,48 +694,48 @@ static void
 _goo_ti_camera_set_capture_mode (GooTiCamera* self, gboolean capture_mode)
 {
 	g_assert (self != NULL);
-	g_assert (GOO_COMPONENT (self)->cur_state == OMX_StateExecuting);
 
 	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 
-	GOO_OBJECT_DEBUG (self, "prev = %d / new = %d",
+	if (GOO_COMPONENT (self)->cur_state == OMX_StateExecuting)
+	{
+		GOO_OBJECT_DEBUG (self, "prev = %d / new = %d",
 			  priv->capturemode, capture_mode);
 
-	OMX_BOOL param = (capture_mode == TRUE) ? OMX_TRUE : OMX_FALSE;
-	g_assert (
-		goo_component_set_config_by_index (GOO_COMPONENT (self),
+		OMX_BOOL param = (capture_mode == TRUE) ? OMX_TRUE : OMX_FALSE;
+		g_assert (
+			goo_component_set_config_by_index (GOO_COMPONENT (self),
 						   OMX_IndexConfigCapturing,
 						   &param)
 		);
 
-#if 1
-	if ((capture_mode == TRUE) && (priv->capturemode == FALSE))
-	{
-		GOO_OBJECT_INFO (self, "Preparing capture port");
+	#if 1
+		if ((capture_mode == TRUE) && (priv->capturemode == FALSE))
+		{
+			GOO_OBJECT_INFO (self, "Preparing capture port");
 
-		GooPort* port = goo_ti_camera_get_port (self, PORT_CAPTURE);
-		goo_component_prepare_port (GOO_COMPONENT (self), port);
-		g_object_unref (port);
+			GooPort* port = goo_ti_camera_get_port (self, PORT_CAPTURE);
+			goo_component_prepare_port (GOO_COMPONENT (self), port);
+			g_object_unref (port);
 
-		priv->capturemode = TRUE;
-	}
+			priv->capturemode = TRUE;
+		}
 
-	if ((capture_mode == FALSE) && (priv->capturemode == TRUE))
-	{
-		/** We are not using the thumbnail port at the moment*/
-		/**
-		GOO_OBJECT_INFO (self, "Preparing thumbnail port");
-		GooPort* port = goo_ti_camera_get_port (GOO_TI_CAMERA (self),
+		if ((capture_mode == FALSE) && (priv->capturemode == TRUE))
+		{
+			/** We are not using the thumbnail port at the moment*/
+			/**
+			GOO_OBJECT_INFO (self, "Preparing thumbnail port");
+			GooPort* port = goo_ti_camera_get_port (GOO_TI_CAMERA (self),
 							PORT_THUMBNAIL);
-		goo_component_prepare_port (GOO_COMPONENT (self), port);
-		g_object_unref (port);
-		**/
-		priv->capturemode = FALSE;
+			goo_component_prepare_port (GOO_COMPONENT (self), port);
+			g_object_unref (port);
+			**/
+			priv->capturemode = FALSE;
+		}
+	#endif
 	}
-#endif
-
 	GOO_OBJECT_DEBUG (self, "");
-
 	return;
 }
 
