@@ -155,7 +155,7 @@ goo_ti_camera_exposure_type ()
 #define DEFAULT_VSTAB      FALSE
 #define DEFAULT_FOCUS      TRUE
 
-G_DEFINE_TYPE (GooTiCamera, goo_ti_camera, GOO_TYPE_COMPONENT)
+G_DEFINE_TYPE (GooTiCamera, goo_ti_camera, GOO_TYPE_COMPONENT);
 
 /* remember to unref the port after usage */
 static GooPort*
@@ -1070,13 +1070,14 @@ goo_ti_camera_get_postproc (GooComponent* self)
 static void
 goo_ti_camera_pp_set_idle (GooComponent* self)
 {
-
 	GooComponent *postproc = goo_ti_camera_get_postproc (self);
 
 	if (postproc == NULL)
 	{
 		return;
 	}
+
+	GOO_OBJECT_DEBUG (self, "going to set postproc to idle");
 
 	/* Sending postprocessor to idle state */
 #if 1
@@ -1092,8 +1093,13 @@ goo_ti_camera_pp_set_idle (GooComponent* self)
 		);
 	GOO_OBJECT_UNLOCK (postproc);
 #endif
+
+	GOO_OBJECT_DEBUG (self, "going to wait for next state");
+
 	goo_component_wait_for_next_state (postproc);
 	g_object_unref (postproc);
+
+	GOO_OBJECT_DEBUG (self, "done");
 
 	return;
 }
@@ -1112,6 +1118,8 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 	{
 		return;
 	}
+
+	GOO_OBJECT_DEBUG (self, "going to set videoenc to idle");
 
 #if 1
 	goo_component_set_state_idle (videoenc);
@@ -1146,8 +1154,14 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 	}
 
 #endif
+
+	GOO_OBJECT_DEBUG (self, "going to wait for next state");
+
 	goo_component_wait_for_next_state (videoenc);
 	g_object_unref (videoenc);
+
+	GOO_OBJECT_DEBUG (self, "done");
+
 	return;
 }
 
@@ -1166,7 +1180,7 @@ goo_ti_camera_jpeg_set_idle (GooComponent* self)
 		return;
 	}
 
-	GOO_OBJECT_INFO (jpegenc, "Sending idle state command");
+	GOO_OBJECT_DEBUG (self, "going to set jpegenc to idle");
 
 	/* Sending postprocessor to idle state */
 #if 1
@@ -1183,8 +1197,12 @@ goo_ti_camera_jpeg_set_idle (GooComponent* self)
 	GOO_OBJECT_UNLOCK (jpegenc);
 #endif
 
+	GOO_OBJECT_DEBUG (self, "going to wait for next state");
+
 	goo_component_wait_for_next_state (jpegenc);
 	g_object_unref (jpegenc);
+
+	GOO_OBJECT_DEBUG (self, "done");
 
 	return;
 }
@@ -1195,6 +1213,8 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 	self->next_state = OMX_StateIdle;
 
 	gboolean prev_outport_queue = TRUE;
+
+	GOO_OBJECT_DEBUG (self, "tmpstate=%d", tmpstate);
 
 	if (tmpstate == OMX_StateLoaded)
 	{
@@ -1236,6 +1256,7 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 
 	if (tmpstate == OMX_StateLoaded)
 	{
+		GOO_OBJECT_INFO (self, "going from loaded->idle.. allocating ports");
 		goo_component_allocate_all_ports (self);
 	}
 	else if (tmpstate == OMX_StateExecuting)
@@ -1250,7 +1271,9 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 		goo_ti_camera_pp_set_idle (self);
 	}
 
+	GOO_OBJECT_DEBUG (self, "going to wait_for_next_state");
 	goo_component_wait_for_next_state (self);
+	GOO_OBJECT_DEBUG (self, "done wait_for_next_state");
 
 	if (tmpstate == OMX_StateExecuting)
 	{
@@ -1270,6 +1293,8 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 		goo_ti_camera_jpeg_set_idle (self);
 	}
 
+	GOO_OBJECT_DEBUG (self, "done");
+
 	return;
 }
 
@@ -1286,11 +1311,12 @@ goo_ti_camera_pp_set_loaded (GooComponent* self)
 		return;
 	}
 
-	GOO_OBJECT_INFO (postproc, "Sending idle state command");
+	GOO_OBJECT_INFO (postproc, "Sending loaded state command");
 
 	/* Sending postprocessor to idle state */
 	goo_component_set_state_loaded (postproc);
 
+	GOO_OBJECT_INFO (postproc, "going to wait for state");
 	goo_component_wait_for_next_state (postproc);
 	g_object_unref (postproc);
 
@@ -1312,8 +1338,11 @@ goo_ti_camera_venc_set_loaded (GooComponent* self)
 		return;
 	}
 
+	GOO_OBJECT_INFO (videoenc, "Sending loaded state command");
+
 	goo_component_set_state_loaded (videoenc);
 
+	GOO_OBJECT_INFO (videoenc, "going to wait for state");
 	goo_component_wait_for_next_state (videoenc);
 	g_object_unref (videoenc);
 	return;
@@ -1364,10 +1393,15 @@ goo_ti_camera_set_state_loaded (GooComponent* self)
 	if (self->cur_state == OMX_StateIdle &&
 	    self->next_state == OMX_StateLoaded)
 	{
+		GOO_OBJECT_INFO (self, "going to deallocate ports");
 		goo_component_deallocate_all_ports (self);
+		GOO_OBJECT_INFO (self, "done deallocate ports");
 	}
 
+	GOO_OBJECT_INFO (self, "going to wait for next state");
 	goo_component_propagate_wait_for_next_state (self);
+	GOO_OBJECT_INFO (self, "done wait for next state");
+
 	self->configured = FALSE;
 
 	return;

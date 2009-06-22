@@ -56,7 +56,7 @@ enum _GooComponentProp
 	PROP_0,
 };
 
-G_DEFINE_TYPE (GooComponent, goo_component, GOO_TYPE_OBJECT)
+G_DEFINE_TYPE (GooComponent, goo_component, GOO_TYPE_OBJECT);
 
 /**
  * _goo_component_command_state_set:
@@ -960,6 +960,7 @@ goo_component_set_state_idle_default (GooComponent* self)
 
 	if (tmpstate == OMX_StateLoaded)
 	{
+		GOO_OBJECT_INFO (self, "going from loaded->idle.. allocating ports");
 		goo_component_allocate_all_ports (self);
 	}
 	else if (tmpstate == OMX_StateExecuting)
@@ -1453,8 +1454,13 @@ goo_component_wait_for_next_state (GooComponent* self)
 {
 	g_assert (GOO_IS_COMPONENT (self));
 
+	GOO_OBJECT_DEBUG (self, "next state is: %s",
+			goo_strstate (self->next_state));
+
 	while (OMX_StateInvalid != self->next_state)
 	{
+		GOO_OBJECT_DEBUG (self, "waiting for %s",
+				goo_strstate (self->next_state));
 		goo_semaphore_down (self->state_sem, TRUE);
 		if (OMX_StateInvalid != self->next_state)
 		{
@@ -1770,6 +1776,8 @@ goo_component_allocate_port (GooComponent* self, GooPort* port)
 	g_assert (GOO_IS_PORT (port));
 	g_assert (goo_component_is_my_port (self, port));
 
+	GOO_OBJECT_DEBUG (self, "going to allocate port: %s", GOO_OBJECT_NAME (port));
+
 	if (goo_port_is_tunneled (port) || goo_port_is_disabled (port))
 	{
 		GOO_OBJECT_INFO (self, "Port is tunneled/disabled");
@@ -1846,6 +1854,8 @@ void
 goo_component_allocate_all_ports (GooComponent* self)
 {
 	g_assert (GOO_IS_COMPONENT (self));
+
+	GOO_OBJECT_DEBUG (self, "going to allocate all ports");
 
 	GooIterator* iter = goo_component_iterate_ports (self);
 	while (!goo_iterator_is_done (iter))
