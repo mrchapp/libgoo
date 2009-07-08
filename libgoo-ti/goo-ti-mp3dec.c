@@ -33,8 +33,8 @@
 #define DASF_PARAM_NAME "OMX.TI.index.config.mp3headerinfo"
 #define FRAME_PARAM_NAME "OMX.TI.index.config.mp3headerinfo"
 #define STREAMID_PARAM_NAME "OMX.TI.index.config.mp3streamIDinfo"
-#define INPUT_BUFFERSIZE 2304
-#define OUTPUT_BUFFERSIZE 36864
+#define INPUT_BUFFERSIZE 16384
+#define OUTPUT_BUFFERSIZE 4608
 
 G_DEFINE_TYPE (GooTiMp3Dec, goo_ti_mp3dec, GOO_TYPE_TI_AUDIO_DECODER)
 
@@ -164,6 +164,7 @@ goo_ti_mp3dec_validate_ports_definitions (GooComponent* component)
 		g_assert (port != NULL);
 
 		GOO_PORT_GET_DEFINITION (port)->nBufferSize = INPUT_BUFFERSIZE;
+		GOO_PORT_GET_DEFINITION (port)->nBufferCountActual = 2;
 		GOO_PORT_GET_DEFINITION (port)->format.audio.eEncoding =
 			OMX_AUDIO_CodingMP3;
 
@@ -181,6 +182,7 @@ goo_ti_mp3dec_validate_ports_definitions (GooComponent* component)
 
 		GOO_PORT_GET_DEFINITION (port)->nBufferSize =
 			OUTPUT_BUFFERSIZE;
+		GOO_PORT_GET_DEFINITION (port)->nBufferCountActual = 2;
 		GOO_PORT_GET_DEFINITION (port)->format.audio.eEncoding =
 			OMX_AUDIO_CodingPCM;
 
