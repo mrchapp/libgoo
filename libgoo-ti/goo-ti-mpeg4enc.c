@@ -196,6 +196,13 @@ goo_ti_mpeg4enc_finalize (GObject* object)
 }
 
 static void
+goo_ti_mpeg4enc_flush_port (GooComponent *self, GooPort *port)
+{
+
+  return;
+}
+
+static void
 goo_ti_mpeg4enc_class_init (GooTiMpeg4EncClass* klass)
 {
         GObjectClass* g_klass = G_OBJECT_CLASS (klass);
@@ -217,6 +224,8 @@ goo_ti_mpeg4enc_class_init (GooTiMpeg4EncClass* klass)
         o_klass->load_parameters_func = goo_ti_mpeg4enc_load_parameters;
         o_klass->validate_ports_definition_func =
                 goo_ti_mpeg4enc_validate_ports_definitions;
+        o_klass->flush_port_func =
+                goo_ti_mpeg4enc_flush_port;
 
         return;
 }
