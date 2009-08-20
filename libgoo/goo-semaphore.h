@@ -39,12 +39,16 @@ struct _GooSemaphore
         GCond *condition;
         GMutex *mutex;
         gint counter;
+        gboolean waiting;
 };
 
 GooSemaphore* goo_semaphore_new (gint counter);
 void goo_semaphore_free (GooSemaphore* self);
 void goo_semaphore_down (GooSemaphore* self, gboolean timeout);
 void goo_semaphore_up   (GooSemaphore* self);
+void goo_semaphore_binary_up (GooSemaphore *self);
+gboolean goo_semaphore_is_waiting (GooSemaphore *self);
+void goo_semaphore_reset (GooSemaphore *self);
 
 G_END_DECLS
 

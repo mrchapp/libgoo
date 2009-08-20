@@ -47,6 +47,7 @@ goo_semaphore_new (gint counter)
         g_assert (self != NULL);
 
         self->counter = counter;
+        self->waiting = FALSE;
 
         self->condition = g_cond_new ();
         self->mutex = g_mutex_new ();
@@ -89,6 +90,7 @@ goo_semaphore_down (GooSemaphore *self, gboolean timeout)
 
         while (self->counter == 0)
         {
+                self->waiting = TRUE;
                 if (timeout)
                 {
                         GTimeVal time;
@@ -106,6 +108,7 @@ goo_semaphore_down (GooSemaphore *self, gboolean timeout)
                 }
         }
 
+        self->waiting = FALSE;
         self->counter--;
 
         g_mutex_unlock (self->mutex);
@@ -129,6 +132,61 @@ goo_semaphore_up (GooSemaphore *self)
         self->counter++;
         g_cond_signal (self->condition);
         g_mutex_unlock (self->mutex);
+
+        return;
+}
+
+/**
+ * goo_semaphore_binary_up:
+ * @self: an #GooSemaphore structure
+ *
+ * Let any semaphore_down continue execution and ends the execution with counter = 0.
+ * This implements a binary semaphore.
+ */
+void
+goo_semaphore_binary_up (GooSemaphore *self)
+{
+        g_assert (self != NULL);
+
+        g_mutex_lock (self->mutex);
+        if (self->waiting == TRUE) {
+                self->counter = 1;
+                g_cond_signal (self->condition);
+        }
+        g_mutex_unlock (self->mutex);
+
+        return;
+}
+
+
+/**
+ * goo_semaphore_is_waiting:
+ * @self: an #GooSemaphore structure
+ *
+ * Checks if semaphore is actually blocked waiting for an up call.
+ *
+ * Returns: a boolean set to TRUE if a semaphore_down call is waiting for signal.
+ */
+gboolean
+goo_semaphore_is_waiting (GooSemaphore *self)
+{
+        g_assert (self != NULL);
+
+        return self->waiting;
+}
+
+/**
+ * goo_semaphore_reset:
+ * @self: an #GooSemaphore structure
+ *
+ * Resets the semaphore count to 0.
+ */
+void
+goo_semaphore_reset (GooSemaphore *self)
+{
+        g_assert (self != NULL);
+
+        self->counter = 0;
 
         return;
 }

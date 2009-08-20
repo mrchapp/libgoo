@@ -106,6 +106,18 @@ _goo_component_command_state_set (GooComponent* self, OMX_STATETYPE state)
 		goo_semaphore_up (self->state_sem);
 	}
 
+	/* If we just got Idle from Executing or Pause, ensure that EOS semaphore doesnt wait forever
+	 * this was added for solving a mp3 deadlock issue (race condition between EOS signal and Idle command).
+	 */
+	if(self->cur_state==OMX_StateIdle &&
+	   (self->prev_state==OMX_StateExecuting || self->prev_state==OMX_StatePause))
+	{
+		if(self->done == FALSE) {
+			self->done = TRUE;
+			goo_semaphore_binary_up (self->done_sem);
+		}
+	}
+
 	return;
 }
 
@@ -1024,6 +1036,10 @@ static void
 goo_component_set_state_executing_default (GooComponent* self)
 {
 	self->next_state = OMX_StateExecuting;
+
+	/* Reset this when executing state command will been send. */
+	self->done = FALSE;
+	goo_semaphore_reset(self->done_sem);
 
 	/* When we propage states we might have already changed our state */
 	if (!goo_component_propagate_state (self, OMX_StateExecuting))
@@ -2828,10 +2844,13 @@ goo_component_set_done (GooComponent* self)
 		  (self->prev_state == OMX_StateIdle || self->prev_state == OMX_StatePause));
 
 	/* GOO_OBJECT_LOCK (self); */
-	self->done = TRUE;
+	/* self->done = TRUE; */
 	/* GOO_OBJECT_UNLOCK (self); */
 
-	goo_semaphore_up (self->done_sem);
+	if(self->done == FALSE) {
+		self->done = TRUE;
+		goo_semaphore_binary_up (self->done_sem);
+	}
 
 	GOO_OBJECT_DEBUG (self, "");
 
@@ -2850,8 +2869,7 @@ gboolean
 goo_component_is_done (GooComponent* self)
 {
 	g_assert (GOO_IS_COMPONENT (self));
-	g_assert ((self->cur_state == OMX_StateExecuting) &&
-		  (self->prev_state == OMX_StateIdle || self->prev_state == OMX_StatePause));
+	g_assert (((self->cur_state == OMX_StateExecuting) && (self->prev_state == OMX_StateIdle || self->prev_state == OMX_StatePause)) || ((self->cur_state == OMX_StateIdle) && (self->prev_state == OMX_StateExecuting || self->prev_state == OMX_StatePause)));
 
 	gboolean retval;
 
