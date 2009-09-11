@@ -73,6 +73,8 @@ goo_object_finalize (GObject* object)
 		self->prefix = NULL;
         }
 
+        if (g_getenv ("OMX_PERF_INSTRUMENTATION"))
+                sleep (1);
         (*G_OBJECT_CLASS (goo_object_parent_class)->finalize) (object);
 
         return;
