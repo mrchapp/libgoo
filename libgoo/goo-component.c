@@ -664,25 +664,29 @@ goo_component_propagate_wait_for_next_state_default (GooComponent * self)
 				continue;
 			}
 
-			GooPort* peer_port;
+			GooPort* peer_port = NULL;
 			peer_port = goo_port_get_peer (port);
 
-			/* According to spec 1.1 we must wait on the state
-			 * change for the supplier port before the non-supplier
-			 * ports */
-			if (peer_port->supplier == TRUE)
+			if (peer_port != NULL)
 			{
-				GOO_OBJECT_INFO (self,
-						 "Peer component is the "
-						 "supplier port. Wating for "
-						 "its change state...");
 
-				goo_component_wait_for_next_state
-					(peer_component);
+				/* According to spec 1.1 we must wait on the state
+				 * change for the supplier port before the non-supplier
+				 * ports */
+				if (peer_port->supplier == TRUE)
+				{
+					GOO_OBJECT_INFO (self,
+							 "Peer component is the "
+							 "supplier port. Wating for "
+							 "its change state...");
+
+					goo_component_wait_for_next_state
+						(peer_component);
+				}
+
+				g_object_unref (peer_port);
 			}
-
 			g_object_unref (peer_component);
-			g_object_unref (peer_port);
 		}
 		g_object_unref (port);
 		goo_iterator_next (iter);
@@ -866,28 +870,31 @@ goo_component_propagate_state_default (GooComponent* self, OMX_STATETYPE state)
 
 			GooPort *peer_port;
 			peer_port = goo_port_get_peer (port);
-			if (port->supplier == TRUE)
+			if (peer_port != NULL)
 			{
-				GOO_OBJECT_INFO (self,
-						 "Peer component is the "
-						 "supplier port. Changing "
-						 "state");
+				if (port->supplier == TRUE)
+				{
+					GOO_OBJECT_INFO (self,
+							 "Peer component is the "
+							 "supplier port. Changing "
+							 "state");
 
-				GOO_OBJECT_LOCK (self);
-				GOO_RUN (
-					OMX_SendCommand (self->handle,
-							 OMX_CommandStateSet,
-							 self->next_state,
-							 NULL)
-					);
-				GOO_OBJECT_UNLOCK (self);
+					GOO_OBJECT_LOCK (self);
+					GOO_RUN (
+						OMX_SendCommand (self->handle,
+								 OMX_CommandStateSet,
+								 self->next_state,
+								 NULL)
+						);
+					GOO_OBJECT_UNLOCK (self);
 
-				goo_component_set_state (peer_component, state);
+					goo_component_set_state (peer_component, state);
 
-				state_changed = TRUE;
+					state_changed = TRUE;
+				}
+				g_object_unref (peer_port);
 			}
 			g_object_unref (peer_component);
-			g_object_unref (peer_port);
 		}
 		g_object_unref (port);
 		goo_iterator_next (iter);

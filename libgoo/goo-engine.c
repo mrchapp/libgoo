@@ -110,6 +110,8 @@ goo_engine_inport_cb (GooPort* port, OMX_BUFFERHEADERTYPE* buffer,
 	guint read_bytes;
 
 	read_bytes = goo_engine_get_buffer_len (self, port);
+	if (read_bytes > buffer->nAllocLen)
+		read_bytes = buffer->nAllocLen;
 
 	r = fread (buffer->pBuffer, 1, read_bytes, self->instream);
 
@@ -382,7 +384,8 @@ goo_engine_set_vop (GooEngine* self)
 
 		fn = g_path_get_basename (self->infile);
 		fn1 = strchr (fn, '.');
-		fn1[0] = '\0';
+		if (fn1 != NULL)
+			fn1[0] = '\0';
 
 		path = g_path_get_dirname (self->infile);
 
@@ -534,12 +537,18 @@ goo_engine_set_property (GObject* object, guint prop_id,
 	}
 	break;
 	case PROP_INFILE:
-		self->infile = g_value_dup_string (value);
-		goo_engine_set_instream (self);
+		if (self->infile == NULL)
+		{
+			self->infile = g_value_dup_string (value);
+			goo_engine_set_instream (self);
+		}
 		break;
 	case PROP_OUTFILE:
-		self->outfile = g_value_dup_string (value);
-		goo_engine_set_outstream (self);
+		if (self->outfile == NULL)
+		{
+			self->outfile = g_value_dup_string (value);
+			goo_engine_set_outstream (self);
+		}
 		break;
 	case PROP_NUMBUFFERS:
 		self->numbuffers = g_value_get_uint (value);

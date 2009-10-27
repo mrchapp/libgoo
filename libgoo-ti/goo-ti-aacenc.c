@@ -109,7 +109,7 @@ _validate_sample_rate (OMX_AUDIO_PARAM_AACPROFILETYPE* param)
 	};
 
 	gint i;
-	for (i = 0; i <= GOO_ARRAY_SIZE (valid_frec); i++)
+	for (i = 0; i < GOO_ARRAY_SIZE (valid_frec); i++)
 	{
 		if (param->nSampleRate == valid_frec[i])
 		{
@@ -159,7 +159,7 @@ _validate_parameters_combination (OMX_AUDIO_PARAM_AACPROFILETYPE* param)
 		return TRUE;
 	}
 
-	for (i = 0; i <= GOO_ARRAY_SIZE (limits); i += 2)
+	for (i = 0; i < GOO_ARRAY_SIZE (limits); i += 2)
 	{
 		if (param->nSampleRate == limits[i][0])
 		{
