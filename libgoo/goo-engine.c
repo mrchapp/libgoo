@@ -341,10 +341,11 @@ goo_engine_set_instream (GooEngine* self)
 
 	if (self->infile != NULL)
 	{
-		g_assert (self->instream == NULL);
 		g_assert (stat (self->infile, &buf) == 0);
 		g_assert (buf.st_size > 0);
 
+		if (self->instream != NULL)
+			fclose (self->instream);
 		self->instream = fopen (self->infile, "r");
 
 		g_assert (self->instream != NULL);
@@ -360,8 +361,8 @@ goo_engine_set_outstream (GooEngine* self)
 
 	if (self->outfile != NULL)
 	{
-		g_assert (self->outstream == NULL);
-
+		if (self->outstream != NULL)
+			fclose (self->outstream);
 		self->outstream = fopen (self->outfile, "w");
 
 		g_assert (self->outstream != NULL);
@@ -378,7 +379,6 @@ goo_engine_set_vop (GooEngine* self)
 	if (self->vopparser == TRUE)
 	{
 		g_assert (self->vopfile == NULL);
-		g_assert (self->vopstream == NULL);
 
 		gchar *fn = NULL, *fn1 = NULL, *path = NULL;
 
@@ -401,6 +401,8 @@ goo_engine_set_vop (GooEngine* self)
 			g_assert (stat (self->vopfile, &buf) == 0);
 			g_assert (buf.st_size > 0);
 
+			if (self->vopstream != NULL)
+				fclose (self->vopstream);
 			self->vopstream = fopen (self->vopfile, "r");
 
 			g_assert (self->vopstream != NULL);

@@ -827,17 +827,20 @@ goo_component_propagate_state_default (GooComponent* self, OMX_STATETYPE state)
 
 			GooPort *peer_port = NULL;
 			peer_port = goo_port_get_peer (port);
-			if (peer_port->supplier == TRUE)
+			if (peer_port != NULL)
 			{
-				GOO_OBJECT_INFO (self,
-						 "Peer component is the "
-						 "supplier port. Changing "
-						 "state");
-				goo_component_set_state (peer_component, state);
-			}
+				if (peer_port->supplier == TRUE)
+				{
+					GOO_OBJECT_INFO (self,
+							 "Peer component is the "
+							 "supplier port. Changing "
+							 "state");
+					goo_component_set_state (peer_component, state);
+				}
 
+				g_object_unref (peer_port);
+			}
 			g_object_unref (peer_component);
-			g_object_unref (peer_port);
 		}
 		g_object_unref (port);
 		goo_iterator_next (iter);
