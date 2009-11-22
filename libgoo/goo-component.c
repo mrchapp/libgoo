@@ -2105,8 +2105,8 @@ goo_component_deallocate_port (GooComponent* self, GooPort* port)
 	g_assert (GOO_IS_COMPONENT (self));
 	g_assert (GOO_IS_PORT (port));
 	g_assert (goo_component_is_my_port (self, port));
-	g_assert (self->cur_state == OMX_StateIdle &&
-		  self->next_state == OMX_StateLoaded);
+	g_assert ((self->cur_state == OMX_StateIdle && self->next_state == OMX_StateLoaded) ||
+                  (self->cur_state == OMX_StateLoaded));
 
 	if (goo_port_is_tunneled (port) || goo_port_is_disabled (port))
 	{
