@@ -30,6 +30,7 @@ G_BEGIN_DECLS
 typedef enum _GooComponentType GooComponentType;
 enum _GooComponentType
 {
+	GOO_TI_H264_720P_DECODER,
 	GOO_TI_NBAMR_DECODER,
 	GOO_TI_PCM_ENCODER,
 	GOO_TI_NBAMR_ENCODER,

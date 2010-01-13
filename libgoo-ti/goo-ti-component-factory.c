@@ -55,6 +55,7 @@
 #include <goo-ti-post-processor.h>
 #include <goo-ti-jpegenc.h>
 #include <goo-ti-h264dec.h>
+#include <goo-ti-h264dec-720p.h>
 #include <goo-ti-h263dec.h>
 #include <goo-ti-wmvdec.h>
 #include <goo-ti-h264enc.h>
@@ -98,6 +99,7 @@ static struct _component_entry _components[] =
 	{ "mpeg4dec", GOO_TI_MPEG4_DECODER, goo_ti_mpeg4dec_get_type, 0 },
 	{ "sparkdec", GOO_TI_SPARK_DECODER, goo_ti_sparkdec_get_type, 0 },
 	{ "h264dec", GOO_TI_H264_DECODER, goo_ti_h264dec_get_type, 0 },
+	{ "h264720pdec", GOO_TI_H264_720P_DECODER, goo_ti_h264dec_720p_get_type, 0 },
 	{ "h263dec", GOO_TI_H263_DECODER, goo_ti_h263dec_get_type, 0 },
 	{ "mpeg4enc", GOO_TI_MPEG4_ENCODER, goo_ti_mpeg4enc_get_type, 0 },
 	{ "postproc", GOO_TI_POST_PROCESSOR, goo_ti_post_processor_get_type, 0 },

@@ -53,6 +53,7 @@ libgoo_ti_la_sources = \
 	goo-ti-jpegenc.c \
 	goo-ti-clock.c \
 	goo-ti-h264dec.c \
+	goo-ti-h264dec-720p.c \
 	goo-ti-h263dec.c \
 	goo-ti-wmvdec.c \
 	goo-ti-h264enc.c \
@@ -96,6 +97,7 @@ libgoo_ti_la_headers = \
 	goo-ti-jpegenc.h \
 	goo-ti-clock.h \
 	goo-ti-h264dec.h \
+	goo-ti-h264dec-720p.h \
 	goo-ti-h263dec.h \
 	goo-ti-wmvdec.h  \
 	goo-ti-h264enc.h \
