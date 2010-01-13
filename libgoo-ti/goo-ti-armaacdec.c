@@ -30,7 +30,7 @@
 #define ID "OMX.TI.ARMAAC.decode"
 #define DASF_PARAM_NAME "OMX.TI.index.config.armaacdecHeaderInfo"
 #define DATAPATH_PARAM_NAME "OMX.TI.index.config.armaacdec.datapath"
-#define FRAME_PARAM_NAME "OMX.TI.index.config.armaacdecHeaderInfo"
+#define FRAME_PARAM_NAME "OMX.TI.index.config.framemode"
 #define STREAMID_PARAM_NAME "OMX.TI.index.config.armaacdecstreamIDinfo"
 #define INPUT_BUFFERSIZE 2000
 #define OUTPUT_BUFFERSIZE 8192
