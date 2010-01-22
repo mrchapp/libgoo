@@ -71,7 +71,7 @@ goo_ti_h264dec_720p_NALU_bytes_type_get_type ()
 	return goo_ti_h264dec_720p_NALU_bytes_type_type;
 }
 
-G_DEFINE_TYPE (GooTiH264Dec720p, goo_ti_h264dec_720p, GOO_TYPE_TI_VIDEO_DECODER)
+G_DEFINE_TYPE (GooTiH264Dec720p, goo_ti_h264dec_720p, GOO_TYPE_TI_VIDEO_DECODER720P)
 
 static void
 goo_ti_h264dec_720p_validate_ports_definitions (GooComponent* component)

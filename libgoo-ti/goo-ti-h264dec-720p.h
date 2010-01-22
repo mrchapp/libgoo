@@ -23,7 +23,7 @@
 #ifndef _GOO_TI_H264DEC720P_H_
 #define _GOO_TI_H264DEC720P_H_
 
-#include <goo-ti-video-decoder.h>
+#include <goo-ti-video-decoder720p.h>
 
 G_BEGIN_DECLS
 
@@ -47,12 +47,12 @@ typedef struct _GooTiH264Dec720pPriv GooTiH264Dec720pPriv;
 
 struct _GooTiH264Dec720p
 {
-	GooTiVideoDecoder parent;
+	GooTiVideoDecoder720p parent;
 };
 
 struct _GooTiH264Dec720pClass
 {
-	GooTiVideoDecoderClass parent_class;
+	GooTiVideoDecoder720pClass parent_class;
 };
 
 typedef enum
