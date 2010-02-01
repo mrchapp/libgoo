@@ -36,13 +36,12 @@
 #include <goo-ti-camera.h>
 #include <goo-utils.h>
 
-/* for custom index params */
-#include <OMX_Camera.h>
-
 /* for memcpy */
 #include <string.h>
 
 #define ID "OMX.TI.Camera"
+
+#define FOCUS_MODE	 "OMX.TI.Camera.Config.StartFocusMode"
 
 enum _GooTiCameraProp
 {
@@ -70,6 +69,7 @@ struct _GooTiCameraPriv
 	GooTiCameraZoom zoom;
 	OMX_WHITEBALCONTROLTYPE balance;
 	OMX_EXPOSURECONTROLTYPE exposure;
+	OMX_CAMERA_CONFIG_FOCUS_MODE focus;
 };
 
 #define GOO_TI_CAMERA_GET_PRIVATE(obj) \
@@ -100,25 +100,40 @@ GType
 goo_ti_camera_white_balance_type ()
 {
 	static GType type = 0;
-
 	if (type == 0)
 	{
 		static const GEnumValue values[] = {
-			{ OMX_WhiteBalControlOff, "Off", "No balance" },
-			{ OMX_WhiteBalControlAuto, "Auto", "Auto balance" },
-			{ OMX_WhiteBalControlSunLight, "Sunlight",
-			  "Sun light" },
-			{ OMX_WhiteBalControlShade, "Shade", "Shade" },
-			{ OMX_WhiteBalControlFluorescent,
-			  "Fluorescent",  "Fluorescent" },
-			{ OMX_WhiteBalControlIncandescent,
-			  "Incandescent", "Incandescent" },
+			{ OMX_WhiteBalControlAuto, "Autobalance", "Autobalance" },
+			{ OMX_WhiteBalControlSunLight, "Sunlight", "Sunlight" },
+			{ OMX_WhiteBalControlCloudy, "Cloudy", "Cloudy" },
+			{ OMX_WhiteBalControlTungsten, "Tungsten", "Tungsten" },
+			{ OMX_WhiteBalControlFluorescent, "Fluorescent",  "Fluorescent" },
 			{ OMX_WhiteBalControlHorizon, "Horizon", "Horizon" },
 			{ 0, NULL, NULL },
 		};
 
-		type = g_enum_register_static ("GooTiCameraWhiteBalance",
-					       values);
+		type = g_enum_register_static ("GooTiCameraWhiteBalance", values);
+	}
+
+	return type;
+}
+
+GType
+goo_ti_camera_focus_type ()
+{
+	static GType type = 0;
+
+	if (type == 0)
+	{
+		static const GEnumValue values[] = {
+			{ OMX_CameraConfigFocusAuto, "Autofocus", "Autofocus" },
+			{ OMX_CameraConfigFocusInfinity, "Infinity", "Infinity" },
+			{ OMX_CameraConfigFocusHyperfocal, "Hyperfocal", "Hyperfocal" },
+			{ OMX_CameraConfigFocusMacro, "Macro", "Macro" },
+			{ 0, NULL, NULL },
+		};
+
+		type = g_enum_register_static ("GooTiCameraFocus", values);
 	}
 
 	return type;
@@ -153,7 +168,7 @@ goo_ti_camera_exposure_type ()
 #define DEFAULT_BRIGHTNESS 50
 #define DEFAULT_CONTRAST   0
 #define DEFAULT_VSTAB      FALSE
-#define DEFAULT_FOCUS      TRUE
+#define DEFAULT_FOCUS      OMX_CameraConfigFocusAuto
 
 G_DEFINE_TYPE (GooTiCamera, goo_ti_camera, GOO_TYPE_COMPONENT);
 
@@ -231,9 +246,8 @@ _goo_ti_camera_set_contrast (GooTiCamera* self, gint contrast)
 					   OMX_IndexConfigCommonContrast,
 					   param);
 
+	GOO_OBJECT_DEBUG (self, "Contrast = %d", param->nContrast);
 	g_free (param);
-
-	GOO_OBJECT_DEBUG (self, "%d", contrast);
 
 	return;
 }
@@ -251,9 +265,9 @@ _goo_ti_camera_get_contrast (GooTiCamera* self)
 					   OMX_IndexConfigCommonContrast,
 					   param);
 
-	GOO_OBJECT_DEBUG (self, "");
-
 	gint retval = param->nContrast;
+
+	GOO_OBJECT_DEBUG (self, "Contrast = %d",retval );
 
 	g_free (param);
 
@@ -265,7 +279,7 @@ _goo_ti_camera_set_brightness (GooTiCamera* self, guint brightness)
 {
 	g_assert (self != NULL);
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
-	g_return_if_fail (brightness >= 0 && brightness <= 100);
+	g_return_if_fail (brightness >= -100 && brightness <= 100);
 
 	OMX_CONFIG_BRIGHTNESSTYPE* param;
 	param = g_new0 (OMX_CONFIG_BRIGHTNESSTYPE, 1);
@@ -277,10 +291,9 @@ _goo_ti_camera_set_brightness (GooTiCamera* self, guint brightness)
 					   OMX_IndexConfigCommonBrightness,
 					   param);
 
+	GOO_OBJECT_DEBUG (self, "Brightness= %d", param->nBrightness);
+
 	g_free (param);
-
-	GOO_OBJECT_DEBUG (self, "%d", brightness);
-
 	return;
 }
 
@@ -302,46 +315,51 @@ _goo_ti_camera_get_brightness (GooTiCamera* self)
 
 	g_free (param);
 
-	GOO_OBJECT_DEBUG (self, "");
+	GOO_OBJECT_DEBUG (self, "Brightness= %d",retval);
 
 	return retval;
 }
 
 
 static void
-_goo_ti_camera_set_focus (GooTiCamera* self, gboolean autofocus)
+_goo_ti_camera_set_focus (GooTiCamera* self, OMX_CAMERA_CONFIG_FOCUS_MODE type)
 {
-	g_assert (GOO_IS_TI_CAMERA (self));
+	g_assert (self != NULL);
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
 
-	if (autofocus == TRUE )
-	{
-		OMX_BOOL param = (autofocus == TRUE) ? OMX_TRUE : OMX_FALSE;
+	gboolean retval = TRUE;
+	/* currently implemented controls */
+	g_assert (  type == OMX_CameraConfigFocusAuto         ||
+		  type == OMX_CameraConfigFocusInfinity     ||
+		  type == OMX_CameraConfigFocusHyperfocal        ||
+		  type == OMX_CameraConfigFocusMacro );
 
-		goo_component_set_config_by_index (GOO_COMPONENT (self),
-							OMX_IndexConfigCommonFocusRegion, &param);
+	OMX_CAMERA_CONFIG_FOCUS_MODE modo;
+	modo = type;
+	retval = goo_component_set_config_by_name (GOO_COMPONENT (self),
+					   FOCUS_MODE,
+					   (OMX_PTR*) &modo);
+	if (retval == TRUE)
+	{
+		GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+		priv->focus = modo;
+		GOO_OBJECT_DEBUG (self, "Focus mode = %d", modo);
 	}
-	GOO_OBJECT_DEBUG (self, "");
 	return;
 }
 
-static gboolean
+static OMX_CAMERA_CONFIG_FOCUS_MODE
 _goo_ti_camera_get_focus (GooTiCamera* self)
 {
 	g_assert (self != NULL);
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
 
-	OMX_BOOL param;
-	goo_component_get_config_by_index (GOO_COMPONENT (self),
-					   OMX_IndexConfigCommonFocusRegion,
-					   &param);
-
-	GOO_OBJECT_DEBUG (self, "");
-
-	gboolean retval = param;
-
-	return retval;
+	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+	OMX_CAMERA_CONFIG_FOCUS_MODE modo;
+	modo = priv->focus;
+	return modo;
 }
+
 
 
 static OMX_EXPOSURECONTROLTYPE
@@ -401,12 +419,11 @@ _goo_ti_camera_set_white_balance (GooTiCamera* self,
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
 
 	/* currently implemented controls */
-	g_assert (type == OMX_WhiteBalControlOff     ||
-		  type == OMX_WhiteBalControlAuto         ||
+	g_assert (  type == OMX_WhiteBalControlAuto         ||
 		  type == OMX_WhiteBalControlSunLight     ||
-		  type == OMX_WhiteBalControlShade        ||
-		  type == OMX_WhiteBalControlFluorescent  ||
-		  type == OMX_WhiteBalControlIncandescent ||
+		  type == OMX_WhiteBalControlCloudy        ||
+		  type == OMX_WhiteBalControlTungsten  ||
+		  type == OMX_WhiteBalControlFluorescent ||
 		  type == OMX_WhiteBalControlHorizon);
 
 	OMX_CONFIG_WHITEBALCONTROLTYPE* param;
@@ -1010,7 +1027,7 @@ goo_ti_camera_get_enc (GooComponent* self)
 			goo_object_get_owner (GOO_OBJECT (peer_port))
 			);
 		g_assert (retval != NULL);
-		/*g_assert (GOO_IS_TI_VIDEO_ENCODER (retval));*/
+
 		g_object_unref (peer_port);
 	}
 
@@ -1077,29 +1094,16 @@ goo_ti_camera_pp_set_idle (GooComponent* self)
 		return;
 	}
 
-	GOO_OBJECT_DEBUG (self, "going to set postproc to idle");
+	GOO_OBJECT_DEBUG (postproc, "going to set postproc to idle");
 
-	/* Sending postprocessor to idle state */
-#if 1
 	goo_component_set_state_idle (postproc);
-#else
-	GOO_OBJECT_LOCK (postproc);
-	postproc->next_state = OMX_StateIdle;
-	GOO_RUN (
-		OMX_SendCommand (postproc->handle,
-				 OMX_CommandStateSet,
-				 postproc->next_state,
-				 NULL)
-		);
-	GOO_OBJECT_UNLOCK (postproc);
-#endif
 
-	GOO_OBJECT_DEBUG (self, "going to wait for next state");
+	GOO_OBJECT_DEBUG (postproc, "going to wait for next idle state");
 
 	goo_component_wait_for_next_state (postproc);
 	g_object_unref (postproc);
 
-	GOO_OBJECT_DEBUG (self, "done");
+	GOO_OBJECT_DEBUG (postproc, "done");
 
 	return;
 }
@@ -1119,48 +1123,16 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 		return;
 	}
 
-	GOO_OBJECT_DEBUG (self, "going to set videoenc to idle");
+	GOO_OBJECT_DEBUG (videoenc, "going to set videoenc to idle");
 
-#if 1
 	goo_component_set_state_idle (videoenc);
-#else
-	GOO_OBJECT_INFO (videoenc, "Sending idle state command");
 
-	OMX_STATETYPE tmpstate = videoenc->cur_state;
-
-	/* Sending videoenc to idle state */
-
-	GOO_OBJECT_LOCK (videoenc);
-	videoenc->next_state = OMX_StateIdle;
-	GOO_RUN (
-		OMX_SendCommand (videoenc->handle,
-				 OMX_CommandStateSet,
-				 videoenc->next_state,
-		 		NULL)
-		);
-	GOO_OBJECT_UNLOCK (videoenc);
-
-
-	if (tmpstate == OMX_StateLoaded)
-	{
-		goo_component_allocate_all_ports (videoenc);
-	}
-
-	goo_component_wait_for_next_state (videoenc);
-	if (tmpstate == OMX_StateExecuting)
-	{
-		/* unblock all the async_queues */
-		goo_component_flush_all_ports (videoenc);
-	}
-
-#endif
-
-	GOO_OBJECT_DEBUG (self, "going to wait for next state");
+	GOO_OBJECT_DEBUG (videoenc, "going to wait for next idle state");
 
 	goo_component_wait_for_next_state (videoenc);
 	g_object_unref (videoenc);
 
-	GOO_OBJECT_DEBUG (self, "done");
+	GOO_OBJECT_DEBUG (videoenc, "done");
 
 	return;
 }
@@ -1180,29 +1152,17 @@ goo_ti_camera_jpeg_set_idle (GooComponent* self)
 		return;
 	}
 
-	GOO_OBJECT_DEBUG (self, "going to set jpegenc to idle");
+	GOO_OBJECT_DEBUG (jpegenc, "going to set jpegenc to idle");
 
-	/* Sending postprocessor to idle state */
-#if 1
 	goo_component_set_state_idle (jpegenc);
-#else
-	GOO_OBJECT_LOCK (jpegenc);
-	jpegenc->next_state = OMX_StateIdle;
-	GOO_RUN (
-		OMX_SendCommand (jpegenc->handle,
-				 OMX_CommandStateSet,
-				 jpegenc->next_state,
-				 NULL)
-		);
-	GOO_OBJECT_UNLOCK (jpegenc);
-#endif
 
-	GOO_OBJECT_DEBUG (self, "going to wait for next state");
+	GOO_OBJECT_DEBUG (jpegenc, "going to wait for next idle state");
 
 	goo_component_wait_for_next_state (jpegenc);
+
 	g_object_unref (jpegenc);
 
-	GOO_OBJECT_DEBUG (self, "done");
+	GOO_OBJECT_DEBUG (jpegenc, "done");
 
 	return;
 }
@@ -1244,7 +1204,7 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 		goo_ti_camera_venc_set_idle (self);
 		goo_ti_camera_jpeg_set_idle (self);
 	}
-
+	GOO_OBJECT_DEBUG (self, "going to set camera to idle");
 	GOO_OBJECT_LOCK (self);
 	GOO_RUN (
 		OMX_SendCommand (self->handle,
@@ -1258,12 +1218,6 @@ goo_ti_camera_set_state_idle (GooComponent* self)
 	{
 		GOO_OBJECT_INFO (self, "going from loaded->idle.. allocating ports");
 		goo_component_allocate_all_ports (self);
-	}
-	else if (tmpstate == OMX_StateExecuting)
-	{
-	}
-	else if (tmpstate == OMX_StatePause)
-	{
 	}
 
 	if (tmpstate == OMX_StateExecuting)
@@ -1311,12 +1265,12 @@ goo_ti_camera_pp_set_loaded (GooComponent* self)
 		return;
 	}
 
-	GOO_OBJECT_INFO (postproc, "Sending loaded state command");
+	GOO_OBJECT_INFO (postproc, "Sending loaded state command to post proc");
 
 	/* Sending postprocessor to idle state */
 	goo_component_set_state_loaded (postproc);
 
-	GOO_OBJECT_INFO (postproc, "going to wait for state");
+	GOO_OBJECT_INFO (postproc, "going to wait for loaded state");
 	goo_component_wait_for_next_state (postproc);
 	g_object_unref (postproc);
 
@@ -1338,11 +1292,11 @@ goo_ti_camera_venc_set_loaded (GooComponent* self)
 		return;
 	}
 
-	GOO_OBJECT_INFO (videoenc, "Sending loaded state command");
+	GOO_OBJECT_INFO (videoenc, "Sending loaded state command to videoenc");
 
 	goo_component_set_state_loaded (videoenc);
 
-	GOO_OBJECT_INFO (videoenc, "going to wait for state");
+	GOO_OBJECT_INFO (videoenc, "going to wait for loaded state");
 	goo_component_wait_for_next_state (videoenc);
 	g_object_unref (videoenc);
 	return;
@@ -1363,8 +1317,9 @@ goo_ti_camera_jpeg_set_loaded (GooComponent* self)
 		return;
 	}
 
+	GOO_OBJECT_INFO (jpegenc, "Sending loaded state command to jpegenc");
 	goo_component_set_state_loaded (jpegenc);
-
+	GOO_OBJECT_INFO (jpegenc, "going to wait for loaded state");
 	goo_component_wait_for_next_state (jpegenc);
 	g_object_unref (jpegenc);
 	return;
@@ -1377,7 +1332,7 @@ goo_ti_camera_set_state_loaded (GooComponent* self)
 
 	goo_ti_camera_pp_set_loaded (self);
 
-	GOO_OBJECT_INFO (self, "Sending load state command");
+	GOO_OBJECT_INFO (self, "Sending load state command to camera");
 	GOO_OBJECT_LOCK (self);
 	GOO_RUN (
 		OMX_SendCommand (self->handle,
@@ -1400,7 +1355,7 @@ goo_ti_camera_set_state_loaded (GooComponent* self)
 
 	GOO_OBJECT_INFO (self, "going to wait for next state");
 	goo_component_propagate_wait_for_next_state (self);
-	GOO_OBJECT_INFO (self, "done wait for next state");
+	GOO_OBJECT_INFO (self, "done");
 
 	self->configured = FALSE;
 
@@ -1419,19 +1374,8 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 	if (postproc != NULL)
 	{
 		GOO_OBJECT_INFO (postproc, "Sending executing state command");
-#if 1
+
 		goo_component_set_state_executing (postproc);
-#else
-		GOO_OBJECT_LOCK (postproc);
-		postproc->next_state = OMX_StateExecuting;
-		GOO_RUN (
-			OMX_SendCommand (postproc->handle,
-					 OMX_CommandStateSet,
-					 postproc->next_state,
-				 	NULL)
-			);
-		GOO_OBJECT_UNLOCK (postproc);
-#endif
 
 		goo_component_wait_for_next_state (postproc);
 
@@ -1443,19 +1387,8 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 	if (videoenc != NULL)
 	{
 		GOO_OBJECT_INFO (videoenc, "Sending executing state command");
-#if 1
+
 		goo_component_set_state_executing (videoenc);
-#else
-		GOO_OBJECT_LOCK (videoenc);
-		videoenc->next_state = OMX_StateExecuting;
-		GOO_RUN (
-			OMX_SendCommand (videoenc->handle,
-					 OMX_CommandStateSet,
-					 videoenc->next_state,
-				 	NULL)
-			);
-		GOO_OBJECT_UNLOCK (videoenc);
-#endif
 
 		goo_component_wait_for_next_state (videoenc);
 
@@ -1467,19 +1400,8 @@ goo_ti_camera_propagate_executing (GooComponent* self)
 	if (jpegenc != NULL)
 	{
 		GOO_OBJECT_INFO (jpegenc, "Sending executing state command");
-#if 1
+
 		goo_component_set_state_executing (jpegenc);
-#else
-		GOO_OBJECT_LOCK (jpegenc);
-		jpegenc->next_state = OMX_StateExecuting;
-		GOO_RUN (
-			OMX_SendCommand (jpegenc->handle,
-					 OMX_CommandStateSet,
-					 jpegenc->next_state,
-				 	NULL)
-			);
-		GOO_OBJECT_UNLOCK (jpegenc);
-#endif
 
 		goo_component_wait_for_next_state (jpegenc);
 
@@ -1556,7 +1478,7 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 		break;
 	case PROP_FOCUS:
 		_goo_ti_camera_set_focus (self,
-						  g_value_get_boolean (value));
+						  g_value_get_enum (value));
 		break;
 	case PROP_VSTAB:
 		_goo_ti_camera_set_vstab_mode (self,
@@ -1601,7 +1523,7 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 				  _goo_ti_camera_get_exposure (self));
 		break;
 	case PROP_FOCUS:
-		g_value_set_boolean (value,
+		g_value_set_enum (value,
 				  _goo_ti_camera_get_focus (self));
 		break;
 	case PROP_VSTAB:
@@ -1702,9 +1624,10 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 				  G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_EXPOSURE, spec);
 
-	spec = g_param_spec_boolean ("focus",
+	spec = g_param_spec_enum ("focus",
 				  "Focus control",
-				  "Set/Get the autofocus mode ",
+				  "Set the autofocus mode ",
+				  GOO_TI_CAMERA_MODE_FOCUS,
 				  DEFAULT_FOCUS, G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_FOCUS, spec);
 
