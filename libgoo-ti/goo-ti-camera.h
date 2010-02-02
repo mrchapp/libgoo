@@ -99,12 +99,14 @@ typedef enum
 #define GOO_TI_CAMERA_WHITE_BALANCE (goo_ti_camera_white_balance_type ())
 #define GOO_TI_CAMERA_MODE_FOCUS (goo_ti_camera_focus_type ())
 #define GOO_TI_CAMERA_EXPOSURE (goo_ti_camera_exposure_type ())
+#define GOO_TI_CAMERA_EFFECTS (goo_ti_camera_effects_type ())
 
 GType goo_ti_camera_get_type (void);
 GType goo_ti_camera_zoom_get_type (void);
 GType goo_ti_camera_white_balance_type (void);
 GType goo_ti_camera_exposure_type (void);
 GType goo_ti_camera_focus_type (void);
+GType goo_ti_camera_effects_type (void);
 
 G_END_DECLS
 

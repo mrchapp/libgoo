@@ -41,7 +41,8 @@
 
 #define ID "OMX.TI.Camera"
 
-#define FOCUS_MODE	 "OMX.TI.Camera.Config.StartFocusMode"
+#define FOCUS_MODE	 	"OMX.TI.Camera.Config.StartFocusMode"
+#define COLOR_EFFECTS	"OMX.TI.Camera.Config.ColorEffect"
 
 enum _GooTiCameraProp
 {
@@ -53,7 +54,8 @@ enum _GooTiCameraProp
 	PROP_EXPOSURE,
 	PROP_ZOOM,
 	PROP_VSTAB,
-	PROP_FOCUS
+	PROP_FOCUS,
+	PROP_EFFECTS
 };
 
 enum _GooTiCameraPorts
@@ -70,6 +72,7 @@ struct _GooTiCameraPriv
 	OMX_WHITEBALCONTROLTYPE balance;
 	OMX_EXPOSURECONTROLTYPE exposure;
 	OMX_CAMERA_CONFIG_FOCUS_MODE focus;
+	OMX_CAMERA_CONFIG_EFFECTS effects;
 };
 
 #define GOO_TI_CAMERA_GET_PRIVATE(obj) \
@@ -149,6 +152,10 @@ goo_ti_camera_exposure_type ()
 		static const GEnumValue values[] = {
 			{ OMX_ExposureControlOff, "Off", "No exposure" },
 			{ OMX_ExposureControlAuto, "Auto", "Auto exposure" },
+			{ OMX_ExposureControlNight, "Night", "Night" },
+			{ OMX_ExposureControlBackLight, "BackLight", "BackLight" },
+			{ OMX_ExposureControlSpotLight, "SpotLight", "SpotLight" },
+			{ OMX_ExposureControlSports, "Sports", "Sports" },
 			{ 0, NULL, NULL },
 		};
 
@@ -158,7 +165,31 @@ goo_ti_camera_exposure_type ()
 
 	return type;
 }
+GType
+goo_ti_camera_effects_type ()
+{
+	static GType type = 0;
 
+	if (type == 0)
+	{
+		static const GEnumValue values[] = {
+			{ OMX_CameraConfigEffectsNormal, "Normal", "Normal" },
+			{ OMX_CameraConfigEffectsSepia, "Sepia", "Sepia" },
+			{ OMX_CameraConfigEffectsNegative, "Negative", "Negative" },
+			{ OMX_CameraConfigEffectsGrayscale, "Grayscale", "Grayscale" },
+			{ OMX_CameraConfigEffectsNatural, "Natural", "Natural" },
+			{ OMX_CameraConfigEffectsVivid, "Vivid", "Vivid" },
+			{ OMX_CameraConfigEffectsColorSwap, "ColorSwap", "ColorSwap" },
+			{ OMX_CameraConfigEffectsSolarize, "Solarize", "Solarize" },
+			{ OMX_CameraConfigEffectsOutOfFocus, "OutOfFocus", "OutOfFocus" },
+			{ 0, NULL, NULL },
+		};
+
+		type = g_enum_register_static ("GooTiCameraEffects", values);
+	}
+
+	return type;
+}
 
 /* default values */
 #define DEFAULT_EXPOSURE   OMX_ExposureControlAuto
@@ -169,6 +200,7 @@ goo_ti_camera_exposure_type ()
 #define DEFAULT_CONTRAST   0
 #define DEFAULT_VSTAB      FALSE
 #define DEFAULT_FOCUS      OMX_CameraConfigFocusAuto
+#define DEFAULT_EFFECT     OMX_CameraConfigEffectsNormal
 
 G_DEFINE_TYPE (GooTiCamera, goo_ti_camera, GOO_TYPE_COMPONENT);
 
@@ -319,8 +351,6 @@ _goo_ti_camera_get_brightness (GooTiCamera* self)
 
 	return retval;
 }
-
-
 static void
 _goo_ti_camera_set_focus (GooTiCamera* self, OMX_CAMERA_CONFIG_FOCUS_MODE type)
 {
@@ -360,7 +390,46 @@ _goo_ti_camera_get_focus (GooTiCamera* self)
 	return modo;
 }
 
+static void
+_goo_ti_camera_set_effects (GooTiCamera* self, OMX_CAMERA_CONFIG_EFFECTS type)
+{
+	g_assert (self != NULL);
+	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
 
+	gboolean retval = TRUE;
+	OMX_CAMERA_CONFIG_EFFECTS color_effect;
+	color_effect = type;
+
+	retval = goo_component_set_config_by_name (GOO_COMPONENT (self),
+					   COLOR_EFFECTS,
+					   (OMX_PTR*) &color_effect);
+	if (retval == TRUE)
+	{
+		GOO_OBJECT_DEBUG (self, "Color_effect = %d", color_effect);
+	}
+	return;
+}
+
+static OMX_CAMERA_CONFIG_EFFECTS
+_goo_ti_camera_get_effects (GooTiCamera* self)
+{
+	g_assert (self != NULL);
+	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
+
+	gboolean retval = TRUE;
+	OMX_CAMERA_CONFIG_EFFECTS color_effect;
+
+	retval = goo_component_get_config_by_name (GOO_COMPONENT (self),
+					   COLOR_EFFECTS,
+					   (OMX_PTR*) &color_effect);
+	if (retval == TRUE)
+	{
+		GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+		priv->effects = color_effect;
+		GOO_OBJECT_DEBUG (self, "Color_effect = %d", color_effect);
+	}
+	return color_effect;
+}
 
 static OMX_EXPOSURECONTROLTYPE
 _goo_ti_camera_get_exposure (GooTiCamera* self)
@@ -368,16 +437,22 @@ _goo_ti_camera_get_exposure (GooTiCamera* self)
 	g_assert (self != NULL);
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
 
+	OMX_CONFIG_EXPOSURECONTROLTYPE* param;
+	param = g_new0 (OMX_CONFIG_EXPOSURECONTROLTYPE, 1);
+	GOO_INIT_PARAM (param, OMX_CONFIG_EXPOSURECONTROLTYPE);
 
 	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 	OMX_EXPOSURECONTROLTYPE retval;
-	retval = priv->exposure;
+
+	goo_component_get_config_by_index (GOO_COMPONENT (self),
+					   OMX_IndexConfigCommonExposure,
+						param);
+	retval = param->eExposureControl ;
 
 	GOO_OBJECT_DEBUG (self, "");
 
 	return retval;
 }
-
 
 static void
 _goo_ti_camera_set_exposure (GooTiCamera* self,
@@ -385,10 +460,6 @@ _goo_ti_camera_set_exposure (GooTiCamera* self,
 {
 	g_assert (self != NULL);
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
-
-	/* currently implemented controls */
-	g_assert (type == OMX_ExposureControlOff     ||
-		  type == OMX_ExposureControlAuto);
 
 	OMX_CONFIG_EXPOSURECONTROLTYPE* param;
 	param = g_new0 (OMX_CONFIG_EXPOSURECONTROLTYPE, 1);
@@ -452,7 +523,7 @@ _goo_ti_camera_get_white_balance (GooTiCamera* self)
 	g_assert (self != NULL);
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
 
-#if 0
+#if 0  /*try setting to 1*/
 	OMX_CONFIG_WHITEBALCONTROLTYPE* param;
 	param = g_new0 (OMX_CONFIG_WHITEBALCONTROLTYPE, 1);
 	GOO_INIT_PARAM (param, OMX_CONFIG_WHITEBALCONTROLTYPE);
@@ -1484,6 +1555,10 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 		_goo_ti_camera_set_vstab_mode (self,
 					       g_value_get_boolean (value));
 		break;
+	case PROP_EFFECTS:
+		_goo_ti_camera_set_effects (self,
+						  g_value_get_enum (value));
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 		break;
@@ -1530,6 +1605,10 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 		g_value_set_boolean (value,
 				     _goo_ti_camera_get_vstab_mode (self));
 		break;
+	case PROP_EFFECTS:
+		g_value_set_enum (value,
+				  _goo_ti_camera_get_effects (self));
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 		break;
@@ -1552,6 +1631,8 @@ goo_ti_camera_init (GooTiCamera* self)
 	priv->zoom = DEFAULT_ZOOM;
 	priv->balance = DEFAULT_BALANCE;
 	priv->exposure = DEFAULT_EXPOSURE;
+	priv->focus = DEFAULT_FOCUS;
+	priv->effects = DEFAULT_EFFECT;
 
 	return;
 }
@@ -1635,6 +1716,13 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 				     "Video stabilization",
 				     DEFAULT_VSTAB, G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_VSTAB, spec);
+
+	spec = g_param_spec_enum ("effects",
+				  "Color effects",
+				  "Set/Get the color effects",
+				  GOO_TI_CAMERA_EFFECTS,
+				  DEFAULT_EFFECT, G_PARAM_READWRITE);
+	g_object_class_install_property (g_klass, PROP_EFFECTS, spec);
 
 	GooComponentClass* c_klass = GOO_COMPONENT_CLASS (klass);
 	c_klass->set_parameters_func = goo_ti_camera_set_parameters;
