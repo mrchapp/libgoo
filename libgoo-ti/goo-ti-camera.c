@@ -307,7 +307,7 @@ _goo_ti_camera_get_contrast (GooTiCamera* self)
 }
 
 static void
-_goo_ti_camera_set_brightness (GooTiCamera* self, guint brightness)
+_goo_ti_camera_set_brightness (GooTiCamera* self, gint brightness)
 {
 	g_assert (self != NULL);
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
@@ -343,7 +343,7 @@ _goo_ti_camera_get_brightness (GooTiCamera* self)
 					   OMX_IndexConfigCommonBrightness,
 					   param);
 
-	guint retval = param->nBrightness;
+	gint retval = param->nBrightness;
 
 	g_free (param);
 
@@ -441,7 +441,6 @@ _goo_ti_camera_get_exposure (GooTiCamera* self)
 	param = g_new0 (OMX_CONFIG_EXPOSURECONTROLTYPE, 1);
 	GOO_INIT_PARAM (param, OMX_CONFIG_EXPOSURECONTROLTYPE);
 
-	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 	OMX_EXPOSURECONTROLTYPE retval;
 
 	goo_component_get_config_by_index (GOO_COMPONENT (self),
@@ -777,7 +776,6 @@ _goo_ti_camera_get_vstab_mode (GooTiCamera* self)
 	return vstab_mode;
 }
 
-
 static void
 _goo_ti_camera_set_capture_mode (GooTiCamera* self, gboolean capture_mode)
 {
@@ -837,7 +835,6 @@ _goo_ti_camera_get_capture_mode (GooTiCamera* self)
 
 	return priv->capturemode;
 }
-
 static void
 goo_ti_camera_load_parameters (GooComponent* component)
 {
@@ -1530,7 +1527,7 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 		_goo_ti_camera_set_contrast (self, g_value_get_int (value));
 		break;
 	case PROP_BRIGHTNESS:
-		_goo_ti_camera_set_brightness (self, g_value_get_uint (value));
+		_goo_ti_camera_set_brightness (self, g_value_get_int (value));
 		break;
 	case PROP_CAPTURE_MODE:
 		_goo_ti_camera_set_capture_mode (self,
@@ -1580,7 +1577,7 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 		g_value_set_int (value, _goo_ti_camera_get_contrast (self));
 		break;
 	case PROP_BRIGHTNESS:
-		g_value_set_uint (value, _goo_ti_camera_get_brightness (self));
+		g_value_set_int (value, _goo_ti_camera_get_brightness (self));
 		break;
 	case PROP_CAPTURE_MODE:
 		g_value_set_boolean (value,
@@ -1672,9 +1669,9 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 				 G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_CONTRAST, spec);
 
-	spec = g_param_spec_uint ("brightness", "Brightness",
+	spec = g_param_spec_int ("brightness", "Brightness",
 				  "Set/Get the camera's brightness",
-				  0, 100, DEFAULT_BRIGHTNESS,
+				  -100, 100, DEFAULT_BRIGHTNESS,
 				  G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_BRIGHTNESS, spec);
 
