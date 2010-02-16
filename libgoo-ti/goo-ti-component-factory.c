@@ -50,6 +50,7 @@
 #include <goo-ti-g711dec.h>
 #include <goo-ti-aacdec.h>
 #include <goo-ti-mpeg4dec.h>
+#include <goo-ti-mpeg4dec-720p.h>
 #include <goo-ti-sparkdec.h>
 #include <goo-ti-mpeg4enc.h>
 #include <goo-ti-post-processor.h>
@@ -97,6 +98,7 @@ static struct _component_entry _components[] =
 	{ "g711dec", GOO_TI_G711_DECODER, goo_ti_g711dec_get_type, 0 },
 	{ "aacdec", GOO_TI_AAC_DECODER, goo_ti_aacdec_get_type, 0 },
 	{ "mpeg4dec", GOO_TI_MPEG4_DECODER, goo_ti_mpeg4dec_get_type, 0 },
+	{ "mpeg4dec720p", GOO_TI_MPEG4_720P_DECODER, goo_ti_mpeg4dec_720p_get_type, 0 },
 	{ "sparkdec", GOO_TI_SPARK_DECODER, goo_ti_sparkdec_get_type, 0 },
 	{ "h264dec", GOO_TI_H264_DECODER, goo_ti_h264dec_get_type, 0 },
 	{ "h264720pdec", GOO_TI_H264_720P_DECODER, goo_ti_h264dec_720p_get_type, 0 },

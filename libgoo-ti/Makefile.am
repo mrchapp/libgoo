@@ -47,6 +47,7 @@ libgoo_ti_la_sources = \
 	goo-ti-video-decoder.c \
 	goo-ti-video-decoder720p.c \
 	goo-ti-mpeg4dec.c \
+	goo-ti-mpeg4dec-720p.c \
 	goo-ti-sparkdec.c \
 	goo-ti-video-encoder.c \
 	goo-ti-mpeg4enc.c \
@@ -92,6 +93,7 @@ libgoo_ti_la_headers = \
 	goo-ti-video-decoder.h \
 	goo-ti-video-decoder720p.h \
 	goo-ti-mpeg4dec.h \
+	goo-ti-mpeg4dec-720p.h \
 	goo-ti-video-encoder.h \
 	goo-ti-mpeg4enc.h \
 	goo-ti-sparkdec.h \
