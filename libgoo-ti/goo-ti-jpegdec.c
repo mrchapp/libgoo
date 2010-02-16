@@ -44,6 +44,8 @@
 #define ID "OMX.TI.JPEG.decode"
 
 #define MAX_NUM_BUFFERS 1
+#define MAX_RES_SN_WIDTH 4000
+#define MAX_RES_SN_HEIGTH 3008
 
 typedef enum OMX_INDEXIMAGETYPE
 {
@@ -292,14 +294,17 @@ goo_ti_jpegdec_set_parameters (GooComponent* component)
 					    "OMX.TI.JPEG.decode.Param.SetMaxResolution",
 					    pMaxResolution);
 
-	pMaxResolution->nWidth = (self->max_res)->nWidth;
-	pMaxResolution->nHeight = (self->max_res)->nHeight;
+	pMaxResolution->nWidth = MAX_RES_SN_WIDTH;
+	pMaxResolution->nHeight = MAX_RES_SN_HEIGTH;
+
+	GOO_OBJECT_DEBUG (self, "********InitMaxResolution->nWidth = %d, InitMaxResolution->nHeight= %d",(self->max_res)->nWidth, (self->max_res)->nHeight);
 
 	goo_component_set_parameter_by_name (component,
 					    "OMX.TI.JPEG.decode.Param.SetMaxResolution",
 					    pMaxResolution);
 
         GOO_OBJECT_DEBUG (self, "");
+        GOO_OBJECT_DEBUG (self, "********OutMaxResolution->nWidth = %d, OutMaxResolution->nHeight= %d", pMaxResolution->nWidth, pMaxResolution->nHeight);
 
         return;
 }
