@@ -38,6 +38,8 @@
 
 #include <goo-utils.h>
 #include <goo-ti-clock.h>
+/* WRONG! Needed for custom index: */
+#include <OMX_Clock.h>
 
 #define ID "OMX_Clock"
 #define NAME "clock"
@@ -77,6 +79,20 @@ goo_ti_clock_get_timestamp (GooTiClock* self)
 	g_free (param);
 
 	return ts;
+}
+
+/**
+ * Set the StreamID used by the audio component
+ */
+void
+goo_ti_clock_set_streamid (GooTiClock* self, gint streamid)
+{
+	g_assert (GOO_IS_TI_CLOCK (self));
+	GOO_OBJECT_INFO (self, "streamid=%lld", streamid);
+
+	goo_component_set_config_by_index (GOO_COMPONENT (self),
+					   OMX_IndexCustomSetStreamId,
+					   (void *) &streamid);
 }
 
 /**
