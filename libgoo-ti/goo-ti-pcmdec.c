@@ -35,7 +35,7 @@
 #define FRAME_PARAM_NAME "OMX.TI.index.config.pcmheaderinfo"
 #define STREAMID_PARAM_NAME "OMX.TI.index.config.pcmstreamIDinfo"
 #define INPUT_BUFFERSIZE 4000
-#define OUTPUT_BUFFERSIZE 320
+#define OUTPUT_BUFFERSIZE 3840
 
 G_DEFINE_TYPE (GooTiPcmDec, goo_ti_pcmdec, GOO_TYPE_TI_AUDIO_DECODER)
 
