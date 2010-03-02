@@ -52,6 +52,7 @@ libgoo_ti_la_sources = \
 	goo-ti-video-encoder.c \
 	goo-ti-video-encoder720p.c \
 	goo-ti-mpeg4enc.c \
+	goo-ti-mpeg4enc-720p.c \
 	goo-ti-post-processor.c \
 	goo-ti-jpegenc.c \
 	goo-ti-clock.c \
@@ -98,6 +99,7 @@ libgoo_ti_la_headers = \
 	goo-ti-video-encoder.h \
 	goo-ti-video-encoder720p.h \
 	goo-ti-mpeg4enc.h \
+	goo-ti-mpeg4enc-720p.h \
 	goo-ti-sparkdec.h \
 	goo-ti-post-processor.h \
 	goo-ti-jpegenc.h \

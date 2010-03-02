@@ -53,6 +53,7 @@
 #include <goo-ti-mpeg4dec-720p.h>
 #include <goo-ti-sparkdec.h>
 #include <goo-ti-mpeg4enc.h>
+#include <goo-ti-mpeg4enc-720p.h>
 #include <goo-ti-post-processor.h>
 #include <goo-ti-jpegenc.h>
 #include <goo-ti-h264dec.h>
@@ -104,6 +105,7 @@ static struct _component_entry _components[] =
 	{ "h264720pdec", GOO_TI_H264_720P_DECODER, goo_ti_h264dec_720p_get_type, 0 },
 	{ "h263dec", GOO_TI_H263_DECODER, goo_ti_h263dec_get_type, 0 },
 	{ "mpeg4enc", GOO_TI_MPEG4_ENCODER, goo_ti_mpeg4enc_get_type, 0 },
+	{ "mpeg4enc720p", GOO_TI_MPEG4_720P_ENCODER, goo_ti_mpeg4enc_720p_get_type, 0 },
 	{ "postproc", GOO_TI_POST_PROCESSOR, goo_ti_post_processor_get_type, 0 },
 #ifdef TI_CAMERA
 	{ "camera", GOO_TI_CAMERA, goo_ti_camera_get_type, 0 },
