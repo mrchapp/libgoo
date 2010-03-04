@@ -60,6 +60,8 @@ struct _GooTiAudioComponent
 
 	GooTiAudioManager* manager;
 
+	GooComponent *clock;
+
 	gboolean dasf_mode;
 	gboolean frame_mode;
 	gboolean acoustic_mode;
@@ -96,6 +98,8 @@ void goo_ti_audio_component_set_frame_mode (GooTiAudioComponent* self,
 					    gboolean frame_mode);
 void goo_ti_audio_component_set_acoustic_mode (GooTiAudioComponent* self,
 					       gboolean frame_mode);
+gboolean goo_ti_audio_component_set_clock (GooComponent *component,
+					   GooComponent *clock);
 
 gboolean goo_ti_audio_component_is_dasf_mode (GooTiAudioComponent* self);
 guint goo_ti_audio_component_get_volume (GooTiAudioComponent* self);
