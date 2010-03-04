@@ -477,7 +477,7 @@ goo_ti_audio_component_get_property (GObject* object, guint prop_id,
 	return;
 }
 
-static gboolean
+gboolean
 goo_ti_audio_component_set_clock (GooComponent *component,
 				  GooComponent *clock)
 {
@@ -489,6 +489,7 @@ goo_ti_audio_component_set_clock (GooComponent *component,
 	gboolean retval = FALSE;
 	gint streamid = goo_ti_audio_component_get_stream_id (self);
 
+	self->clock = clock;
 	retval = goo_component_set_config_by_index (clock,
 						    OMX_IndexCustomSetStreamId,
 						    (void *) &streamid);

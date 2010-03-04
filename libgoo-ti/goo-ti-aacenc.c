@@ -203,6 +203,7 @@ _goo_ti_aacenc_set_bit_rate_mode (GooTiAacEnc *self,
 	goo_component_set_config_by_name (GOO_COMPONENT (self),
 					  me->dasf_param_name,
 					  me->audioinfo);
+	g_print ("OMX.TI.index.config.aacencHeaderInfo\n");
 
 	GOO_OBJECT_DEBUG (self, "");
 
@@ -219,6 +220,7 @@ _goo_ti_aacenc_set_output_frames (GooTiAacEnc *self)
 	goo_component_set_config_by_name (GOO_COMPONENT (self),
 					  FRAMESPERBUFFER,
 					  &self->output_frames);
+	g_print ("OMX.TI.index.config.aacencframesPerOutBuf\n");
 
 	return;
 }
@@ -363,6 +365,7 @@ goo_ti_aacenc_set_parameters (GooComponent* component)
 	goo_component_set_parameter_by_index (component,
 					      OMX_IndexParamAudioPcm,
 					      self->input_port_param);
+	g_print ("OMX_IndexParamAudioPcm\n");
 
 	goo_component_set_parameter_by_index (component,
 					      OMX_IndexParamAudioAac,
