@@ -193,6 +193,19 @@ goo_ti_camera_effects_type ()
 	return type;
 }
 
+void
+goo_ti_camera_set_clock (GooComponent* component, GooComponent* clock)
+{
+	g_assert (component);
+	g_assert (clock);
+
+	g_assert (goo_component_set_parameter_by_name (component,
+				"OMX.TI.Camera.Param.ClockSource",
+				GOO_COMPONENT(clock)->handle));
+
+	return;
+}
+
 /* default values */
 #define DEFAULT_EXPOSURE   OMX_ExposureControlAuto
 #define DEFAULT_BALANCE    OMX_WhiteBalControlAuto
