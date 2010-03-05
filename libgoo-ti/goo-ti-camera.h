@@ -108,6 +108,7 @@ GType goo_ti_camera_white_balance_type (void);
 GType goo_ti_camera_exposure_type (void);
 GType goo_ti_camera_focus_type (void);
 GType goo_ti_camera_effects_type (void);
+void goo_ti_camera_set_clock (GooComponent* component, GooComponent* clock);
 
 G_END_DECLS
 
