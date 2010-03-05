@@ -100,6 +100,7 @@ void goo_ti_audio_component_set_acoustic_mode (GooTiAudioComponent* self,
 					       gboolean frame_mode);
 gboolean goo_ti_audio_component_set_clock (GooComponent *component,
 					   GooComponent *clock);
+GooComponent *goo_ti_audio_component_get_clock (GooComponent *component);
 
 gboolean goo_ti_audio_component_is_dasf_mode (GooTiAudioComponent* self);
 guint goo_ti_audio_component_get_volume (GooTiAudioComponent* self);

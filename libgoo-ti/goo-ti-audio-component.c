@@ -496,6 +496,17 @@ goo_ti_audio_component_set_clock (GooComponent *component,
 	return retval;
 }
 
+GooComponent*
+goo_ti_audio_component_get_clock (GooComponent *component)
+{
+	g_assert(component);
+
+	GooTiAudioComponent* self = GOO_TI_AUDIO_COMPONENT (component);
+	g_assert (self);
+
+	return self->clock;
+}
+
 static void
 goo_ti_audio_component_class_init (GooTiAudioComponentClass* klass)
 {
