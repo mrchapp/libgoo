@@ -43,6 +43,7 @@
 
 #define FOCUS_MODE	 	"OMX.TI.Camera.Config.StartFocusMode"
 #define COLOR_EFFECTS	"OMX.TI.Camera.Config.ColorEffect"
+#define IPP		"OMX.TI.Camera.Param.IPP"
 
 enum _GooTiCameraProp
 {
@@ -55,7 +56,8 @@ enum _GooTiCameraProp
 	PROP_ZOOM,
 	PROP_VSTAB,
 	PROP_FOCUS,
-	PROP_EFFECTS
+	PROP_EFFECTS,
+	PROP_IPP
 };
 
 enum _GooTiCameraPorts
@@ -73,6 +75,7 @@ struct _GooTiCameraPriv
 	OMX_EXPOSURECONTROLTYPE exposure;
 	OMX_CAMERA_CONFIG_FOCUS_MODE focus;
 	OMX_CAMERA_CONFIG_EFFECTS effects;
+	gboolean ipp;
 };
 
 #define GOO_TI_CAMERA_GET_PRIVATE(obj) \
@@ -203,6 +206,7 @@ goo_ti_camera_effects_type ()
 #define DEFAULT_VSTAB      FALSE
 #define DEFAULT_FOCUS      OMX_CameraConfigFocusAuto
 #define DEFAULT_EFFECT     OMX_CameraConfigEffectsNormal
+#define DEFAULT_IPP        FALSE
 
 G_DEFINE_TYPE (GooTiCamera, goo_ti_camera, GOO_TYPE_COMPONENT);
 
@@ -763,6 +767,32 @@ _goo_ti_camera_get_vstab_mode (GooTiCamera* self)
 	GOO_OBJECT_DEBUG (self, "");
 
 	return vstab_mode;
+}
+
+static void
+_goo_ti_camera_set_ipp (GooTiCamera* self, gboolean value)
+{
+	g_assert (GOO_IS_TI_CAMERA (self));
+	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
+	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+
+	OMX_BOOL ipp;
+	ipp= value;
+	goo_component_set_parameter_by_name (GOO_COMPONENT (self),
+					     IPP, (OMX_PTR*) &ipp);
+
+	priv->ipp = ipp;
+
+	GOO_OBJECT_DEBUG (self, "IPP = %d ", priv->ipp);
+	return;
+}
+
+static gboolean
+_goo_ti_camera_get_ipp (GooTiCamera* self)
+{
+	g_assert (self != NULL);
+	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+	return priv->ipp;
 }
 
 static void
@@ -1543,6 +1573,10 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 		_goo_ti_camera_set_effects (self,
 						  g_value_get_enum (value));
 		break;
+	case PROP_IPP:
+		_goo_ti_camera_set_ipp (self,
+					g_value_get_boolean (value));
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 		break;
@@ -1593,6 +1627,10 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 		g_value_set_enum (value,
 				  _goo_ti_camera_get_effects (self));
 		break;
+	case PROP_IPP:
+		g_value_set_boolean (value,
+				     _goo_ti_camera_get_ipp (self));
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 		break;
@@ -1617,6 +1655,7 @@ goo_ti_camera_init (GooTiCamera* self)
 	priv->exposure = DEFAULT_EXPOSURE;
 	priv->focus = DEFAULT_FOCUS;
 	priv->effects = DEFAULT_EFFECT;
+	priv->ipp = DEFAULT_IPP;
 
 	return;
 }
@@ -1707,6 +1746,12 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 				  GOO_TI_CAMERA_EFFECTS,
 				  DEFAULT_EFFECT, G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_EFFECTS, spec);
+
+	spec = g_param_spec_boolean ("ipp", "Image Processing Pipeline",
+				     "Enabled IPP",
+				     DEFAULT_IPP,
+				     G_PARAM_READWRITE);
+	g_object_class_install_property (g_klass, PROP_IPP, spec);
 
 	GooComponentClass* c_klass = GOO_COMPONENT_CLASS (klass);
 	c_klass->set_parameters_func = goo_ti_camera_set_parameters;
