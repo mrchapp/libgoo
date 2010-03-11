@@ -936,8 +936,8 @@ goo_ti_camera_validate (GooComponent* component)
 			param->format.image.nFrameHeight =
 				sensor->sFrameSize.nHeight;
 
-			/* the frame rate is always 0 */
-			sensor->nFrameRate = 0;
+			/* frame rate should be greater than 0 */
+			g_assert (sensor->nFrameRate > 0);
 
 			param->format.image.cMIMEType = "video/x-raw-yuv";
 
