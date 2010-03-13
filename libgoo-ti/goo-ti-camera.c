@@ -76,6 +76,7 @@ struct _GooTiCameraPriv
 	OMX_CAMERA_CONFIG_FOCUS_MODE focus;
 	OMX_CAMERA_CONFIG_EFFECTS effects;
 	gboolean ipp;
+	GooSemaphore* focus_sem;
 };
 
 #define GOO_TI_CAMERA_GET_PRIVATE(obj) \
@@ -267,6 +268,56 @@ goo_ti_camera_flush_port (GooComponent* self, GooPort* port)
 }
 #endif
 
+void
+goo_ti_camera_wait_for_focus (GooComponent* self)
+{
+	g_assert (GOO_IS_COMPONENT (self));
+	g_assert (self->cur_state == OMX_StateExecuting);
+	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+
+	goo_semaphore_down (priv->focus_sem, FALSE);
+
+	return;
+}
+/**
+ * OpenMAX callback
+ **/
+static void
+goo_ti_camera_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
+			     OMX_EVENTTYPE eEvent, OMX_U32 nData1,
+			     OMX_U32 nData2, OMX_PTR pEventData)
+{
+	GooComponent* self = GOO_COMPONENT (g_object_ref (pAppData));
+	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+
+	switch (eEvent)
+	{
+	case OMX_EventCmdComplete:
+	{
+		OMX_COMMANDTYPE cmd = (OMX_COMMANDTYPE) nData1;
+		switch (cmd)
+		{
+		case OMX_CustomCommandAutofocusComplete:
+			GOO_OBJECT_INFO (self, "AutofocusComplete status = %d", nData2);
+			goo_semaphore_up (priv->focus_sem);
+			break;
+		default:
+			GOO_OBJECT_INFO (self,
+				 "(From goo-ti-camera) EventCmdComplete - command: %s",
+				 goo_strcommand (cmd));
+		}
+		break;
+	}
+
+	default:
+		GOO_OBJECT_INFO (self, "%s", goo_strevent (eEvent));
+	}
+
+	g_object_unref (G_OBJECT (self));
+
+	return;
+}
+
 static void
 _goo_ti_camera_set_contrast (GooTiCamera* self, gint contrast)
 {
@@ -372,6 +423,7 @@ _goo_ti_camera_set_focus (GooTiCamera* self, OMX_CAMERA_CONFIG_FOCUS_MODE type)
 					   (OMX_PTR*) &modo);
 	if (retval == TRUE)
 	{
+		goo_ti_camera_wait_for_focus (GOO_COMPONENT (self));
 		GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 		priv->focus = modo;
 		GOO_OBJECT_DEBUG (self, "Focus mode = %d", modo);
@@ -1656,6 +1708,7 @@ goo_ti_camera_init (GooTiCamera* self)
 	priv->focus = DEFAULT_FOCUS;
 	priv->effects = DEFAULT_EFFECT;
 	priv->ipp = DEFAULT_IPP;
+	priv->focus_sem = goo_semaphore_new (0);
 
 	return;
 }
@@ -1666,11 +1719,18 @@ goo_ti_camera_finalize (GObject* object)
 	g_assert (GOO_IS_TI_CAMERA (object));
 
 	GooTiCamera* self = GOO_TI_CAMERA (object);
+	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 
 	if (G_LIKELY (self->param != NULL))
 	{
 		g_free (self->param);
 		self->param = NULL;
+	}
+
+	if (G_LIKELY (priv->focus_sem != NULL))
+	{
+		goo_semaphore_free (priv->focus_sem);
+		priv->focus_sem = NULL;
 	}
 
 	(*G_OBJECT_CLASS (goo_ti_camera_parent_class)->finalize) (object);
@@ -1760,6 +1820,7 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 	c_klass->set_state_loaded_func = goo_ti_camera_set_state_loaded;
 	c_klass->set_state_idle_func = goo_ti_camera_set_state_idle;
 	c_klass->set_state_executing_func = goo_ti_camera_set_state_executing;
+	c_klass->event_handler_extra = goo_ti_camera_event_handler;
 	/* c_klass->flush_port_func = goo_ti_camera_flush_port; */
 
 	return;
