@@ -205,7 +205,7 @@ goo_ti_camera_effects_type ()
 #define DEFAULT_BRIGHTNESS 50
 #define DEFAULT_CONTRAST   0
 #define DEFAULT_VSTAB      FALSE
-#define DEFAULT_FOCUS      OMX_CameraConfigFocusAuto
+#define DEFAULT_FOCUS      OMX_CameraConfigFocusStopFocus
 #define DEFAULT_EFFECT     OMX_CameraConfigEffectsNormal
 #define DEFAULT_IPP        FALSE
 
