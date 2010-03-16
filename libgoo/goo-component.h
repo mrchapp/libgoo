@@ -142,6 +142,10 @@ struct _GooComponentClass
 	void (*release_buffer_func) (GooComponent* self,
 				     OMX_BUFFERHEADERTYPE* buffer);
 	void (*flush_port_func) (GooComponent* self, GooPort* port);
+	void (*event_handler_extra) (
+			OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
+			OMX_EVENTTYPE eEvent, OMX_U32 nData1,
+			OMX_U32 nData2, OMX_PTR pEventData);
 };
 
 GType goo_component_get_type (void);

@@ -280,6 +280,7 @@ goo_component_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
 			     OMX_U32 nData2, OMX_PTR pEventData)
 {
 	GooComponent* self = GOO_COMPONENT (g_object_ref (pAppData));
+	GooComponentClass* klass = GOO_COMPONENT_GET_CLASS (self);
 
 	switch (eEvent)
 	{
@@ -307,7 +308,13 @@ goo_component_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
 			goo_semaphore_up (self->port_sem);
 			break;
 		default:
-			GOO_OBJECT_INFO (self,
+			if (klass->event_handler_extra != NULL)
+				klass->event_handler_extra (
+					hComponent, pAppData,
+					eEvent, nData1,
+					nData2, pEventData);
+			else
+				GOO_OBJECT_INFO (self,
 					 "EventCmdComplete - command: %s",
 					 goo_strcommand (cmd));
 		}
@@ -1464,6 +1471,7 @@ goo_component_class_init (GooComponentClass* klass)
 	klass->eos_flag_func = goo_component_eos_buffer_flag;
 	klass->release_buffer_func = goo_component_release_buffer_default;
 	klass->flush_port_func = goo_component_flush_port_default;
+	klass->event_handler_extra = NULL;
 
 	return;
 }
