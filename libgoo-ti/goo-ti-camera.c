@@ -82,6 +82,9 @@ struct _GooTiCameraPriv
 #define GOO_TI_CAMERA_GET_PRIVATE(obj) \
 	(G_TYPE_INSTANCE_GET_PRIVATE ((obj), GOO_TYPE_TI_CAMERA, GooTiCameraPriv))
 
+#define GOO_IS_TI_ANY_VIDEO_ENCODER(obj) \
+	(GOO_IS_TI_VIDEO_ENCODER(obj) || GOO_IS_TI_VIDEO_ENCODER720P(obj))
+
 GType
 goo_ti_camera_zoom_get_type ()
 {
@@ -1257,7 +1260,7 @@ goo_ti_camera_venc_set_idle (GooComponent* self)
 	{
 		return;
 	}
-	else if(!GOO_IS_TI_VIDEO_ENCODER (videoenc) )
+	else if (!GOO_IS_TI_ANY_VIDEO_ENCODER (videoenc))
 	{
 		return;
 	}
@@ -1425,7 +1428,7 @@ goo_ti_camera_venc_set_loaded (GooComponent* self)
 	{
 		return;
 	}
-	else if(!GOO_IS_TI_VIDEO_ENCODER (videoenc) )
+	else if (!GOO_IS_TI_ANY_VIDEO_ENCODER (videoenc))
 	{
 		return;
 	}
@@ -1450,7 +1453,7 @@ goo_ti_camera_jpeg_set_loaded (GooComponent* self)
 		return;
 	}
 
-	else if(!GOO_IS_TI_JPEGENC (jpegenc) )
+	else if (!GOO_IS_TI_JPEGENC (jpegenc))
 	{
 		return;
 	}
