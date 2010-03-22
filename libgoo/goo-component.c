@@ -1301,9 +1301,12 @@ goo_component_unload_default (GooComponent* self)
 	GOO_OBJECT_DEBUG (self, "");
 
 	GOO_OBJECT_LOCK (self);
-	RETURN_GOO_RUN (
-		OMX_FreeHandle (self->handle)
-		);
+	if (G_LIKELY (self->handle)) {
+		RETURN_GOO_RUN (
+			OMX_FreeHandle (self->handle)
+			);
+		self->handle = NULL;
+	}
 	GOO_OBJECT_UNLOCK (self);
 
 	GOO_OBJECT_DEBUG (self, "");
@@ -1372,21 +1375,25 @@ goo_component_dispose (GObject* object)
 	if (G_LIKELY (self->clock))
 	{
 		g_object_unref (self->clock);
+		self->clock = NULL;
 	}
 
 	if (G_LIKELY (self->ports))
 	{
 		g_object_unref (self->ports);
+		self->ports = NULL;
 	}
 
 	if (G_LIKELY (self->input_ports))
 	{
 		g_object_unref (self->input_ports);
+		self->input_ports = NULL;
 	}
 
 	if (G_LIKELY (self->output_ports))
 	{
 		g_object_unref (self->output_ports);
+		self->output_ports = NULL;
 	}
 
 	if (G_LIKELY (self->handle))
