@@ -27,7 +27,7 @@
 #include <goo-ti-armaacdec.h>
 #include <goo-utils.h>
 
-#define ID "OMX.TI.ARMAAC.decode"
+#define ID "OMX.ITTIAM.AAC.decode"
 #define DASF_PARAM_NAME "OMX.TI.index.config.armaacdecHeaderInfo"
 #define DATAPATH_PARAM_NAME "OMX.TI.index.config.armaacdec.datapath"
 #define FRAME_PARAM_NAME "OMX.TI.index.config.framemode"
