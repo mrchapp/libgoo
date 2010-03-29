@@ -131,9 +131,11 @@ goo_ti_post_processor_output_get_type ()
 			  "LCD", "LCD display output" },
 			{ GOO_TI_POST_PROCESSOR_OUTPUT_TV,
 			  "TV", "TV display output" },
-			{ GOO_TI_POST_PROCESSOR_OUTPUT_BOTH,
-			  "TV & LCD", "Simultaneous display output" },
-			{ 0, NULL, NULL },
+			{ GOO_TI_POST_PROCESSOR_OUTPUT_HDMI,
+			  "HDMI", "HDMI output" },
+			{ GOO_TI_POST_PROCESSOR_OUTPUT_LCD_TV,
+			  "TV & LCD", "Simultaneous LCD and TV display output" },
+			{ 0, NULL, NULL }
 		};
 
 		type = g_enum_register_static
@@ -550,10 +552,15 @@ _goo_ti_post_processor_set_ouput (GooTiPostProcessor* self,
 		outdev.nVideoPipeline1 = GOO_TI_POST_PROCESSOR_OUTPUT_NONE;
 		outdev.nVideoPipeline2 = GOO_TI_POST_PROCESSOR_OUTPUT_TV;
 	}
-	else if (output == GOO_TI_POST_PROCESSOR_OUTPUT_BOTH)
+	else if (output == GOO_TI_POST_PROCESSOR_OUTPUT_LCD_TV)
 	{
 		outdev.nVideoPipeline1 = GOO_TI_POST_PROCESSOR_OUTPUT_LCD;
 		outdev.nVideoPipeline2 = GOO_TI_POST_PROCESSOR_OUTPUT_TV;
+	}
+	else if (output == GOO_TI_POST_PROCESSOR_OUTPUT_HDMI)
+	{
+		outdev.nVideoPipeline1 = GOO_TI_POST_PROCESSOR_OUTPUT_HDMI;
+		outdev.nVideoPipeline2 = GOO_TI_POST_PROCESSOR_OUTPUT_NONE;
 	}
 	else
 	{
