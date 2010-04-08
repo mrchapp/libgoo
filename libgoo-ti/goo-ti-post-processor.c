@@ -552,15 +552,22 @@ _goo_ti_post_processor_set_ouput (GooTiPostProcessor* self,
 		outdev.nVideoPipeline1 = GOO_TI_POST_PROCESSOR_OUTPUT_NONE;
 		outdev.nVideoPipeline2 = GOO_TI_POST_PROCESSOR_OUTPUT_TV;
 	}
+	else if (self->video_pipeline == 1 &&
+			output == GOO_TI_POST_PROCESSOR_OUTPUT_HDMI)
+	{
+		outdev.nVideoPipeline1 =  GOO_TI_POST_PROCESSOR_OUTPUT_HDMI;
+		outdev.nVideoPipeline2 =  GOO_TI_POST_PROCESSOR_OUTPUT_NONE;
+	}
+	else if (self->video_pipeline == 2 &&
+			output == GOO_TI_POST_PROCESSOR_OUTPUT_HDMI)
+	{
+		outdev.nVideoPipeline1 =  GOO_TI_POST_PROCESSOR_OUTPUT_NONE;
+		outdev.nVideoPipeline2 =  GOO_TI_POST_PROCESSOR_OUTPUT_HDMI;
+	}
 	else if (output == GOO_TI_POST_PROCESSOR_OUTPUT_LCD_TV)
 	{
 		outdev.nVideoPipeline1 = GOO_TI_POST_PROCESSOR_OUTPUT_LCD;
 		outdev.nVideoPipeline2 = GOO_TI_POST_PROCESSOR_OUTPUT_TV;
-	}
-	else if (output == GOO_TI_POST_PROCESSOR_OUTPUT_HDMI)
-	{
-		outdev.nVideoPipeline1 = GOO_TI_POST_PROCESSOR_OUTPUT_HDMI;
-		outdev.nVideoPipeline2 = GOO_TI_POST_PROCESSOR_OUTPUT_NONE;
 	}
 	else
 	{
