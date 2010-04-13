@@ -45,6 +45,16 @@
 #define COLOR_EFFECTS	"OMX.TI.Camera.Config.ColorEffect"
 #define IPP		"OMX.TI.Camera.Param.IPP"
 
+/* signals */
+enum
+{
+	PPM_FOCUS_START,
+	PPM_FOCUS_END,
+	PPM_LAST_SIGNAL
+};
+
+static guint goo_ti_camera_signals[PPM_LAST_SIGNAL] = { 0 };
+
 enum _GooTiCameraProp
 {
 	PROP_0,
@@ -429,7 +439,7 @@ _goo_ti_camera_set_focus (GooTiCamera* self, OMX_CAMERA_CONFIG_FOCUS_MODE type)
 {
 	g_assert (self != NULL);
 	g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
-
+	GTimeVal current_time;
 	gboolean retval = TRUE;
 
 	OMX_CAMERA_CONFIG_FOCUS_MODE modo;
@@ -439,7 +449,19 @@ _goo_ti_camera_set_focus (GooTiCamera* self, OMX_CAMERA_CONFIG_FOCUS_MODE type)
 					   (OMX_PTR*) &modo);
 	if (retval == TRUE)
 	{
+		/* Get the current time */
+		g_get_current_time (&current_time);
+		g_signal_emit (G_OBJECT (self),
+				goo_ti_camera_signals[PPM_FOCUS_START], 0, &current_time);
+
 		goo_ti_camera_wait_for_focus (GOO_COMPONENT (self));
+
+		/* Get the current time */
+		g_get_current_time (&current_time);
+		/*g_signal_emit_by_name (self, "PPM_focus_end", &current_time);*/
+		g_signal_emit (G_OBJECT (self),
+				goo_ti_camera_signals[PPM_FOCUS_END], 0, &current_time);
+
 		GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 		priv->focus = modo;
 		GOO_OBJECT_DEBUG (self, "Focus mode = %d", modo);
@@ -1828,6 +1850,22 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 				     DEFAULT_IPP,
 				     G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_IPP, spec);
+
+	goo_ti_camera_signals[PPM_FOCUS_START] =
+			g_signal_new ("PPM_focus_start", G_TYPE_FROM_CLASS (klass),
+					G_SIGNAL_RUN_FIRST,
+					G_STRUCT_OFFSET (GooTiCameraClass, PPM_focus_start),
+					NULL,
+					NULL, g_cclosure_marshal_VOID__POINTER,
+					G_TYPE_NONE, 1, G_TYPE_POINTER);
+
+	goo_ti_camera_signals[PPM_FOCUS_END] =
+			g_signal_new ("PPM_focus_end", G_TYPE_FROM_CLASS (klass),
+					G_SIGNAL_RUN_FIRST,
+					G_STRUCT_OFFSET (GooTiCameraClass, PPM_focus_end),
+					NULL,
+					NULL, g_cclosure_marshal_VOID__POINTER,
+					G_TYPE_NONE, 1, G_TYPE_POINTER);
 
 	GooComponentClass* c_klass = GOO_COMPONENT_CLASS (klass);
 	c_klass->set_parameters_func = goo_ti_camera_set_parameters;

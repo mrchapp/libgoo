@@ -67,6 +67,10 @@ struct _GooTiCamera
 struct _GooTiCameraClass
 {
 	GooComponentClass parent_class;
+
+	/* signals */
+	void (*PPM_focus_start) (GooComponent *component);
+	void (*PPM_focus_end) (GooComponent *component);
 };
 
 /**
