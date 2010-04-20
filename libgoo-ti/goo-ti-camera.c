@@ -998,15 +998,6 @@ goo_ti_camera_validate (GooComponent* component)
 
 	ResolutionInfo rinfo = goo_get_resolution ("720p");
 
-	/* param */
-	{
-		/* let's fix the width and the height */
-		sensor->sFrameSize.nWidth =
-			GOO_ROUND_UP_16 (sensor->sFrameSize.nWidth);
-		sensor->sFrameSize.nHeight =
-			GOO_ROUND_UP_16 (sensor->sFrameSize.nHeight);
-	}
-
 	/* capture port */
 	{
 		OMX_PARAM_PORTDEFINITIONTYPE *param = NULL;
@@ -1019,15 +1010,9 @@ goo_ti_camera_validate (GooComponent* component)
 		if (param->eDomain == OMX_PortDomainImage)
 		{
 			color_format = param->format.image.eColorFormat;
-
 			/* synch data */
-			param->format.image.nFrameWidth =
-				sensor->sFrameSize.nWidth;
-			param->format.image.nFrameHeight =
-				sensor->sFrameSize.nHeight;
-
-			/* frame rate should be greater than 0 */
-			g_assert (sensor->nFrameRate > 0);
+			param->format.image.nFrameWidth = GOO_ROUND_UP_16 (param->format.image.nFrameWidth);
+			param->format.image.nFrameHeight = GOO_ROUND_UP_16 (param->format.image.nFrameHeight);
 
 			param->format.image.cMIMEType = "video/x-raw-yuv";
 
@@ -1035,18 +1020,14 @@ goo_ti_camera_validate (GooComponent* component)
 			     OMX_IMAGE_CodingUnused;
 
 			param->nBufferCountActual = 1;
-
-			/*param->eDomain = OMX_PortDomainImage;*/
 		}
 		else
 		{
 			color_format = param->format.video.eColorFormat;
 
 			/* synch data */
-			param->format.video.nFrameWidth =
-				sensor->sFrameSize.nWidth;
-			param->format.video.nFrameHeight =
-				sensor->sFrameSize.nHeight;
+			param->format.video.nFrameWidth = GOO_ROUND_UP_16 (param->format.video.nFrameWidth);
+			param->format.video.nFrameHeight = GOO_ROUND_UP_16 (param->format.video.nFrameHeight);
 
 			g_assert (sensor->nFrameRate > 0);
 
@@ -1054,7 +1035,6 @@ goo_ti_camera_validate (GooComponent* component)
 
 			param->format.video.eCompressionFormat =
 			     OMX_VIDEO_CodingUnused;
-			/*param->eDomain = OMX_PortDomainVideo; */
 		}
 
 		switch (color_format)
@@ -1064,13 +1044,13 @@ goo_ti_camera_validate (GooComponent* component)
 		case OMX_COLOR_FormatYCbYCr:				/* YUY2 */
 		case OMX_COLOR_Format16bitRGB565:
 			param->nBufferSize =
-				sensor->sFrameSize.nWidth *
-				sensor->sFrameSize.nHeight * 2;
+					param->format.video.nFrameWidth *
+					param->format.video.nFrameHeight * 2;
 			break;
 		case OMX_COLOR_FormatYUV420PackedPlanar:	/*I420*/
 			param->nBufferSize =
-				sensor->sFrameSize.nWidth *
-				sensor->sFrameSize.nHeight * 1.5;
+					param->format.video.nFrameWidth *
+					param->format.video.nFrameHeight * 1.5;
 			break;
 		default:
 			GOO_OBJECT_ERROR (self,
