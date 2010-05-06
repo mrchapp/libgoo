@@ -50,6 +50,7 @@ enum
 {
 	PPM_FOCUS_START,
 	PPM_FOCUS_END,
+	PPM_OMX_EVENT,
 	PPM_LAST_SIGNAL
 };
 
@@ -315,6 +316,7 @@ goo_ti_camera_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
 {
 	GooComponent* self = GOO_COMPONENT (g_object_ref (pAppData));
 	GooTiCameraPriv* priv = GOO_TI_CAMERA_GET_PRIVATE (self);
+	GooTiCameraOmxDataEvent OmxEventData;
 
 	switch (eEvent)
 	{
@@ -336,7 +338,13 @@ goo_ti_camera_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
 	}
 
 	default:
-		GOO_OBJECT_INFO (self, "%s", goo_strevent (eEvent));
+		GOO_OBJECT_INFO (self, "OMX_EVENT: %s", goo_strevent (eEvent));
+		OmxEventData.eEvent = (guint) eEvent;
+		OmxEventData.nData1 = (gulong) nData1;
+		OmxEventData.nData2 = (gulong) nData2;
+		g_signal_emit (G_OBJECT (self),
+				goo_ti_camera_signals[PPM_OMX_EVENT], 0, &OmxEventData);
+		break;
 	}
 
 	g_object_unref (G_OBJECT (self));
@@ -458,7 +466,6 @@ _goo_ti_camera_set_focus (GooTiCamera* self, OMX_CAMERA_CONFIG_FOCUS_MODE type)
 
 		/* Get the current time */
 		g_get_current_time (&current_time);
-		/*g_signal_emit_by_name (self, "PPM_focus_end", &current_time);*/
 		g_signal_emit (G_OBJECT (self),
 				goo_ti_camera_signals[PPM_FOCUS_END], 0, &current_time);
 
@@ -1843,6 +1850,14 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 			g_signal_new ("PPM_focus_end", G_TYPE_FROM_CLASS (klass),
 					G_SIGNAL_RUN_FIRST,
 					G_STRUCT_OFFSET (GooTiCameraClass, PPM_focus_end),
+					NULL,
+					NULL, g_cclosure_marshal_VOID__POINTER,
+					G_TYPE_NONE, 1, G_TYPE_POINTER);
+
+	goo_ti_camera_signals[PPM_OMX_EVENT] =
+			g_signal_new ("PPM_omx_event", G_TYPE_FROM_CLASS (klass),
+					G_SIGNAL_RUN_FIRST,
+					G_STRUCT_OFFSET (GooTiCameraClass, PPM_omx_event),
 					NULL,
 					NULL, g_cclosure_marshal_VOID__POINTER,
 					G_TYPE_NONE, 1, G_TYPE_POINTER);

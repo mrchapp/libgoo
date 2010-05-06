@@ -50,6 +50,7 @@ G_BEGIN_DECLS
 typedef struct _GooTiCamera GooTiCamera;
 typedef struct _GooTiCameraPriv GooTiCameraPriv;
 typedef struct _GooTiCameraClass GooTiCameraClass;
+typedef struct _GooTiCameraOmxDataEvent GooTiCameraOmxDataEvent;
 
 /**
  * GooTiCamera:
@@ -71,6 +72,15 @@ struct _GooTiCameraClass
 	/* signals */
 	void (*PPM_focus_start) (GooComponent *component);
 	void (*PPM_focus_end) (GooComponent *component);
+	void (*PPM_omx_event) (GooComponent *component);
+
+};
+
+struct _GooTiCameraOmxDataEvent
+{
+    guint  eEvent;
+    gulong nData1;
+    gulong nData2;
 };
 
 /**

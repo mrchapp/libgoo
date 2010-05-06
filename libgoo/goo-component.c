@@ -364,7 +364,12 @@ goo_component_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
 	}
 
 	default:
-		GOO_OBJECT_INFO (self, "%s", goo_strevent (eEvent));
+		if (klass->event_handler_extra != NULL)
+			klass->event_handler_extra (hComponent, pAppData,
+					eEvent, nData1, nData2, pEventData);
+		else
+			GOO_OBJECT_INFO (self, "%s", goo_strevent (eEvent));
+		break;
 	}
 
 	g_object_unref (G_OBJECT (self));
