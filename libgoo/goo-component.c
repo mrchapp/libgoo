@@ -279,7 +279,7 @@ goo_component_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
 			     OMX_EVENTTYPE eEvent, OMX_U32 nData1,
 			     OMX_U32 nData2, OMX_PTR pEventData)
 {
-	GooComponent* self = GOO_COMPONENT (g_object_ref (pAppData));
+	GooComponent* self = GOO_COMPONENT (pAppData);
 	GooComponentClass* klass = GOO_COMPONENT_GET_CLASS (self);
 
 	switch (eEvent)
@@ -371,8 +371,6 @@ goo_component_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
 			GOO_OBJECT_INFO (self, "%s", goo_strevent (eEvent));
 		break;
 	}
-
-	g_object_unref (G_OBJECT (self));
 
 	return OMX_ErrorNone;
 }
