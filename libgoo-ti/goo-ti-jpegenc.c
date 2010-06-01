@@ -57,7 +57,13 @@ enum _GooTiJpegEncProc
 	PROP_APP1H,
 	PROP_APP13I,
 	PROP_APP13W,
-	PROP_APP13H
+	PROP_APP13H,
+	PROP_ROTATION,
+	PROP_CONVERSION,
+	PROP_CROPWIDTH,
+	PROP_CROPHEIGHT,
+	PROP_CROPLEFT,
+	PROP_CROPTOP
 };
 
 typedef struct _APP_INFO {
@@ -73,10 +79,13 @@ typedef enum OMX_JPEGE_INDEXTYPE
     OMX_IndexCustomInputFrameHeight,
     OMX_IndexCustomAPP0,
     OMX_IndexCustomAPP1,
+    OMX_IndexCustomAPP5,
     OMX_IndexCustomAPP13,
     OMX_IndexCustomQFactor,
     OMX_IndexCustomDRI,
-    OMX_IndexCustomHuffmanTable
+    OMX_IndexCustomHuffmanTable,
+    OMX_IndexCustomConversionFlag,
+    OMX_IndexCustomPPLibDynParams
 
 } OMX_INDEXIMAGETYPE;
 
@@ -399,6 +408,149 @@ _goo_ti_jpegenc_get_thumbnail (GooTiJpegEnc* self)
 */
 
 static void
+_goo_ti_jpegenc_set_conversions_params (GooComponent* component)
+{
+	g_assert (GOO_IS_TI_JPEGENC (component));
+	GooTiJpegEnc* self = GOO_TI_JPEGENC (component);
+
+	OMX_PARAM_PORTDEFINITIONTYPE *in_param;
+	OMX_PARAM_PORTDEFINITIONTYPE *out_param;
+
+	GooIterator* iter_in = goo_component_iterate_input_ports (component);
+	goo_iterator_nth (iter_in, 0);
+	GooPort* in_port = GOO_PORT (goo_iterator_get_current (iter_in));
+	g_assert (in_port != NULL);
+	in_param = GOO_PORT_GET_DEFINITION (in_port);
+
+	GooIterator* iter_out = goo_component_iterate_output_ports (component);
+	goo_iterator_nth (iter_out, 0);
+	GooPort* out_port = GOO_PORT (goo_iterator_get_current (iter_out));
+	g_assert (out_port != NULL);
+	out_param = GOO_PORT_GET_DEFINITION (out_port);
+
+	if (in_param->format.image.eColorFormat == OMX_COLOR_FormatYUV420PackedPlanar && out_param->format.image.eColorFormat == OMX_COLOR_FormatCbYCrY)
+	{
+		self->nConversionFlag = JPE_CONV_YUV420P_YUV422ILE;
+	}
+	else if (in_param->format.image.eColorFormat == OMX_COLOR_Format32bitARGB8888 && out_param->format.image.eColorFormat == OMX_COLOR_FormatCbYCrY)
+	{
+		self->nConversionFlag = JPE_CONV_RGB32_YUV422I;
+	}
+	else if (in_param->format.image.eColorFormat == OMX_COLOR_FormatCbYCrY && out_param->format.image.eColorFormat == OMX_COLOR_FormatCbYCrY)
+	{
+		if (self->rotation == 90)
+		{
+			self->nConversionFlag = JPE_CONV_YUV422I_90ROT_YUV422I;
+		}
+		else if (self->rotation == 180)
+		{
+			self->nConversionFlag = JPE_CONV_YUV422I_180ROT_YUV422I;
+		}
+		else if (self->rotation == 270)
+		{
+			self->nConversionFlag = JPE_CONV_YUV422I_270ROT_YUV422I;
+		}
+	}
+	else if (in_param->format.image.eColorFormat == OMX_COLOR_FormatCbYCrY && out_param->format.image.eColorFormat == OMX_COLOR_FormatYUV420PackedPlanar)
+	{
+		if (self->rotation == 90)
+		{
+			self->nConversionFlag = JPE_CONV_YUV422I_90ROT_YUV420P;
+		}
+	}
+	goo_component_set_config_by_index (GOO_COMPONENT (self), OMX_IndexCustomConversionFlag, &(self->nConversionFlag));
+
+	g_object_unref (iter_in);
+	g_object_unref (iter_out);
+	g_object_unref (in_port);
+	g_object_unref (out_port);
+}
+
+static void
+_goo_ti_jpegenc_set_pplib_params (GooComponent* component)
+{
+
+	g_assert (GOO_IS_TI_JPEGENC (component));
+	GooTiJpegEnc* self = GOO_TI_JPEGENC (component);
+
+	OMX_PARAM_PORTDEFINITIONTYPE *in_param;
+	OMX_PARAM_PORTDEFINITIONTYPE *out_param;
+
+	GooIterator* iter_in = goo_component_iterate_input_ports (component);
+	goo_iterator_nth (iter_in, 0);
+	GooPort* in_port = GOO_PORT (goo_iterator_get_current (iter_in));
+	g_assert (in_port != NULL);
+	in_param = GOO_PORT_GET_DEFINITION (in_port);
+
+	GooIterator* iter_out = goo_component_iterate_output_ports (component);
+	goo_iterator_nth (iter_out, 0);
+	GooPort* out_port = GOO_PORT (goo_iterator_get_current (iter_out));
+	g_assert (out_port != NULL);
+	out_param = GOO_PORT_GET_DEFINITION (out_port);
+
+	JPGE_PPLIB_DynamicParams *nPplibDynParams;
+	nPplibDynParams = g_new0 (JPGE_PPLIB_DynamicParams, 1);
+	gboolean bEnablePPLibDynParams = FALSE;
+	OMX_CONFIG_RECTTYPE sCrop;
+
+	sCrop.nTop = 0;
+	sCrop.nLeft = 0;
+	sCrop.nWidth = self->cropwidth;
+	sCrop.nHeight = self->cropheight;
+
+	goo_component_set_config_by_index (GOO_COMPONENT (self), OMX_IndexConfigCommonInputCrop, &sCrop);
+
+	if (((self->rotation == 90) || (self->rotation == 270)) && ((self->nConversionFlag == JPE_CONV_YUV422I_90ROT_YUV422I) ||
+				(self->nConversionFlag == JPE_CONV_YUV422I_270ROT_YUV422I) || (self->nConversionFlag == JPE_CONV_YUV422I_90ROT_YUV420P)))
+	{
+		//swap the input/output height and width
+		bEnablePPLibDynParams = TRUE;
+		nPplibDynParams->ulPPLIBInWidth = in_param->format.image.nFrameHeight;
+		nPplibDynParams->ulPPLIBInHeight = in_param->format.image.nFrameWidth;
+		nPplibDynParams->ulPPLIBOutWidth = out_param->format.image.nFrameHeight;
+		nPplibDynParams->ulPPLIBOutHeight = out_param->format.image.nFrameWidth;
+	}
+
+	//now check for cropping and scaling/zoom here.
+	if (self->cropwidth != 0 || self->cropheight != 0)
+	{
+		//enable pplib cropping and set the values accordingly
+		if ((self->cropwidth%2 == 0) && (self->cropheight%2 == 0) && self->cropwidth >=4 && self->cropheight >= 4)
+		{
+			bEnablePPLibDynParams = TRUE;
+			nPplibDynParams->ulPPLIBEnableCropping = 1;
+			nPplibDynParams->ulPPLIBXstart = self->cropleft;
+			nPplibDynParams->ulPPLIBYstart = self->croptop;
+			nPplibDynParams->ulPPLIBXsize = self->cropwidth;
+			nPplibDynParams->ulPPLIBYsize = self->cropheight;
+			nPplibDynParams->ulPPLIBOutWidth = self->cropwidth;
+			nPplibDynParams->ulPPLIBOutHeight = self->cropheight;
+		}
+		else
+		{
+			nPplibDynParams->ulPPLIBEnableCropping = 1;
+			nPplibDynParams->ulPPLIBXstart = self->cropleft;
+			nPplibDynParams->ulPPLIBYstart = self->croptop;
+			nPplibDynParams->ulPPLIBXsize = in_param->format.image.nFrameHeight;
+			nPplibDynParams->ulPPLIBYsize = in_param->format.image.nFrameWidth;
+			nPplibDynParams->ulPPLIBOutWidth = out_param->format.image.nFrameHeight;
+			nPplibDynParams->ulPPLIBOutHeight = out_param->format.image.nFrameWidth;
+		}
+	}
+
+	if (bEnablePPLibDynParams)
+	{
+		goo_component_set_config_by_index (GOO_COMPONENT (self), OMX_IndexCustomPPLibDynParams, nPplibDynParams);
+	}
+
+	g_free(nPplibDynParams);
+	g_object_unref (iter_in);
+	g_object_unref (iter_out);
+	g_object_unref (in_port);
+	g_object_unref (out_port);
+}
+
+static void
 goo_ti_jpegenc_load_parameters (GooComponent* component)
 {
         g_assert (GOO_IS_TI_JPEGENC (component));
@@ -416,6 +568,8 @@ goo_ti_jpegenc_load_parameters (GooComponent* component)
         self->thumbnail->APP1_Index = FALSE;
 		self->thumbnail->APP13_Index = FALSE;
 		GOO_INIT_PARAM (self->param, OMX_IMAGE_PARAM_QFACTORTYPE);
+
+		self->nConversionFlag = JPE_CONV_NONE;
 
         GOO_OBJECT_DEBUG (self, "");
 
@@ -553,6 +707,9 @@ goo_ti_jpegenc_validate (GooComponent* component)
         g_object_unref (port);
     }
 
+    _goo_ti_jpegenc_set_conversions_params (component);
+    _goo_ti_jpegenc_set_pplib_params (component);
+
     GOO_OBJECT_DEBUG (self, "");
 
     return;
@@ -639,6 +796,42 @@ goo_ti_jpegenc_set_property (GObject* object, guint prop_id,
 				self->thumbnail->APP13_height = g_value_get_uint(value);
 				break;
 			}
+			case PROP_ROTATION:
+			{
+				GOO_OBJECT_DEBUG (self, "ROTATION");
+				self->rotation = g_value_get_uint (value);
+				break;
+			}
+			case PROP_CONVERSION:
+			{
+				GOO_OBJECT_DEBUG (self, "CONVERSION");
+				self->conversion = g_value_get_uint (value);
+				break;
+			}
+			case PROP_CROPWIDTH:
+			{
+				GOO_OBJECT_DEBUG (self, "CROPWIDTH");
+				self->cropwidth = g_value_get_uint (value);
+				break;
+			}
+			case PROP_CROPHEIGHT:
+			{
+				GOO_OBJECT_DEBUG (self, "CROPHEIGHT");
+				self->cropheight = g_value_get_uint (value);
+				break;
+			}
+			case PROP_CROPLEFT:
+			{
+				GOO_OBJECT_DEBUG (self, "CROPLEFT");
+				self->cropleft = g_value_get_uint (value);
+				break;
+			}
+			case PROP_CROPTOP:
+			{
+				GOO_OBJECT_DEBUG (self, "CROPTOP");
+				self->croptop = g_value_get_uint (value);
+				break;
+			}
 			default:
 			{
 				G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
@@ -717,6 +910,36 @@ goo_ti_jpegenc_get_property (GObject* object, guint prop_id,
 			{
 				g_value_set_uint (value, self->thumbnail->APP13_height);
 			break;
+			}
+			case PROP_ROTATION:
+			{
+				g_value_set_uint (value, self->rotation);
+				break;
+			}
+			case PROP_CONVERSION:
+			{
+				g_value_set_uint (value, self->conversion);
+				break;
+			}
+			case PROP_CROPWIDTH:
+			{
+				g_value_set_uint (value, self->cropwidth);
+				break;
+			}
+			case PROP_CROPHEIGHT:
+			{
+				g_value_set_uint (value, self->cropheight);
+				break;
+			}
+			case PROP_CROPLEFT:
+			{
+				g_value_set_uint (value, self->cropleft);
+				break;
+			}
+			case PROP_CROPTOP:
+			{
+				g_value_set_uint (value, self->croptop);
+				break;
 			}
 			default:
 				G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
@@ -807,6 +1030,28 @@ goo_ti_jpegenc_class_init (GooTiJpegEncClass* klass)
 		spec = g_param_spec_uint ("app13h", "APP13h", "Set/Get an image APP13 height",
 									16, 320, THUMBNAIL_HEIGHT, G_PARAM_READWRITE);
         g_object_class_install_property (g_klass, PROP_APP13H, spec);
+
+        /* Rotation */
+        spec = g_param_spec_uint ("rotation", "Rotation", "Image rotation", 0, 360, 0, G_PARAM_READWRITE);
+        g_object_class_install_property (g_klass, PROP_ROTATION, spec);
+
+        /* Conversion */
+        spec = g_param_spec_uint ("conversion", "Conversion", "Image conversion",
+                                  JPE_CONV_NONE, JPE_CONV_YUV422I_180ROT_YUV422I , 0, G_PARAM_READWRITE);
+        g_object_class_install_property (g_klass, PROP_CONVERSION, spec);
+
+        /* Cropping */
+        spec = g_param_spec_uint ("crop-width", "Crop-width", "Width of cropped image", 0, 4096, 0, G_PARAM_READWRITE);
+        g_object_class_install_property (g_klass, PROP_CROPWIDTH, spec);
+
+        spec = g_param_spec_uint ("crop-height", "Crop-height", "Height of cropped image", 0, 4096, 0, G_PARAM_READWRITE);
+        g_object_class_install_property (g_klass, PROP_CROPHEIGHT, spec);
+
+        spec = g_param_spec_uint ("crop-left", "Crop-left", "Number of pixels to be cropped from left", 0, 4096, 0, G_PARAM_READWRITE);
+        g_object_class_install_property (g_klass, PROP_CROPLEFT, spec);
+
+        spec = g_param_spec_uint ("crop-top", "Crop-top", "Number of pixels to be cropped from top", 0, 4096, 0, G_PARAM_READWRITE);
+        g_object_class_install_property (g_klass, PROP_CROPTOP, spec);
 
         GooComponentClass* c_klass = GOO_COMPONENT_CLASS (klass);
         c_klass->load_parameters_func = goo_ti_jpegenc_load_parameters;

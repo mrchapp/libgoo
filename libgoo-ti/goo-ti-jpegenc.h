@@ -57,6 +57,13 @@ struct _GooTiJpegEnc
         OMX_IMAGE_PARAM_QFACTORTYPE* param;
 		ThumbnailJpegPrivate* thumbnail;
 		gchar* comment;
+        guint rotation;
+        guint conversion;
+        guint cropwidth;
+        guint cropheight;
+        guint cropleft;
+        guint croptop;
+        guint nConversionFlag;
 };
 
 struct _GooTiJpegEncClass
