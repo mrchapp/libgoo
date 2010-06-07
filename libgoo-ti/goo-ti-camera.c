@@ -68,7 +68,8 @@ enum _GooTiCameraProp
 	PROP_VSTAB,
 	PROP_FOCUS,
 	PROP_EFFECTS,
-	PROP_IPP
+	PROP_IPP,
+	PROP_SHOTS
 };
 
 enum _GooTiCameraPorts
@@ -88,6 +89,7 @@ struct _GooTiCameraPriv
 	OMX_CAMERA_CONFIG_EFFECTS effects;
 	gboolean ipp;
 	GooSemaphore* focus_sem;
+	gint shots;
 };
 
 #define GOO_TI_CAMERA_GET_PRIVATE(obj) \
@@ -338,7 +340,7 @@ goo_ti_camera_event_handler (OMX_HANDLETYPE hComponent, OMX_PTR pAppData,
 	}
 
 	default:
-		GOO_OBJECT_INFO (self, "OMX_EVENT: %s", goo_strevent (eEvent));
+		GOO_OBJECT_INFO (self, "OMX_EVENT: %d",(guint) eEvent);
 		OmxEventData.eEvent = (guint) eEvent;
 		OmxEventData.nData1 = (gulong) nData1;
 		OmxEventData.nData2 = (gulong) nData2;
@@ -891,6 +893,32 @@ _goo_ti_camera_get_ipp (GooTiCamera* self)
 	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 	return priv->ipp;
 }
+static void
+_goo_ti_camera_set_burstmode (GooTiCamera* self, int shots)
+{
+		g_assert (GOO_IS_TI_CAMERA (self));
+		g_assert (GOO_COMPONENT (self)->cur_state != OMX_StateInvalid);
+
+		OMX_PARAM_SENSORMODETYPE* sensor;
+		sensor = GOO_TI_CAMERA_GET_PARAM (self);
+		GOO_OBJECT_DEBUG (self, "Burst mode configuration: frame limited mode");
+
+		OMX_CONFIG_CAPTUREMODETYPE* param;
+		param = g_new0 (OMX_CONFIG_CAPTUREMODETYPE, 1);
+		GOO_INIT_PARAM (param, OMX_CONFIG_CAPTUREMODETYPE);
+
+		param->bContinuous = !(sensor->bOneShot);
+		param->bFrameLimited = sensor->nFrameRate;
+		param->nFrameLimit = shots;
+
+		goo_component_set_config_by_index (GOO_COMPONENT (self),
+						   OMX_IndexConfigCaptureMode, param);
+		g_free (param);
+
+		GOO_OBJECT_DEBUG (self,"bContinuous = %d, Framelimited = %d, Framelimit = %d",
+				  param->bContinuous, param->bFrameLimited, (int)param->nFrameLimit);
+		return;
+}
 
 static void
 _goo_ti_camera_set_capture_mode (GooTiCamera* self, guint capture_mode)
@@ -918,6 +946,14 @@ _goo_ti_camera_set_capture_mode (GooTiCamera* self, guint capture_mode)
 						   OMX_IndexConfigCapturing,
 						   &param)
 		);
+
+		/* Burst mode configuratioin: framelimited mode */
+		OMX_PARAM_PORTDEFINITIONTYPE *port_param = NULL;
+		GooPort* port = goo_ti_camera_get_port (self, PORT_CAPTURE);
+		port_param = GOO_PORT_GET_DEFINITION (port);
+
+		if ((port_param->eDomain == OMX_PortDomainImage) && (capture_mode == 1))
+			_goo_ti_camera_set_burstmode(self, priv->shots);
 
 	#if 1
 		if ((capture_mode != DEFAULT_CAPTURE) && (priv->capturemode == DEFAULT_CAPTURE))
@@ -1622,6 +1658,7 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 {
 	g_assert (GOO_IS_TI_CAMERA (object));
 	GooTiCamera* self = GOO_TI_CAMERA (object);
+	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 
 	switch (prop_id)
 	{
@@ -1662,6 +1699,9 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 		_goo_ti_camera_set_ipp (self,
 					g_value_get_boolean (value));
 		break;
+	case PROP_SHOTS:
+		priv->shots = g_value_get_uint (value);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 		break;
@@ -1676,7 +1716,6 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 {
 	g_assert (GOO_IS_TI_CAMERA (object));
 	GooTiCamera* self = GOO_TI_CAMERA (object);
-	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 
 	switch (prop_id)
 	{
@@ -1743,6 +1782,7 @@ goo_ti_camera_init (GooTiCamera* self)
 	priv->effects = DEFAULT_EFFECT;
 	priv->ipp = DEFAULT_IPP;
 	priv->focus_sem = goo_semaphore_new (0);
+	priv->shots = 1;
 
 	return;
 }
@@ -1846,6 +1886,11 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 				     DEFAULT_IPP,
 				     G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_IPP, spec);
+
+	spec = g_param_spec_uint ("shots", "Number of shots",
+				  "Number of shots",
+				  1, G_MAXUINT, 1, G_PARAM_READWRITE);
+	g_object_class_install_property (g_klass, PROP_SHOTS, spec);
 
 	goo_ti_camera_signals[PPM_FOCUS_START] =
 			g_signal_new ("PPM_focus_start", G_TYPE_FROM_CLASS (klass),
