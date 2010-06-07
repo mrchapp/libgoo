@@ -80,7 +80,7 @@ enum _GooTiCameraPorts
 
 struct _GooTiCameraPriv
 {
-	gboolean capturemode;
+	guint capturemode;
 	GooTiCameraZoom zoom;
 	OMX_WHITEBALCONTROLTYPE balance;
 	OMX_EXPOSURECONTROLTYPE exposure;
@@ -228,7 +228,7 @@ goo_ti_camera_set_clock (GooComponent* component, GooComponent* clock)
 #define DEFAULT_EXPOSURE   OMX_ExposureControlAuto
 #define DEFAULT_BALANCE    OMX_WhiteBalControlAuto
 #define DEFAULT_ZOOM       GOO_TI_CAMERA_ZOOM_1X
-#define DEFAULT_CAPTURE    FALSE
+#define DEFAULT_CAPTURE    0
 #define DEFAULT_BRIGHTNESS 50
 #define DEFAULT_CONTRAST   0
 #define DEFAULT_VSTAB      FALSE
@@ -893,7 +893,7 @@ _goo_ti_camera_get_ipp (GooTiCamera* self)
 }
 
 static void
-_goo_ti_camera_set_capture_mode (GooTiCamera* self, gboolean capture_mode)
+_goo_ti_camera_set_capture_mode (GooTiCamera* self, guint capture_mode)
 {
 	g_assert (self != NULL);
 
@@ -904,7 +904,15 @@ _goo_ti_camera_set_capture_mode (GooTiCamera* self, gboolean capture_mode)
 		GOO_OBJECT_DEBUG (self, "prev = %d / new = %d",
 			  priv->capturemode, capture_mode);
 
-		OMX_BOOL param = (capture_mode == TRUE) ? OMX_TRUE : OMX_FALSE;
+		OMX_U32 param;
+		/*
+		 * 0 -> preview mode
+		 * 1 -> high performance mode / video mode
+		 * 2 -> high quality mode
+		 * */
+		g_return_if_fail ((capture_mode == 0) || (capture_mode == 1) || (capture_mode == 2));
+		param = capture_mode;
+
 		g_assert (
 			goo_component_set_config_by_index (GOO_COMPONENT (self),
 						   OMX_IndexConfigCapturing,
@@ -912,7 +920,7 @@ _goo_ti_camera_set_capture_mode (GooTiCamera* self, gboolean capture_mode)
 		);
 
 	#if 1
-		if ((capture_mode == TRUE) && (priv->capturemode == FALSE))
+		if ((capture_mode != DEFAULT_CAPTURE) && (priv->capturemode == DEFAULT_CAPTURE))
 		{
 			GOO_OBJECT_INFO (self, "Preparing capture port");
 
@@ -920,10 +928,10 @@ _goo_ti_camera_set_capture_mode (GooTiCamera* self, gboolean capture_mode)
 			goo_component_prepare_port (GOO_COMPONENT (self), port);
 			g_object_unref (port);
 
-			priv->capturemode = TRUE;
+			priv->capturemode = capture_mode;
 		}
 
-		if ((capture_mode == FALSE) && (priv->capturemode == TRUE))
+		if ((capture_mode == DEFAULT_CAPTURE) && (priv->capturemode != DEFAULT_CAPTURE))
 		{
 			/** We are not using the thumbnail port at the moment*/
 			/**
@@ -933,11 +941,11 @@ _goo_ti_camera_set_capture_mode (GooTiCamera* self, gboolean capture_mode)
 			goo_component_prepare_port (GOO_COMPONENT (self), port);
 			g_object_unref (port);
 			**/
-			priv->capturemode = FALSE;
+			priv->capturemode = DEFAULT_CAPTURE;
 		}
 	#endif
 	}
-	GOO_OBJECT_DEBUG (self, "");
+	GOO_OBJECT_DEBUG (self, "exit");
 	return;
 }
 
@@ -1625,7 +1633,7 @@ goo_ti_camera_set_property (GObject* object, guint prop_id,
 		break;
 	case PROP_CAPTURE_MODE:
 		_goo_ti_camera_set_capture_mode (self,
-						 g_value_get_boolean (value));
+						 g_value_get_uint (value));
 		break;
 	case PROP_ZOOM:
 		_goo_ti_camera_set_zoom (self, g_value_get_enum (value));
@@ -1668,6 +1676,7 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 {
 	g_assert (GOO_IS_TI_CAMERA (object));
 	GooTiCamera* self = GOO_TI_CAMERA (object);
+	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 
 	switch (prop_id)
 	{
@@ -1678,7 +1687,7 @@ goo_ti_camera_get_property (GObject* object, guint prop_id,
 		g_value_set_int (value, _goo_ti_camera_get_brightness (self));
 		break;
 	case PROP_CAPTURE_MODE:
-		g_value_set_boolean (value,
+		g_value_set_uint (value,
 				     _goo_ti_camera_get_capture_mode (self));
 		break;
 	case PROP_ZOOM:
@@ -1726,7 +1735,7 @@ goo_ti_camera_init (GooTiCamera* self)
 
 	GooTiCameraPriv *priv = GOO_TI_CAMERA_GET_PRIVATE (self);
 
-	priv->capturemode = FALSE;
+	priv->capturemode = DEFAULT_CAPTURE;
 	priv->zoom = DEFAULT_ZOOM;
 	priv->balance = DEFAULT_BALANCE;
 	priv->exposure = DEFAULT_EXPOSURE;
@@ -1786,9 +1795,9 @@ goo_ti_camera_class_init (GooTiCameraClass* klass)
 				  G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_BRIGHTNESS, spec);
 
-	spec = g_param_spec_boolean ("capture", "Capture mode",
+	spec = g_param_spec_uint ("capture", "Capture mode",
 				     "Turn on/off the capture mode",
-				     DEFAULT_CAPTURE, G_PARAM_READWRITE);
+				     0, 2, DEFAULT_CAPTURE, G_PARAM_READWRITE);
 	g_object_class_install_property (g_klass, PROP_CAPTURE_MODE, spec);
 
 	spec = g_param_spec_enum ("zoom", "Zoom value",
