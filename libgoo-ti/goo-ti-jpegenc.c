@@ -660,12 +660,12 @@ goo_ti_jpegenc_get_property (GObject* object, guint prop_id,
         {
 			case PROP_WIDTH:
 			{
-				self->thumbnail->width = g_value_get_uint (value);
+				g_value_set_uint (value, self->thumbnail->width);
 				break;
 			}
 			case PROP_HEIGHT:
 			{
-				self->thumbnail->height = g_value_get_uint (value);
+				g_value_set_uint (value, self->thumbnail->height);
 				break;
 			}
 			case PROP_COMMENT:
@@ -675,47 +675,47 @@ goo_ti_jpegenc_get_property (GObject* object, guint prop_id,
 			}
 			case PROP_APP0I:
 			{
-				self->thumbnail->APP0_Index = g_value_get_boolean (value);
+				g_value_set_boolean (value, self->thumbnail->APP0_Index);
 				break;
 			}
 			case PROP_APP0W:
 			{
-				self->thumbnail->APP0_width = g_value_get_uint (value);
+				g_value_set_uint (value, self->thumbnail->APP0_width);
 				break;
 			}
 			case PROP_APP0H:
 			{
-			self->thumbnail->APP0_height = g_value_get_uint (value);
+				g_value_set_uint (value, self->thumbnail->APP0_height);
 					break;
 			}
 			case PROP_APP1I:
 			{
-				self->thumbnail->APP1_Index = g_value_get_boolean (value);
+				g_value_set_boolean (value, self->thumbnail->APP1_Index);
 				break;
 			}
 			case PROP_APP1W:
 			{
-				self->thumbnail->APP1_width = g_value_get_uint (value);
+				g_value_set_uint (value, self->thumbnail->APP1_width);
 				break;
 			}
 			case PROP_APP1H:
 			{
-			self->thumbnail->APP1_height = g_value_get_uint (value);
+				g_value_set_uint (value, self->thumbnail->APP1_height);
 					break;
 			}
 			case PROP_APP13I:
 			{
-					self->thumbnail->APP13_Index = g_value_get_boolean (value);
+				g_value_set_boolean (value, self->thumbnail->APP13_Index);
 				break;
 			}
 			case PROP_APP13W:
 			{
-					self->thumbnail->APP13_width = g_value_get_uint (value);
+				g_value_set_uint (value, self->thumbnail->APP13_width);
 				break;
 			}
 			case PROP_APP13H:
 			{
-					self->thumbnail->APP13_height = g_value_get_uint (value);
+				g_value_set_uint (value, self->thumbnail->APP13_height);
 			break;
 			}
 			default:
