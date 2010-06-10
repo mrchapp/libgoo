@@ -2347,7 +2347,7 @@ goo_component_prepare_all_ports (GooComponent* self)
 	 * no need of this thread!!
 	 */
 #ifdef OUTPUT_QUEUE
-	if (do_thread == TRUE && goo_list_get_length (self->input_ports) > 0)
+	if (do_thread == TRUE && goo_list_get_length (self->input_ports) > 0 && self->output_thread == NULL)
 	{
 		GOO_OBJECT_INFO (self, "Creating the output thread");
 		self->output_thread = g_thread_create
