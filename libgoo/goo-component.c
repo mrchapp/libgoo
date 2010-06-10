@@ -1068,7 +1068,7 @@ goo_component_set_state_executing_default (GooComponent* self)
 
 	goo_component_wait_for_next_state (self);
 
-	if (self->prev_state == OMX_StateIdle)
+	if (self->prev_state == OMX_StateIdle || self->prev_state == OMX_StatePause)
 	{
 		goo_component_prepare_all_ports (self);
 	}
@@ -2273,7 +2273,7 @@ goo_component_prepare_port (GooComponent* self, GooPort* port)
 	g_assert (GOO_IS_PORT (port));
 	g_assert (goo_component_is_my_port (self, port));
 	g_assert ((self->cur_state == OMX_StateExecuting) &&
-		  (self->prev_state == OMX_StateIdle));
+		  (self->prev_state == OMX_StateIdle || self->prev_state == OMX_StatePause));
 
 	guint numbuf, i;
 	OMX_BUFFERHEADERTYPE* buffer = NULL;
@@ -2323,7 +2323,7 @@ goo_component_prepare_all_ports (GooComponent* self)
 {
 	g_assert (GOO_IS_COMPONENT (self));
 	g_assert ((self->cur_state == OMX_StateExecuting) &&
-		  (self->prev_state == OMX_StateIdle));
+		  (self->prev_state == OMX_StateIdle || self->prev_state == OMX_StatePause));
 
 	GooPort* port = NULL;
 	gboolean do_thread = FALSE;
