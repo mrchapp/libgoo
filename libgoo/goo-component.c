@@ -81,7 +81,7 @@ _goo_component_command_state_set (GooComponent* self, OMX_STATETYPE state)
 	{
 		self->prev_state = self->cur_state;
 		self->cur_state	 = state;
-		self->next_state = OMX_StateInvalid;
+		self->next_state = state;
 		GOO_OBJECT_INFO (self, "New state: %s",
 				 goo_strstate (self->cur_state));
 
@@ -99,7 +99,7 @@ _goo_component_command_state_set (GooComponent* self, OMX_STATETYPE state)
 
 		self->prev_state = self->cur_state;
 		self->cur_state	 = state;
-		self->next_state = OMX_StateInvalid;
+		self->next_state = state;
 		GOO_OBJECT_INFO (self, "New state: %s",
 				 goo_strstate (self->cur_state));
 
@@ -1501,12 +1501,12 @@ goo_component_wait_for_next_state (GooComponent* self)
 	GOO_OBJECT_DEBUG (self, "next state is: %s",
 			goo_strstate (self->next_state));
 
-	while (OMX_StateInvalid != self->next_state)
+	while (self->cur_state != self->next_state)
 	{
 		GOO_OBJECT_DEBUG (self, "waiting for %s",
 				goo_strstate (self->next_state));
 		goo_semaphore_down (self->state_sem, TRUE);
-		if (OMX_StateInvalid != self->next_state)
+		if (self->cur_state != self->next_state)
 		{
 			GOO_OBJECT_WARNING (self, "Still waiting for %s",
 					    goo_strstate (self->next_state));
