@@ -1198,7 +1198,10 @@ goo_component_release_buffer_default (GooComponent* self,
 		goo_port_set_eos (port);
 	}
 
-	if (self->cur_state == OMX_StateIdle)
+	if (self->cur_state == OMX_StateIdle ||
+		self->cur_state == OMX_StatePause ||
+		self->next_state == OMX_StateIdle ||
+		self->next_state == OMX_StatePause)
 	{
 		GOO_OBJECT_DEBUG (port, "Pushing buffer to queue");
 		goo_port_push_buffer (port, buffer);
